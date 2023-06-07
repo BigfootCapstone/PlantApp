@@ -21,10 +21,13 @@ button.addEventListener('click', function (){
         name.innerHTML = nameValue;
         temp.innerHTML = "Temperature: " + tempValue + " °F";
         desc.innerHTML = "Description: " + descValue;
-        humid.innerHTML = "Humidity: " + humidValue;
+        humid.innerHTML = "Humidity: " + humidValue + " %";
         rain.innerHTML = "Rain Chance: ";
     })
 
         .catch(error => alert("Wrong city name!"))
 })
 
+
+// OG link: `https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${WEATHER_API_TOKEN}&units=imperial`
+// 4 Hour Call Link (need payment): `https://pro.openweathermap.org/data/2.5/forecast/hourly?${inputValue.value}&appid=${WEATHER_API_TOKEN}`
