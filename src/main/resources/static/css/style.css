@@ -193,9 +193,6 @@ html {
   display: inline-block;
 }
 
-.navbar-custom .logo .logo-dark {
-  display: none;
-}
 
 .navbar-custom .navbar-nav .nav-item .nav-link {
   line-height: 26px;
