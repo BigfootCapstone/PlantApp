@@ -10,7 +10,7 @@ let humid = document.querySelector('.humid');
 let rain = document.querySelector('.rain');
 
 button.addEventListener('click', function (){
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${WEATHER_API_TOKEN}&units=imperial`).then(response => response.json()).then(data => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${WEATHER_API_TOKEN}`).then(response => response.json()).then(data => {
         console.log(data)
         let nameValue = data['name'];
         let tempValue = data['main']['temp'];
@@ -30,4 +30,3 @@ button.addEventListener('click', function (){
 
 
 // OG link: `https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${WEATHER_API_TOKEN}&units=imperial`
-// 4 Hour Call Link (need payment): `https://pro.openweathermap.org/data/2.5/forecast/hourly?${inputValue.value}&appid=${WEATHER_API_TOKEN}`
