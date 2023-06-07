@@ -200,14 +200,6 @@ html {
     z-index: 999;
     margin-bottom: 0px;
     transition: all 0.5s ease-in-out;
-    .logo{
-        .logo-light {
-            display: inline-block;
-        }
-        .logo-dark {
-            display: none;
-        }
-    }
     .navbar-nav{
         .nav-item{
             .nav-link{
@@ -249,15 +241,6 @@ html {
     padding: 10px 0px;
     background-color: $white;
     box-shadow: 0 10px 33px -14px rgba(0,0,0,.1);
-    .logo{
-        .logo-dark {
-            display: inline-block;
-        }
-        .logo-light {
-            display:none;
-        }
-    }
-
     .navbar-nav{
         .nav-item{
             .nav-link{

@@ -9,11 +9,8 @@ File: Main scss file
 02.Helper
 03.Navbar
 04.Home
-05.Features
-06.Services
-07.Portfolio
+06.About Us
 08.Clients
-09.Pricing plans
 10.Contact
 11.Cta
 12.footer
@@ -26,7 +23,8 @@ File: Main scss file
 body {
   font-family: "Noto Sans", sans-serif;
   font-size: 14px;
-  background-color: #0d3830;
+  background: linear-gradient(to right, #0d3830, #176354);
+
 }
 
 h1 {
@@ -104,10 +102,6 @@ html {
   padding-bottom: 60px;
 }
 
-.text-primary {
-  color: #672fed !important;
-}
-
 .text-custom {
   color: #ff5b5b;
 }
@@ -147,12 +141,9 @@ html {
   letter-spacing: 2px;
 }
 
-.image-holder{
-  background-color: #769C69;
-}
-
 .sign-up{
   background-color: #76908C;
+  border-radius: 10px;
 }
 
 /**BACK TO TOP**/
@@ -180,6 +171,8 @@ html {
 /******************
     3.Navbar
 *******************/
+
+
 .navbar-custom {
   padding: 20px 0px;
   width: 100%;
@@ -193,13 +186,34 @@ html {
   display: inline-block;
 }
 
+.navbar-nav {
+  margin-left: 435px;
+}
+.logo-text {
+  display: inline-block;
+}
+
+.login{
+  background-color: #92ACA8;
+  color: #FFFFFF;
+  border-color: #F28153;
+  width: 115px;
+  height: 25px;
+
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 0px;
+
+  color: #FFFFFF;
+}
+
 
 .navbar-custom .navbar-nav .nav-item .nav-link {
   line-height: 26px;
   color: rgb(255, 255, 255);
   transition: all 0.4s;
   padding: 6px 10px;
-  margin: 0 7px;
+  margin: 0 20px;
   font-family: "Karla", sans-serif;
 }
 
@@ -250,6 +264,14 @@ html {
   padding: 200px 0px 240px;
 }
 
+.row .sign-up {
+  padding: 20px 10px;
+}
+
+.home-img{
+  height: 430px;
+  width: 670px;
+}
 .home-center {
   display: table;
   width: 100%;
@@ -282,75 +304,20 @@ html {
   border: none;
 }
 
-/*******************
-    5.Features
-*******************/
-.features {
-  position: relative;
-  bottom: 98px;
-}
-
-.features .nav-pills .nav-item .nav-link .tab-title, .features .nav-pills .nav-item .nav-link .tab-icon {
-  color: #ffffff;
-}
-
-.features .nav-pills .nav-item .nav-link.active .tab-title {
-  color: #28282e;
-}
-
-.features .nav-pills .nav-item .nav-link.active .tab-icon {
-  color: #ff5d48;
-}
-
-.features-tab .nav-item {
-  text-align: left;
-  margin: 0px 12px;
-}
-
-.features-tab .nav-item:first-child {
-  margin-left: 0px;
-}
-
-.features-tab .nav-item:last-child {
-  margin-right: 0px;
-}
-
-.features-tab .nav-item .nav-link {
-  padding: 22px 30px;
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.features-tab .nav-item .nav-link p {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.features-tab .nav-item .nav-link.active {
-  background: #ffffff;
-  color: #28282e;
-}
-
-.features-tab .nav-item .nav-link.active p {
-  color: #7a7d84;
-}
-
-.features-tab .nav-item .nav-link.active .features-icon i {
-  color: #ff5b5b;
-}
 
 /*******************
-    6.Services
+    6.About Us
 *******************/
-.services-box {
+.about-box {
   box-shadow: 0 10px 35px 0 rgba(154, 161, 171, 0.1);
   border-radius: 7px;
 }
 
-.services-box h5 {
+.about-box h5 {
   font-size: 18px;
 }
 
-.services-box .services-img img {
+.about-box .about-img img {
   max-height: 46px;
 }
 
@@ -372,7 +339,7 @@ html {
   right: 0;
   top: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, #3a59af, #352786);
+  background: linear-gradient(to bottom, #0d3830, #196b5a);
   opacity: 0;
   transition: all 0.5s;
 }
@@ -581,7 +548,6 @@ html {
   .navbar-custom {
     margin-top: 0px;
     padding: 10px 0px !important;
-    background-color: #ffffff !important;
     box-shadow: 0 10px 33px -14px rgba(0, 0, 0, 0.1);
   }
   .navbar-custom .logo .logo-dark {
@@ -590,9 +556,11 @@ html {
   .navbar-custom .logo .logo-light {
     display: none;
   }
-  .navbar-custom .logo img {
-    height: 18px;
-  }
+
+  /*.navbar-custom .logo img {*/
+  /*  height: 18px;*/
+  /*}*/
+
   .navbar-custom .navbar-nav .nav-item .nav-link {
     transition: all 0.4s;
     color: rgba(40, 40, 46, 0.8) !important;
