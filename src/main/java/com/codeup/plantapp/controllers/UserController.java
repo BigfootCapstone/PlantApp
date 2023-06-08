@@ -22,6 +22,7 @@ public class UserController {
         return "createUserForm";
     }
 
+    //messing with it for the create user
     @PostMapping("/create")
     public String createUserProfile(@ModelAttribute("user") User user) {
         userRepository.save(user);
