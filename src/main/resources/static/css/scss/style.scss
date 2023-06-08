@@ -111,21 +111,12 @@ html {
     padding-bottom: 60px;
 }
 
-.text-primary{
-    color: $primary !important;
-}
-
 .text-custom{
     color: $custom;
 }
 
 .bg-custom{
     background-color: $custom;
-}
-
-.bg-gradient {
-   // background: $bg-gradient;
-    background: linear-gradient(to bottom, #3a59af, #352786) !important;
 }
 
 .font-14{

@@ -9,12 +9,12 @@ File: Main scss file
 02.Helper
 03.Navbar
 04.Home
-06.About Us
-08.Clients
-10.Contact
-11.Cta
-12.footer
-13.Responsive
+05.About Us
+06.Reviews
+07.Contact
+08.Cta
+09.footer
+10.Responsive
 ********************************/
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Karla:400,700");
 /*******************
@@ -102,14 +102,6 @@ html {
   padding-bottom: 60px;
 }
 
-.text-custom {
-  color: #ff5b5b;
-}
-
-.bg-custom {
-  background-color: #ff5b5b;
-}
-
 .font-14 {
   font-size: 14px;
 }
@@ -136,14 +128,26 @@ html {
   background-color: #F9C0A9;
 }
 
-.title .small-title {
+.small-title {
+  color: #FFFFFF;
   text-transform: uppercase;
   letter-spacing: 2px;
+}
+.subtitle{
+  color: #FDE5B4;
+}
+
+.quote{
+color: #FFCBA5
 }
 
 .sign-up{
   background-color: #76908C;
   border-radius: 10px;
+}
+
+.descriptions{
+  color: #7036b4;
 }
 
 /**BACK TO TOP**/
@@ -191,6 +195,10 @@ html {
 }
 .logo-text {
   display: inline-block;
+  color: white;
+  font-size: 47px;
+  -webkit-text-stroke: 1px #F8F8F8;
+  text-shadow: 0px 2px 4px #2ab59a;
 }
 
 .login{
@@ -268,6 +276,10 @@ html {
   padding: 20px 10px;
 }
 
+.discover{
+  color: rgba(253, 229, 180, 0.7);
+}
+
 .home-img{
   height: 430px;
   width: 670px;
@@ -292,6 +304,7 @@ html {
   border-radius: 50%;
   display: inline-block;
   color: #672fed;
+
 }
 
 .how-it-work {
@@ -306,11 +319,11 @@ html {
 
 
 /*******************
-    6.About Us
+    5.About Us
 *******************/
 .about-box {
-  box-shadow: 0 10px 35px 0 rgba(154, 161, 171, 0.1);
-  border-radius: 7px;
+  background-color: rgb(118, 156, 105);
+  border-radius: 10px;
 }
 
 .about-box h5 {
@@ -318,52 +331,12 @@ html {
 }
 
 .about-box .about-img img {
-  max-height: 46px;
+  max-height: 50px;
 }
+
 
 /*******************
-    7.demo
-*******************/
-.demo-box {
-  box-shadow: 0 10px 35px 0 rgba(154, 161, 171, 0.1);
-}
-
-.demo-box a .demo-content {
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.demo-box a .demo-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: linear-gradient(to bottom, #0d3830, #196b5a);
-  opacity: 0;
-  transition: all 0.5s;
-}
-
-.demo-box a .overlay-icon {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  opacity: 0;
-  transition: all 0.5s;
-}
-
-.demo-box a:hover .demo-overlay {
-  opacity: 0.7;
-}
-
-.demo-box a:hover .overlay-icon {
-  opacity: 1;
-}
-
-/*******************
-    8.Clients
+    6.Reviews
 *******************/
 .testi-box {
   position: relative;
@@ -382,33 +355,14 @@ html {
   color: #f4f4f4;
 }
 
-.client-images img {
+.review-images img {
   margin: 10px auto;
   opacity: 0.7;
 }
 
-/*******************
-  9.Pricing plans
-*******************/
-.pricing-plans {
-  box-shadow: 0 10px 35px 0 rgba(154, 161, 171, 0.1);
-  border-radius: 7px;
-  max-width: 414px;
-  margin: 0px auto;
-}
-
-.pricing-plans .plan-price .price {
-  display: inline-block;
-  width: 94px;
-  height: 94px;
-  line-height: 94px;
-  background: #dfd3fb;
-  border-radius: 50%;
-  color: #672fed;
-}
 
 /*******************
-    10.Contact
+    7.Contact
 ********************/
 .custom-form .form-group {
   margin-bottom: 1.5rem;
@@ -469,7 +423,7 @@ html {
 }
 
 /*******************
-    11.Cta
+    8.Cta
 ********************/
 .cta {
   background: linear-gradient(to bottom, #3a59af, #352786);
@@ -479,7 +433,7 @@ html {
 }
 
 /*******************
-    12.footer
+    9.footer
 ********************/
 .footer {
   padding: 40px 0px 20px 0px;
@@ -517,7 +471,7 @@ html {
 }
 
 /******************
-    13.Responsive
+    10.Responsive
 *******************/
 @media (min-width: 200px) and (max-width: 1199px) {
   .container-fluid {
