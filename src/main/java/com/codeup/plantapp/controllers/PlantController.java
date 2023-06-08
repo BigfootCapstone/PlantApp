@@ -19,7 +19,7 @@ public class PlantController {
         this.restTemplate = new RestTemplate();
     }
 
-    @GetMapping("/")
+    @GetMapping("/search")
     public String showSearchForm() {
         return "searchForm";
     }
