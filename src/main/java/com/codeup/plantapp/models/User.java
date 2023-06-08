@@ -26,4 +26,11 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public User(long id, String username) {
+        this.id = id;
+        this.username = username;
+    }
+
+    public User(){}
 }
