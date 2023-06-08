@@ -11,14 +11,14 @@ let rain = document.querySelector('.rain');
 let date = document.querySelector('.date');
 
 button.addEventListener('click', function (){
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${WEATHER_API_TOKEN}`).then(response => response.json()).then(data => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${WEATHER_API_TOKEN}&units=imperial`).then(response => response.json()).then(data => {
         console.log(data)
         let nameValue = data['name'];
         let tempValue = data['main']['temp'];
         let descValue = data['weather'][0]['description'];
         let humidValue = data['main']['humidity'];
         // Rain???
-        // Time conversion:
+        // Date conversion:
         let unixTimeStamp = data['dt'];
         let date = new Date(unixTimeStamp * 1000);
         let dateValue = date.getDate();
