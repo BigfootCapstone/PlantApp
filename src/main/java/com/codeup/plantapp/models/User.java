@@ -1,6 +1,8 @@
 package com.codeup.plantapp.models;
 
-
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import jakarta.persistence.*;
 
@@ -56,6 +58,7 @@ public class User {
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
