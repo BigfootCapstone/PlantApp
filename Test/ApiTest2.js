@@ -1,5 +1,5 @@
-const apiKey2 = '';
-const speciesId2 = '234'; // Replace [SPECIES_ID] with the actual ID
+const apiKey2 = PERENUAL_API_TOKEN;
+const speciesId2 = '122772'; // Replace [SPECIES_ID] with the actual ID
 
 const url2 = `https://perenual.com/api/pest-disease-list?key=${apiKey2}`;
 fetch(url2)

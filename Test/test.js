@@ -3,7 +3,7 @@ const readline = require('readline');
 
 // Function to perform the search
 async function searchPlants(query) {
-    const response = await fetch(`https://trefle.io/api/v1/plants/search?token=&q=${encodeURIComponent(query)}`);
+    const response = await fetch(`https://trefle.io/api/v1/plants/search?token=${TREFLE_API_TOKEN}&q=${encodeURIComponent(query)}`);
     const data = await response.json();
 
     // Extract the array of plant objects from the response
