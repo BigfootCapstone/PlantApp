@@ -119,9 +119,12 @@ html {
 }
 
 .btn-custom {
+  display: flex;
+  border-radius: 7px;
   color: #ffffff !important;
   background-color: #f28153;
   border-color: #f28153;
+  max-width: 400px;
 }
 
 .btn-custom:hover, .btn-custom:focus, .btn-custom:active {
@@ -161,7 +164,6 @@ color: #FFCBA5
   text-align: center;
   z-index: 10000;
   border-radius: 3px;
-  background-color: #672fed;
   transition: all 0.5s;
 }
 
@@ -191,7 +193,7 @@ color: #FFCBA5
 }
 
 .navbar-nav {
-  margin-left: 366px;
+  margin-left: 276px;
 }
 .logo-text {
   display: inline-block;
@@ -332,23 +334,24 @@ color: #FFCBA5
 
 .about-box .about-img img {
   max-height: 50px;
+  max-width: 50px;
 }
 
 
 /*******************
     6.Reviews
 *******************/
-.testi-box {
+.testers-box {
   position: relative;
   box-shadow: 0 10px 35px 0 rgba(154, 161, 171, 0.1);
   border-radius: 7px;
 }
 
-.testi-box .testi-img img {
+.testers-box .testers-img img {
   max-width: 64px;
 }
 
-.testi-box .testi-icon i {
+.testers-box .testers-icon i {
   position: absolute;
   bottom: 0;
   left: 0;
