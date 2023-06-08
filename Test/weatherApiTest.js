@@ -11,7 +11,7 @@ let rain = document.querySelector('.rain');
 let date = document.querySelector('.date');
 
 button.addEventListener('click', function (){
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${WEATHER_API_TOKEN}`).then(response => response.json()).then(data => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${WEATHER_API_TOKEN}&units=imperial`).then(response => response.json()).then(data => {
         console.log(data)
         let nameValue = data['name'];
         let tempValue = data['main']['temp'];
