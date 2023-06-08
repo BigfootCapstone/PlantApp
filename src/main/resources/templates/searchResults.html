@@ -8,6 +8,7 @@
 <ul>
   <li th:each="plant : ${plants}">
     <p th:text="${plant.common_name}"></p>
+    <img th:if="${plant.image_url}" th:src="${plant.image_url}" alt="Plant Photo">
     <p th:text="${plant.family}"></p>
     <p th:text="${plant.genus}"></p>
   </li>

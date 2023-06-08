@@ -7,7 +7,16 @@ public class PlantDTO {
     private String family;
     private String genus;
 
-    // Getters and setters for the properties
+    private String image_url;
+
+    public String getImage_url() {
+        return image_url;
+    }
+
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+// Getters and setters for the properties
 
     public String getId() {
         return id;
