@@ -4,29 +4,31 @@
     <meta charset="utf-8" />
     <title>BotaniBuddy Landing Page</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css" integrity="sha512-LX0YV/MWBEn2dwXCYgQHrpa9HJkwB+S+bnBpifSOTO1No27TqNMKYoAn6ff2FBh03THAzAiiCwQ+aPX+/Qt/Ow==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="//db.onlinewebfonts.com/c/7218a2da5a03f622ca18085806382043?family=Pe-icon-7-stroke" rel="stylesheet" type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-    <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/css/pe-icon-7-stroke.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/pe-icon-7-stroke.css">
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="/static/css/images/favicon.ico">
+    <link rel="shortcut icon" href="/css/images/favicon.ico">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
 
     <!--Material Icon -->
-    <link rel="stylesheet" type="text/css" href="/static/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/materialdesignicons.min.css" />
 
     <!--pe-7 Icon -->
-    <link rel="stylesheet" type="text/css" href="/static/css/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" type="text/css" href="/css/pe-icon-7-stroke.css" />
 
     <!-- Custom  sCss -->
-    <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/style.css">
 
 </head>
 
@@ -34,40 +36,29 @@
 
 <!--Navbar Start-->
 <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="nav-sticky">
-    <div class="container-fluid">
+    <div class="container ps-3 pe-3">
         <!-- LOGO -->
-        <a class="logo text-uppercase" href="index.html">
-            <img src="/static/css/images/logo-light.png" alt="" class="logo-light" height="18" />
-            <img src="/static/css/images/logo-dark.png" alt="" class="logo-dark" height="18" />
+        <a class="logo justify-items-center align-items-center gap" href="index.html">
+            <img src="/css/images/carrotguy(fknawesome).png" alt="" class="logo-dark" height="100" />
+            <h1 class="logo-text text-white">BotaniBuddy</h1>
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <i class="mdi mdi-menu"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav ms-auto" id="mySidenav">
+
+            <ul class="navbar-nav" id="mySidenav">
                 <li class="nav-item">
                     <a href="#home" class="nav-link active">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#about" class="nav-link">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#reviews" class="nav-link">Reviews</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#demo" class="nav-link">Demos</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#clients" class="nav-link">Clients</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#pricing" class="nav-link">Pricing</a>
-                </li>
-
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
+                <button type="button" class="btn login">Login</button>
             </ul>
         </div>
     </div>
@@ -80,22 +71,24 @@
         <div class="home-desc-center">
             <div class="container-fluid">
                 <div class="row align-content-center">
-                    <div class="col-lg-6 col-sm-6 sign-up">
-                        <div class="home-title">
-                            <h5 class="mb-3 text-white-50">Discover BotaniBuddy Today</h5>
+                    <div class="col-sm-6 sign-up">
+                        <div class="home-title text-center">
+                            <h5 class="mb-3 discover">Discover</h5>
                             <h2 class="mb-4 text-white">BotaniBuddy</h2>
-                            <p class="text-white-50 home-desc font-16 mb-5">BotaniBuddy is a fully featured plant lovers garden tracker, community, and learning resource. </p>
-                            <div class="mt-5">
-                                <a href="#" class="btn btn-custom me-4">SIGN UP!</a>
+                            <p class="subtitle home-desc font-16 mb-5">Our guidance empowers you to cultivate your first green companions or nurture an exquisite garden oasis.
+                            </p>
+                            <div class="d-flex justify-content-center mt-5">
+                                <a href="#" class="btn btn-custom">SIGN UP!</a>
                             </div>
-
                         </div>
                     </div>
+                    <!-- start carousel -->
                     <div class="col-lg-5 offset-lg-1 col-sm-6 image-holder">
-                        <div class="home-img mo-mt-20">
-                            <img src="/static/css/images/home-img.png" alt="" class="img-fluid mx-auto d-block">
+                        <div class="home-img-div">
+                            <img src="/css/images/PlantSlide1.png" alt="Plants make us happy" class=" home-img img-fluid">
                         </div>
                     </div>
+                    <!-- end carousel -->
                 </div>
                 <!-- end row -->
 
@@ -106,262 +99,62 @@
 </section>
 <!-- home end -->
 
-<!-- features start -->
-<section class="features" id="features">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <ul class="nav nav-pills nav-justified features-tab mb-5" id="pills-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-code-tab" data-bs-toggle="pill" href="#pills-code" role="tab" aria-controls="pills-code" aria-selected="true">
-                            <div class="clearfix">
-                                <div class="features-icon float-end">
-                                    <h1><i class="pe-7s-notebook tab-icon"></i></h1>
-                                </div>
-                                <div class="d-none d-lg-block me-4">
-                                    <h5 class="tab-title">Quality Code</h5>
-                                    <p>At vero eos et accusam et</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" id="pills-customize-tab" data-bs-toggle="pill" href="#pills-customize" role="tab" aria-controls="pills-customize" aria-selected="false">
-                            <div class="clearfix">
-                                <div class="features-icon float-end">
-                                    <h1><i class="pe-7s-edit tab-icon"></i></h1>
-                                </div>
-                                <div class="d-none d-lg-block me-4">
-                                    <h5 class="tab-title">Easy to customize</h5>
-                                    <p>Sed ut unde iste error sit</p>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-support-tab" data-bs-toggle="pill" href="#pills-support" role="tab" aria-controls="pills-support" aria-selected="false">
-                            <div class="features-icon float-end">
-                                <h1><i class="pe-7s-headphones tab-icon"></i></h1>
-                            </div>
-                            <div class="d-none d-lg-block me-4">
-                                <h5 class="tab-title">Awesome Support</h5>
-                                <p>It will be as simple as fact</p>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade" id="pills-code" role="tabpanel" aria-labelledby="pills-code-tab">
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-lg-4 col-sm-6">
-                                <div>
-                                    <img src="/static/css/images/features-img/img-1.png" alt="" class="img-fluid mx-auto d-block">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 offset-lg-1">
-                                <div>
-                                    <div class="feature-icon mb-4">
-                                        <h1><i class="pe-7s-notebook text-primary"></i><h1>
-                                    </div>
-                                    <h5 class="mb-3">Quality Code</h5>
-                                    <p class="text-muted">It will be as simple as Occidental in fact, it will be Occidental. To an English person it will seem like simplified English as a skeptical Cambridge.</p>
-                                    <p class="text-muted">If several languages coalesce the grammar of the resulting language </p>
-                                    <div class="row pt-4">
-                                        <div class="col-lg-6">
-                                            <div class="text-muted">
-                                                <p><i class="mdi mdi-checkbox-marked-outline text-primary me-2 h6"></i> Nemo enim ipsam quia</p>
-                                                <p><i class="mdi mdi-checkbox-marked-outline text-primary me-2 h6"></i> Ut enim ad minima</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="text-muted">
-                                                <p><i class="mdi mdi-checkbox-marked-outline text-primary me-2 h6"></i> At vero eos accusamus et </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4">
-                                        <a href="#" class="btn btn-custom">Learn More <i class="mdi mdi-arrow-right ms-1"></i></a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <!-- end row -->
-                    </div>
-                    <div class="tab-pane fades how active" id="pills-customize" role="tabpanel" aria-labelledby="pills-customize-tab">
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-lg-4 col-sm-6">
-                                <div>
-                                    <img src="/static/css/images/features-img/img-2.png" alt="" class="img-fluid mx-auto d-block">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 offset-lg-1">
-                                <div>
-                                    <div class="feature-icon mb-4">
-                                        <h1><i class="pe-7s-edit text-primary"></i></h1>
-                                    </div>
-                                    <h5 class="mb-3">Easy to customize</h5>
-                                    <p class="text-muted">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et</p>
-                                    <p class="text-muted">If several languages coalesce the grammar of the resulting language </p>
-                                    <div class="row pt-4">
-                                        <div class="col-lg-6">
-                                            <div class="text-muted">
-                                                <p><i class="mdi mdi-checkbox-marked-outline text-primary me-2 h6"></i> Nemo enim ipsam quia</p>
-                                                <p><i class="mdi mdi-checkbox-marked-outline text-primary me-2 h6"></i> Ut enim ad minima</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="text-muted">
-                                                <p><i class="mdi mdi-checkbox-marked-outline text-primary me-2 h6"></i> At vero eos accusamus et </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4">
-                                        <a href="#" class="btn btn-custom">Learn More <i class="mdi mdi-arrow-right ms-1"></i></a>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <!-- end row -->
-                    </div>
-                    <div class="tab-pane fade" id="pills-support" role="tabpanel" aria-labelledby="pills-support-tab">
-
-                        <div class="row align-items-center justify-content-center">
-                            <div class="col-lg-4 col-sm-6">
-                                <div>
-                                    <img src="/static/css/images/features-img/img-3.png" alt="" class="img-fluid mx-auto d-block">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 offset-lg-1">
-                                <div>
-                                    <div class="feature-icon mb-4">
-                                        <i class="pe-7s-headphones h1 text-primary"></i>
-                                    </div>
-                                    <h5 class="mb-3">Awesome Support</h5>
-                                    <p class="text-muted">It will be as simple as Occidental in fact, it will be Occidental. To an English person it will seem like simplified English as a skeptical Cambridge.</p>
-                                    <p class="text-muted">If several languages coalesce the grammar of the resulting language </p>
-                                    <div class="row pt-4">
-                                        <div class="col-lg-6">
-                                            <div class="text-muted">
-                                                <p><i class="mdi mdi-checkbox-marked-outline text-primary me-2 h6"></i> Nemo enim ipsam quia</p>
-                                                <p><i class="mdi mdi-checkbox-marked-outline text-primary me-2 h6"></i> Ut enim ad minima</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="text-muted">
-                                                <p><i class="mdi mdi-checkbox-marked-outline text-primary me-2 h6"></i> At vero eos accusamus et </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4">
-                                        <a href="#" class="btn btn-custom">Learn More <i class="mdi mdi-arrow-right ms-1"></i></a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                        <!-- end row -->
-                    </div>
-                </div>
-                <!-- end tab-content -->
-            </div>
-        </div>
-        <!-- end row -->
-    </div>
-    <!-- end container-fluid -->
-</section>
-<!-- features end -->
-
-<!-- services start -->
-<section class="section bg-light" id="services">
+<!-- About Us start -->
+<section class="section" id="about">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="title text-center">
-                    <h6 class="text-primary small-title">Services</h6>
-                    <h4>What we do</h4>
-                    <p class="text-muted">At solmen va esser far uniform grammatica.</p>
+                    <h6 class="about small-title">About Us</h6>
+                    <h4 class="subtitle">What we do</h4>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-xl-4 col-sm-6">
-                <div class="services-box p-4 bg-white mt-4">
-                    <div class="services-img float-start me-4">
-                        <img src="/static/css/images/icons/layers.png" alt="">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-l-4 col-sm-6">
+                <div class="about-box p-4 mt-4">
+                    <div class="about-img float-start me-4">
+                        <img src="/css/images/icons/binosyellow.png" alt="">
                     </div>
-                    <h5>Responsive Layouts</h5>
+                    <h5 class="text-white">Search THOUSANDS of Plants</h5>
                     <div class="overflow-hidden">
-                        <p class="text-muted">The new common language will be more simple and regular than the existing European languages.</p>
-                        <a href="#" class="text-custom">Read more...</a>
+                        <p class="descriptions">The new common language will be more simple and regular than the existing European languages.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-sm-6">
-                <div class="services-box p-4 bg-white mt-4">
-                    <div class="services-img float-start me-4">
-                        <img src="/static/css/images/icons/core.png" alt="">
+            <div class="col-l-4 col-sm-6">
+                <div class="about-box p-4 mt-4">
+                    <div class="about-img float-start me-4">
+                        <img src="/css/images/icons/wateringcan.png" alt="">
                     </div>
-                    <h5>Based on Bootstrap UI</h5>
+                    <h5 class="text-white">Water Managment</h5>
                     <div class="overflow-hidden">
-                        <p class="text-muted">If several languages coalesce the grammar language is more than that of indual languages.</p>
-                        <a href="#" class="text-custom">Read more...</a>
+                        <p class="descriptions">If several languages coalesce the grammar language is more than that of indual languages.</p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-sm-6">
-                <div class="services-box p-4 bg-white mt-4">
-                    <div class="services-img float-start me-4">
-                        <img src="/static/css/images/icons/paperdesk.png" alt="">
+            <div class="col-l-4 col-sm-6">
+                <div class="about-box p-4 mt-4">
+                    <div class="about-img float-start me-4">
+                        <img src="/css/images/icons/sunny.png" alt="">
                     </div>
-                    <h5>Creative Design</h5>
+                    <h5 class="text-white">Growth Conditions</h5>
                     <div class="overflow-hidden">
-                        <p class="text-muted">It will be as simple as occidental it will be to an english person. It will be as simple as occidental</p>
-                        <a href="#" class="text-custom">Read more...</a>
+                        <p class="descriptions">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut</p>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xl-4 col-sm-6">
-                <div class="services-box p-4 bg-white mt-4">
-                    <div class="services-img float-start me-4">
-                        <img src="/static/css/images/icons/solarsystem.png" alt="">
+            <div class="col-l-4 col-sm-6">
+                <div class="about-box p-4 mt-4">
+                    <div class="about-img float-start me-4">
+                        <img src="/css/images/icons/journal.png" alt="">
                     </div>
-                    <h5>Awesome Support</h5>
+                    <h5 class="text-white">Journal</h5>
                     <div class="overflow-hidden">
-                        <p class="text-muted">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam nisi ut</p>
-                        <a href="#" class="text-custom">Read more...</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-4 col-sm-6">
-                <div class="services-box p-4 bg-white mt-4">
-                    <div class="services-img float-start me-4">
-                        <img src="/static/css/images/icons/datatext.png" alt="">
-                    </div>
-                    <h5>Easy to customize</h5>
-                    <div class="overflow-hidden">
-                        <p class="text-muted">Everyone realizes why a new common language would be one could refuse to pay translators.</p>
-                        <a href="#" class="text-custom">Read more...</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-xl-4 col-sm-6">
-                <div class="services-box p-4 bg-white mt-4">
-                    <div class="services-img float-start me-4">
-                        <img src="/static/css/images/icons/browserscript.png" alt="">
-                    </div>
-                    <h5>Quality Code</h5>
-                    <div class="overflow-hidden">
-                        <p class="text-muted">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis deleniti atque</p>
-                        <a href="#" class="text-custom">Read more...</a>
+                        <p class="descriptions">Everyone realizes why a new common language would be one could refuse to pay translators.</p>
                     </div>
                 </div>
             </div>
@@ -371,158 +164,17 @@
     </div>
     <!-- end container-fluid -->
 </section>
-<!-- services end -->
+<!-- About Us end -->
 
-<!-- Demo start -->
-<section class="section" id="demo">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="title text-center">
-                    <h6 class="text-primary small-title">Demos</h6>
-                    <h4>Available Demos</h4>
-                    <p class="text-muted">At solmen va esser far uniform grammatica.</p>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-sm-6">
-                <div class="demo-box text-center p-3 mt-4">
-                    <a href="#" class="text-dark">
-                        <div class="position-relative demo-content">
-                            <div class="demo-img">
-                                <img src="/static/css/images/demo/demo-1.jpg" alt="" class="img-fluid mx-auto d-block rounded">
-                            </div>
-                            <div class="demo-overlay">
-                                <div class="overlay-icon">
-                                    <i class="pe-7s-expand1 h1 text-white"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <h5 class="font-18">Light Layouts</h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="demo-box text-center p-3 mt-4">
-                    <a href="#" class="text-dark">
-                        <div class="position-relative demo-content">
-                            <div class="demo-img">
-                                <img src="/static/css/images/demo/demo-2.jpg" alt="" class="img-fluid mx-auto d-block rounded">
-                            </div>
-                            <div class="demo-overlay">
-                                <div class="overlay-icon">
-                                    <i class="pe-7s-expand1 h1 text-white"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <h5 class="font-18">Horizontal Layouts</h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="demo-box text-center p-3 mt-4">
-                    <a href="#" class="text-dark">
-                        <div class="position-relative demo-content">
-                            <div class="demo-img">
-                                <img src="/static/css/images/demo/demo-3.jpg" alt="" class="img-fluid mx-auto d-block rounded">
-                            </div>
-                            <div class="demo-overlay">
-                                <div class="overlay-icon">
-                                    <i class="pe-7s-expand1 h1 text-white"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <h5 class="font-18">Semi Dark Layout</h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="demo-box text-center p-3 mt-4">
-                    <a href="#" class="text-dark">
-                        <div class="position-relative demo-content">
-                            <div class="demo-img">
-                                <img src="/static/css/images/demo/demo-4.jpg" alt="" class="img-fluid mx-auto d-block rounded">
-                            </div>
-                            <div class="demo-overlay">
-                                <div class="overlay-icon">
-                                    <i class="pe-7s-expand1 h1 text-white"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <h5 class="font-18">Semi Dark Horizontal</h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="demo-box text-center p-3 mt-4">
-                    <a href="#" class="text-dark">
-                        <div class="position-relative demo-content">
-                            <div class="demo-img">
-                                <img src="/static/css/images/demo/demo-5.jpg" alt="" class="img-fluid mx-auto d-block rounded">
-                            </div>
-                            <div class="demo-overlay">
-                                <div class="overlay-icon">
-                                    <i class="pe-7s-expand1 h1 text-white"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <h5 class="font-18">Landing Page</h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6">
-                <div class="demo-box text-center p-3 mt-4">
-                    <a href="#" class="text-dark">
-                        <div class="position-relative demo-content">
-                            <div class="demo-img">
-                                <img src="/static/css/images/demo/demo-6.jpg" alt="" class="img-fluid mx-auto d-block rounded">
-                            </div>
-                            <div class="demo-overlay">
-                                <div class="overlay-icon">
-                                    <i class="pe-7s-expand1 h1 text-white"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <h5 class="font-18">Dark Sidebar</h5>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <!-- end row -->
-        <div class="row">
-            <div class="col-12">
-                <div class="text-center mt-4">
-                    <button class="btn btn-custom">More Demos <i class="mdi mdi-chevron-right"></i></button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end container-fluid -->
-</section>
-<!-- Demo end -->
-
-<!-- clients start -->
-<section class="section bg-light" id="clients">
+<!-- reviews start -->
+<section class="section" id="reviews">
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="title text-center mb-4">
-                    <h6 class="text-primary small-title">Clients</h6>
-                    <h4>What our Users Says</h4>
-                    <p class="text-muted">At solmen va esser far uniform grammatica.</p>
+                    <h6 class="small-title">Reviews</h6>
+                    <h4 class="subtitle">What our Users Says</h4>
+                    <p class="quote">From the roots of the ancient tree of life, countless branches sprout, each leading to a distinct journey.</p>
                 </div>
             </div>
         </div>
@@ -530,16 +182,13 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="testi-box p-4 bg-white mt-4 text-center">
-                    <p class="text-muted mb-4">" The designer of this theme delivered a quality product. I am not a front-end developer and I hate when the theme I download has glitches or needs minor tweaks here and there. This worked for my needs just out of the boxes. Also, it is fast and elegant."</p>
+                    <p class="text-muted mb-4">"With BotaniBuddy I have been able to provide a level of care for my plants that I did not know was possible! No more parsing through tons of websites or books with conflicting tips, or feeling terrible because I lost a plant. BotaniBuddy's watering notifications, day-to-day journaling feature, and it's wonderful community are invaluable to me and I could not be happier!"</p>
                     <div class="testi-img mb-4">
-                        <img src="/static/css/images/testi/img-1.png" alt="" class="rounded-circle img-thumbnail">
+                        <img src="/css/images/testi/img-1.png" alt="" class="rounded-circle img-thumbnail">
                     </div>
-                    <p class="text-muted mb-1"> - Adminto User</p>
+                    <p class="text-muted mb-1"> - Drake Jacquez
+                        BotaniBuddy User</p>
                     <h5 class="font-18">Xpanta</h5>
-
-                    <div class="testi-icon">
-                        <i class="mdi mdi-format-quote-open display-2"></i>
-                    </div>
 
                 </div>
             </div>
@@ -547,14 +196,10 @@
                 <div class="testi-box p-4 bg-white mt-4 text-center">
                     <p class="text-muted mb-4">"  Extremely well designed and the documentation is very well done. Super happy with the purchase and definitely recommend this! "</p>
                     <div class="testi-img mb-4">
-                        <img src="/static/css/images/testi/img-2.png" alt="" class="rounded-circle img-thumbnail">
+                        <img src="/css/images/testi/img-2.png" alt="" class="rounded-circle img-thumbnail">
                     </div>
                     <p class="text-muted mb-1"> - Adminto User</p>
                     <h5 class="font-18">G_Sam</h5>
-
-                    <div class="testi-icon">
-                        <i class="mdi mdi-format-quote-open display-2"></i>
-                    </div>
 
                 </div>
             </div>
@@ -562,14 +207,10 @@
                 <div class="testi-box p-4 bg-white mt-4 text-center">
                     <p class="text-muted mb-4">"  We used this theme to save some design time but... wow it has everything you didn't realize you would need later. I highly recommend this template to get your web design headed in the right direction quickly.  "</p>
                     <div class="testi-img mb-4">
-                        <img src="/static/css/images/testi/img-3.png" alt="" class="rounded-circle img-thumbnail">
+                        <img src="/css/images/testi/img-3.png" alt="" class="rounded-circle img-thumbnail">
                     </div>
                     <p class="text-muted mb-1"> - Adminto User</p>
                     <h5 class="font-18">Isaacfab</h5>
-
-                    <div class="testi-icon">
-                        <i class="mdi mdi-format-quote-open display-2"></i>
-                    </div>
 
                 </div>
             </div>
@@ -578,172 +219,30 @@
 
         <div class="row mt-5 pt-5">
             <div class="col-lg-3 col-sm-6">
-                <div class="client-images">
-                    <img src="/static/css/images/clients/1.png" alt="logo-img" class="mx-auto img-fluid d-block">
+                <div class="reviews-images">
+                    <img src="/css/images/reviews/1.png" alt="logo-img" class="mx-auto img-fluid d-block">
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
-                <div class="client-images">
-                    <img src="/static/css/images/clients/2.png" alt="logo-img" class="mx-auto img-fluid d-block">
+                <div class="reviews-images">
+                    <img src="/css/images/reviews/2.png" alt="logo-img" class="mx-auto img-fluid d-block">
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
-                <div class="client-images">
-                    <img src="/static/css/images/clients/3.png" alt="logo-img" class="mx-auto img-fluid d-block">
+                <div class="reviews-images">
+                    <img src="/css/images/reviews/3.png" alt="logo-img" class="mx-auto img-fluid d-block">
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
-                <div class="client-images">
-                    <img src="/static/css/images/clients/4.png" alt="logo-img" class="mx-auto img-fluid d-block">
+                <div class="reviews-images">
+                    <img src="/css/images/reviews/4.png" alt="logo-img" class="mx-auto img-fluid d-block">
                 </div>
             </div>
         </div>
     </div>
     <!-- end container-fluid -->
 </section>
-<!-- clients end -->
-
-<!-- counter start -->
-<section class="section bg-gradient">
-    <div class="container-fluid">
-        <div class="row" id="counter">
-            <div class="col-lg-3 col-sm-6">
-                <div class="text-center p-3">
-                    <div class="counter-icon text-white-50 mb-4">
-                        <i class="pe-7s-add-user display-4"></i>
-                    </div>
-                    <div class="counter-content">
-                        <h2 class="counter_value mb-3 text-white" data-target="1200">0</h2>
-                        <h5 class="counter-name text-white">Fans</h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-sm-6">
-                <div class="text-center p-3">
-                    <div class="counter-icon text-white-50 mb-4">
-                        <i class="pe-7s-cart display-4"></i>
-                    </div>
-                    <div class="counter-content">
-                        <h2 class="mb-3 text-white"><span class="counter_value" data-target="1500">10</span> +</h2>
-                        <h5 class="counter-name text-white">Total Sales</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="text-center p-3">
-                    <div class="counter-icon text-white-50 mb-4">
-                        <i class="pe-7s-smile display-4"></i>
-                    </div>
-                    <div class="counter-content">
-                        <h2 class="counter_value mb-3 text-white" data-target="6931">608</h2>
-                        <h5 class="counter-name text-white">Happy Clients</h5>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="text-center p-3">
-                    <div class="counter-icon text-white-50 mb-4">
-                        <i class="pe-7s-medal display-4"></i>
-                    </div>
-                    <div class="counter-content">
-                        <h2 class="counter_value mb-3 text-white" data-target="800">2</h2>
-                        <h5 class="counter-name text-white">Won Prices</h5>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-<!-- counter end -->
-
-<!-- pricing start -->
-<section class="section bg-light" id="pricing">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="title text-center mb-4">
-                    <h6 class="text-primary small-title">Pricing</h6>
-                    <h4>Our Pricing plans</h4>
-                    <p class="text-muted">At solmen va esser far uniform grammatica.</p>
-                </div>
-            </div>
-        </div>
-        <!-- end row -->
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="pricing-plans bg-white text-center p-4 mt-4">
-                    <h5 class="plan-title mt-2 mb-4">Single</h5>
-
-                    <div class="plan-price">
-                        <h4 class="mb-3 price"><sup><small>$</small></sup>24</h4>
-                        <h5 class="plan-duration text-muted font-18">Per license</h5>
-                    </div>
-
-                    <div class="pricing-content p-4 text-muted mb-2">
-                        <p>Number of end products 1</p>
-                        <p>Customer support</p>
-                        <p>Free Updates</p>
-                        <p>Monthly updates</p>
-                        <p>24 x 7 Support</p>
-                    </div>
-
-                    <div class="pt-4">
-                        <a href="#" class="btn btn-custom d-block">Purchase Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="pricing-plans bg-white text-center p-4 mt-4">
-                    <h5 class="plan-title mt-2 mb-4">Multiple</h5>
-
-                    <div class="plan-price">
-                        <h4 class="mb-3 price"><sup><small>$</small></sup>120</h4>
-                        <h5 class="plan-duration text-muted font-18">Per license</h5>
-                    </div>
-
-                    <div class="pricing-content p-4 text-muted mb-2">
-                        <p>Number of end products 1</p>
-                        <p>Customer support</p>
-                        <p>Free Updates</p>
-                        <p>Monthly updates</p>
-                        <p>24 x 7 Support</p>
-                    </div>
-
-                    <div class="pt-4">
-                        <a href="#" class="btn btn-custom d-block">Purchase Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="pricing-plans bg-white text-center p-4 mt-4">
-                    <h5 class="plan-title mt-2 mb-4">Extended</h5>
-
-                    <div class="plan-price">
-                        <h4 class="mb-3 price"><sup><small>$</small></sup>999</h4>
-                        <h5 class="plan-duration text-muted font-18">Per license</h5>
-                    </div>
-
-                    <div class="pricing-content p-4 text-muted mb-2">
-                        <p>Number of end products 1</p>
-                        <p>Customer support</p>
-                        <p>Free Updates</p>
-                        <p>Monthly updates</p>
-                        <p>24 x 7 Support</p>
-                    </div>
-
-                    <div class="pt-4">
-                        <a href="#" class="btn btn-custom d-block">Purchase Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end row -->
-    </div>
-    <!-- end container-fluid -->
-</section>
-<!-- pricing end -->
+<!-- reviews end -->
 
 <!-- contact start -->
 <section class="section" id="contact">
@@ -859,15 +358,13 @@
             <div class="col-xl-12">
                 <div class="text-center">
                     <div class="footer-logo mb-3">
-                        <img src="/static/css/images/logo-light.png" alt="" height="20">
+                        <img src="/css/images/logo-light.png" alt="" height="20">
                     </div>
                     <ul class="list-inline footer-list text-center mt-5">
                         <li class="list-inline-item"><a href="#">Home</a></li>
-                        <li class="list-inline-item"><a href="#">About</a></li>
-                        <li class="list-inline-item"><a href="#">Services</a></li>
-                        <li class="list-inline-item"><a href="#">Clients</a></li>
-                        <li class="list-inline-item"><a href="#">Pricing</a></li>
-                        <li class="list-inline-item"><a href="#">Contact</a></li>
+                        <li class="list-inline-item"><a href="#about">About Us</a></li>
+                        <li class="list-inline-item"><a href="#reviews">Reviews</a></li>
+                        <li class="list-inline-item"><a href="#contact">Contact</a></li>
                     </ul>
                     <ul class="list-inline social-links mb-4 mt-5">
                         <li class="list-inline-item"><a href="#"><i class="mdi mdi-facebook"></i></a></li>
@@ -875,7 +372,7 @@
                         <li class="list-inline-item"><a href="#"><i class="mdi mdi-instagram"></i></a></li>
                         <li class="list-inline-item"><a href="#"><i class="mdi mdi-google-plus"></i></a></li>
                     </ul>
-                    <p class="text-white-50 mb-4">2016 - 2020 © Adminto. Design by <a href="#" target="_blank" class="text-white-50">Coderthemes</a> </p>
+                    <p class="text-white-50 mb-4">2023 © BotaniBuddy. Design by <a href="#" target="_blank" class="text-white-50">The Druids</a> </p>
 
                 </div>
             </div>
