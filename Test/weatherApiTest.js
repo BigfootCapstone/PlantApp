@@ -8,6 +8,7 @@ let temp = document.querySelector('.temp');
 let desc = document.querySelector('.desc');
 let humid = document.querySelector('.humid');
 let rain = document.querySelector('.rain');
+let date = document.querySelector('.date');
 
 button.addEventListener('click', function (){
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${inputValue.value}&appid=${WEATHER_API_TOKEN}`).then(response => response.json()).then(data => {
@@ -17,12 +18,17 @@ button.addEventListener('click', function (){
         let descValue = data['weather'][0]['description'];
         let humidValue = data['main']['humidity'];
         // Rain???
+        // Time conversion:
+        let unixTimeStamp = data['dt'];
+        let date = new Date(unixTimeStamp * 1000);
+        let dateValue = date.getDate();
 
         name.innerHTML = nameValue;
         temp.innerHTML = "Temperature: " + tempValue + " °F";
         desc.innerHTML = "Description: " + descValue;
         humid.innerHTML = "Humidity: " + humidValue + " %";
         rain.innerHTML = "Rain Chance: ";
+        date.innerHTML = "Date: " + dateValue;
     })
 
         .catch(error => alert("Wrong city name!"))
