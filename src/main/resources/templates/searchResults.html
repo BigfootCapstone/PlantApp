@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Plant Search Results</title>
+</head>
+<body>
+<h1>Search Results for "<span th:text="${query}"></span>"</h1>
+<ul>
+  <li th:each="plant : ${plants}">
+    <p th:text="${plant.common_name}"></p>
+    <p th:text="${plant.family}"></p>
+    <p th:text="${plant.genus}"></p>
+  </li>
+</ul>
+</body>
+</html>
