@@ -17,17 +17,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
     @Column(nullable = false, length = 128)
     private Date created_at;
 
     @Column(nullable = false, unique = true, length = 60)
     private String username;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, length = 100)
     private String first_name;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, length = 100)
     private String last_name;
 
     @Column(nullable = false, unique = true, length = 64)
@@ -128,4 +127,3 @@ public class User {
         this.password = password;
     }
 }
-
