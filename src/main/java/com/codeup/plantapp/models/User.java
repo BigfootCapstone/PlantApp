@@ -11,9 +11,12 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
 
     @Column(nullable = false, length = 128)
     private Date created_at;
@@ -125,3 +128,4 @@ public class User {
         this.password = password;
     }
 }
+
