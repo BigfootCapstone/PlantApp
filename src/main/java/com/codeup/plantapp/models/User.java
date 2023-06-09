@@ -1,6 +1,8 @@
 package com.codeup.plantapp.models;
 
-
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import jakarta.persistence.*;
 
@@ -17,18 +19,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-
     @Column(nullable = false, length = 128)
     private Date created_at;
 
     @Column(nullable = false, unique = true, length = 60)
     private String username;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, length = 100)
     private String first_name;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = false, length = 100)
     private String last_name;
+
+    @Column(nullable = false, length = 100)
+    private String city;
 
     @Column(nullable = false, unique = true, length = 64)
     private String email;
@@ -56,6 +60,7 @@ public class User {
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -72,6 +77,13 @@ public class User {
     }
     public void setLast_name(String last_name) {
         this.last_name = last_name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getEmail() {
@@ -103,19 +115,14 @@ public class User {
     }
 
 
-    public User() {
-    }
-    public User(Date created_at, String username, String first_name, String last_name, String email, String password) {
-        this.id = id;
+    public User() {}
+
+    public User(Date created_at, String username, String first_name, String last_name, String city, String email, String password) {
         this.created_at = created_at;
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
-        this.email = email;
-        this.password = password;
-    }
-    public User(String username, String email, String password) {
-        this.username = username;
+        this.city = city;
         this.email = email;
         this.password = password;
     }
@@ -128,4 +135,3 @@ public class User {
         this.password = password;
     }
 }
-

@@ -18,7 +18,7 @@ button.addEventListener('click', function (){
         let descValue = data['weather'][0]['description'];
         let humidValue = data['main']['humidity'];
         // Rain???
-        // Time conversion:
+        // Date conversion:
         let unixTimeStamp = data['dt'];
         let date = new Date(unixTimeStamp * 1000);
         let dateValue = date.getDate();
