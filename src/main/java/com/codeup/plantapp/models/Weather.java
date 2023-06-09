@@ -118,6 +118,7 @@ public class Weather{
         return dateTime.getDayOfMonth();
     }
 
+//  To make calculations by hour
     public static int getHour(LocalDateTime dateTime) {
         if (dateTime.getHour() > 12) {
             return dateTime.getHour() - 12;
@@ -125,9 +126,19 @@ public class Weather{
             return dateTime.getHour();
         }
     }
-
+//  To make calculations by minute
     public static int getMinute(LocalDateTime dateTime) {
         return dateTime.getMinute();
+    }
+//  To print time for USER view
+    public static String printTime(LocalDateTime dateTime) {
+        int hour = dateTime.getHour();
+        int minutes = dateTime.getMinute();
+        if (hour > 12) {
+            return (hour - 12) + " : " + minutes + " PM";
+        } else {
+            return hour + " : " + minutes + " AM";
+        }
     }
 
     public Weather(double tempAvg, long humidity, LocalDateTime sunrise, LocalDateTime sunset, long cloudiness, String cloudDesc,
