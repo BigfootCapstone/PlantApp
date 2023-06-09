@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile</title>
+    <title th:text="${user.username} + '\'s Profile'"></title>
 </head>
 <body>
     <div>
-        <h1 th:text="${user.username}">'s Profile</h1>
-        <p th:text="${user.created_at}"></p>
-        <p th:text="${user.first_name}"></p>
-        <p th:text="${user.last_name}"></p>
-        <p th:text="${user.city}"></p>
-        <p th:text="${user.email}"></p>
+        <h1 th:text="${user.username} + '\'s Profile'"></h1>
+        <p th:text="'Date Created: ' + ${user.created_at}"></p>
+        <p th:text="'First Name: ' + ${user.first_name}"></p>
+        <p th:text="'Last Name: ' + ${user.last_name}"></p>
+        <p th:text="'City: ' + ${user.city}"></p>
+        <p th:text="'Email: ' + ${user.email}"></p>
     </div>
 </body>
 </html>
