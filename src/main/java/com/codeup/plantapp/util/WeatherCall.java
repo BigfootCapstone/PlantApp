@@ -44,8 +44,6 @@ public class WeatherCall {
             JSONParser parser = new JSONParser();
             JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
 
-            System.out.println(jsonResponse);
-
             JSONObject atmObject = (JSONObject) jsonResponse.get("main");
             double tempAvg = (double) atmObject.get("temp");
             long humidity = (long) atmObject.get("humidity");

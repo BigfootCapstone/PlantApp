@@ -26,7 +26,7 @@ public class GardenPlant {
     private sun_amount sun_amount;
 
     @Column(nullable = false, length = 128)
-    private Date created_at;
+    private Date last_watered;
 
     @Column(nullable = false)
     private long water_interval;
@@ -65,11 +65,11 @@ public class GardenPlant {
         this.sun_amount = sun_amount;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    public Date getLast_watered() {
+        return last_watered;
     }
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setLast_watered(Date created_at) {
+        this.last_watered = created_at;
     }
 
     public long getWater_interval() {
