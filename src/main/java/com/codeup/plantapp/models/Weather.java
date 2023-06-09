@@ -1,26 +1,14 @@
 package com.codeup.plantapp.models;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-
 public class Weather{
 
     private double tempAvg;
     private long humidity;
-    private LocalDateTime sunriseDTG;
-    private LocalDateTime sunsetDTG;
+    private String sunriseDTG;
+    private String sunsetDTG;
     private long cloudiness;
     private String cloudDesc;
-    private double windSpeed;
+    private String windSpeed;
 
     public double getTempAvg() {
         return tempAvg;
@@ -28,10 +16,10 @@ public class Weather{
     public long getHumidity() {
         return humidity;
     }
-    public LocalDateTime getSunrise() {
+    public String getSunrise() {
         return sunriseDTG;
     }
-    public LocalDateTime getSunset() {
+    public String getSunset() {
         return sunsetDTG;
     }
     public long getCloudiness() {
@@ -40,7 +28,7 @@ public class Weather{
     public String getCloudDesc() {
         return cloudDesc;
     }
-    public double getWindSpeed() {
+    public String getWindSpeed() {
         return windSpeed;
     }
 
@@ -48,6 +36,7 @@ public class Weather{
 //      Date date = new Date(); // Fri Jun 09 08:42:40 CDT 2023
 //      User user = new User(date, "username", "first_name", "last_name", "San Antonio", "email", "password");
 //      Weather usersLocalWeather = getWeather(user);
+
     public static Weather getWeather(User user) {
     String apiKey = keys.getWeather();
     String city = user.getCity();
@@ -100,49 +89,9 @@ public class Weather{
         return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
     }
 
-//      String weekDay = Weather.getWeekday(usersLocalWeather.getSunset()); // FRIDAY
-//      String month = Weather.getMonth(usersLocalWeather.getSunset()); // JUNE
-//      int day = Weather.getDay(usersLocalWeather.getSunset()); // 9
-//      int hour = Weather.getHour(usersLocalWeather.getSunset()); // 8
-//      int minute = Weather.getMinute(usersLocalWeather.getSunset()); // 32
 
-    public static String getWeekday(LocalDateTime dateTime) {
-        return dateTime.getDayOfWeek().toString();
-    }
-
-    public static String getMonth(LocalDateTime dateTime) {
-        return dateTime.getMonth().toString();
-    }
-
-    public static int getDay(LocalDateTime dateTime) {
-        return dateTime.getDayOfMonth();
-    }
-
-//  To make calculations by hour
-    public static int getHour(LocalDateTime dateTime) {
-        if (dateTime.getHour() > 12) {
-            return dateTime.getHour() - 12;
-        } else {
-            return dateTime.getHour();
-        }
-    }
-//  To make calculations by minute
-    public static int getMinute(LocalDateTime dateTime) {
-        return dateTime.getMinute();
-    }
-//  To print time for USER view
-    public static String printTime(LocalDateTime dateTime) {
-        int hour = dateTime.getHour();
-        int minutes = dateTime.getMinute();
-        if (hour > 12) {
-            return (hour - 12) + " : " + minutes + " PM";
-        } else {
-            return hour + " : " + minutes + " AM";
-        }
-    }
-
-    public Weather(double tempAvg, long humidity, LocalDateTime sunrise, LocalDateTime sunset, long cloudiness, String cloudDesc,
-                   double windSpeed) {
+    public Weather(double tempAvg, long humidity, String sunrise, String sunset, long cloudiness,
+                   String cloudDesc, String windSpeed) {
         this.tempAvg = tempAvg;
         this.humidity = humidity;
         this.sunriseDTG = sunrise;
@@ -152,4 +101,5 @@ public class Weather{
         this.windSpeed = windSpeed;
     }
     public Weather () {}
+
 }
