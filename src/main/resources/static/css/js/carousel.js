@@ -9,11 +9,15 @@ const renderCarouselImages = (images, parent) =>{
             element.classList.add('slide', 'right');
         }
         element.innerHTML= `
-          <div class="column shrink movie-container">
-           <div class="column shrink movie-container-left">
-          <div class="column shrink align-center">
-            <img src="" alt="" class="movie-poster">
-          </div>
+          <div class="column shrink img-container">
+           <div class="column shrink img-container-left">
+              <div class="column shrink align-center">
+                <img src="/css/images/PlantSlide2.png" alt="sad plant" class=img">
+              </div>
+            </div>
+            <div class="column shrink img-container">
+                
+            </div>
         </div>
 `
     })
