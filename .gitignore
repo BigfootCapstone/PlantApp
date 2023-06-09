@@ -1,6 +1,6 @@
 HELP.md
-keys.java
-keys.js
+Keys.java
+Keys.js
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
