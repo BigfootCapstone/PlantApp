@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Plant Search</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="partials/head :: head('Plant Search')"></head>
+
+
 <body>
 <h1>Plant Search</h1>
 <form action="#" th:action="@{/search}" method="post">
