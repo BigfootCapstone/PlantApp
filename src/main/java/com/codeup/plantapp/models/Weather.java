@@ -1,7 +1,5 @@
-package com.codeup.plantapp;
+package com.codeup.plantapp.models;
 
-import com.codeup.plantapp.models.Keys;
-import com.codeup.plantapp.models.User;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
