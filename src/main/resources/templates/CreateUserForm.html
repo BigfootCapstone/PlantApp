@@ -8,10 +8,10 @@
 <!--Needed:
 Date created_at, country, state, city,username, first_name, last_name, email, password-->
 <h1>Create Your Profile!</h1>
-<form method="post" th:action="@{/users/create}" th:object="${user}">
+<form th:method="post" th:action="@{/create}" th:object="${user}">
     <div>
         <label for="createdAt">Today's Date:</label>
-        <input type="date" id="createdAt" th:field="*{created_at}" required>
+        <input type="text" id="createdAt" th:field="*{created_at}" required>
     </div>
     <div>
         <label for="username">Username:</label>

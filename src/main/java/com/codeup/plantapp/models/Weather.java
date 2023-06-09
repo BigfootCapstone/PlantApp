@@ -49,7 +49,7 @@ public class Weather{
 //      User user = new User(date, "username", "first_name", "last_name", "San Antonio", "email", "password");
 //      Weather usersLocalWeather = getWeather(user);
     public static Weather getWeather(User user) {
-    String apiKey = Keys.getWeather();
+    String apiKey = keys.getWeather();
     String city = user.getCity();
     try {
         URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey +
