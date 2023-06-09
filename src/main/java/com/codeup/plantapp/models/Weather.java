@@ -45,9 +45,7 @@ public class Weather{
     }
 
 
-
-    public Weather(double tempAvg, long humidity, String sunrise, String sunset, long cloudiness,
-                   String cloudDesc, String windSpeed) {
+    public Weather(double tempAvg, long humidity, String sunrise, String sunset, long cloudiness, String cloudDesc, String windSpeed) {
         this.tempAvg = tempAvg;
         this.humidity = humidity;
         this.sunriseDTG = sunrise;
