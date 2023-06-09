@@ -22,11 +22,11 @@ public class UserController {
         return "createUserForm";
     }
 
-    //messing with it for the create user
+    //messing with it for the createUser
     @PostMapping("/create")
     public String createUserProfile(@ModelAttribute("user") User user) {
         userRepository.save(user);
-        return "redirect:/userProfile";
+        return "redirect:/users/" + user.getId();
     }
 
     @GetMapping("/{id}")
