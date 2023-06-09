@@ -3,8 +3,6 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:insert="partials/head :: head('Create User')"></head>
 <body>
-<!--Needed:
-Date created_at, country, state, city,username, first_name, last_name, email, password-->
 <h1>Create Your Profile!</h1>
 <form th:method="post" th:action="@{/users/create}" th:object="${user}">
     <div>
