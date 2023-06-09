@@ -19,6 +19,10 @@ import static com.codeup.plantapp.util.Time.convertTimestampToLocalDateTime;
 
 public class WeatherCall {
 
+    //  HOW GET WEATHER WORKS:
+//      Date date = new Date(); // Fri Jun 09 08:42:40 CDT 2023
+//      User user = new User(date, "username", "first_name", "last_name", "San Antonio", "email", "password");
+//      Weather usersLocalWeather = getWeather(user);
     public static Weather getWeather(User user) {
         String apiKey = keys.getWeather();
         String city = user.getCity();
