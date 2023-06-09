@@ -27,7 +27,7 @@ public class UserController {
     @PostMapping("/create")
     public String createUserProfile(@ModelAttribute("user") User user) {
         userRepository.save(user);
-        return "redirect:/users";
+        return "redirect:/userProfile";
     }
     @GetMapping("/login")
     public String showLoginForm(){
@@ -53,7 +53,7 @@ public class UserController {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
-        return "editUserProfileForm";
+        return "editUserForm";
     }
 
     @PostMapping("/{id}/edit")

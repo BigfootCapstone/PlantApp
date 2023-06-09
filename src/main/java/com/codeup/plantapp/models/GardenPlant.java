@@ -3,6 +3,7 @@ package com.codeup.plantapp.models;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
+
 import static jakarta.persistence.EnumType.STRING;
 
 @Entity
@@ -30,7 +31,7 @@ public class GardenPlant {
     @Column(nullable = false)
     private long water_interval;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = false)
     private boolean is_outside;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "gardenPlant")
