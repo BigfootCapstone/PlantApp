@@ -1,5 +1,17 @@
 package com.codeup.plantapp.models;
 
+import org.apache.tomcat.util.json.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 public class Weather{
 
     private double tempAvg;
@@ -33,7 +45,9 @@ public class Weather{
     }
 
 
-    public Weather(double tempAvg, long humidity, String sunrise, String sunset, long cloudiness, String cloudDesc, String windSpeed) {
+
+    public Weather(double tempAvg, long humidity, String sunrise, String sunset, long cloudiness,
+                   String cloudDesc, String windSpeed) {
         this.tempAvg = tempAvg;
         this.humidity = humidity;
         this.sunriseDTG = sunrise;
