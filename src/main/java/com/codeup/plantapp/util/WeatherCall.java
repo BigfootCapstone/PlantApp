@@ -60,27 +60,16 @@ public class WeatherCall {
             JSONArray cloudArray = (JSONArray) jsonResponse.get("weather");
             JSONObject cloudDescObject = (JSONObject) cloudArray.get(0);
             long cloudiness = (long) cloudObject.get("all");
-            String cloudDesc = (String) cloudDescObject.get("description");
+            String desc = (String) cloudDescObject.get("description");
 
             JSONObject windObject = (JSONObject) jsonResponse.get("wind");
             Object windSpeed = windObject.get("speed");
 
-            return new Weather(tempAvg, humidity, sunriseDTG, sunsetDTG, cloudiness, cloudDesc, windSpeed.toString());
+            return new Weather(tempAvg, humidity, sunriseDTG, sunsetDTG, cloudiness, desc, windSpeed.toString());
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
-    }
-
-    public static List<GardenPlant> checkForOutdoorPlants(User user) {
-        List<GardenPlant> userPlants = user.getGardenPlants();
-        List<GardenPlant> outdoor = new ArrayList<>();
-        for (GardenPlant plant: userPlants) {
-            if (plant.isIs_outside()) {
-                outdoor.add(plant);
-            }
-        }
-        return outdoor;
     }
 
 }

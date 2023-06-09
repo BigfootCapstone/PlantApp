@@ -6,8 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import static com.codeup.plantapp.util.WeatherCall.checkForOutdoorPlants;
 import static com.codeup.plantapp.util.WeatherCall.getWeather;
+import static com.codeup.plantapp.util.CareTips.checkForOutdoorPlants;
 
 @Controller
 public class WeatherController {
