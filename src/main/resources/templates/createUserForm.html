@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:insert="partials/head :: head('Create User')"></head>
+<<<<<<< HEAD
 
 
 
@@ -61,5 +62,42 @@ Date created_at, country, state, city,username, first_name, last_name, email, pa
             </div>
         </div>
     </div>
+=======
+<body>
+<!--Needed:
+Date created_at, country, state, city,username, first_name, last_name, email, password-->
+<h1>Create Your Profile!</h1>
+<form th:method="post" th:action="@{/users/create}" th:object="${user}">
+    <div>
+        <label for="createdAt">Today's Date:</label>
+        <input type="text" id="createdAt" th:field="*{created_at}" required>
+    </div>
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" th:field="*{username}" required>
+    </div>
+    <div>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" th:field="*{first_name}" required>
+    </div>
+    <div>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" th:field="*{last_name}" required>
+    </div>
+    <div>
+        <label for="city">Current City:</label>
+        <input type="text" id="city" th:field="*{city}" required>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}" required>
+    </div>
+    <button type="submit">Create Profile</button>
+</form>
+>>>>>>> main
 </body>
 </html>

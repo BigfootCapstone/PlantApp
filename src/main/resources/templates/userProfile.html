@@ -1,9 +1,17 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:insert="partials/head :: head('Profile')"></head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
 <body>
-<h1 th:text="${user.name}"></h1>
-
-
+    <div>
+        <h1 th:text="${user.username}">'s Profile</h1>
+        <p th:text="${user.created_at}"></p>
+        <p th:text="${user.first_name}"></p>
+        <p th:text="${user.last_name}"></p>
+        <p th:text="${user.city}"></p>
+        <p th:text="${user.email}"></p>
+    </div>
 </body>
 </html>
