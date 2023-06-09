@@ -5,10 +5,19 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/users/{id}/edit" method="post" th:object="${user}">
-  <label>Name: <input type="text" th:field="*{name}"/></label>
-  <input type="submit" value="Save"/>
-</form>
-
+    <div class="col-lg-8">
+        <div class="custom-form">
+            <form action="/users/{id}/edit" method="post" th:object="${user}">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label>Name: <input type="text" th:field="*{name}"/></label>
+                            <input type="submit" value="Save"/>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
