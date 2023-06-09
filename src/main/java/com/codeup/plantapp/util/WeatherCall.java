@@ -1,10 +1,10 @@
 package com.codeup.plantapp.util;
 
 import com.codeup.plantapp.models.GardenPlant;
-import com.codeup.plantapp.models.keys;
+import com.codeup.plantapp.models.Keys;
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.models.Weather;
-import com.codeup.plantapp.models.keys;
+import com.codeup.plantapp.models.Keys;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -24,7 +24,7 @@ public class WeatherCall {
 //      User user = new User(date, "username", "first_name", "last_name", "San Antonio", "email", "password");
 //      Weather usersLocalWeather = getWeather(user);
     public static Weather getWeather(User user) {
-        String apiKey = keys.getWeather();
+        String apiKey = Keys.getWeather();
         String city = user.getCity();
         try {
             URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey +
