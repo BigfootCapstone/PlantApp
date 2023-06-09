@@ -1,11 +1,6 @@
 package com.codeup.plantapp.models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 import jakarta.persistence.*;
-
 import java.util.Date;
 import java.util.List;
 
@@ -13,14 +8,12 @@ import java.util.List;
 @Table(name = "users")
 public class User {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false, length = 128)
-    private Date created_at;
+    private String created_at;
 
     @Column(nullable = false, unique = true, length = 60)
     private String username;
@@ -41,6 +34,9 @@ public class User {
     private String password;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    private List<GardenPlant> gardenPlants;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Post> posts;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
@@ -50,17 +46,16 @@ public class User {
         return id;
     }
 
-    public Date getCreated_at() {
+    public String getCreated_at() {
         return created_at;
     }
-    public void setCreated_at(Date created_at) {
+    public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
 
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -100,6 +95,13 @@ public class User {
         this.password = password;
     }
 
+    public List<GardenPlant> getGardenPlants() {
+        return gardenPlants;
+    }
+    public void setGardenPlants(List<GardenPlant> gardenPlants) {
+        this.gardenPlants = gardenPlants;
+    }
+
     public List<Post> getPosts() {
         return posts;
     }
@@ -117,7 +119,7 @@ public class User {
 
     public User() {}
 
-    public User(Date created_at, String username, String first_name, String last_name, String city, String email, String password) {
+    public User(String created_at, String username, String first_name, String last_name, String city, String email, String password) {
         this.created_at = created_at;
         this.username = username;
         this.first_name = first_name;

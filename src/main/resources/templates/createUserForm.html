@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Create User</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="partials/head :: head('Create User')"></head>
 <body>
 <!--Needed:
 Date created_at, country, state, city,username, first_name, last_name, email, password-->
 <h1>Create Your Profile!</h1>
-<form method="post" th:action="@{/users/create}" th:object="${user}">
+<form th:method="post" th:action="@{/users/create}" th:object="${user}">
     <div>
         <label for="createdAt">Today's Date:</label>
-        <input type="date" id="createdAt" th:field="*{created_at}" required>
+        <input type="text" id="createdAt" th:field="*{created_at}" required>
     </div>
     <div>
         <label for="username">Username:</label>
@@ -24,6 +22,10 @@ Date created_at, country, state, city,username, first_name, last_name, email, pa
     <div>
         <label for="lastName">Last Name:</label>
         <input type="text" id="lastName" th:field="*{last_name}" required>
+    </div>
+    <div>
+        <label for="city">Current City:</label>
+        <input type="text" id="city" th:field="*{city}" required>
     </div>
     <div>
         <label for="email">Email:</label>

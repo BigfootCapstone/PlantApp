@@ -1,36 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>BotaniBuddy Landing Page</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css" integrity="sha512-LX0YV/MWBEn2dwXCYgQHrpa9HJkwB+S+bnBpifSOTO1No27TqNMKYoAn6ff2FBh03THAzAiiCwQ+aPX+/Qt/Ow==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="//db.onlinewebfonts.com/c/7218a2da5a03f622ca18085806382043?family=Pe-icon-7-stroke" rel="stylesheet" type="text/css"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
 
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/pe-icon-7-stroke.css">
-
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="/css/images/favicon.ico">
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
-
-    <!--Material Icon -->
-    <link rel="stylesheet" type="text/css" href="/css/materialdesignicons.min.css" />
-
-    <!--pe-7 Icon -->
-    <link rel="stylesheet" type="text/css" href="/css/pe-icon-7-stroke.css" />
-
-    <!-- Custom  sCss -->
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/style.css">
-
-</head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="58" class="scrollspy-example">
 
@@ -81,7 +52,9 @@
                             <p class="subtitle home-desc font-16 mb-5">Our guidance empowers you to cultivate your first green companions or nurture an exquisite garden oasis.
                             </p>
                             <div class="d-flex justify-content-center mt-5">
-                                <button href="#" class="btn-custom btn-sign-up justify-content-center align-items-center">SIGN UP!</button>
+                                <button class="btn-custom btn-sign-up justify-content-center align-items-center">
+                                    <a  class="btn-sign-text" th:href="@{/users/create}">SIGN UP!</a>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -188,7 +161,7 @@
                 <div class="testers-box p-4 bg-white mt-4 text-center">
                     <p class="text-muted mb-4">" With BotaniBuddy I have been able to provide a level of care for my plants that I did not know was possible! No more parsing through tons of websites or books with conflicting tips, or feeling terrible because I lost a plant. BotaniBuddy's watering notifications, day-to-day journaling feature, and it's wonderful community are invaluable to me and I could not be happier! 5 stars! "</p>
                     <div class="testers-img mb-4">
-                        <img src="/css/images/testers/img-1.png" alt="" class="rounded-circle img-thumbnail">
+                        <img src="/css/images/testers/img-1.jpg" alt="" class="rounded-circle img-thumbnail">
                     </div>
                     <p class="text-muted mb-1"> - Drake Jacquez</p>
                     <h5 class="font-18">ManDr@k3</h5>
@@ -199,7 +172,7 @@
                 <div class="testers-box p-4 bg-white mt-4 text-center">
                     <p class="text-muted mb-4">" My tomatoes kept dying and I could not figure out why! Using the advice from BotaniBuddy, I was able to recover a few of them and they even bore some fruit! "</p>
                     <div class="testers-img mb-4">
-                        <img src="/css/images/testers/img-2.png" alt="" class="rounded-circle img-thumbnail">
+                        <img src="/css/images/testers/img-2.jpeg" alt="" class="rounded-circle img-thumbnail">
                     </div>
                     <p class="text-muted mb-1"> - Brendan Thomas</p>
                     <h5 class="font-18">BTomat!ll0</h5>

@@ -124,6 +124,10 @@ html {
   height: 45px;
 }
 
+a.btn-sign-text{
+  color: #FFFFFF;
+}
+
 .btn-custom:hover, .btn-custom:focus, .btn-custom:active {
   background-color: #F9C0A9;
 }
