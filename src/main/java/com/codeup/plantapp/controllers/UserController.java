@@ -33,12 +33,12 @@ public class UserController {
     public String showLoginForm(){
         return "/login";
     }
-    @PostMapping("/login")
-    public String loginSessionSetter(Model model, HttpSession session){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        session.setAttribute("user", user);
-        return "/login";
-    }
+//    @PostMapping("/login")
+//    public String loginSessionSetter(Model model, HttpSession session){
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        session.setAttribute("user", user);
+//        return "/login";
+//    }
 
     @GetMapping("/{id}")
     public String getUserProfile(@PathVariable Long id, Model model) {

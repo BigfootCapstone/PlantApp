@@ -1,5 +1,16 @@
 package com.codeup.plantapp.models;
 
+import org.apache.tomcat.util.json.JSONParser;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
+import java.io.BufferedReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 public class Weather{
 
     private double tempAvg;
@@ -38,7 +49,7 @@ public class Weather{
 //      Weather usersLocalWeather = getWeather(user);
 
     public static Weather getWeather(User user) {
-    String apiKey = keys.getWeather();
+    String apiKey = Keys.getWeather();
     String city = user.getCity();
     try {
         URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey +
