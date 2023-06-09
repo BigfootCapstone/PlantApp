@@ -42,7 +42,7 @@ public class UserController {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
-        return "editUserProfileForm";
+        return "editUserForm";
     }
 
     @PostMapping("/{id}/edit")

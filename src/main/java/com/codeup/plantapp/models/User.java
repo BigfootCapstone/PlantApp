@@ -17,7 +17,6 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    // need to DateTimeFormatter parse - wouldn't work for Date type
     @Column(nullable = false, length = 128)
     private String created_at;
 
