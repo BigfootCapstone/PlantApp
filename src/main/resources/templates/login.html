@@ -5,6 +5,25 @@
     <title>Title</title>
 </head>
 <body>
+<div class="col-lg-8">
+    <div class="custom-form">
+        <form action="/login" method="post" th:object="${user}">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-3">
+                        <label>Username:
+                            <input  class="form-control" type="text" th:field="*{username}"/>
+                        </label>
+                        <label>Password:
+                            <input  class="form-control" type="password" th:field="*{password}"/>
+                        </label>
+                        <input  class="submitBnt btn btn-custom" type="submit" value="Save"/>
 
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

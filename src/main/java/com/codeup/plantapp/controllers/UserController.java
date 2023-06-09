@@ -2,6 +2,7 @@ package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.repositories.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,16 @@ public class UserController {
     public String createUserProfile(@ModelAttribute("user") User user) {
         userRepository.save(user);
         return "redirect:/users";
+    }
+    @GetMapping("/login")
+    public String showLoginForm(){
+        return "/login";
+    }
+    @PostMapping("/login")
+    public String loginSessionSetter(Model model, HttpSession session){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        session.setAttribute("user", user);
+        return "/login";
     }
 
     @GetMapping("/{id}")
