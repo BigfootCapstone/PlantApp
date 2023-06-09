@@ -1,17 +1,18 @@
 package com.codeup.plantapp.util;
 
+import com.codeup.plantapp.models.GardenPlant;
 import com.codeup.plantapp.models.Keys;
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.models.Weather;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.codeup.plantapp.util.Time.convertTimestampToLocalDateTime;
 
@@ -47,9 +48,9 @@ public class WeatherCall {
 
             JSONObject sunObject = (JSONObject) jsonResponse.get("sys");
             long sunrise = (long) sunObject.get("sunrise") * 1000;
-            LocalDateTime sunriseDTG = convertTimestampToLocalDateTime(sunrise);
+            String sunriseDTG = Time.printTime(convertTimestampToLocalDateTime(sunrise));
             long sunset = (long) sunObject.get("sunset") * 1000;
-            LocalDateTime sunsetDTG = convertTimestampToLocalDateTime(sunset);
+            String sunsetDTG = Time.printTime(convertTimestampToLocalDateTime(sunset));
 
             JSONObject cloudObject = (JSONObject) jsonResponse.get("clouds");
             JSONArray cloudArray = (JSONArray) jsonResponse.get("weather");
@@ -58,13 +59,24 @@ public class WeatherCall {
             String cloudDesc = (String) cloudDescObject.get("description");
 
             JSONObject windObject = (JSONObject) jsonResponse.get("wind");
-            long windSpeed = (long) windObject.get("speed");
+            Object windSpeed = windObject.get("speed");
 
-            return new Weather(tempAvg, humidity, sunriseDTG, sunsetDTG, cloudiness, cloudDesc, windSpeed);
+            return new Weather(tempAvg, humidity, sunriseDTG, sunsetDTG, cloudiness, cloudDesc, windSpeed.toString());
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static List<GardenPlant> checkForOutdoorPlants(User user) {
+        List<GardenPlant> userPlants = user.getGardenPlants();
+        List<GardenPlant> outdoor = new ArrayList<>();
+        for (GardenPlant plant: userPlants) {
+            if (plant.isIs_outside()) {
+                outdoor.add(plant);
+            }
+        }
+        return outdoor;
     }
 
 }

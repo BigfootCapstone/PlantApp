@@ -1,19 +1,12 @@
 package com.codeup.plantapp.models;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
 import jakarta.persistence.*;
-
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class User {
-
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,6 +34,9 @@ public class User {
     private String password;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    private List<GardenPlant> gardenPlants;
+
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Post> posts;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
@@ -60,7 +56,6 @@ public class User {
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -98,6 +93,13 @@ public class User {
     }
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<GardenPlant> getGardenPlants() {
+        return gardenPlants;
+    }
+    public void setGardenPlants(List<GardenPlant> gardenPlants) {
+        this.gardenPlants = gardenPlants;
     }
 
     public List<Post> getPosts() {
