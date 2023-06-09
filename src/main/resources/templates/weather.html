@@ -20,7 +20,6 @@
 
                 <h3>PLANTS OUTSIDE</h3>
                 <div th:if="${outdoorPlant}" th:each="plant : ${outdoorPlant}">
-                    <p th:text="${plant.user.username}"></p>
                     <p th:text="${plant.plant.name}"></p>
                     <p th:text="${plant.sun_amount}"></p>
                     <p th:text="${plant.water_interval}"></p>

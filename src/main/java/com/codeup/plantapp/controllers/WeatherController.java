@@ -33,7 +33,7 @@ public class WeatherController {
 //      Get weather data for user's location
         model.addAttribute("weather", getWeather(base));
 
-        return "Weather";
+        return "weather";
     }
 
 }
