@@ -1,7 +1,5 @@
 package com.codeup.plantapp.services;
 
-
-import com.codeup.plantapp.models.GardenPlant;
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.models.Weather;
 import com.codeup.plantapp.util.Time;
@@ -10,13 +8,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.codeup.plantapp.services.Keys;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import static com.codeup.plantapp.util.Time.convertTimestampToLocalDateTime;
 
@@ -24,17 +22,14 @@ import static com.codeup.plantapp.util.Time.convertTimestampToLocalDateTime;
 public class WeatherCall {
 
     @Autowired
-    private static Keys keys;
+    private Keys keys;
+
     //  HOW GET WEATHER WORKS:
 //      Date date = new Date(); // Fri Jun 09 08:42:40 CDT 2023
 //      User user = new User(date, "username", "first_name", "last_name", "San Antonio", "email", "password");
 //      Weather usersLocalWeather = getWeather(user);
-    public static Weather getWeather(User user) {
-        String apiKey = keys.getWeather();
-        String city = user.getCity();
+    public static Weather getWeather(URL url) {
         try {
-            URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey +
-                    "&units=imperial");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
@@ -78,15 +73,15 @@ public class WeatherCall {
     }
 
 
-    public List<GardenPlant> checkForOutdoorPlants(User user) {
-        List<GardenPlant> userPlants = user.getGardenPlants();
-        List<GardenPlant> outdoor = new ArrayList<>();
-        for (GardenPlant plant: userPlants) {
-            if (plant.isIs_outside()) {
-                outdoor.add(plant);
-            }
-        }
-        return outdoor;
-    }
+//    public List<GardenPlant> checkForOutdoorPlants(User user) {
+//        List<GardenPlant> userPlants = user.getGardenPlants();
+//        List<GardenPlant> outdoor = new ArrayList<>();
+//        for (GardenPlant plant: userPlants) {
+//            if (plant.isIs_outside()) {
+//                outdoor.add(plant);
+//            }
+//        }
+//        return outdoor;
+//    }
 
 }
