@@ -1,28 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="partials/head :: head('Login')"></head>
-
-
 <body>
 
 <!--Navbar Start-->
 <header th:replace="partials/navbar :: navbar"></header>
 <!-- Navbar End -->
+    <div class="container grow justify-center">
+        <div class="row justify-center">
+            <div class="column shrink">
+                <h1>Log In</h1>
 
-<div class="container grow justify-center">
-    <div class="row justify-center">
-        <div class="column shrink">
-            <h1>Log In</h1>
-            <form th:action="@{/login}" th:method="post">
-                <label class="form-label" for="username">Username:</label>
-                <input class="form-control" type="text" id="username" name="username">
-                <label class="form-label" for="password">Password</label>
-                <input class="form-control" type="text" id="password" name="password">
-                <input type="submit" value="Log In">
-            </form>
+                <form th:action="@{/users/login}" th:method="post">
+                    <label class="form-label" for="username">Username:</label>
+                    <input class="form-control" type="text" id="username" name="username">
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-control" type="text" id="password" name="password">
+                    <input type="submit" value="Log In">
+                </form>
+            </div>
         </div>
     </div>
-</div>
-
 </body>
 </html>

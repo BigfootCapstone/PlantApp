@@ -1,7 +1,9 @@
 package com.codeup.plantapp.models;
 
 import jakarta.persistence.*;
-import java.util.Date;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -13,7 +15,7 @@ public class User {
     private long id;
 
     @Column(nullable = false, length = 128)
-    private String created_at;
+    private LocalDate created_at;
 
     @Column(nullable = false, unique = true, length = 60)
     private String username;
@@ -46,10 +48,10 @@ public class User {
         return id;
     }
 
-    public String getCreated_at() {
+    public LocalDate getCreated_at() {
         return created_at;
     }
-    public void setCreated_at(String created_at) {
+    public void setCreated_at(LocalDate created_at) {
         this.created_at = created_at;
     }
 
@@ -117,10 +119,11 @@ public class User {
     }
 
 
-    public User() {}
+    public User() {
+    }
 
-    public User(String created_at, String username, String first_name, String last_name, String city, String email, String password) {
-        this.created_at = created_at;
+    public User(LocalDate created_at, String username, String first_name, String last_name, String city, String email, String password) {
+        this.created_at = LocalDate.now();
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;

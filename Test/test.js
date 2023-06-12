@@ -1,6 +1,7 @@
 const fetch = require('node-fetch');
 const readline = require('readline');
 
+
 // Function to perform the search
 async function searchPlants(query) {
     const response = await fetch(`https://trefle.io/api/v1/plants/search?token=${TREFLE_API_TOKEN}&q=${encodeURIComponent(query)}`);

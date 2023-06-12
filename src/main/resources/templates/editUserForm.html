@@ -101,19 +101,19 @@
                   <div class="form-group">
                     <label class="d-flex col control-label quote">Username <span sec:authentication="principal.username"></span></label>
                     <div class="col">
-                      <input type="text" class="form-control" th:field="${user.username}">
+                      <input type="text" class="form-control" th:field="*{username}">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col control-label quote">First Name</label>
                     <div class="col">
-                      <input type="text" class="form-control" th:field="${user.first_name}">
+                      <input type="text" class="form-control" th:field="${first_name}">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col control-label quote">Last Name</label>
                     <div class="col">
-                      <input type="text" class="form-control" th:field="${user.last_name}">
+                      <input type="text" class="form-control" th:field="${last_name}">
                     </div>
                   </div>
                   <div class="form-group">
@@ -133,7 +133,7 @@
                   <div class="form-group">
                     <label class="col control-label quote">E-mail address</label>
                     <div class="col">
-                      <input type="email" class="form-control" th:value="${user.email}">
+                      <input type="email" class="form-control" th:value="${email}">
                     </div>
                   </div>
                 </div>
@@ -147,18 +147,19 @@
                   <div class="form-group">
                     <label class="col control-label quote">Current password</label>
                     <div class="col">
-                      <input type="password" class="form-control" th:field="${user.password}">
+                      <input type="password" class="form-control" th:field="${password}">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col control-label quote">New password</label>
                     <div class="col">
-                      <input type="password" class="form-control" th:field="${user.password}">
+                      <input type="password" class="form-control" th:field="${password}">
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="d-flex col">
-                      <button type="submit" class="btn btn-custom" value="save">Submit</button>
+                      <input type="hidden" name="id" th:attr="value=${user.id}" />
+                      <button type="submit" class="btn btn-custom" value="save">Save</button>
                       <button type="reset" class="btn nav-link">Cancel</button>
                     </div>
                     <div class="col font-16 delete-profile pe-7s-delete-user mt-3">    Delete Profile</div>
@@ -173,9 +174,8 @@
 
 
 
-<!--    <label>Name: <input type="text" th:field="*{name}"/></label>-->
-<!--    <input type="submit" value="Save"/>-->
 <script th:src="@{/js/staticElements.js}"></script>
 <footer th:replace="partials/footer :: footer"></footer>
+
 </body>
 </html>
