@@ -16,12 +16,6 @@ Date created_at, country, state, city,username, first_name, last_name, email, pa
                     <form method="post" th:action="@{/users/create}" th:object="${user}">
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label class="form-label" for="createdAt">Today's Date:</label>
-                                <input type="text" id="createdAt" class="form-control" th:field="*{created_at}" required>
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
                                 <label class="form-label" for="username">Username:</label>
                                 <input type="text" id="username" class="form-control" th:field="*{username}" required>
                             </div>
