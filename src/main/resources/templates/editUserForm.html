@@ -18,12 +18,12 @@
       <div class="d-flex col justify-content-center">
         <form class="form-horizontal flex-grow-1"
               th:action="@{/users/{id}/edit}"
-              th:object="${user}" method="post"
+              th:object="${user}" th:method="post"
               enctype="multipart/form-data"
         >
           <div class="panel ">
             <div class="panel-body text-center">
-              <img src="/css/images/testers/img-3.jpg" class="img-circle profile-avatar" id="profile-img" th:src="@{#}" th:onload="loadFile()" alt="User avatar">
+              <img class="img-circle profile-avatar" id="profile-img" src="" alt="User avatar">
               <input type="file" name="image" accept="image/*" />
             </div>
           </div>
@@ -33,7 +33,7 @@
             </div>
             <div class="panel-body">
               <div class="form-group">
-                <label class="d-flex col control-label quote">Username</label>
+                <label class="d-flex col control-label quote">Username <span th:text="${user.username}"></span> </label>
                 <div class="col">
                   <input type="text" class="form-control" th:field="*{username}">
                 </div>
