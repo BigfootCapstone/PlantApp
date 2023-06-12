@@ -570,4 +570,75 @@ a.login-text{
     padding: 24px !important;
   }
 }
+/*******************************
+  13.carousel
+ ********************************/
+.container.slider{
+  min-height: 70vh;
+}
+.slider-mask {
+  overflow: hidden;
+  align-self: stretch;
+  flex: 1 0 0;
+  position: relative;
+}
+.slides {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.controls>*{
+  font-size: 35px;
+}
+.car-con{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.arrow-left{
+  position: absolute;
+  top: 50%;
+  left: 290px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: rgba(255, 222, 173, 0.78);
+  border: unset;
+}
+.arrow-right{
+  position: absolute;
+  top: 50%;
+  right: 203px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: rgba(255, 222, 173, 0.78);
+  border: unset;
+}
+.slide{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(17, 9, 30, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  transition: all ease .3s;
+  max-height: 630px;
+  border-radius: 15px;
+  color: rgba(255, 222, 173, 0.78);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+}
+.slide.left{
+  left: -100%;
+}
+.slide.right{
+  left: 100%;
+}
+.carouselHolder{
+  margin: 45px;
+}
 /*# sourceMappingURL=style.css.map */

@@ -2,6 +2,9 @@ package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.repositories.UserRepository;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +16,15 @@ import java.util.Date;
 @RequestMapping("/users")
 public class UserController {
 
-    private final UserRepository userRepository;
+    private final UserRepository usersDao;
 
-    public UserController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    private final PasswordEncoder passwordEncoder;
+//    private final UserRepository userDao;
+
+    public UserController(UserRepository userDao, UserRepository usersDao, PasswordEncoder passwordEncoder){
+        this.usersDao = usersDao;
+//        this.userDao = userDao;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/create")
@@ -25,17 +33,38 @@ public class UserController {
         return "createUserForm";
     }
 
-    //messing with it for the createUser
+    //messing with it for the create user
     @PostMapping("/create")
     public String createUserProfile(@ModelAttribute("user") User user) {
         user.setCreated_at(LocalDate.now());
-        userRepository.save(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        usersDao.save(user);
         return "redirect:/users/" + user.getId();
+//        usersDao.save(user);
+//        return "redirect:/userProfile";
     }
-
+    @GetMapping("/login")
+    public String viewLoginPage() {
+        return "login";
+    }
+    @PostMapping("/login")
+    public String loginSessionSetter(Model model, HttpSession session){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        session.setAttribute("user", user);
+        return "redirect: /users/profile";
+    }
+    @GetMapping("/profile")
+    public String showProfile(Model model){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = user.getId();
+        user = usersDao.findUserById(userId);
+        model.addAttribute("user", user);
+        System.out.println(user.getUsername());
+        return "userProfile";
+    }
     @GetMapping("/{id}")
     public String getUserProfile(@PathVariable Long id, Model model) {
-        User user = userRepository.findById(id)
+        User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
         return "userProfile";
@@ -43,7 +72,7 @@ public class UserController {
 
     @GetMapping("/{id}/edit")
     public String editUserProfileForm(@PathVariable Long id, Model model) {
-        User user = userRepository.findById(id)
+        User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
         return "editUserForm";
@@ -51,25 +80,28 @@ public class UserController {
 
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
-        User user = userRepository.findUserById(1L);
-        user.setUsername(updatedUser.getUsername());
-        user.setFirst_name(updatedUser.getFirst_name());
-        user.setLast_name(updatedUser.getLast_name());
-        user.setCity(updatedUser.getCity());
-        user.setEmail(updatedUser.getEmail());
-        userRepository.save(user);
+//        User user = userDao.findUserById(1L);
+        User users = usersDao.findUserById(1L);
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+        users.setUsername(updatedUser.getUsername());
+        users.setFirst_name(updatedUser.getFirst_name());
+        users.setLast_name(updatedUser.getLast_name());
+        users.setCity(updatedUser.getCity());
+        users.setEmail(updatedUser.getEmail());
+//        userDao.save(user);
+        usersDao.save(users);
         return "redirect:/users/" + id;
     }
 
     @PostMapping("/{id}/delete")
     public String deleteUserProfile(@PathVariable Long id) {
-        userRepository.deleteById(id);
+        usersDao.deleteById(id);
         return "redirect:/users";
     }
 
     @GetMapping
     public String getAllUsers(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("users", usersDao.findAll());
         return "users";
     }
 }
