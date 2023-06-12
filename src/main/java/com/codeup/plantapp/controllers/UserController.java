@@ -69,19 +69,18 @@ public class UserController {
         User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
-        return "createUserForm";
+        return "editUserForm";
     }
 
     @PostMapping("/{id}/edit")
-    public String updateUserProfile(@PathVariable Long id, @ModelAttribute User updatedUser) {
-        User user = usersDao.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
-        user.setUsername(updatedUser.getUsername());
-        user.setFirst_name(updatedUser.getFirst_name());
-        user.setLast_name(updatedUser.getLast_name());
-        user.setCity(updatedUser.getCity());
-        user.setEmail(updatedUser.getEmail());
-        usersDao.save(user);
+    public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
+        User users = usersDao.findUserById(1L);
+        users.setUsername(updatedUser.getUsername());
+        users.setFirst_name(updatedUser.getFirst_name());
+        users.setLast_name(updatedUser.getLast_name());
+        users.setCity(updatedUser.getCity());
+        users.setEmail(updatedUser.getEmail());
+        usersDao.save(users);
         return "redirect:/users/" + id;
     }
 
