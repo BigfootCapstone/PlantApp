@@ -1,11 +1,13 @@
 package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.services.Keys;
+import com.codeup.plantapp.util.PlantDTO;
 import com.codeup.plantapp.util.PlantResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
@@ -40,4 +42,16 @@ public class PlantController {
 
         return "searchResults";
     }
+
+    @GetMapping("/plants/{id}")
+    public String showPlantDetails(@PathVariable("id") String id, Model model) {
+        String apiUrl = "https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle();
+        PlantDTO plant = restTemplate.getForObject(apiUrl, PlantDTO.class);
+
+        model.addAttribute("plant", plant);
+
+        return "view-more";
+    }
+
+
 }
