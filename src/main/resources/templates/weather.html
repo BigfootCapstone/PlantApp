@@ -20,9 +20,11 @@
 
                 <h3>PLANTS OUTSIDE</h3>
                 <div th:if="${outdoorPlant}" th:each="plant : ${outdoorPlant}">
-                    <p th:text="${plant.plant.name}"></p>
-                    <p th:text="${plant.sun_amount}"></p>
-                    <p th:text="${plant.water_interval}"></p>
+                    <p> Plant Name: <span th:text="${plant.plant.name}"></span></p>
+                    <p> Req'd Sun Amount: <span  th:text="${plant.sun_amount}"></span></p>
+                    <p> Req'd water Amount: <span th:text="${plant.water_interval}"></span></p>
+                    <p> BotaniBuddy SunTip: <span  th:text="${plant.getSun_tip}"></span></p>
+                    <p> BotaniBuddy WaterTip: <span  th:text="${plant.getWater_tip}"></span></p>
                 </div>
 
             </div>

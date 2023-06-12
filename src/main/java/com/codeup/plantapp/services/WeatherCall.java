@@ -1,7 +1,7 @@
 package com.codeup.plantapp.services;
 
+
 import com.codeup.plantapp.models.GardenPlant;
-import com.codeup.plantapp.services.Keys;
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.models.Weather;
 import com.codeup.plantapp.util.Time;
@@ -24,12 +24,12 @@ import static com.codeup.plantapp.util.Time.convertTimestampToLocalDateTime;
 public class WeatherCall {
 
     @Autowired
-    private Keys keys;
+    private static Keys keys;
     //  HOW GET WEATHER WORKS:
 //      Date date = new Date(); // Fri Jun 09 08:42:40 CDT 2023
 //      User user = new User(date, "username", "first_name", "last_name", "San Antonio", "email", "password");
 //      Weather usersLocalWeather = getWeather(user);
-    public Weather getWeather(User user) {
+    public static Weather getWeather(User user) {
         String apiKey = keys.getWeather();
         String city = user.getCity();
         try {
@@ -51,8 +51,6 @@ public class WeatherCall {
             JSONParser parser = new JSONParser();
             JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
 
-            System.out.println(jsonResponse);
-
             JSONObject atmObject = (JSONObject) jsonResponse.get("main");
             double tempAvg = (double) atmObject.get("temp");
             long humidity = (long) atmObject.get("humidity");
@@ -67,17 +65,18 @@ public class WeatherCall {
             JSONArray cloudArray = (JSONArray) jsonResponse.get("weather");
             JSONObject cloudDescObject = (JSONObject) cloudArray.get(0);
             long cloudiness = (long) cloudObject.get("all");
-            String cloudDesc = (String) cloudDescObject.get("description");
+            String desc = (String) cloudDescObject.get("description");
 
             JSONObject windObject = (JSONObject) jsonResponse.get("wind");
             Object windSpeed = windObject.get("speed");
 
-            return new Weather(tempAvg, humidity, sunriseDTG, sunsetDTG, cloudiness, cloudDesc, windSpeed.toString());
+            return new Weather(tempAvg, humidity, sunriseDTG, sunsetDTG, cloudiness, desc, windSpeed.toString());
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
 
     public List<GardenPlant> checkForOutdoorPlants(User user) {
         List<GardenPlant> userPlants = user.getGardenPlants();

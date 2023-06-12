@@ -19,7 +19,7 @@ public class Weather{
     private String sunriseDTG;
     private String sunsetDTG;
     private long cloudiness;
-    private String cloudDesc;
+    private String desc;
     private String windSpeed;
 
     public double getTempAvg() {
@@ -38,7 +38,7 @@ public class Weather{
         return cloudiness;
     }
     public String getCloudDesc() {
-        return cloudDesc;
+        return desc;
     }
     public String getWindSpeed() {
         return windSpeed;
@@ -51,7 +51,7 @@ public class Weather{
         this.sunriseDTG = sunrise;
         this.sunsetDTG = sunset;
         this.cloudiness = cloudiness;
-        this.cloudDesc = cloudDesc;
+        this.desc = cloudDesc;
         this.windSpeed = windSpeed;
     }
     public Weather () {}
