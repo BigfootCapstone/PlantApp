@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-  <title>Plant Details</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
-</head>
+<head th:insert="partials/head :: head('BotaniBuddy Plant Details')"></head>
 <body>
+
+<header th:replace="partials/navbar :: navbar"></header>
+
+
 <div th:if="${plant}" class="ui container">
+
   <button class="ui button" onclick="window.history.back();">Back</button>
+
+
+
   <h1>Plant Details</h1>
   <div class="ui segment">
     <h3 th:text="${plant.common_name}"></h3>

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${user.username} + '\'s Profile'"></title>
-</head>
+
+    <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
+
 <body>
+<header th:replace="partials/navbar :: navbar"></header>
+
 <div>
     <h1 th:text="${user.username} + '\'s Profile'"></h1>
     <p th:text="'Date Created: ' + ${user.created_at}"></p>

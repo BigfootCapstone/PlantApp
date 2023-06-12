@@ -82,34 +82,65 @@ public class PlantController {
             }
             reader.close();
 
-            // Parse JSON response
+// Parse JSON response
             JSONParser parser = new JSONParser();
             JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
+
 
             JSONObject plantObject = (JSONObject) jsonResponse.get("data");
             long plant_id = (long) plantObject.get("id");
             String plant_id_string = Long.toString(plant_id);
             String common_name = (String) plantObject.get("common_name");
+            String scientific_name = (String) plantObject.get("scientific_name");
             JSONObject family = (JSONObject) plantObject.get("family");
             String family_name = (String) family.get("name");
             JSONObject genus = (JSONObject) plantObject.get("genus");
             String genus_name = (String) genus.get("name");
             String image_url = (String) plantObject.get("image_url");
-            String scientific_name = (String) plantObject.get("scientific_name");
             String family_common_name = (String) plantObject.get("family_common_name");
-            String duration = (String) plantObject.get("duration");
-            String growth_habit = (String) plantObject.get("growth_habit");
-            String edible = (String) plantObject.get("edible");
+
+            JSONObject mainSpeciesObject = (JSONObject) plantObject.get("main_species");
+
+            String duration = null;
+            if (mainSpeciesObject.containsKey("duration")) {
+                duration = (String) mainSpeciesObject.get("duration");
+            }
+            System.out.println("Duration: " + duration);
+
+            String description = null;
+            if (mainSpeciesObject.containsKey("growth")) {
+                JSONObject growthObject = (JSONObject) mainSpeciesObject.get("growth");
+                if (growthObject.containsKey("description")) {
+                    description = (String) growthObject.get("description");
+                }
+            }
+            System.out.println("Description: " + description);
+
+            String growth_habit = null;
+            if (mainSpeciesObject.containsKey("specifications")) {
+                JSONObject specificationsObject = (JSONObject) mainSpeciesObject.get("specifications");
+                if (specificationsObject.containsKey("growth_habit")) {
+                    growth_habit = (String) specificationsObject.get("growth_habit");
+                }
+            }
+            System.out.println("Growth Habit: " + growth_habit);
+
+            Boolean edible = (Boolean) mainSpeciesObject.get("edible");
+            System.out.println("Edible: " + edible);
 
             PlantDTO plant = new PlantDTO(plant_id_string, common_name, family_name, genus_name, image_url, scientific_name,
-                    family_common_name, duration, growth_habit, edible, "blank");
+                    family_common_name, duration, growth_habit, edible.toString(), description);
 
             model.addAttribute("plant", plant);
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "view-more";
     }
+
 
     @PostMapping("/plants/{id}")
     public String savePlant(@PathVariable("id") String id,
@@ -131,3 +162,6 @@ public class PlantController {
     }
 
 }
+
+}
+

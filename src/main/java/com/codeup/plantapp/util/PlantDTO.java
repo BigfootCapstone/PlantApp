@@ -15,6 +15,7 @@ public class PlantDTO {
     private String edible;
     private String description;
 
+
     // Getters and setters for the properties
 
     public String getId() {
