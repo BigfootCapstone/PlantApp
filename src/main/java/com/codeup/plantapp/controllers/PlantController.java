@@ -1,26 +1,37 @@
 package com.codeup.plantapp.controllers;
 
+import com.codeup.plantapp.models.GardenPlant;
+import com.codeup.plantapp.models.Plant;
+import com.codeup.plantapp.models.User;
+import com.codeup.plantapp.models.sun_amount;
+import com.codeup.plantapp.repositories.GardenPlantRepository;
+import com.codeup.plantapp.repositories.PlantRepository;
+import com.codeup.plantapp.repositories.UserRepository;
 import com.codeup.plantapp.services.Keys;
 import com.codeup.plantapp.util.PlantDTO;
 import com.codeup.plantapp.util.PlantResultDTO;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Controller
 public class PlantController {
+
+    private final UserRepository usersDao;
+    private final PlantRepository plantsDao;
+    private final GardenPlantRepository gardenPlantsDao;
 
     @Autowired
     private Keys keys;
@@ -29,8 +40,11 @@ public class PlantController {
 
     private final RestTemplate restTemplate;
 
-    public PlantController() {
+    public PlantController(UserRepository usersDao, PlantRepository plantsDao, GardenPlantRepository gardenPlantsDao) {
         this.restTemplate = new RestTemplate();
+        this.usersDao = usersDao;
+        this.plantsDao = plantsDao;
+        this.gardenPlantsDao = gardenPlantsDao;
     }
 
     @GetMapping("/search")
@@ -126,4 +140,28 @@ public class PlantController {
         }
         return "view-more";
     }
+
+
+    @PostMapping("/plants/{id}")
+    public String savePlant(@PathVariable("id") String id,
+                            @RequestParam(name="name") String plant_name,
+                            @RequestParam(name="sun_amount") sun_amount sun_amount,
+                            @RequestParam(name="water_interval") long water_interval,
+                            @RequestParam(name="is_outside") boolean is_outside
+                            ) {
+        Plant userPlant = new Plant(id, plant_name);
+        plantsDao.save(userPlant);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Date date = new Date();
+
+        GardenPlant newGardenPlant = new GardenPlant(user, userPlant, sun_amount, date, water_interval, is_outside);
+
+        gardenPlantsDao.save(newGardenPlant);
+        return "searchForm";
+    }
+
 }
+
+}
+
