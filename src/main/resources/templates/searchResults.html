@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-  <title>Plant Search Results</title>
-</head>
+<head th:insert="partials/head :: head('Plant Search Results')"></head>
 <body>
 <h1>Search Results for "<span th:text="${query}"></span>"</h1>
 <ul>
