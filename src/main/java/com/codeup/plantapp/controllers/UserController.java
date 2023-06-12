@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Controller
 @RequestMapping("/users")
@@ -19,7 +18,6 @@ public class UserController {
     private final UserRepository usersDao;
 
     private final PasswordEncoder passwordEncoder;
-//    private final UserRepository userDao;
 
     public UserController(UserRepository usersDao, PasswordEncoder passwordEncoder){
         this.usersDao = usersDao;
@@ -32,7 +30,6 @@ public class UserController {
         return "createUserForm";
     }
 
-    //messing with it for the create user
     @PostMapping("/create")
     public String createUserProfile(@ModelAttribute("user") User user) {
         user.setCreated_at(LocalDate.now());
@@ -72,18 +69,19 @@ public class UserController {
         User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
-        return "editUserForm";
+        return "createUserForm";
     }
 
     @PostMapping("/{id}/edit")
-    public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
-        User users = usersDao.findUserById(1L);
-        users.setUsername(updatedUser.getUsername());
-        users.setFirst_name(updatedUser.getFirst_name());
-        users.setLast_name(updatedUser.getLast_name());
-        users.setCity(updatedUser.getCity());
-        users.setEmail(updatedUser.getEmail());
-        usersDao.save(users);
+    public String updateUserProfile(@PathVariable Long id, @ModelAttribute User updatedUser) {
+        User user = usersDao.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+        user.setUsername(updatedUser.getUsername());
+        user.setFirst_name(updatedUser.getFirst_name());
+        user.setLast_name(updatedUser.getLast_name());
+        user.setCity(updatedUser.getCity());
+        user.setEmail(updatedUser.getEmail());
+        usersDao.save(user);
         return "redirect:/users/" + id;
     }
 
