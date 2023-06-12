@@ -19,11 +19,11 @@ public class UserController {
     private final UserRepository usersDao;
 
     private final PasswordEncoder passwordEncoder;
-    private final UserRepository userDao;
+//    private final UserRepository userDao;
 
     public UserController(UserRepository userDao, UserRepository usersDao, PasswordEncoder passwordEncoder){
         this.usersDao = usersDao;
-        this.userDao = userDao;
+//        this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -37,11 +37,11 @@ public class UserController {
     @PostMapping("/create")
     public String createUserProfile(@ModelAttribute("user") User user) {
         user.setCreated_at(LocalDate.now());
-        userDao.save(user);
-        return "redirect:/users/" + user.getId();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
-        return "redirect:/userProfile";
+        return "redirect:/users/" + user.getId();
+//        usersDao.save(user);
+//        return "redirect:/userProfile";
     }
     @GetMapping("/login")
     public String viewLoginPage() {
@@ -51,13 +51,13 @@ public class UserController {
     public String loginSessionSetter(Model model, HttpSession session){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         session.setAttribute("user", user);
-        return "userProfile";
+        return "redirect: /users/profile";
     }
     @GetMapping("/profile")
     public String showProfile(Model model){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = user.getId();
-        user = userDao.findUserById(userId);
+        user = usersDao.findUserById(userId);
         model.addAttribute("user", user);
         System.out.println(user.getUsername());
         return "userProfile";
@@ -80,15 +80,15 @@ public class UserController {
 
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
-        User user = userDao.findUserById(1L);
-        User users = usersDao.findUserById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+//        User user = userDao.findUserById(1L);
+        User users = usersDao.findUserById(1L);
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         users.setUsername(updatedUser.getUsername());
-        user.setFirst_name(updatedUser.getFirst_name());
-        user.setLast_name(updatedUser.getLast_name());
-        user.setCity(updatedUser.getCity());
-        user.setEmail(updatedUser.getEmail());
-        userDao.save(user);
+        users.setFirst_name(updatedUser.getFirst_name());
+        users.setLast_name(updatedUser.getLast_name());
+        users.setCity(updatedUser.getCity());
+        users.setEmail(updatedUser.getEmail());
+//        userDao.save(user);
         usersDao.save(users);
         return "redirect:/users/" + id;
     }
