@@ -14,7 +14,9 @@
     <p th:text="'Email: ' + ${user.email}"></p>
 </div>
 <div>
-    <h3>Finish Creating Your Profile</h3>
+    <a th:href="@{/users/{id}/edit(id=${id})}">
+        <h3>Edit Your Profile</h3>
+    </a>
 </div>
 </body>
 </html>
