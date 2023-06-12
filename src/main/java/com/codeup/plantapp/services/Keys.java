@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 public class Keys {
 
     //  OpenWeather API
-    @Value("openweather.key")
+    @Value("${openweather.key}")
     private String weather;
     //  Trefle API
-    @Value("trefle.key")
+    @Value("${trefle.key}")
     private String trefle;
     //  Perenual API
-    @Value("perenual.key")
+    @Value("${perenual.key}")
     private String perenual;
 
     public String getWeather() {
