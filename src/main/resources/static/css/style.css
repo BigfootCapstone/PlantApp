@@ -715,4 +715,14 @@ div .delete-profile, .pe-7s-delete-user{
 .carouselHolder{
   margin: 45px;
 }
+
+
+/******************
+    Login Page
+*******************/
+
+.login-form{
+  max-width: 400px;
+  max-height: 400px;
+}
 /*# sourceMappingURL=style.css.map */
