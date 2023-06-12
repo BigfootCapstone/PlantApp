@@ -1,6 +1,5 @@
 package com.codeup.plantapp.util;
 
-import com.codeup.plantapp.models.GardenPlant;
 import com.codeup.plantapp.models.Keys;
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.models.Weather;
@@ -11,8 +10,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 import static com.codeup.plantapp.util.Time.convertTimestampToLocalDateTime;
 

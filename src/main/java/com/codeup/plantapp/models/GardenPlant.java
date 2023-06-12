@@ -25,8 +25,12 @@ public class GardenPlant {
     @Enumerated(STRING)
     private sun_amount sun_amount;
 
+    private String sun_tip;
+
     @Column(nullable = false, length = 128)
     private Date last_watered;
+
+    private String water_tip;
 
     @Column(nullable = false)
     private long water_interval;
@@ -65,11 +69,25 @@ public class GardenPlant {
         this.sun_amount = sun_amount;
     }
 
+    public String getSun_tip() {
+        return sun_tip;
+    }
+    public void setSun_tip(String sun_tip) {
+        this.sun_tip = sun_tip;
+    }
+
     public Date getLast_watered() {
         return last_watered;
     }
     public void setLast_watered(Date created_at) {
         this.last_watered = created_at;
+    }
+
+    public String getWater_tip() {
+        return water_tip;
+    }
+    public void setWater_tip(String water_tip) {
+        this.water_tip = water_tip;
     }
 
     public long getWater_interval() {
