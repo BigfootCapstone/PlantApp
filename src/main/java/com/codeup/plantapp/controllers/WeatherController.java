@@ -2,15 +2,18 @@ package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.repositories.UserRepository;
+import com.codeup.plantapp.services.WeatherCall;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import static com.codeup.plantapp.util.WeatherCall.checkForOutdoorPlants;
-import static com.codeup.plantapp.util.WeatherCall.getWeather;
 
 @Controller
 public class WeatherController {
+
+    @Autowired
+    private WeatherCall weatherCall;
 
     private final UserRepository userDao;
 
@@ -28,10 +31,10 @@ public class WeatherController {
         User base = userDao.findUserById(id);
 
 //      Get list of user's garden plants marked as outdoor plants
-        model.addAttribute("outdoorPlant", checkForOutdoorPlants(base));
+        model.addAttribute("outdoorPlant", weatherCall.checkForOutdoorPlants(base));
 
 //      Get weather data for user's location
-        model.addAttribute("weather", getWeather(base));
+        model.addAttribute("weather", weatherCall.getWeather(base));
 
         return "weather";
     }
