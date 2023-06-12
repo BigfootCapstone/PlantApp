@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Plant Details</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+</head>
+<body>
+<div class="ui container">
+  <h1>Plant Details</h1>
+  <div class="ui segment">
+    <h3 th:text="${plant.common_name}"></h3>
+    <div class="ui two column grid">
+      <div class="column">
+        <img class="ui fluid rounded image" th:if="${plant.image_url}" th:src="${plant.image_url}" alt="Plant Photo">
+      </div>
+      <div class="column">
+        <p><strong>Family:</strong> <span th:text="${plant.family}"></span></p>
+        <p><strong>Genus:</strong> <span th:text="${plant.genus}"></span></p>
+        <p><strong>Scientific Name:</strong> <span th:text="${plant.scientific_name}"></span></p>
+        <p><strong>Family Common Name:</strong> <span th:text="${plant.family_common_name}"></span></p>
+        <p><strong>Duration:</strong> <span th:text="${plant.duration}"></span></p>
+        <p><strong>Growth Habit:</strong> <span th:text="${plant.growth_habit}"></span></p>
+        <p><strong>Edible:</strong> <span th:text="${plant.edible}"></span></p>
+        <p><strong>Description:</strong></p>
+        <p th:text="${plant.description}"></p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

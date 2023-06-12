@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -33,6 +36,9 @@ public class UserController {
     //messing with it for the create user
     @PostMapping("/create")
     public String createUserProfile(@ModelAttribute("user") User user) {
+        user.setCreated_at(LocalDate.now());
+        userDao.save(user);
+        return "redirect:/users/" + user.getId();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
         return "redirect:/userProfile";
@@ -74,10 +80,16 @@ public class UserController {
 
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
-        User user = usersDao.findById(id)
+        User user = userDao.findUserById(1L);
+        User users = usersDao.findUserById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
-        user.setUsername(updatedUser.getUsername());
-        usersDao.save(user);
+        users.setUsername(updatedUser.getUsername());
+        user.setFirst_name(updatedUser.getFirst_name());
+        user.setLast_name(updatedUser.getLast_name());
+        user.setCity(updatedUser.getCity());
+        user.setEmail(updatedUser.getEmail());
+        userDao.save(user);
+        usersDao.save(users);
         return "redirect:/users/" + id;
     }
 

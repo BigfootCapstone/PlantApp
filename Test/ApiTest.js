@@ -1,7 +1,7 @@
-const apiKey = PERENUAL_API_TOKEN;
-const speciesId = '1'; // Replace [SPECIES_ID] with the actual ID
+const apiKey = 'sk-HD1n647e568e98fbe1165';
+const speciesId = '269338'; // Replace [SPECIES_ID] with the actual ID
 
-const url = `https://perenual.com/api/species/details/${speciesId}?key=${apiKey}`;
+const url = `https://perenual.com/api/species-list?page=1&key=${apiKey}&q=tomato`;
 fetch(url)
     .then(response => response.json())
     .then(data => {
