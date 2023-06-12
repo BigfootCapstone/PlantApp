@@ -1,17 +1,181 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head th:insert="partials/head :: head('Edit Profile')"></head>
+<!--<head th:insert="partials/head :: head('Edit Profile')"></head>-->
+<head>
+  <meta charset="utf-8" />
+
+  <title></title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.0.39/css/materialdesignicons.min.css" integrity="sha512-1gUlHrTUP7SJE3KF6kFAPLdDtfkPr8Yy53pU1fKZhtFH2CoF/sMJBBze2NsZB9MW256Xdpl2cZaPSFJ+XpSLfg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="//db.onlinewebfonts.com/c/7218a2da5a03f622ca18085806382043?family=Pe-icon-7-stroke" rel="stylesheet" type="text/css"/>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+  <meta content="Coderthemes" name="author" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/pe-icon-7-stroke.css">
+
+  <!-- App favicon -->
+  <link rel="shortcut icon" href="/static/css/images/favicon.ico">
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css">
+
+  <!--Material Icon -->
+  <link rel="stylesheet" type="text/css" href="/static/css/materialdesignicons.min.css" />
+
+  <!--pe-7 Icon -->
+  <link rel="stylesheet" type="text/css" href="/static/css/pe-icon-7-stroke.css" />
+
+  <!-- Custom  sCss -->
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+  <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
+</head>
 
 <body>
-<form action="/users/{id}/editUserForm" method="post" th:object="${user}">
-  <label>Username: <input type="text" th:field="*{username}" /></label><br />
-  <label>First Name: <input type="text" th:field="*{first_name}" /></label><br />
-  <label>Last Name: <input type="text" th:field="*{last_name}" /></label><br />
-  <label>City: <input type="text" th:field="*{city}" /></label><br />
-  <label>Email: <input type="email" th:field="*{email}" /></label><br />
-  <input type="hidden" name="id" th:attr="value=${user.id}" />
-  <button type="submit">Save</button>
-</form>
+  <!--Navbar Start-->
+  <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="nav-sticky">
+    <div class="container ps-3 pe-3">
+      <!-- LOGO -->
+      <a class="logo justify-items-center align-items-center gap" href="index.html">
+        <img src="/css/images/carrotguy(fknawesome).png" alt="" class="logo-dark" height="100" />
+        <h1 class="logo-text text-white">BotaniBuddy</h1>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="mdi mdi-menu"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+
+        <ul class="navbar-nav" id="mySidenav">
+          <li class="nav-item">
+            <a href="#home" class="nav-link active">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="#reviews" class="nav-link">Reviews</a>
+          </li>
+          <li class="nav-item">
+            <a href="#contact" class="nav-link">Contact</a>
+          </li>
+          <button type="button" class="btn login">
+            <a class="login-text" th:href="@{/login}">Login</a>
+          </button>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <div class="d-flex container create justify-content-center align-content-center">
+   <div class="row subtitle">
+     <div class="col subtitle text-center">
+      <h1 class="subtitle mb-4">EDIT PROFILE</h1>
+    </div>
+   </div>
+      <div class="container bootstrap snippets bootdeys">
+        <div class="row">
+          <div class="d-flex col justify-content-center">
+            <form class="form-horizontal flex-grow-1"
+                  th:action="@{/users/{id}/edit}"
+                  th:object="${user}" method="post"
+                  enctype="multipart/form-data"
+            >
+              <div class="panel ">
+                <div class="panel-body text-center">
+                  <img src="/static/css/images/testers/img-3.jpg" class="img-circle profile-avatar" id="profile-img" th:src="@{#}" th:onchange="${loadfile(event)}" alt="User avatar">
+                  <input type="file" name="image" accept="image/*" />
+                </div>
+              </div>
+              <div class="d-block panel ">
+                <div class="subtitle">
+                  <h4 class="panel-title subtitle">User info</h4>
+                </div>
+                <div class="panel-body">
+                  <div class="form-group">
+                    <label class="d-flex col control-label quote">Username <span sec:authentication="principal.username"></span></label>
+                    <div class="col">
+                      <input type="text" class="form-control" th:field="*{username}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col control-label quote">First Name</label>
+                    <div class="col">
+                      <input type="text" class="form-control" th:field="${first_name}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col control-label quote">Last Name</label>
+                    <div class="col">
+                      <input type="text" class="form-control" th:field="${last_name}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col control-label quote" for="city">Current City</label>
+                    <div class="col">
+                      <input type="text" id="city" class="form-control" th:field="*{city}" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel ">
+                <div class="subtitle">
+                  <h4 class="panel-title subtitle">Contact info</h4>
+                </div>
+                <div class="panel-body">
+                  <div class="form-group">
+                    <label class="col control-label quote">E-mail address</label>
+                    <div class="col">
+                      <input type="email" class="form-control" th:value="${email}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel ">
+                <div class="subtitle">
+                  <h4 class="panel-title subtitle">Security</h4>
+                </div>
+                <div class="panel-body">
+                  <div class="form-group">
+                    <label class="col control-label quote">Current password</label>
+                    <div class="col">
+                      <input type="password" class="form-control" th:field="${password}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col control-label quote">New password</label>
+                    <div class="col">
+                      <input type="password" class="form-control" th:field="${password}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="d-flex col">
+                      <input type="hidden" name="id" th:attr="value=${user.id}" />
+                      <button type="submit" class="btn btn-custom" value="save">Save</button>
+                      <button type="reset" class="btn nav-link">Cancel</button>
+                    </div>
+                    <div class="col font-16 delete-profile pe-7s-delete-user mt-3">    Delete Profile</div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+
+<script th:src="@{/js/staticElements.js}"></script>
+<footer th:replace="partials/footer :: footer"></footer>
 
 </body>
 </html>

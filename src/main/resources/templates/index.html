@@ -33,7 +33,7 @@
                     <a href="#contact" class="nav-link">Contact</a>
                 </li>
                 <button type="button" class="btn login">
-                    <a class="login-text" th:href="@{/login}">Login</a>
+                    <a class="login-text" th:href="@{/users/login}">Login</a>
                 </button>
             </ul>
         </div>
@@ -61,11 +61,29 @@
                         </div>
                     </div>
                     <!-- start carousel -->
-                    <div class="col-lg-5 offset-lg-1 col-sm-6 image-holder">
-                        <div class="home-img-div">
-                            <img src="/css/images/PlantSlide1.png" alt="Plants make us happy" class=" home-img img-fluid">
+                    <div class="container slider">
+                        <div class="row grow carouselHolder">
+                            <div class="slider-mask">
+                                <div class="slides">
+                                </div>
+                                <div class="controls car-con">
+
+                                    <div class="arrow">
+                                        <img class='svgLeft arrow-left' src="/css/images/icons/leftarrowtag.png" alt="left arrow">
+                                    </div>
+                                    <div class="col-lg-5 offset-lg-1 col-sm-6 image-holder">
+                                        <div class="home-img-div">
+                                            <img src="/css/images/PlantSlide1.png" alt="Plants make us happy" class=" home-img img-fluid">
+                                        </div>
+                                    </div>
+                                    <div class="arrow">
+                                        <img class='svgRight arrow-right' src="/css/images/icons/rightarrowtag.png" alt="right arrow">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                     <!-- end carousel -->
                 </div>
                 <!-- end row -->
