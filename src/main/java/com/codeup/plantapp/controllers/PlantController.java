@@ -53,5 +53,4 @@ public class PlantController {
         return "view-more";
     }
 
-
 }
