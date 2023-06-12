@@ -570,6 +570,80 @@ a.login-text{
     padding: 24px !important;
   }
 }
+
+/*# sourceMappingURL=style.css.map */
+
+/******************
+    Edit Profile
+*******************/
+
+.panel {
+  box-shadow: none;
+}
+.panel-heading {
+  border-bottom: 0;
+}
+.panel-title {
+  font-size: 17px;
+}
+.panel-title > small {
+  font-size: .75em;
+  color: #999999;
+}
+.panel-body *:first-child {
+  margin-top: 0;
+}
+.panel-footer {
+  border-top: 0;
+}
+
+.form-horizontal, .form-group {
+max-width: 500px;
+}
+@media (min-width: 768px) {
+  .form-horizontal .control-label {
+    margin-bottom: 0;
+    padding-top: 7px;
+  }
+}
+
+
+.profile-avatar {
+  width: 300px;
+  position: relative;
+  border: 4px solid #f3f3f3;
+  border-radius: 999px;
+}
+
+input::file-selector-button {
+  font-weight: bold;
+  padding: 0.5em;
+  border-radius: 7px;
+  color: #ffffff !important;
+  background-color: #f28153;
+  border: 1px solid #F28153;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #F9C0A9;
+  transition: 1s;
+}
+
+input[type='file'] {
+  color: rgb(255, 203, 165);
+
+}
+
+div .delete-profile, .pe-7s-delete-user{
+  color: #F28153;
+  height: 500px;
+  width: 500px;
+}
+
+.row .subtitle{
+}
+
+
 /*******************************
   13.carousel
  ********************************/
