@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="partials/head :: head('Edit Profile')"></head>
+
 <body>
-<form action="/users/{id}/edit" method="post" th:object="${user}">
-  <label>Name: <input type="text" th:field="*{name}"/></label>
-  <input type="submit" value="Save"/>
+<form action="/users/{id}/editUserForm" method="post" th:object="${user}">
+  <label>Username: <input type="text" th:field="*{username}" /></label><br />
+  <label>First Name: <input type="text" th:field="*{first_name}" /></label><br />
+  <label>Last Name: <input type="text" th:field="*{last_name}" /></label><br />
+  <label>City: <input type="text" th:field="*{city}" /></label><br />
+  <label>Email: <input type="email" th:field="*{email}" /></label><br />
+  <input type="hidden" name="id" th:attr="value=${user.id}" />
+  <button type="submit">Save</button>
 </form>
 
 </body>

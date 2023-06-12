@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-  <title>Plant Search Results</title>
-</head>
+<head th:insert="partials/head :: head('Plant Search Results')"></head>
 <body>
 <h1>Search Results for "<span th:text="${query}"></span>"</h1>
 <ul>
@@ -11,6 +9,9 @@
     <img th:if="${plant.image_url}" th:src="${plant.image_url}" alt="Plant Photo">
     <p th:text="${plant.family}"></p>
     <p th:text="${plant.genus}"></p>
+    <p th:text="${plant.id}"></p>
+
+    <a th:href="@{/plants/{id}(id=${plant.id})}">View Details</a>
   </li>
 </ul>
 </body>

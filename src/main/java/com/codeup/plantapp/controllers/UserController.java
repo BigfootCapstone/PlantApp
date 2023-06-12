@@ -6,6 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -22,11 +25,12 @@ public class UserController {
         return "createUserForm";
     }
 
-    //messing with it for the create user
+    //messing with it for the createUser
     @PostMapping("/create")
     public String createUserProfile(@ModelAttribute("user") User user) {
+        user.setCreated_at(LocalDate.now());
         userRepository.save(user);
-        return "redirect:/userProfile";
+        return "redirect:/users/" + user.getId();
     }
 
     @GetMapping("/{id}")
@@ -47,9 +51,12 @@ public class UserController {
 
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+        User user = userRepository.findUserById(1L);
         user.setUsername(updatedUser.getUsername());
+        user.setFirst_name(updatedUser.getFirst_name());
+        user.setLast_name(updatedUser.getLast_name());
+        user.setCity(updatedUser.getCity());
+        user.setEmail(updatedUser.getEmail());
         userRepository.save(user);
         return "redirect:/users/" + id;
     }

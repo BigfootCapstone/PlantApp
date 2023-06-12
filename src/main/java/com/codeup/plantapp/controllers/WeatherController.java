@@ -3,18 +3,23 @@ package com.codeup.plantapp.controllers;
 import com.codeup.plantapp.models.*;
 import com.codeup.plantapp.repositories.GardenPlantRepository;
 import com.codeup.plantapp.repositories.UserRepository;
+import com.codeup.plantapp.services.WeatherCall;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.Date;
+
 import java.util.List;
 
+import static com.codeup.plantapp.services.WeatherCall.getWeather;
 import static com.codeup.plantapp.util.CareTips.*;
-import static com.codeup.plantapp.util.WeatherCall.getWeather;
 
 @Controller
 public class WeatherController {
+
+    @Autowired
+    private WeatherCall weatherCall;
 
     private final UserRepository userDao;
     private final GardenPlantRepository gardenPlantDao;
@@ -44,6 +49,7 @@ public class WeatherController {
         }
 
 //      Get list of user's garden plants marked as outdoor plants
+
         model.addAttribute("outdoorPlant", allPlants);
 
 //      Get weather data for user's location
