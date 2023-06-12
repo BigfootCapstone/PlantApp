@@ -1,5 +1,7 @@
 package com.codeup.plantapp.util;
 
+import org.json.simple.JSONObject;
+
 public class PlantDTO {
     private String id;
     private String common_name;
@@ -103,7 +105,9 @@ public class PlantDTO {
     public PlantDTO() {
     }
 
-    public PlantDTO(String id, String common_name, String family, String genus, String image_url, String scientific_name, String family_common_name, String duration, String growth_habit, String edible, String description) {
+    public PlantDTO(String id, String common_name, String family, String genus, String image_url,
+                    String scientific_name,
+                    String family_common_name, String duration, String growth_habit, String edible, String description) {
         this.id = id;
         this.common_name = common_name;
         this.family = family;
