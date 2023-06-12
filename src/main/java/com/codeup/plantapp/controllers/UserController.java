@@ -21,9 +21,8 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
 //    private final UserRepository userDao;
 
-    public UserController(UserRepository userDao, UserRepository usersDao, PasswordEncoder passwordEncoder){
+    public UserController(UserRepository usersDao, PasswordEncoder passwordEncoder){
         this.usersDao = usersDao;
-//        this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -40,8 +39,6 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
         return "redirect:/users/" + user.getId();
-//        usersDao.save(user);
-//        return "redirect:/userProfile";
     }
     @GetMapping("/login")
     public String viewLoginPage() {
@@ -80,22 +77,20 @@ public class UserController {
 
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
-//        User user = userDao.findUserById(1L);
         User users = usersDao.findUserById(1L);
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         users.setUsername(updatedUser.getUsername());
         users.setFirst_name(updatedUser.getFirst_name());
         users.setLast_name(updatedUser.getLast_name());
         users.setCity(updatedUser.getCity());
         users.setEmail(updatedUser.getEmail());
-//        userDao.save(user);
         usersDao.save(users);
         return "redirect:/users/" + id;
     }
 
     @PostMapping("/{id}/delete")
     public String deleteUserProfile(@PathVariable Long id) {
-        usersDao.deleteById(id);
+        User user = usersDao.findById(id).orElseThrow(() -> new IllegalArgumentException("User not found with id: " + id));
+        usersDao.delete(user);
         return "redirect:/users";
     }
 
