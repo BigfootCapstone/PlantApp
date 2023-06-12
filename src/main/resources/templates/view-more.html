@@ -6,6 +6,7 @@
 </head>
 <body>
 <div th:if="${plant}" class="ui container">
+  <button class="ui button" onclick="window.history.back();">Back</button>
   <h1>Plant Details</h1>
   <div class="ui segment">
     <h3 th:text="${plant.common_name}"></h3>
@@ -24,8 +25,32 @@
         <p><strong>Description:</strong></p>
         <p th:text="${plant.description}"></p>
       </div>
+
+      <div class="row">
+        <form method="post" th:action="@{/plants/{id}(id=${plant.id})}">
+<!--          get trefle-->
+          <input type="hidden" th:text="${plant.id}" name="id">
+          <input type="text" th:text="${plant.common_name}" name="name">
+          <label for="sun_amount">Sun Amount</label>
+          <select name="sun_amount" id="sun_amount">
+            <option value="FULL_SUN">Full Sun</option>
+            <option value="PARTIAL_SUN">Partial Sun</option>
+            <option value="FULL_SHADE">Shaded</option>
+          </select>
+          <label for="water_interval">Water Interval</label>
+          <input type="number" id="water_interval" name="water_interval" min="1" max="30">
+          <p>Is this plant Outside</p>
+          <label for="yes">yes</label>
+          <input name="is_outside" id="yes" type="radio" value="0">Yes
+          <label for="no">no</label>
+          <input name="is_outside" id="no" type="radio" value="1">No
+
+          <button class="ui button">Save</button>
+        </form>
+      </div>
     </div>
   </div>
+
 </div>
 </body>
 </html>

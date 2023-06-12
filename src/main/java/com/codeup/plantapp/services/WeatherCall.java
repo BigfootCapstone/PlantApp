@@ -30,10 +30,8 @@ public class WeatherCall {
 //      User user = new User(date, "username", "first_name", "last_name", "San Antonio", "email", "password");
 //      Weather usersLocalWeather = getWeather(user);
     public static Weather getWeather(User user) {
-        String apiKey = keys.getWeather();
-        String city = user.getCity();
         try {
-            URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey +
+            URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + user.getCity() + "&appid=" + keys.getOpenWeather() +
                     "&units=imperial");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -78,15 +76,15 @@ public class WeatherCall {
     }
 
 
-    public List<GardenPlant> checkForOutdoorPlants(User user) {
-        List<GardenPlant> userPlants = user.getGardenPlants();
-        List<GardenPlant> outdoor = new ArrayList<>();
-        for (GardenPlant plant: userPlants) {
-            if (plant.isIs_outside()) {
-                outdoor.add(plant);
-            }
-        }
-        return outdoor;
-    }
+//    public List<GardenPlant> checkForOutdoorPlants(User user) {
+//        List<GardenPlant> userPlants = user.getGardenPlants();
+//        List<GardenPlant> outdoor = new ArrayList<>();
+//        for (GardenPlant plant: userPlants) {
+//            if (plant.isIs_outside()) {
+//                outdoor.add(plant);
+//            }
+//        }
+//        return outdoor;
+//    }
 
 }
