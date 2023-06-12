@@ -5,7 +5,7 @@
 <body>
     <div class="col-lg-8">
         <div class="custom-form">
-            <form action="/users/{id}/edit" method="post" th:object="${user}">
+            <form th:action="@{/users/{id}/edit}" method="post" th:object="${user}">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="mb-3">
