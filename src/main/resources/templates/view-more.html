@@ -29,7 +29,6 @@
       <div class="row">
         <form method="post" th:action="@{/plants/{id}(id=${plant.id})}">
 <!--          get trefle-->
-          <input type="hidden" th:text="${plant.id}" name="id">
           <input type="text" th:text="${plant.common_name}" name="name">
           <label for="sun_amount">Sun Amount</label>
           <select name="sun_amount" id="sun_amount">
