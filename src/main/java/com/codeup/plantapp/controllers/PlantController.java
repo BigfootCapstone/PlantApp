@@ -201,4 +201,58 @@ public class PlantController {
         gardenPlantsDao.save(newGardenPlant);
         return "searchForm";
     }
+
+    /*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><USER DELETE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+    @GetMapping("plants/{id}/delete")
+    public String deletePlant(@PathVariable long id) {
+        GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
+        gardenPlantsDao.deleteById(id);
+        long userPlant = userGardenPlant.getPlant().getId();
+        plantsDao.deleteById(userPlant);
+        return "redirect:/users/profile";
+    }
+
+    /*
+    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+    |><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
+    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+    */
+    @GetMapping("/plants/plantEdit/{id}")
+    public String editUserPlant(@PathVariable long id, Model model) {
+        GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
+        Plant userPlant = userGardenPlant.getPlant();
+
+        model.addAttribute("gardenPlant", userGardenPlant);
+        model.addAttribute("plant", userPlant);
+
+        return "editPlant";
+    }
+
+    @PostMapping("/plants/plantEdit/{id}")
+    public String updateUserPlant(
+            @PathVariable("id") long id,
+            @RequestParam(name="name") String plant_name,
+            @RequestParam(name="sun_amount") sun_amount sun_amount,
+            @RequestParam(name="water_interval") long water_interval,
+            @RequestParam(name="is_outside") boolean is_outside ) {
+        GardenPlant updateGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
+        Plant updatePlant = updateGardenPlant.getPlant();
+        updatePlant.setName(plant_name);
+        plantsDao.save(updatePlant);
+
+        updateGardenPlant.setSun_amount(sun_amount);
+        updateGardenPlant.setWater_interval(water_interval);
+        updateGardenPlant.setIs_outside(is_outside);
+        gardenPlantsDao.save(updateGardenPlant);
+
+        return "userProfile";
+    }
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
 }

@@ -1,9 +1,6 @@
 package com.codeup.plantapp.controllers;
 
-import com.codeup.plantapp.models.GardenPlant;
-import com.codeup.plantapp.models.Plant;
-import com.codeup.plantapp.models.User;
-import com.codeup.plantapp.models.Weather;
+import com.codeup.plantapp.models.*;
 import com.codeup.plantapp.repositories.GardenPlantRepository;
 import com.codeup.plantapp.repositories.PlantRepository;
 import com.codeup.plantapp.repositories.UserRepository;
@@ -18,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import static com.codeup.plantapp.services.WeatherCall.getWeather;
@@ -112,40 +108,6 @@ public class UserController {
 
         System.out.println(user.getUsername());
         return "userProfile";
-    }
-
-
-/*
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><USER DELETE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-*/
-    @GetMapping("plants/{id}/delete")
-    public String deletePlant(@PathVariable long id) {
-        GardenPlant userGardenPlant = gardenPlantDao.findGardenPlantsById(id);
-        gardenPlantDao.deleteById(id);
-        long userPlant = userGardenPlant.getPlant().getId();
-        plantDao.deleteById(userPlant);
-        return "redirect:/users/profile";
-    }
-
-/*
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-*/
-    @GetMapping("plants/{id}/edit")
-    public String editUserPlant(@PathVariable long id) {
-        GardenPlant userGardenPlant = gardenPlantDao.findGardenPlantsById(id);
-//      gardenPlantDao.deleteById(id);
-        long userPlant = userGardenPlant.getPlant().getId();
-//      plantDao.deleteById(userPlant);
-        return "redirect:editPlant";
-    }
-    @PostMapping("plants/{id}/edit")
-    public String updateUserPlant(@PathVariable long id, @ModelAttribute("plant") Plant Plant) {
-
-        return "redirect:/users/profile";
     }
 
     @GetMapping("/{id}")

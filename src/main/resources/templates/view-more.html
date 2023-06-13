@@ -32,7 +32,7 @@
       </div>
 
       <div class="row">
-        <form method="post" th:action="@{/plants/{id}(id=${plant.id})}">
+        <form method="post" th:href="@{/plants/{id}(id=${plant.id})}">
 <!--          get trefle-->
           <input type="text" th:text="${plant.common_name}" name="name">
           <label for="sun_amount">Sun Amount</label>
@@ -44,8 +44,12 @@
           <label for="water_interval">Water Interval</label>
           <input type="number" id="water_interval" name="water_interval" min="1" max="30">
           <label>Is this plant Outside</label>
-          <input name="is_outside" id="yes" type="radio" value="true">Yes
-          <input name="is_outside" id="no" type="radio" value="false">No
+            <label for="yes">Yes
+                <input name="is_outside" id="yes" type="radio" value="true">
+            </label>
+            <label for="no">No
+                <input name="is_outside" id="no" type="radio" value="false">
+            </label>
 
           <button class="ui button">Save</button>
         </form>
