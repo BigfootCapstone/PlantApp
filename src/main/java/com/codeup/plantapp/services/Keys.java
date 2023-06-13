@@ -16,11 +16,17 @@ public class Keys {
     @Value("${perenual.key}")
     private String perenual;
 
+    @Value("cynthia.v.nelson7@gmail.com:ba75fac4fbac9c6f1575a5049b907d0d")
+    private String openfarm;
+
     public String getOpenWeather() {
         return weather;
     }
     public String getTrefle() {
         return trefle;
+    }
+    public String getOpenFarm() {
+        return openfarm;
     }
     public String getPerenual() {
         return perenual;

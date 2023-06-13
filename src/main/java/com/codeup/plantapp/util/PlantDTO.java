@@ -9,11 +9,11 @@ public class PlantDTO {
     private String genus;
     private String image_url;
     private String scientific_name;
-    private String family_common_name;
-    private String duration;
     private String growth_habit;
     private String edible;
-    private String description;
+    private String minimum_temperature;
+
+    private String maximum_temperature;
 
 
     // Getters and setters for the properties
@@ -66,21 +66,7 @@ public class PlantDTO {
         this.scientific_name = scientific_name;
     }
 
-    public String getFamily_common_name() {
-        return family_common_name;
-    }
 
-    public void setFamily_common_name(String family_common_name) {
-        this.family_common_name = family_common_name;
-    }
-
-    public String getDuration() {
-        return duration;
-    }
-
-    public void setDuration(String duration) {
-        this.duration = duration;
-    }
 
     public String getGrowth_habit() {
         return growth_habit;
@@ -98,30 +84,34 @@ public class PlantDTO {
         this.edible = edible;
     }
 
-    public String getDescription() {
-        return description;
+    public String getMinimum_temperature() {
+        return minimum_temperature;
+    }
+    public String getMaximum_temperature() {
+        return maximum_temperature;
     }
 
     public PlantDTO() {
     }
 
     public PlantDTO(String id, String common_name, String family, String genus, String image_url,
-                    String scientific_name,
-                    String family_common_name, String duration, String growth_habit, String edible, String description) {
+                    String scientific_name,String growth_habit, String edible, String minimum_temperature,String maximum_temperature) {
         this.id = id;
         this.common_name = common_name;
         this.family = family;
         this.genus = genus;
         this.image_url = image_url;
         this.scientific_name = scientific_name;
-        this.family_common_name = family_common_name;
-        this.duration = duration;
         this.growth_habit = growth_habit;
         this.edible = edible;
-        this.description = description;
+        this.minimum_temperature = minimum_temperature;
+        this.maximum_temperature = maximum_temperature;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setMinimum_temperature(String minimum_temperature) {
+        this.minimum_temperature = minimum_temperature;
+    }
+    public void setMaximum_temperature(String maximum_temperature) {
+        this.maximum_temperature = maximum_temperature;
     }
 }
