@@ -2,17 +2,17 @@
 <header th:fragment="navbar" class="container-fluid">
 
 
-<!--<header th:fragment="navbar">-->
+    <!--<header th:fragment="navbar">-->
 
     <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark mt-3" id="nav-sticky">
 
-    <!-- LOGO  Start-->
+        <!-- LOGO  Start-->
         <a class="d-flex ms-4 logo justify-items-center align-items-center gap" th:href="@{/}">
             <img src="/css/images/carrotguy(fknawesome).png" alt="" class="logo-dark" height="100">
             <h1 class="logo-text text-white">BotaniBuddy</h1>
         </a>
-    <!-- LOGO End-->
-    <!--  LINKS  -->
+        <!-- LOGO End-->
+        <!--  LINKS  -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <i class="mdi mdi-menu"></i>
         </button>
@@ -30,14 +30,14 @@
                 <li class="nav-item">
                     <a th:href="@{/#contact}" class="nav-link">Contact</a>
                 </li>
-                <li class="nav-item" sec:authorize="isAnonymous()">
-                    <form th:action="@{/users/login}">
-                        <button th:href="@{/users/login}" th:method="post" class="login-text nav-link active" >Login</button>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <form th:action="@{/users/login}" th:method="post">
+                        <button  th:method="post" class="login-text nav-link active" >Login</button>
                     </form>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}">
-                        <button th:href="@{/logout}" th:method="post" class="login-text nav-link active" >Logout</button>
+                    <form th:action="@{/logout}" th:method="post">
+                        <button  th:method="post" class="login-text nav-link active" >Logout</button>
                     </form>
                 </li>
                 <li id="wrap">
