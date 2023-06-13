@@ -35,6 +35,7 @@ public class PlantController {
     private final PlantRepository plantsDao;
     private final GardenPlantRepository gardenPlantsDao;
 
+
     @Autowired
     private Keys keys;
 
@@ -47,6 +48,10 @@ public class PlantController {
         this.usersDao = usersDao;
         this.plantsDao = plantsDao;
         this.gardenPlantsDao = gardenPlantsDao;
+    }
+    @GetMapping("/add")
+    public String addPlantForm(){
+        return "addPlantForm";
     }
 
     @GetMapping("/search")
