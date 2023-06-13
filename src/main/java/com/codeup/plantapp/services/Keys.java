@@ -16,7 +16,7 @@ public class Keys {
     @Value("${perenual.key}")
     private String perenual;
 
-    public String getWeather() {
+    public String getOpenWeather() {
         return weather;
     }
     public String getTrefle() {
