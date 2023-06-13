@@ -13,6 +13,7 @@ import com.codeup.plantapp.util.PlantResultDTO;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ import java.util.Date;
 
 @Controller
 public class PlantController {
+
 
     private final UserRepository usersDao;
     private final PlantRepository plantsDao;
@@ -155,7 +157,22 @@ public class PlantController {
             PlantDTO plant = new PlantDTO(plant_id_string, common_name, family_name, genus_name, image_url, scientific_name,
                     growth_habit, edible.toString(),minimum_temperature,maximum_temperature );
 
+            String selectedPlantCommonName = plant.getCommon_name();
+
+            String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
+
+            String openFarmApiUrl = "https://openfarm.cc/api/v1/crops/" + commonNameSlug;
+            apiUrl += "?api_key=" + "zionsegovia@gmail.com:bbdf2915e7c58b0416f4ffa6fc45dc04";
+
+            RestTemplate openFarmRestTemplate = new RestTemplate();
+            ResponseEntity<String> openFarmResponse = openFarmRestTemplate.getForEntity(openFarmApiUrl, String.class);
+
+            System.out.println("OpenFarm API Response:");
+            System.out.println(openFarmResponse.getBody());
+
             model.addAttribute("plant", plant);
+            model.addAttribute("selectedPlantCommonName", selectedPlantCommonName);
+            System.out.println("selectedPlantCommonName: " + selectedPlantCommonName);
 
 
 
