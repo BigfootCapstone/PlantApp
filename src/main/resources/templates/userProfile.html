@@ -3,20 +3,22 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-
-    <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
+<head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
 
 <body>
-<div>
+<!--Navbar Start-->
     <header th:replace="partials/navbar :: navbar"></header>
+<!-- Navbar End -->
+    <div class="d-flex container create justify-content-center align-content-center">
+        <div class="d-flex row flex-grow-1">
 
-    <div>
-        <h1 th:text="${user.username} + '\'s Profile'"></h1>
-        <p th:text="'Date Created: ' + ${user.created_at}"></p>
-        <p th:text="'First Name: ' + ${user.first_name}"></p>
-        <p th:text="'Last Name: ' + ${user.last_name}"></p>
-        <p th:text="'City: ' + ${user.city}"></p>
-        <p th:text="'Email: ' + ${user.email}"></p>
+        <h1  class="subtitle" th:text="${user.username} + '\'s Profile'"></h1>
+        <p class="quote" th:text="'Date Created: ' + ${user.created_at}"></p>
+        <p class="quote" th:text="'First Name: ' + ${user.first_name}"></p>
+        <p class="quote" th:text="'Last Name: ' + ${user.last_name}"></p>
+        <p class="quote" th:text="'City: ' + ${user.city}"></p>
+        <p class="quote" th:text="'Email: ' + ${user.email}"></p>
+        </div>
     </div>
     <div>
         <a th:href="@{/users/{id}/edit(id=${id})}">
@@ -78,6 +80,5 @@
 
     </div>
 
-</div>
 </body>
 </html>
