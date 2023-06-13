@@ -154,10 +154,13 @@ public class PlantController {
             }
             System.out.println("Growth Habit: " + growth_habit);
 
-            Boolean edible = (Boolean) mainSpeciesObject.get("edible");
+            Boolean edible = mainSpeciesObject.get("edible") == null ? false : (Boolean) mainSpeciesObject.get(
+                    "edible");
             System.out.println("Edible: " + edible);
 //            print out entire JSON response
             System.out.println(jsonResponse);
+
+
 
             PlantDTO plant = new PlantDTO(plant_id_string, common_name, family_name, genus_name, image_url, scientific_name,
                     growth_habit, edible.toString(),minimum_temperature,maximum_temperature );
