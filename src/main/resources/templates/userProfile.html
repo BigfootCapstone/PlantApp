@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title th:text="${user.username} + '\'s Profile'"></title>
-</head>
+
+    <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
+
 <body>
     <div>
         <h1 th:text="${user.username} + '\'s Profile'"></h1>
@@ -65,6 +64,5 @@
         <h3>Plant Log Preview</h3>
 
     </div>
-
 </body>
 </html>
