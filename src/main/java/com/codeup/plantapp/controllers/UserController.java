@@ -84,18 +84,18 @@ public class UserController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = user.getId();
 
-        User userFound = usersDao.findUserById(userId);
-        model.addAttribute("user", userFound);
+        User userFromDb = usersDao.findUserById(userId);
+        model.addAttribute("user", userFromDb);
 
 //      Get Weather for User's City
-        String city = user.getCity();
+        String city = userFromDb.getCity();
         String key = keys.getOpenWeather();
         URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + key +
                 "&units=imperial");
         Weather userWeather = getWeather(url);
 
 //      Aggregate all plants in user's garden
-        List<GardenPlant> allPlants = gardenPlantDao.findGardenPlantByUser(user);
+        List<GardenPlant> allPlants = gardenPlantDao.findGardenPlantByUser(userFromDb);
 
 //      Run conditional logic for all plants based on Days passed
         for (GardenPlant plant: allPlants) {
@@ -108,12 +108,12 @@ public class UserController {
         model.addAttribute("weather", userWeather);
 
 //      Set Outdoor plants for quick weather reference and warnings
-        model.addAttribute("outdoorPlants", checkForOutdoorPlants(user));
+        model.addAttribute("outdoorPlants", checkForOutdoorPlants(userFromDb));
 
 //      Set All Plants for Garden Preview
         model.addAttribute("userPlants", allPlants);
 
-        System.out.println(user.getUsername());
+        System.out.println(userFromDb.getUsername());
         return "userProfile";
     }
 

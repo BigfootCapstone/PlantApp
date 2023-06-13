@@ -260,7 +260,7 @@ public class PlantController {
         updateGardenPlant.setIs_outside(is_outside);
         gardenPlantsDao.save(updateGardenPlant);
 
-        return "userProfile";
+        return "redirect:/users/profile";
     }
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
