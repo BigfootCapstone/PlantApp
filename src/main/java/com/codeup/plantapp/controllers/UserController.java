@@ -70,7 +70,14 @@ public class UserController {
         session.setAttribute("user", user);
         return "redirect: /users/profile";
     }
-
+//    @GetMapping("/logout")
+//    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (auth != null){
+//            new SecurityContextLogoutHandler().logout(request, response, auth);
+//        }
+//        return "redirect:/";
+//    }
 
     @GetMapping("/profile")
     public String showProfile(Model model) throws Exception{
