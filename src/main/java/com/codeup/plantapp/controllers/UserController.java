@@ -84,8 +84,8 @@ public class UserController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = user.getId();
 
-        user = usersDao.findUserById(userId);
-        model.addAttribute("user", user);
+        User userFound = usersDao.findUserById(userId);
+        model.addAttribute("user", userFound);
 
 //      Get Weather for User's City
         String city = user.getCity();
