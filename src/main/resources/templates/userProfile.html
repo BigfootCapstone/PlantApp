@@ -51,7 +51,7 @@
     <div>
         <h3>Garden Preview</h3>
         <div class="column" th:each="plant : ${userPlants}">
-            <p><span  th:text="${plant.plant_id}"></span></p>
+            <p><span  th:text="${plant.plant.id}"></span></p>
             <p><span th:text="${plant.plant.name}"></span></p>
             <p><span  th:text="${plant.sun_amount}"></span></p>
             <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
