@@ -10,7 +10,7 @@
 
 <div th:if="${plant}" class="ui container">
 
-  <button class="ui button" onclick="window.history.back();">Back</button>
+  <a href="/search" class="ui button">Back</a>
 
 
 
@@ -46,10 +46,14 @@
           <label for="water_interval">Water Interval</label>
           <input type="number" id="water_interval" name="water_interval" min="1" max="30">
           <label>Is this plant Outside</label>
-          <input name="is_outside" id="yes" type="radio" value="true">Yes
-          <input name="is_outside" id="no" type="radio" value="false">No
+            <label for="yes">Yes
+                <input name="is_outside" id="yes" type="radio" value="true">
+            </label>
+            <label for="no">No
+                <input name="is_outside" id="no" type="radio" value="false">
+            </label>
 
-          <button class="ui button">Save</button>
+          <input type="submit" class="ui button">Save
         </form>
       </div>
     </div>

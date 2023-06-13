@@ -1,9 +1,8 @@
 package com.codeup.plantapp.controllers;
 
-import com.codeup.plantapp.models.GardenPlant;
-import com.codeup.plantapp.models.User;
-import com.codeup.plantapp.models.Weather;
+import com.codeup.plantapp.models.*;
 import com.codeup.plantapp.repositories.GardenPlantRepository;
+import com.codeup.plantapp.repositories.PlantRepository;
 import com.codeup.plantapp.repositories.UserRepository;
 import com.codeup.plantapp.services.Keys;
 import jakarta.servlet.http.HttpSession;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import static com.codeup.plantapp.services.WeatherCall.getWeather;
@@ -28,17 +26,19 @@ import static com.codeup.plantapp.util.CareTips.plantTipCheck;
 public class UserController {
 
     private final UserRepository usersDao;
-
     private final PasswordEncoder passwordEncoder;
     private final GardenPlantRepository gardenPlantDao;
+    private final PlantRepository plantDao;
 
 
 //    private final UserRepository userDao;
 
-    public UserController(UserRepository usersDao, GardenPlantRepository gardenPlantDao, PasswordEncoder passwordEncoder){
+    public UserController(UserRepository usersDao, GardenPlantRepository gardenPlantDao,
+                          PlantRepository plantDao, PasswordEncoder passwordEncoder){
         this.usersDao = usersDao;
         this.gardenPlantDao = gardenPlantDao;
         this.passwordEncoder = passwordEncoder;
+        this.plantDao =  plantDao;
     }
 
     @Autowired
@@ -84,18 +84,18 @@ public class UserController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = user.getId();
 
-        user = usersDao.findUserById(userId);
-        model.addAttribute("user", user);
+        User userFromDb = usersDao.findUserById(userId);
+        model.addAttribute("user", userFromDb);
 
 //      Get Weather for User's City
-        String city = user.getCity();
+        String city = userFromDb.getCity();
         String key = keys.getOpenWeather();
         URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + key +
                 "&units=imperial");
         Weather userWeather = getWeather(url);
 
 //      Aggregate all plants in user's garden
-        List<GardenPlant> allPlants = gardenPlantDao.findGardenPlantByUser(user);
+        List<GardenPlant> allPlants = gardenPlantDao.findGardenPlantByUser(userFromDb);
 
 //      Run conditional logic for all plants based on Days passed
         for (GardenPlant plant: allPlants) {
@@ -108,15 +108,14 @@ public class UserController {
         model.addAttribute("weather", userWeather);
 
 //      Set Outdoor plants for quick weather reference and warnings
-        model.addAttribute("outdoorPlants", checkForOutdoorPlants(user));
+        model.addAttribute("outdoorPlants", checkForOutdoorPlants(userFromDb));
 
 //      Set All Plants for Garden Preview
         model.addAttribute("userPlants", allPlants);
 
-        System.out.println(user.getUsername());
+        System.out.println(userFromDb.getUsername());
         return "userProfile";
     }
-
 
     @GetMapping("/{id}")
     public String getUserProfile(@PathVariable Long id, Model model) {
@@ -160,4 +159,6 @@ public class UserController {
         model.addAttribute("users", usersDao.findAll());
         return "users";
     }
+
+
 }
