@@ -1,15 +1,13 @@
 package com.codeup.plantapp.controllers;
 
+import com.codeup.plantapp.models.Plant;
 import com.codeup.plantapp.services.Keys;
 import com.codeup.plantapp.util.PlantDTO;
 import com.codeup.plantapp.util.PlantResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
@@ -52,6 +50,10 @@ public class PlantController {
 
         return "view-more";
     }
-
+    @GetMapping("/add")
+    public String addPlant(Model model){
+            model.addAttribute("plant",new Plant());
+            return "addPlantForm";
+    }
 
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="partials/head :: head('Add Plant')"></head>
+<body>
+<header th:replace="partials/navbar :: navbar"></header>
+
+<section class="bg-home" id="home">
+    <div class="home-center">
+       
+    </div>
+</section>
+<section class="section">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="custom-form">
+                    <span id="error-msg"></span>
+                    <form method="post" name="addPlantForm" th:action="@{/users/add}" >
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Plant Name</label>
+                                    <input name="name" id="name" type="text" class="form-control" placeholder="Enter your plants name...">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="family" class="form-label">Plant Family</label>
+                                    <input name="family" id="family" type="text" class="form-control" placeholder="Enter the plants family...">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="genus" class="form-label">Plant Genus</label>
+                                    <input name="name" id="genus" type="text" class="form-control" placeholder="Enter plant genus...">
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 text-end">
+                                        <input type="submit" id="submit" name="send" class="submitBnt btn btn-custom" value="Add Plant" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
