@@ -162,7 +162,7 @@ public class PlantController {
             String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
 
             String openFarmApiUrl = "https://openfarm.cc/api/v1/crops/" + commonNameSlug;
-            apiUrl += "?api_key=" + "zionsegovia@gmail.com:bbdf2915e7c58b0416f4ffa6fc45dc04";
+            apiUrl += "?api_key=" + "keys.getOpenFarm()";
 
             RestTemplate openFarmRestTemplate = new RestTemplate();
             ResponseEntity<String> openFarmResponse = openFarmRestTemplate.getForEntity(openFarmApiUrl, String.class);
