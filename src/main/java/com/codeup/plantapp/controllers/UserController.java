@@ -5,8 +5,6 @@ import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.models.Weather;
 import com.codeup.plantapp.repositories.GardenPlantRepository;
 import com.codeup.plantapp.repositories.UserRepository;
-import com.codeup.plantapp.services.UserServices;
-import jakarta.servlet.http.HttpServletRequest;
 import com.codeup.plantapp.services.Keys;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import static com.codeup.plantapp.services.WeatherCall.getWeather;
@@ -59,8 +56,6 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
         return "redirect:/users/" + user.getId();
-//        usersDao.save(user);
-//        return "redirect:/userProfile";
     }
     @GetMapping("/login")
     public String viewLoginPage() {

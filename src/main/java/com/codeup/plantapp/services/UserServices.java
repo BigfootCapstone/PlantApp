@@ -27,15 +27,4 @@ public class UserServices implements UserDetailsService {
             return new UserRolls(user.getId(), user.getUsername(), user.getEmail(),user.getPassword());
         }
     }
-
-    // maybe use
-    public void updateUserProfile(Long id, String firstName, String lastName, String city, String email, String password) {
-        User user = usersDao.findById(id).orElseThrow(() -> new RuntimeException("User not found with id: " + id));
-        user.setFirst_name(firstName);
-        user.setLast_name(lastName);
-        user.setCity(city);
-        user.setEmail(email);
-        user.setPassword(password);
-        usersDao.save(user);
-    }
 }
