@@ -1,6 +1,7 @@
 
 
 
+
 <header th:fragment="navbar" class="container">
   <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="nav-sticky">
     <div class="container ps-3 pe-3">
@@ -50,4 +51,111 @@
       </div>
     </div>
   </nav>
+
+<header th:fragment="navbar">
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="nav-sticky">
+            <div class="row">
+                    <!-- LOGO  Start-->
+                    <div class="d-flex">
+                        <a class="d-flex logo justify-items-center align-items-center gap" th:href="@{/}">
+                            <img src="/css/images/carrotguy(fknawesome).png" alt="" class="logo-dark" height="100">
+                            <h1 class="logo-text text-white">BotaniBuddy</h1>
+                        </a>
+                    </div>
+                    <!-- LOGO End-->
+                <div class="column">
+                <!--  LINKS  -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="mdi mdi-menu"></i>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav" id="mySidenav">
+                            <li class="nav-item">
+                                <a th:href="@{/}" class="nav-link active">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a th:href="@{/#about}" class="nav-link">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a th:href="@{/#reviews}" class="nav-link">Reviews</a>
+                            </li>
+                            <li class="nav-item">
+                                <a th:href="@{/#contact}" class="nav-link">Contact</a>
+                            </li>
+                            <li>
+                                <form action="#" th:action="@{/search}" method="post">
+                                    <a class="text-white">Plant Search</a>
+                                    <input class="d-flex" type="text" name="query" placeholder="Enter a plant name" required>
+                                    <button class="btn noAction search text-white font-14" type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
+                                </form>
+                            </li>
+                            <button type="button" class="btn noAction">
+                                <a class="login-text" th:href="@{/users/login}">Login</a>
+                            </button>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </nav>
+
+
+
+
+
+
+
+
+
+
+
+<!--  <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="nav-sticky">-->
+<!--    <div class="container">-->
+<!--      <div class="row g-0 text-center">-->
+<!--          &lt;!&ndash; LOGO  Start&ndash;&gt;-->
+<!--          <div class="col-6">-->
+<!--              <div class="d-flex">-->
+<!--                  <a class="d-flex logo justify-items-center align-items-center gap" th:href="@{/}">-->
+<!--                    <img src="/css/images/carrotguy(fknawesome).png" alt="" class="logo-dark" height="100" />-->
+<!--                    <h1 class="logo-text text-white">BotaniBuddy</h1>-->
+<!--                  </a>-->
+<!--              </div>-->
+<!--          &lt;!&ndash; LOGO End&ndash;&gt;-->
+<!--          <div class="col-6 collapse navbar-collapse" id="navbarCollapse">-->
+<!--            <ul class="navbar-nav" id="mySidenav">-->
+<!--              <li class="nav-item">-->
+<!--                <a th:href="@{/}" class="nav-link active">Home</a>-->
+<!--              </li>-->
+<!--              <li class="nav-item">-->
+<!--                <a th:href="@{/#about}" class="nav-link">About</a>-->
+<!--              </li>-->
+<!--              <li class="nav-item">-->
+<!--                <a th:href="@{/#reviews}" class="nav-link">Reviews</a>-->
+<!--              </li>-->
+<!--              <li class="nav-item">-->
+<!--                <a th:href="@{/#contact}" class="nav-link">Contact</a>-->
+<!--              </li>-->
+<!--              <button type="button" class="btn login">-->
+<!--                <a class="login-text" th:href="@{/users/login}">Login</a>-->
+<!--              </button>-->
+<!--            </ul>-->
+<!--          </div>-->
+<!--          </div>-->
+<!--          <div class="row">-->
+<!--          <div class="d-flex col justify-content-end">-->
+<!--            <form action="#" th:action="@{/search}" method="post">-->
+<!--              <a class="text-white">Plant Search</a>-->
+<!--              <input class="d-flex" type="text" name="query" placeholder="Enter a plant name" required>-->
+<!--              <button class="btn btn-custom" type="submit">Search</button>-->
+<!--            </form>-->
+<!--          </div>-->
+<!--          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--              <i class="mdi mdi-menu"></i>-->
+<!--            </button>-->
+<!--          </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </nav>-->
+
+
 </header>
