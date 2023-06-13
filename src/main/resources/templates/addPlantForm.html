@@ -18,8 +18,9 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="custom-form">
-                    <span id="error-msg"></span>
+                <span id="error-msg"></span>
+
+                <div  class="custom-form" sec:authorize="isAuthenticated()">
                     <form method="post" name="addPlantForm" th:action="@{/users/add}" >
                         <div class="row">
                             <div class="col-lg-6">
