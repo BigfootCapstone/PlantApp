@@ -98,6 +98,7 @@ public class PlantController {
             String genus_name = (String) genus.get("name");
             String image_url = (String) plantObject.get("image_url");
 
+
             JSONObject mainSpeciesObject = (JSONObject) plantObject.get("main_species");
 
             String minimum_temperature = null;
@@ -149,10 +150,10 @@ public class PlantController {
             Boolean edible = (Boolean) mainSpeciesObject.get("edible");
             System.out.println("Edible: " + edible);
 //            print out entire JSON response
-          System.out.println(jsonResponse);
+            System.out.println(jsonResponse);
 
             PlantDTO plant = new PlantDTO(plant_id_string, common_name, family_name, genus_name, image_url, scientific_name,
-                   growth_habit, edible.toString(),minimum_temperature,maximum_temperature );
+                    growth_habit, edible.toString(),minimum_temperature,maximum_temperature );
 
             model.addAttribute("plant", plant);
 
@@ -171,7 +172,7 @@ public class PlantController {
                             @RequestParam(name="sun_amount") sun_amount sun_amount,
                             @RequestParam(name="water_interval") long water_interval,
                             @RequestParam(name="is_outside") boolean is_outside
-                            ) {
+    ) {
         Plant userPlant = new Plant(id, plant_name);
         plantsDao.save(userPlant);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -185,6 +186,3 @@ public class PlantController {
     }
 
 }
-
-
-
