@@ -13,6 +13,7 @@ import com.codeup.plantapp.util.PlantResultDTO;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ import java.util.Date;
 
 @Controller
 public class PlantController {
+
 
     private final UserRepository usersDao;
     private final PlantRepository plantsDao;
@@ -97,24 +99,46 @@ public class PlantController {
             JSONObject genus = (JSONObject) plantObject.get("genus");
             String genus_name = (String) genus.get("name");
             String image_url = (String) plantObject.get("image_url");
-            String family_common_name = (String) plantObject.get("family_common_name");
+
 
             JSONObject mainSpeciesObject = (JSONObject) plantObject.get("main_species");
 
-            String duration = null;
-            if (mainSpeciesObject.containsKey("duration")) {
-                duration = (String) mainSpeciesObject.get("duration");
-            }
-            System.out.println("Duration: " + duration);
-
-            String description = null;
+            String minimum_temperature = null;
             if (mainSpeciesObject.containsKey("growth")) {
                 JSONObject growthObject = (JSONObject) mainSpeciesObject.get("growth");
-                if (growthObject.containsKey("description")) {
-                    description = (String) growthObject.get("description");
+                if (growthObject.containsKey("minimum_temperature")) {
+                    JSONObject temperatureObject = (JSONObject) growthObject.get("minimum_temperature");
+                    Object degCObject = temperatureObject.get("deg_f");
+                    if (degCObject != null) {
+                        if (degCObject instanceof Long) {
+                            minimum_temperature = Long.toString((Long) degCObject);
+                        } else if (degCObject instanceof String) {
+                            minimum_temperature = (String) degCObject;
+                        }
+                    }
                 }
             }
-            System.out.println("Description: " + description);
+            System.out.println("min: " + minimum_temperature);
+
+            String maximum_temperature = null;
+            if (mainSpeciesObject.containsKey("growth")) {
+                JSONObject growthObject = (JSONObject) mainSpeciesObject.get("growth");
+                if (growthObject.containsKey("maximum_temperature")) {
+                    JSONObject temperatureObject = (JSONObject) growthObject.get("maximum_temperature");
+                    Object degCObject = temperatureObject.get("deg_f");
+                    if (degCObject != null) {
+                        if (degCObject instanceof Long) {
+                            maximum_temperature = Long.toString((Long) degCObject);
+                        } else if (degCObject instanceof String) {
+                            maximum_temperature = (String) degCObject;
+                        }
+                    }
+                }
+            }
+            System.out.println("max: " + maximum_temperature);
+
+
+
 
             String growth_habit = null;
             if (mainSpeciesObject.containsKey("specifications")) {
@@ -127,11 +151,28 @@ public class PlantController {
 
             Boolean edible = (Boolean) mainSpeciesObject.get("edible");
             System.out.println("Edible: " + edible);
+//            print out entire JSON response
+            System.out.println(jsonResponse);
 
             PlantDTO plant = new PlantDTO(plant_id_string, common_name, family_name, genus_name, image_url, scientific_name,
-                    family_common_name, duration, growth_habit, edible.toString(), description);
+                    growth_habit, edible.toString(),minimum_temperature,maximum_temperature );
+
+            String selectedPlantCommonName = plant.getCommon_name();
+
+            String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
+
+            String openFarmApiUrl = "https://openfarm.cc/api/v1/crops/" + commonNameSlug;
+            apiUrl += "?api_key=" + "keys.getOpenFarm()";
+
+            RestTemplate openFarmRestTemplate = new RestTemplate();
+            ResponseEntity<String> openFarmResponse = openFarmRestTemplate.getForEntity(openFarmApiUrl, String.class);
+
+            System.out.println("OpenFarm API Response:");
+            System.out.println(openFarmResponse.getBody());
 
             model.addAttribute("plant", plant);
+            model.addAttribute("selectedPlantCommonName", selectedPlantCommonName);
+            System.out.println("selectedPlantCommonName: " + selectedPlantCommonName);
 
 
 
@@ -148,7 +189,7 @@ public class PlantController {
                             @RequestParam(name="sun_amount") sun_amount sun_amount,
                             @RequestParam(name="water_interval") long water_interval,
                             @RequestParam(name="is_outside") boolean is_outside
-                            ) {
+    ) {
         Plant userPlant = new Plant(id, plant_name);
         plantsDao.save(userPlant);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -160,5 +201,4 @@ public class PlantController {
         gardenPlantsDao.save(newGardenPlant);
         return "searchForm";
     }
-
 }
