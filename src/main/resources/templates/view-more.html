@@ -2,38 +2,57 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head th:insert="partials/head :: head('BotaniBuddy Plant Details')"></head>
 <body>
+
 <header th:replace="partials/navbar :: navbar"></header>
 
-<!--<section class="section">-->
-<!--  <div class="container-fluid">-->
-<!--    <div class="row justify-content-center">-->
-<!--      <div class="col-lg-6">-->
 
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</section>-->
-<div class="ui container">
+<div th:if="${plant}" class="ui container">
+
+  <button class="ui button" onclick="window.history.back();">Back</button>
+
+
+
   <h1>Plant Details</h1>
   <div class="ui segment">
     <h3 th:text="${plant.common_name}"></h3>
     <div class="ui two column grid">
       <div class="column">
-        <img class="ui fluid rounded image" th:if="${plant.image_url}" th:src="${plant.image_url}" alt="Plant Photo">
+        <img class="ui fluid rounded image" th:src="${plant.image_url}" alt="Plant Photo">
       </div>
       <div class="column">
         <p><strong>Family:</strong> <span th:text="${plant.family}"></span></p>
         <p><strong>Genus:</strong> <span th:text="${plant.genus}"></span></p>
         <p><strong>Scientific Name:</strong> <span th:text="${plant.scientific_name}"></span></p>
-        <p><strong>Family Common Name:</strong> <span th:text="${plant.family_common_name}"></span></p>
-        <p><strong>Duration:</strong> <span th:text="${plant.duration}"></span></p>
         <p><strong>Growth Habit:</strong> <span th:text="${plant.growth_habit}"></span></p>
         <p><strong>Edible:</strong> <span th:text="${plant.edible}"></span></p>
-        <p><strong>Description:</strong></p>
-        <p th:text="${plant.description}"></p>
+        <p><strong>Minimum Temperature:</strong></p>
+        <p th:text="${plant.minimum_temperature}"></p>
+          <p><strong>Maximum Temperature:</strong></p>
+          <p th:text="${plant.maximum_temperature}"></p>
+      </div>
+
+      <div class="row">
+        <form method="post" th:action="@{/plants/{id}(id=${plant.id})}">
+<!--          get trefle-->
+          <input type="text" th:text="${plant.common_name}" name="name">
+          <label for="sun_amount">Sun Amount</label>
+          <select name="sun_amount" id="sun_amount">
+            <option value="FULL_SUN">Full Sun</option>
+            <option value="PARTIAL_SUN">Partial Sun</option>
+            <option value="FULL_SHADE">Shaded</option>
+          </select>
+          <label for="water_interval">Water Interval</label>
+          <input type="number" id="water_interval" name="water_interval" min="1" max="30">
+          <label>Is this plant Outside</label>
+          <input name="is_outside" id="yes" type="radio" value="true">Yes
+          <input name="is_outside" id="no" type="radio" value="false">No
+
+          <button class="ui button">Save</button>
+        </form>
       </div>
     </div>
   </div>
+
 </div>
 </body>
 </html>

@@ -13,9 +13,6 @@ public class Plant {
     @Column
     private String trefle_id;
 
-    @Column
-    private String perenual_id;
-
     @Column(nullable = true, length = 100)
     private String name;
 
@@ -36,13 +33,6 @@ public class Plant {
         this.trefle_id = trefle_id;
     }
 
-    public String getPerenual_id() {
-        return perenual_id;
-    }
-    public void setPerenual_id(String perenual_id) {
-        this.perenual_id = perenual_id;
-    }
-
     public String getName() {
         return name;
     }
@@ -58,4 +48,9 @@ public class Plant {
     }
 
     public Plant () {}
+
+    public Plant(String trefle_id, String name) {
+        this.trefle_id = trefle_id;
+        this.name = name;
+    }
 }

@@ -16,19 +16,20 @@ public class Keys {
     @Value("${perenual.key}")
     private String perenual;
 
-    @Value("${openfarm.key")
+    @Value("${openfarm.key}")
     private String openfarm;
 
-    public String getWeather() {
+    public String getOpenWeather() {
         return weather;
     }
     public String getTrefle() {
         return trefle;
     }
+    public String getOpenFarm() {
+        return openfarm;
+    }
     public String getPerenual() {
         return perenual;
     }
-
-    public String getOpenfarm(){return openfarm;}
 
 }
