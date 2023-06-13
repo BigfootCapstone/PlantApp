@@ -4,44 +4,10 @@
 >
 <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
 
-
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="58" class="scrollspy-example">
-
 <!--Navbar Start-->
-<nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="nav-sticky">
-    <div class="container ps-3 pe-3">
-        <!-- LOGO -->
-        <a class="logo justify-items-center align-items-center gap" href="index.html">
-            <img src="/css/images/carrotguy(fknawesome).png" alt="" class="logo-dark" height="100" />
-            <h1 class="logo-text text-white">BotaniBuddy</h1>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="mdi mdi-menu"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-
-            <ul class="navbar-nav" id="mySidenav">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link active">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#reviews" class="nav-link">Reviews</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
-                <button type="button" class="btn login">
-                    <a class="login-text" th:href="@{/users/login}">Login</a>
-                </button>
-            </ul>
-        </div>
-    </div>
-</nav>
+<header th:replace="partials/navbar :: navbar"></header>
 <!-- Navbar End -->
-
 <!-- home start -->
 <section class="bg-home" id="home">
     <div class="home-center">
@@ -61,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- start carousel -->
+<!-- start carousel -->
                     <div class="container slider">
                         <div class="row grow carouselHolder">
                             <div class="slider-mask">
@@ -84,18 +50,15 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- end carousel -->
+<!-- end carousel -->
                 </div>
-                <!-- end row -->
-
+<!-- end row -->
             </div>
-            <!-- end container-fluid -->
+<!-- end container-fluid -->
         </div>
     </div>
 </section>
 <!-- home end -->
-
 <!-- About Us start -->
 <section class="section" id="about">
     <div class="container-fluid">
@@ -119,7 +82,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-l-6 col-sm-6">
                 <div class="about-box p-4 mt-4">
                     <div class="about-img float-start me-4">
@@ -132,6 +94,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row align-items-center justify-content-center">
             <div class="col-l-6 col-sm-6">
                 <div class="about-box p-4 mt-4">
@@ -144,7 +107,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-l-6 col-sm-6">
                 <div class="about-box p-4 mt-4">
                     <div class="about-img float-start me-4">
@@ -156,11 +118,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- end row -->
+<!-- end row -->
     </div>
-    <!-- end container-fluid -->
+<!-- end container-fluid -->
 </section>
 <!-- About Us end -->
 
@@ -176,7 +137,7 @@
                 </div>
             </div>
         </div>
-        <!-- end row -->
+<!-- end row -->
         <div class="row">
             <div class="col-lg-4">
                 <div class="testers-box p-4 bg-white mt-4 text-center">
@@ -186,7 +147,6 @@
                     </div>
                     <p class="text-muted mb-1"> - Drake Jacquez</p>
                     <h5 class="font-18">ManDr@k3</h5>
-
                 </div>
             </div>
             <div class="col-lg-4">
@@ -197,7 +157,6 @@
                     </div>
                     <p class="text-muted mb-1"> - Brendan Thomas</p>
                     <h5 class="font-18">BTomat!ll0</h5>
-
                 </div>
             </div>
             <div class="col-lg-4">
@@ -208,12 +167,10 @@
                     </div>
                     <p class="text-muted mb-1"> - Hazel Gutierrez-Diaz</p>
                     <h5 class="font-18">W!tchyHaz3l</h5>
-
                 </div>
             </div>
         </div>
-        <!-- end row -->
-
+<!-- end row -->
         <div class="row mt-5 pt-5">
             <div class="col-lg-3 col-sm-6">
                 <div class="reviews-images">
@@ -236,8 +193,9 @@
                 </div>
             </div>
         </div>
+<!-- end row -->
     </div>
-    <!-- end container-fluid -->
+<!-- end container-fluid -->
 </section>
 <!-- reviews end -->
 
@@ -249,18 +207,16 @@
                 <div class="title text-center mb-5">
                     <h6 class="small-title">Contact</h6>
                     <h4 class="subtitle">Have any Questions ?</h4>
-                    <p class="quote">Ask us question or provide feedback.</p>
+                    <p class="quote">Ask us a question or provide feedback.</p>
                 </div>
             </div>
         </div>
-        <!-- end row -->
-
+<!-- end row -->
         <div class="row">
             <div class="col-lg-4">
                 <div class="get-in-touch">
                     <h5 class="subtitle">Get in touch</h5>
                     <p class="quote mb-5">Ways to contact us :</p>
-
                     <div class="mb-3">
                         <div class="get-touch-icon float-start me-3">
                             <h2><i class="pe-7s-mail text-white"></i></h2>
@@ -290,6 +246,7 @@
                     </div>
                 </div>
             </div>
+<!-- Start Contact Form -->
             <div class="col-lg-8">
                 <div class="custom-form">
                     <span id="error-msg"></span>
@@ -308,8 +265,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end row -->
-
+<!-- end row -->
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="mb-3">
@@ -318,8 +274,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end row -->
-
+<!-- end row -->
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="mb-3">
@@ -328,23 +283,21 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end row -->
-
+<!-- end row -->
                         <div class="row">
                             <div class="col-lg-12 text-end">
                                 <input type="submit" id="submit" name="send" class="submitBnt btn btn-custom" value="Send Message" />
                             </div>
                         </div>
-                        <!-- end row -->
+<!-- end row -->
                     </form>
                 </div>
-                <!-- end custom-form -->
-
             </div>
+<!-- End Contact form -->
         </div>
-        <!-- end row -->
+<!-- end row -->
     </div>
-    <!-- end container-fluid -->
+<!-- end container-fluid -->
 </section>
 <!-- contact end -->
 
