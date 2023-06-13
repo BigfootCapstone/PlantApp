@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="partials/head :: head('Login')"></head>
 <body>
-
-<!--Navbar Start-->
-<header th:replace="partials/navbar :: navbar"></header>
-<!-- Navbar End -->
-    <div class="container grow justify-center">
-        <div class="row justify-center">
-            <div class="column shrink">
-                <h1>Log In</h1>
-
+    <!--Navbar Start-->
+    <header th:replace="partials/navbar :: navbar"></header>
+    <!-- Navbar End -->
+    <div class="d-flex container create justify-content-center align-content-center">
+        <div class="d-flex row flex-grow-1">
+            <div class="col login-form text-center">
+                <h1 class="subtitle">Log In</h1>
                 <form th:action="@{/users/login}" th:method="post">
                     <label class="form-label" for="username">Username:</label>
                     <input class="form-control" type="text" id="username" name="username">
                     <label class="form-label" for="password">Password</label>
                     <input class="form-control" type="text" id="password" name="password">
-                    <input type="submit" value="Log In">
+                    <input class="btn btn-custom mt-3" type="submit" value="Log In">
                 </form>
             </div>
         </div>

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<html  lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!--<head th:insert="partials/head :: head('Edit Profile')"></head>-->
 <head>
   <meta charset="utf-8" />
@@ -36,41 +38,13 @@
   <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
 </head>
 
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:insert="partials/head :: head('Edit Profile')"></head>
+
+
 <body>
   <!--Navbar Start-->
-  <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="nav-sticky">
-    <div class="container ps-3 pe-3">
-      <!-- LOGO -->
-      <a class="logo justify-items-center align-items-center gap" href="index.html">
-        <img src="/css/images/carrotguy(fknawesome).png" alt="" class="logo-dark" height="100" />
-        <h1 class="logo-text text-white">BotaniBuddy</h1>
-      </a>
-
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="mdi mdi-menu"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-
-        <ul class="navbar-nav" id="mySidenav">
-          <li class="nav-item">
-            <a href="#home" class="nav-link active">Home</a>
-          </li>
-          <li class="nav-item">
-            <a href="#about" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
-            <a href="#reviews" class="nav-link">Reviews</a>
-          </li>
-          <li class="nav-item">
-            <a href="#contact" class="nav-link">Contact</a>
-          </li>
-          <button type="button" class="btn login">
-            <a class="login-text" th:href="@{/login}">Login</a>
-          </button>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <header th:replace="partials/navbar :: navbar"></header>
   <!-- Navbar End -->
 
   <div class="d-flex container create justify-content-center align-content-center">
@@ -84,12 +58,12 @@
           <div class="d-flex col justify-content-center">
             <form class="form-horizontal flex-grow-1"
                   th:action="@{/users/{id}/edit}"
-                  th:object="${user}" method="post"
+                  th:object="${user}" th:method="post"
                   enctype="multipart/form-data"
             >
               <div class="panel ">
                 <div class="panel-body text-center">
-                  <img src="/static/css/images/testers/img-3.jpg" class="img-circle profile-avatar" id="profile-img" th:src="@{#}" th:onchange="${loadfile(event)}" alt="User avatar">
+                  <img class="img-circle profile-avatar" id="profile-img" src="" alt="User avatar">
                   <input type="file" name="image" accept="image/*" />
                 </div>
               </div>
@@ -99,7 +73,7 @@
                 </div>
                 <div class="panel-body">
                   <div class="form-group">
-                    <label class="d-flex col control-label quote">Username <span sec:authentication="principal.username"></span></label>
+                    <label class="d-flex col control-label quote">Username <span th:text="${user.username}"></span> </label>
                     <div class="col">
                       <input type="text" class="form-control" th:field="*{username}">
                     </div>
@@ -107,13 +81,13 @@
                   <div class="form-group">
                     <label class="col control-label quote">First Name</label>
                     <div class="col">
-                      <input type="text" class="form-control" th:field="${first_name}">
+                      <input type="text" class="form-control" th:field="*{first_name}">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col control-label quote">Last Name</label>
                     <div class="col">
-                      <input type="text" class="form-control" th:field="${last_name}">
+                      <input type="text" class="form-control" th:field="*{last_name}">
                     </div>
                   </div>
                   <div class="form-group">
@@ -133,7 +107,7 @@
                   <div class="form-group">
                     <label class="col control-label quote">E-mail address</label>
                     <div class="col">
-                      <input type="email" class="form-control" th:value="${email}">
+                      <input type="email" class="form-control" th:value="*{email}">
                     </div>
                   </div>
                 </div>
@@ -147,13 +121,13 @@
                   <div class="form-group">
                     <label class="col control-label quote">Current password</label>
                     <div class="col">
-                      <input type="password" class="form-control" th:field="${password}">
+                      <input type="password" class="form-control" th:field="*{password}">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col control-label quote">New password</label>
                     <div class="col">
-                      <input type="password" class="form-control" th:field="${password}">
+                      <input type="password" class="form-control" th:field="*{password}">
                     </div>
                   </div>
                   <div class="form-group">
@@ -174,7 +148,7 @@
 
 
 
-<script th:src="@{/js/staticElements.js}"></script>
+<script th:src="@{/css/js/staticElements.js}"></script>
 <footer th:replace="partials/footer :: footer"></footer>
 
 </body>

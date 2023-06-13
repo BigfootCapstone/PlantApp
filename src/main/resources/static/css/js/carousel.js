@@ -24,16 +24,6 @@ const renderCarouselImages = (images, parent) =>{
 }
 
 
-
-
-
-
-
-
-
-
-
-
 //CAROUSEL FUNCTIONALITY
 let arrows = document.querySelectorAll('.arrow');
 // carousel forEach
@@ -112,7 +102,7 @@ arrows.forEach(function(arrow){
     }
     // click anywhere outside of modal close it
     window.onclick = function(event) {
-        if (event.target == modal) {
+        if (event.target === modal) {
             modal.style.display = "none";
         }
     }

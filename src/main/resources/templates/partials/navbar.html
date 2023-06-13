@@ -1,41 +1,48 @@
-<header th:fragment="navbar" class="container">
 
-  <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="nav-sticky">
-    <div class="container ps-3 pe-3">
-      <!-- LOGO -->
-      <a class="logo justify-items-center align-items-center gap" href="index.html">
-        <img src="/css/images/carrotguy(fknawesome).png" alt="" class="logo-dark" height="100" />
-        <h1 class="logo-text text-white">BotaniBuddy</h1>
-      </a>
-      <h1>Plant Search</h1>
-      <form action="#" th:action="@{/search}" method="post">
-        <input type="text" name="query" placeholder="Enter a plant name" required>
-        <button type="submit">Search</button>
-      </form>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="mdi mdi-menu"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
+<header th:fragment="navbar" class="container-fluid">
 
-        <ul class="navbar-nav" id="mySidenav">
-          <li class="nav-item">
-            <a th:href="@{/}" class="nav-link active">Home</a>
-          </li>
-          <li class="nav-item">
-            <a th:href="@{/#about}" class="nav-link">About</a>
-          </li>
-          <li class="nav-item">
-            <a th:href="@{/#reviews}" class="nav-link">Reviews</a>
-          </li>
-          <li class="nav-item">
-            <a th:href="@{/#contact}" class="nav-link">Contact</a>
-          </li>
-          <button type="button" class="btn login">
-            <a class="login-text" th:href="@{/users/login}">Login</a>
-          </button>
-        </ul>
-      </div>
-    </div>
-  </nav>
 
+<!--<header th:fragment="navbar">-->
+
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark mt-3" id="nav-sticky">
+
+    <!-- LOGO  Start-->
+        <a class="d-flex ms-4 logo justify-items-center align-items-center gap" th:href="@{/}">
+            <img src="/css/images/carrotguy(fknawesome).png" alt="" class="logo-dark" height="100">
+            <h1 class="logo-text text-white">BotaniBuddy</h1>
+        </a>
+    <!-- LOGO End-->
+    <!--  LINKS  -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="mdi mdi-menu"></i>
+        </button>
+        <div class="d-flex justify-content-end navbar-collapse" id="navbarCollapse">
+            <ul class="d-flex navbar-nav" id="mySidenav">
+                <li class="nav-item">
+                    <a th:href="@{/}" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/#about}" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/#reviews}" class="nav-link">Reviews</a>
+                </li>
+                <li class="nav-item">
+                    <a th:href="@{/#contact}" class="nav-link">Contact</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a th:href="@{/users/login}" th:method="post" class="login-text nav-link active" >Login</a>
+                </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}" th:method="post" class="login-text nav-link active" >Logout</a>
+                </li>
+                <li id="wrap">
+                    <form action="#" th:action="@{/search}" method="post">
+                        <input id="search" class="d-flex" type="text" name="query" placeholder="Lookin' for a plant ?" required>
+                        <input id="search_submit" value="Search" type="submit">
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </header>

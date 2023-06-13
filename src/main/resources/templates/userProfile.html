@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 
     <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
 
 <body>
+<div>
+    <header th:replace="partials/navbar :: navbar"></header>
+
     <div>
         <h1 th:text="${user.username} + '\'s Profile'"></h1>
         <p th:text="'Date Created: ' + ${user.created_at}"></p>
@@ -18,7 +24,7 @@
         </a>
     </div>
 
-<!--Weather Banner-->
+    <!--Weather Banner-->
     <div>
         <h3>Weather Banner</h3>
         <div th:if="${weather}">
@@ -32,7 +38,7 @@
         </div>
     </div>
 
-<!--Outdoor Plant Warning-->
+    <!--Outdoor Plant Warning-->
     <div th:if="${outdoorPlants}">
         <h3>Outdoor Plant Warning</h3>
         <div class="row justify-content-between">
@@ -46,7 +52,7 @@
         </div>
     </div>
 
-<!--Garden Preview-->
+    <!--Garden Preview-->
     <div>
         <h3>Garden Preview</h3>
         <div class="column" th:each="plant : ${userPlants}">
@@ -70,10 +76,12 @@
         </div>
     </div>
 
-<!--Plant Log Preview-->
+    <!--Plant Log Preview-->
     <div>
         <h3>Plant Log Preview</h3>
 
     </div>
+
+</div>
 </body>
 </html>
