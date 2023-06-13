@@ -4,6 +4,7 @@ import com.codeup.plantapp.models.GardenPlant;
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.models.Weather;
 import com.codeup.plantapp.repositories.GardenPlantRepository;
+import com.codeup.plantapp.repositories.PlantRepository;
 import com.codeup.plantapp.repositories.UserRepository;
 import com.codeup.plantapp.services.Keys;
 import jakarta.servlet.http.HttpSession;
@@ -28,17 +29,19 @@ import static com.codeup.plantapp.util.CareTips.plantTipCheck;
 public class UserController {
 
     private final UserRepository usersDao;
-
     private final PasswordEncoder passwordEncoder;
     private final GardenPlantRepository gardenPlantDao;
+    private final PlantRepository plantDao;
 
 
 //    private final UserRepository userDao;
 
-    public UserController(UserRepository usersDao, GardenPlantRepository gardenPlantDao, PasswordEncoder passwordEncoder){
+    public UserController(UserRepository usersDao, GardenPlantRepository gardenPlantDao,
+                          PlantRepository plantDao, PasswordEncoder passwordEncoder){
         this.usersDao = usersDao;
         this.gardenPlantDao = gardenPlantDao;
         this.passwordEncoder = passwordEncoder;
+        this.plantDao =  plantDao;
     }
 
     @Autowired
@@ -111,6 +114,17 @@ public class UserController {
     }
 
 
+//  Delete For User Garden Plant
+    @GetMapping("plants/{id}/delete")
+    public String deletePlant(@PathVariable long id) {
+        GardenPlant userGardenPlant = gardenPlantDao.findGardenPlantsById(id);
+        gardenPlantDao.deleteById(id);
+        long userPlant = userGardenPlant.getPlant().getId();
+        plantDao.deleteById(userPlant);
+        return "redirect:/users/profile";
+    }
+
+
     @GetMapping("/{id}")
     public String getUserProfile(@PathVariable Long id, Model model) {
         User user = usersDao.findById(id)
@@ -153,4 +167,6 @@ public class UserController {
         model.addAttribute("users", usersDao.findAll());
         return "users";
     }
+
+
 }
