@@ -16,7 +16,7 @@ public class Keys {
     @Value("${perenual.key}")
     private String perenual;
 
-    @Value("cynthia.v.nelson7@gmail.com:ba75fac4fbac9c6f1575a5049b907d0d")
+    @Value("${openfarm.key}")
     private String openfarm;
 
     public String getOpenWeather() {
