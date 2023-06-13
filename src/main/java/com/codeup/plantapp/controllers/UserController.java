@@ -2,7 +2,10 @@ package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.repositories.UserRepository;
+import com.codeup.plantapp.services.UserServices;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,9 @@ import java.time.LocalDate;
 @RequestMapping("/users")
 public class UserController {
 
+    @Autowired
+    private UserServices userService;
+
     private final UserRepository usersDao;
 
     private final PasswordEncoder passwordEncoder;
@@ -24,8 +30,19 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @GetMapping("/login")
+    public String viewLoginPage() {
+        return "login";
+    }
+    @PostMapping("/login")
+    public String loginSessionSetter(Model model, HttpSession session){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        session.setAttribute("user", user);
+        return "redirect: /users/profile";
+    }
+
     @GetMapping("/create")
-    public String createUserForm(Model model) {
+    public String showCreateUserForm(Model model) {
         model.addAttribute("user", new User());
         return "createUserForm";
     }
@@ -37,16 +54,7 @@ public class UserController {
         usersDao.save(user);
         return "redirect:/users/" + user.getId();
     }
-    @GetMapping("/login")
-    public String viewLoginPage() {
-        return "login";
-    }
-    @PostMapping("/login")
-    public String loginSessionSetter(Model model, HttpSession session){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        session.setAttribute("user", user);
-        return "redirect: /users/profile";
-    }
+
     @GetMapping("/profile")
     public String showProfile(Model model){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -56,6 +64,7 @@ public class UserController {
         System.out.println(user.getUsername());
         return "userProfile";
     }
+
     @GetMapping("/{id}")
     public String getUserProfile(@PathVariable Long id, Model model) {
         User user = usersDao.findById(id)
@@ -73,13 +82,13 @@ public class UserController {
     }
 
     @PostMapping("/{id}/edit")
-    public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
+    public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User user) {
         User users = usersDao.findUserById(1L);
-        users.setUsername(updatedUser.getUsername());
-        users.setFirst_name(updatedUser.getFirst_name());
-        users.setLast_name(updatedUser.getLast_name());
-        users.setCity(updatedUser.getCity());
-        users.setEmail(updatedUser.getEmail());
+        users.setUsername(user.getUsername());
+        users.setFirst_name(user.getFirst_name());
+        users.setLast_name(user.getLast_name());
+        users.setCity(user.getCity());
+        users.setEmail(user.getEmail());
         usersDao.save(users);
         return "redirect:/users/" + id;
     }
