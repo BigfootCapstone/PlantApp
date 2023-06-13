@@ -97,24 +97,45 @@ public class PlantController {
             JSONObject genus = (JSONObject) plantObject.get("genus");
             String genus_name = (String) genus.get("name");
             String image_url = (String) plantObject.get("image_url");
-            String family_common_name = (String) plantObject.get("family_common_name");
 
             JSONObject mainSpeciesObject = (JSONObject) plantObject.get("main_species");
 
-            String duration = null;
-            if (mainSpeciesObject.containsKey("duration")) {
-                duration = (String) mainSpeciesObject.get("duration");
-            }
-            System.out.println("Duration: " + duration);
-
-            String description = null;
+            String minimum_temperature = null;
             if (mainSpeciesObject.containsKey("growth")) {
                 JSONObject growthObject = (JSONObject) mainSpeciesObject.get("growth");
-                if (growthObject.containsKey("description")) {
-                    description = (String) growthObject.get("description");
+                if (growthObject.containsKey("minimum_temperature")) {
+                    JSONObject temperatureObject = (JSONObject) growthObject.get("minimum_temperature");
+                    Object degCObject = temperatureObject.get("deg_f");
+                    if (degCObject != null) {
+                        if (degCObject instanceof Long) {
+                            minimum_temperature = Long.toString((Long) degCObject);
+                        } else if (degCObject instanceof String) {
+                            minimum_temperature = (String) degCObject;
+                        }
+                    }
                 }
             }
-            System.out.println("Description: " + description);
+            System.out.println("min: " + minimum_temperature);
+
+            String maximum_temperature = null;
+            if (mainSpeciesObject.containsKey("growth")) {
+                JSONObject growthObject = (JSONObject) mainSpeciesObject.get("growth");
+                if (growthObject.containsKey("maximum_temperature")) {
+                    JSONObject temperatureObject = (JSONObject) growthObject.get("maximum_temperature");
+                    Object degCObject = temperatureObject.get("deg_f");
+                    if (degCObject != null) {
+                        if (degCObject instanceof Long) {
+                            maximum_temperature = Long.toString((Long) degCObject);
+                        } else if (degCObject instanceof String) {
+                            maximum_temperature = (String) degCObject;
+                        }
+                    }
+                }
+            }
+            System.out.println("max: " + maximum_temperature);
+
+
+
 
             String growth_habit = null;
             if (mainSpeciesObject.containsKey("specifications")) {
@@ -127,9 +148,11 @@ public class PlantController {
 
             Boolean edible = (Boolean) mainSpeciesObject.get("edible");
             System.out.println("Edible: " + edible);
+//            print out entire JSON response
+          System.out.println(jsonResponse);
 
             PlantDTO plant = new PlantDTO(plant_id_string, common_name, family_name, genus_name, image_url, scientific_name,
-                    family_common_name, duration, growth_habit, edible.toString(), description);
+                   growth_habit, edible.toString(),minimum_temperature,maximum_temperature );
 
             model.addAttribute("plant", plant);
 
@@ -163,5 +186,5 @@ public class PlantController {
 
 }
 
-}
+
 
