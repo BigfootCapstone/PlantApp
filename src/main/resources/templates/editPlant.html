@@ -7,7 +7,7 @@
 <h1>Edit</h1>
 
     <div class="row">
-        <form method="post" th:if="${gardenPlant}" th:href="@{/plants/plantEdit/{id}(id=${gardenPlant.id})}">
+        <form method="post" th:if="${gardenPlant}" th:action="@{/plants/plantEdit/{id}(id=${gardenPlant.id})}">
             <input type="text" th:placeholder="${plant.name}" name="name">
             <label for="sun_amount">Sun Amount</label>
             <select name="sun_amount" id="sun_amount">
