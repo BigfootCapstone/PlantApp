@@ -74,22 +74,22 @@ public class UserController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editUserProfileForm(@PathVariable Long id, Model model) {
-        User user = usersDao.findById(id)
+    public String editUserProfileForm(@PathVariable("id") String id, Model model) {
+        User user = usersDao.findById(1L)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
         return "editUserForm";
     }
 
     @PostMapping("/{id}/edit")
-    public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User user) {
-        User users = usersDao.findUserById(1L);
-        users.setUsername(user.getUsername());
-        users.setFirst_name(user.getFirst_name());
-        users.setLast_name(user.getLast_name());
-        users.setCity(user.getCity());
-        users.setEmail(user.getEmail());
-        usersDao.save(users);
+    public String updateUserProfile(@PathVariable("id") String id, @ModelAttribute("user") User user) {
+        User updatedUser = usersDao.findUserById(1L);
+        updatedUser.setUsername(user.getUsername());
+        updatedUser.setFirst_name(user.getFirst_name());
+        updatedUser.setLast_name(user.getLast_name());
+        updatedUser.setCity(user.getCity());
+        updatedUser.setEmail(user.getEmail());
+        usersDao.save(updatedUser);
         return "redirect:/users/" + id;
     }
 
