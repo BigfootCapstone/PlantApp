@@ -57,7 +57,16 @@
             <p><span  th:text="${plant.getSun_tip}"></span></p>
             <p><span  th:text="${plant.getWater_tip}"></span></p>
 <!--            button for delete path-->
-            <a class="ui-button" th:href="@{plants/{id}/delete(id=${plant.id})}">Delete</a>
+            <div class="row">
+                <div class="column" id="delete">
+                <a class="ui-button" th:href="@{plants/{id}/delete(id=${plant.id})}">Delete</a>
+                </div>
+
+                <div class="column" id="edit">
+                <a class="ui-button" th:href="@{plants/{id}/edit(id=${plant.id})}">Edit</a>
+                </div>
+            </div>
+
         </div>
     </div>
 

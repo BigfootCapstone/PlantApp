@@ -1,6 +1,7 @@
 package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.GardenPlant;
+import com.codeup.plantapp.models.Plant;
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.models.Weather;
 import com.codeup.plantapp.repositories.GardenPlantRepository;
@@ -114,7 +115,11 @@ public class UserController {
     }
 
 
-//  Delete For User Garden Plant
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><USER DELETE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
     @GetMapping("plants/{id}/delete")
     public String deletePlant(@PathVariable long id) {
         GardenPlant userGardenPlant = gardenPlantDao.findGardenPlantsById(id);
@@ -124,6 +129,24 @@ public class UserController {
         return "redirect:/users/profile";
     }
 
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+    @GetMapping("plants/{id}/edit")
+    public String editUserPlant(@PathVariable long id) {
+        GardenPlant userGardenPlant = gardenPlantDao.findGardenPlantsById(id);
+//      gardenPlantDao.deleteById(id);
+        long userPlant = userGardenPlant.getPlant().getId();
+//      plantDao.deleteById(userPlant);
+        return "redirect:editPlant";
+    }
+    @PostMapping("plants/{id}/edit")
+    public String updateUserPlant(@PathVariable long id, @ModelAttribute("plant") Plant Plant) {
+
+        return "redirect:/users/profile";
+    }
 
     @GetMapping("/{id}")
     public String getUserProfile(@PathVariable Long id, Model model) {
