@@ -34,7 +34,7 @@
       </div>
 
       <div class="row">
-        <form method="post" th:href="@{/plants/{id}(id=${plant.id})}">
+        <form method="post" th:action="@{/plants/{id}(id=${plant.id})}">
 <!--          get trefle-->
           <input type="text" th:text="${plant.common_name}" name="name">
           <label for="sun_amount">Sun Amount</label>
@@ -53,7 +53,7 @@
                 <input name="is_outside" id="no" type="radio" value="false">
             </label>
 
-          <button class="ui button">Save</button>
+          <input type="submit" class="ui button">Save
         </form>
       </div>
     </div>

@@ -24,10 +24,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.Date;
 
 @Controller
+@RequestMapping("/plants")
 public class PlantController {
 
 
@@ -49,6 +49,7 @@ public class PlantController {
         this.plantsDao = plantsDao;
         this.gardenPlantsDao = gardenPlantsDao;
     }
+
     @GetMapping("/add")
     public String addPlantForm(){
         return "addPlantForm";
@@ -71,7 +72,7 @@ public class PlantController {
         return "searchResults";
     }
 
-    @GetMapping("/plants/{id}")
+    @GetMapping("/{id}")
     public String showPlantDetails(@PathVariable("id") String id, Model model) {
         String apiUrl = "https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle();
 
@@ -163,7 +164,7 @@ public class PlantController {
 
 
             PlantDTO plant = new PlantDTO(plant_id_string, common_name, family_name, genus_name, image_url, scientific_name,
-                    growth_habit, edible.toString(),minimum_temperature,maximum_temperature );
+                    growth_habit, edible.toString(), minimum_temperature,maximum_temperature );
 
             String selectedPlantCommonName = plant.getCommon_name();
 
@@ -191,7 +192,7 @@ public class PlantController {
     }
 
 
-    @PostMapping("/plants/{id}")
+    @PostMapping("/{id}")
     public String savePlant(@PathVariable("id") String id,
                             @RequestParam(name="name") String plant_name,
                             @RequestParam(name="sun_amount") sun_amount sun_amount,
@@ -200,22 +201,24 @@ public class PlantController {
     ) {
         Plant userPlant = new Plant(id, plant_name);
         plantsDao.save(userPlant);
+
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userFound = usersDao.findUserById(user.getId());
 
         Date date = new Date();
 
-        GardenPlant newGardenPlant = new GardenPlant(user, userPlant, sun_amount, date, water_interval, is_outside);
+        GardenPlant newGardenPlant = new GardenPlant(userFound, userPlant, sun_amount, date, water_interval, is_outside);
 
         gardenPlantsDao.save(newGardenPlant);
         return "searchForm";
     }
 
     /*
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><USER DELETE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-*/
-    @GetMapping("plants/{id}/delete")
+    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+    |><<>><<>><<>><<>><<>><<>><<>><USER DELETE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
+    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+    */
+    @GetMapping("/{id}/delete")
     public String deletePlant(@PathVariable long id) {
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
         gardenPlantsDao.deleteById(id);
@@ -229,7 +232,7 @@ public class PlantController {
     |><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
     |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
     */
-    @GetMapping("/plants/plantEdit/{id}")
+    @GetMapping("/plantEdit/{id}")
     public String editUserPlant(@PathVariable long id, Model model) {
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
         Plant userPlant = userGardenPlant.getPlant();
@@ -240,7 +243,7 @@ public class PlantController {
         return "editPlant";
     }
 
-    @PostMapping("/plants/plantEdit/{id}")
+    @PostMapping("/plantEdit/{id}")
     public String updateUserPlant(
             @PathVariable("id") long id,
             @RequestParam(name="name") String plant_name,
@@ -257,7 +260,7 @@ public class PlantController {
         updateGardenPlant.setIs_outside(is_outside);
         gardenPlantsDao.save(updateGardenPlant);
 
-        return "userProfile";
+        return "redirect:/users/profile";
     }
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
