@@ -64,12 +64,12 @@ public class UserController {
     public String viewLoginPage() {
         return "login";
     }
-    @PostMapping("/login")
-    public String loginSessionSetter(Model model, HttpSession session){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        session.setAttribute("user", user);
-        return "redirect: /users/profile";
-    }
+//    @PostMapping("/login")
+//    public String loginSessionSetter(Model model, HttpSession session){
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        session.setAttribute("user", user);
+//        return "redirect: /users/profile";
+//    }
 //    @GetMapping("/logout")
 //    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
