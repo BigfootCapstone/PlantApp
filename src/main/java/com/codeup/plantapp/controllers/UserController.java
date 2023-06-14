@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import static com.codeup.plantapp.services.WeatherCall.getWeather;
 import static com.codeup.plantapp.util.CareTips.checkForOutdoorPlants;
@@ -118,7 +117,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String getUserProfile(@PathVariable("id") Long id, Model model) {
+    public String getUserProfile(@PathVariable("id") long id, Model model) {
         User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
@@ -126,29 +125,27 @@ public class UserController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editUserProfileForm(@PathVariable("id") Long id, Model model) {
-        User user = usersDao.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+    public String editUserProfileForm(@PathVariable("id") long id, Model model) {
+        User user = usersDao.findUserById(id);
         model.addAttribute("user", user);
         return "editUserForm";
     }
 
     @PostMapping("/edit/{id}")
-    public String updateUserProfile(@PathVariable("id") Long id, @ModelAttribute User user) {
-        User updatedUser = usersDao.findUserById(1L);
-        updatedUser.setUsername(updatedUser.getUsername());
-        updatedUser.setFirst_name(user.getFirst_name());
-        updatedUser.setLast_name(user.getLast_name());
-        updatedUser.setCity(user.getCity());
-        updatedUser.setEmail(user.getEmail());
-        user.setId(id);
-        usersDao.save(updatedUser); // save the updated user object
-        System.out.println("Saved updated user: " + updatedUser);
-        return "redirect:/users/" + user.getId();
+    public String updateUserProfile(@PathVariable Long id, @ModelAttribute User updatedUser) {
+        User user = usersDao.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+        user.setUsername(updatedUser.getUsername());
+        user.setFirst_name(updatedUser.getFirst_name());
+        user.setLast_name(updatedUser.getLast_name());
+        user.setCity(updatedUser.getCity());
+        user.setEmail(updatedUser.getEmail());
+        usersDao.save(user);
+        return "redirect:/users/" + id;
     }
 
     @PostMapping("/{id}/delete")
-    public String deleteUserProfile(@PathVariable Long id) {
+    public String deleteUserProfile(@PathVariable long id) {
         usersDao.deleteById(id);
         return "redirect:/users";
     }

@@ -12,7 +12,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(nullable = false, length = 128)
     private LocalDate created_at;
@@ -44,11 +44,11 @@ public class User {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Comment> comments;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
