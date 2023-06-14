@@ -129,7 +129,7 @@ public class PlantsCall {
             String sowing_method = openFarm_attributes.get("sowing_method") == null ? "N/A" : (String) openFarm_attributes.get("sowing_method");
             long spread = openFarm_attributes.get("spread") == null ? 0 : (long) openFarm_attributes.get("spread");
             String spread_string = Long.toString(spread) == null ? "N/A" : (String) Long.toString(spread);
-            long row_spacing = openFarm_attributes.get("row_spacing")== null ? 0 : (long) openFarm_attributes.get("row_spacing");
+            long row_spacing = openFarm_attributes.get("row_spacing") == null ? 0 : (long) openFarm_attributes.get("row_spacing");
             String row_spacing_string = Long.toString(row_spacing) == null ? "N/A" : (String) Long.toString(row_spacing);
             long height = openFarm_attributes.get("height") == null ? 0 : (long) openFarm_attributes.get("height");
             String height_string = Long.toString(height) == null ? "N/A" : (String) Long.toString(height);
@@ -145,7 +145,7 @@ public class PlantsCall {
             return plant;
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return plant;
         }
     }
 
