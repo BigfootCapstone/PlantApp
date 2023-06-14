@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import static com.codeup.plantapp.services.WeatherCall.getWeather;
 import static com.codeup.plantapp.util.CareTips.checkForOutdoorPlants;
@@ -58,10 +59,12 @@ public class UserController {
         usersDao.save(user);
         return "redirect:/users/" + user.getId();
     }
+
     @GetMapping("/login")
     public String viewLoginPage() {
         return "login";
     }
+
     @PostMapping("/login")
     public String loginSessionSetter(Model model, HttpSession session){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -81,7 +84,6 @@ public class UserController {
     public String showProfile(Model model) throws Exception{
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = user.getId();
-
         User userFromDb = usersDao.findUserById(userId);
         model.addAttribute("user", userFromDb);
 
@@ -116,33 +118,33 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String getUserProfile(@PathVariable Long id, Model model) {
+    public String getUserProfile(@PathVariable("id") Long id, Model model) {
         User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
         return "userProfile";
     }
 
-    @GetMapping("/{id}/edit")
-    public String editUserProfileForm(@PathVariable("id") String id, Model model) {
-        User user = usersDao.findById(1L)
+    @GetMapping("/edit/{id}")
+    public String editUserProfileForm(@PathVariable("id") Long id, Model model) {
+        User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
         return "editUserForm";
     }
 
-    @PostMapping("/{id}/edit")
-    public String updateUserProfile(@PathVariable("id") String id, @ModelAttribute("user") User user) {
-        User updatedUser = usersDao.findUserById(user.getId());
-        if(updatedUser != null) {
-            updatedUser.setUsername(user.getUsername());
-            updatedUser.setFirst_name(user.getFirst_name());
-            updatedUser.setLast_name(user.getLast_name());
-            updatedUser.setCity(user.getCity());
-            updatedUser.setEmail(user.getEmail());
-            usersDao.save(updatedUser);
-        }
-        return "redirect:/users/" + id;
+    @PostMapping("/edit/{id}")
+    public String updateUserProfile(@PathVariable("id") Long id, @ModelAttribute User user) {
+        User updatedUser = usersDao.findUserById(1L);
+        updatedUser.setUsername(updatedUser.getUsername());
+        updatedUser.setFirst_name(user.getFirst_name());
+        updatedUser.setLast_name(user.getLast_name());
+        updatedUser.setCity(user.getCity());
+        updatedUser.setEmail(user.getEmail());
+        user.setId(id);
+        usersDao.save(updatedUser); // save the updated user object
+        System.out.println("Saved updated user: " + updatedUser);
+        return "redirect:/users/" + user.getId();
     }
 
     @PostMapping("/{id}/delete")
