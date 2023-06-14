@@ -33,7 +33,7 @@
             </div>
             <div class="panel-body">
               <div class="form-group">
-                <label class="d-flex col control-label quote">Username <span th:text="${user.username}"></span> </label>
+                <label class="d-flex col control-label quote">Username <span th:text="${user.getUsername()}"></span> </label>
                 <div class="col">
                   <input type="text" class="form-control" th:field="*{username}">
                 </div>

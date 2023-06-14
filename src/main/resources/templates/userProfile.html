@@ -4,13 +4,14 @@
     <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
 
 <body>
+<!--User Info-->
     <div>
-        <h1 th:text="${user.username} + '\'s Profile'"></h1>
-        <p th:text="'Date Created: ' + ${user.created_at}"></p>
-        <p th:text="'First Name: ' + ${user.first_name}"></p>
-        <p th:text="'Last Name: ' + ${user.last_name}"></p>
-        <p th:text="'City: ' + ${user.city}"></p>
-        <p th:text="'Email: ' + ${user.email}"></p>
+        <h1 th:text="${user.getUsername()} + '\'s Profile'"></h1>
+        <p th:text="'Date Created: ' + ${user.getCreated_at()}"></p>
+        <p th:text="'First Name: ' + ${user.getFirst_name()}"></p>
+        <p th:text="'Last Name: ' + ${user.getLast_name()}"></p>
+        <p th:text="'City: ' + ${user.getCity()}"></p>
+        <p th:text="'Email: ' + ${user.getEmail()}"></p>
     </div>
     <div>
         <a th:href="@{/users/{id}/edit}">

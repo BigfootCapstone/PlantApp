@@ -125,13 +125,15 @@ public class UserController {
 
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable("id") String id, @ModelAttribute("user") User user) {
-        User updatedUser = usersDao.findUserById(1L);
-        updatedUser.setUsername(user.getUsername());
-        updatedUser.setFirst_name(user.getFirst_name());
-        updatedUser.setLast_name(user.getLast_name());
-        updatedUser.setCity(user.getCity());
-        updatedUser.setEmail(user.getEmail());
-        usersDao.save(updatedUser);
+        User updatedUser = usersDao.findUserById(user.getId());
+        if(updatedUser != null) {
+            updatedUser.setUsername(user.getUsername());
+            updatedUser.setFirst_name(user.getFirst_name());
+            updatedUser.setLast_name(user.getLast_name());
+            updatedUser.setCity(user.getCity());
+            updatedUser.setEmail(user.getEmail());
+            usersDao.save(updatedUser);
+        }
         return "redirect:/users/" + id;
     }
 
