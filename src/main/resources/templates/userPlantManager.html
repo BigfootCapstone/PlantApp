@@ -67,10 +67,15 @@
             <div class="row">
                 <div id="comments-container" class="container" th:if="${userGardenPlant.plantLogs.size()>0}">
                 <div id="comments-feed" class="column justify-top gap-15">
-                    <div th:each="plantLog: ${userGardenPlant.plantLogs}">
+                    <div th:each="plantLog: ${usersPlantLogs}">
                         <div>
                             <p th:text="${plantLog.title}"></p>
                             <p th:text="${plantLog.content}"></p>
+                            <div class="row">
+                                <a th:href="@{/plants/comment/delete/{plant}.{id}(id=${plantLog.id}, plant=${userGardenPlant.id})}">Delete</a>
+
+                                <a th:href="@{/plants/comment/edit/{plant}.{id}(id=${plantLog.id}, plant=${userGardenPlant.id})}">Edit</a>
+                            </div>
                         </div>
                     </div>
                 </div>

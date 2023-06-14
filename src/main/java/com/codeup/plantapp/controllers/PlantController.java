@@ -24,6 +24,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/plants")
@@ -259,7 +260,6 @@ public class PlantController {
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
 
-
     @GetMapping("/garden/{id}")
     public String viewPlantManager(
             @PathVariable("id") long id,
@@ -360,9 +360,11 @@ public class PlantController {
 
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
         Plant userPlant = userGardenPlant.getPlant();
+        List<PlantLog> usersPlantLogs = plantLogsDao.findPlantLogByGardenPlant(userGardenPlant);
 
         model.addAttribute("userGardenPlant", userGardenPlant);
         model.addAttribute("userPlant", userPlant);
+        model.addAttribute("usersPlantLogs", usersPlantLogs);
 
         return "userPlantManager";
     }
@@ -382,8 +384,41 @@ public class PlantController {
 
         redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");
 
-        return "redirect:/users/profile";
+        return "redirect:/plants/garden/{id}";
     }
+
+    @GetMapping("/comment/delete/{plant}.{id}")
+    public String deletePlantLog(
+            @PathVariable long id,
+            @PathVariable long plant ){
+
+        plantLogsDao.deleteById(id);
+
+        return "redirect:/plants/garden/{plant}";
+    }
+
+    @PostMapping("/comment/edit/{plant.{id}")
+    public String updatePlantLog(
+            RedirectAttributes redirectAttributes,
+            @PathVariable long id,
+            @PathVariable long plant,
+            @RequestParam(name="title") String title,
+            @RequestParam(name="content") String content ){
+        Date date = new Date();
+
+        PlantLog userNewPlantLog =  plantLogsDao.findPlantLogById(id);
+        userNewPlantLog.setTitle(title);
+        userNewPlantLog.setContent(content);
+        userNewPlantLog.setCreated_at(date);
+
+        plantLogsDao.save(userNewPlantLog);
+
+        redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");
+
+        return "redirect:/plants/garden/{plant}";
+    }
+
+
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
