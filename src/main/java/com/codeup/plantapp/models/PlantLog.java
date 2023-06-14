@@ -47,6 +47,12 @@ public class PlantLog {
         this.created_at = created_at;
     }
 
-    public PlantLog() {
+    public PlantLog() {}
+
+    public PlantLog(String title, String content, Date created_at, GardenPlant gardenPlant) {
+        this.title = title;
+        this.content = content;
+        this.created_at = created_at;
+        this.gardenPlant = gardenPlant;
     }
 }

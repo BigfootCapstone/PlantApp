@@ -56,7 +56,7 @@ public class UserController {
         user.setCreated_at(LocalDate.now());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
-        return "redirect:/users/" + user.getId();
+        return "redirect:/users/login";
 //        usersDao.save(user);
 //        return "redirect:/userProfile";
     }
@@ -68,7 +68,7 @@ public class UserController {
     public String loginSessionSetter(Model model, HttpSession session){
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         session.setAttribute("user", user);
-        return "redirect: /users/profile";
+        return "redirect:/users/profile";
     }
 //    @GetMapping("/logout")
 //    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
