@@ -830,3 +830,10 @@ div .delete-profile, .pe-7s-delete-user{
   max-height: 400px;
 }
 /*# sourceMappingURL=style.css.map */
+.signup{
+  display: flex;
+  width:250px;
+  height:45px;
+  justify-content: center;
+  align-items: center;
+}
