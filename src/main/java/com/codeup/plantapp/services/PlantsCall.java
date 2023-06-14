@@ -125,14 +125,14 @@ public class PlantsCall {
             JSONObject openFarm_attributes = (JSONObject) openFarm.get("attributes");
             String openFarm_name = (String) openFarm_attributes.get("name");
             String description = (String) openFarm_attributes.get("description");
-            String sun_requirements = (String) openFarm_attributes.get("sun_requirements");
-            String sowing_method = (String) openFarm_attributes.get("sowing_method");
-            long spread = (long) openFarm_attributes.get("spread");
-            String spread_string = Long.toString(spread);
-            long row_spacing = (long) openFarm_attributes.get("row_spacing");
-            String row_spacing_string = Long.toString(row_spacing);
-            long height = (long) openFarm_attributes.get("height");
-            String height_string = Long.toString(height);
+            String sun_requirements = openFarm_attributes.get("sun_requirements") == null ? "N/A" : (String) openFarm_attributes.get("sun_requirements");
+            String sowing_method = openFarm_attributes.get("sowing_method") == null ? "N/A" : (String) openFarm_attributes.get("sowing_method");
+            long spread = openFarm_attributes.get("spread") == null ? 0 : (long) openFarm_attributes.get("spread");
+            String spread_string = Long.toString(spread) == null ? "N/A" : (String) Long.toString(spread);
+            long row_spacing = openFarm_attributes.get("row_spacing")== null ? 0 : (long) openFarm_attributes.get("row_spacing");
+            String row_spacing_string = Long.toString(row_spacing) == null ? "N/A" : (String) Long.toString(row_spacing);
+            long height = openFarm_attributes.get("height") == null ? 0 : (long) openFarm_attributes.get("height");
+            String height_string = Long.toString(height) == null ? "N/A" : (String) Long.toString(height);
 
             plant.setOpenFarm_name(openFarm_name);
             plant.setDescription(description);

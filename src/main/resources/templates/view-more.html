@@ -31,9 +31,24 @@
         <p th:text="${plant.minimum_temperature}"></p>
         <p><strong>Maximum Temperature:</strong></p>
         <p th:text="${plant.maximum_temperature}"></p>
+        <p><strong>Minimum PH:</strong></p>
+        <p th:text="${plant.ph_minimum}"></p>
+        <p><strong>Maximum PH:</strong></p>
+        <p th:text="${plant.ph_maximum}"></p>
+        <p><strong>Description</strong></p>
+        <p th:text="${plant.description}"></p>
+        <p><strong>Sun_requirements</strong></p>
+        <p th:text="${plant.sun_requirements}"></p>
+        <p><strong>Sowing_method</strong></p>
+        <p th:text="${plant.sowing_method}"></p>
+        <p><strong>Spread</strong></p>
+        <p th:text="${plant.spread}"></p>
+        <p><strong>Row_spacing</strong></p>
+        <p th:text="${plant.row_spacing}"></p>
       </div>
 
       <div class="row">
+          <h3>ADD to your Garden</h3>
         <form method="post" th:action="@{/plants/{id}(id=${plant.id})}">
 <!--          get trefle-->
           <input type="text" th:text="${plant.common_name}" name="name">

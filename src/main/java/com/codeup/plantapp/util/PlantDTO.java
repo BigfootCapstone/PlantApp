@@ -149,6 +149,20 @@ public class PlantDTO {
         this.height = height;
     }
 
+    public String getPh_maximum() {
+        return ph_maximum;
+    }
+    public void setPh_maximum(String ph_maximum) {
+        this.ph_maximum = ph_maximum;
+    }
+
+    public String getPh_minimum() {
+        return ph_minimum;
+    }
+    public void setPh_minimum(String ph_minimum) {
+        this.ph_minimum = ph_minimum;
+    }
+
     public PlantDTO() {
     }
 //Trefle Constructor
