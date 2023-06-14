@@ -59,7 +59,7 @@
         <h3>Garden Preview</h3>
         <div class="column" th:each="plant : ${userPlants}">
             <p><span  th:text="${plant.plant.id}"></span></p>
-            <p><span th:text="${plant.plant.name}"></span></p>
+            <a th:href="@{/plants/garden/{id}(id=${plant.id})}"><span th:text="${plant.plant.name}"></span></a>
             <p><span  th:text="${plant.sun_amount}"></span></p>
             <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
             <p><span  th:text="${plant.getSun_tip}"></span></p>
@@ -68,7 +68,7 @@
             <div class="row">
                 <a th:href="@{/plants/{id}/delete(id=${plant.id})}">Delete</a>
 
-                <a th:href="@{/plants/plantEdit/{id}(id=${plant.id})}">Edit</a>
+                <a th:href="@{/plants/garden/{id}(id=${plant.id})}">Edit</a>
             </div>
 
         </div>

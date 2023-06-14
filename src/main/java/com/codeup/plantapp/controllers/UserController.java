@@ -56,7 +56,7 @@ public class UserController {
         user.setCreated_at(LocalDate.now());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
-        return "redirect:/users/" + user.getId();
+        return "redirect:/users/login";
 //        usersDao.save(user);
 //        return "redirect:/userProfile";
     }
