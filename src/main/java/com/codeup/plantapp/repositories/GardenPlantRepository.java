@@ -12,4 +12,5 @@ public interface GardenPlantRepository extends JpaRepository<GardenPlant, Long> 
     GardenPlant findGardenPlantsById(long id);
 
     List<GardenPlant> findGardenPlantByUser(User user);
+
 }
