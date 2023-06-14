@@ -392,7 +392,7 @@ input#search_submit[type="submit"]:hover {
   text-align: center;
   border-radius: 50%;
   display: inline-block;
-  color: #red;
+  color: red;
 }
 
 
