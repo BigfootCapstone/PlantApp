@@ -30,6 +30,11 @@
                 <li class="nav-item">
                     <a th:href="@{/#contact}" class="nav-link">Contact</a>
                 </li>
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/users/{id}/" th:method="post">
+                        <button th:method="post" class="login-nav nav-link active" >Logout</button>
+                    </form>
+                </li>
                 <li class="nav-item" sec:authorize="!isAuthenticated()">
                     <form th:action="@{/users/login}" th:method="post">
                         <button th:method="post" class="login-nav nav-link active" >Login</button>

@@ -2,21 +2,28 @@
 01.General
 02.Helper
 03.Navbar
-04.Home
-05.About Us
-06.Reviews
-07.Contact
-08.footer
-09.Create User
-10.Responsive
+04.Search On Nav
+05.Home
+06.About Us
+07.Reviews
+08.Contact
+09.footer
+10.Create User
+11.Carousel
+12.Login
+13.Edit Profile
+  .Responsive
 ********************************/
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Karla:400,700");
 @import url(//db.onlinewebfonts.com/c/7218a2da5a03f622ca18085806382043?family=Pe-icon-7-stroke);
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
+
+
 /*******************
     1.General
 *******************/
+
 body {
   font-family: "Noto Sans", sans-serif;
   font-size: 14px;
@@ -75,18 +82,17 @@ p {
   font-size: 15px;
 }
 
-.row > * {
-  /*position: relative;*/
-}
 
 html {
   scroll-padding-top: 57px;
   /* height of sticky header */
 }
 
+
 /*******************
     2.Helper
 *******************/
+
 .section {
   position: relative;
   padding-top: 80px;
@@ -147,7 +153,7 @@ a.btn-sign-text{
 }
 
 .quote{
-color: #FFCBA5
+  color: #FFCBA5
 }
 
 .sign-up{
@@ -203,6 +209,7 @@ color: #FFCBA5
 .navbar-nav {
 
 }
+
 .logo-text {
   display: inline-block;
   color: white;
@@ -271,10 +278,11 @@ button.login-nav{
 .nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link:hover, .nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link.active, .nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link:active {
   color: #FFCBA5;
 }
+
+
 /*******************
   4.Search on Nav
 *******************/
-
 
 li#wrap {
   margin: -60px 75px;
@@ -345,8 +353,9 @@ input#search_submit[type="submit"]:hover {
 
 
 /*******************
-    4.Home
+    5.Home
 *******************/
+
 .bg-home {
   position: relative;
   padding: 200px 0px 240px;
@@ -383,24 +392,15 @@ input#search_submit[type="submit"]:hover {
   text-align: center;
   border-radius: 50%;
   display: inline-block;
-  color: #672fed;
-
+  color: #red;
 }
 
-.how-it-work {
-  margin-top: 80px;
-  position: relative;
-  top: 30px;
-}
-
-.tab-content {
-  border: none;
-}
 
 
 /*******************
-    5.About Us
+    6.About Us
 *******************/
+
 .about-box {
   background-color: rgb(118, 156, 105);
   border-radius: 10px;
@@ -417,13 +417,15 @@ input#search_submit[type="submit"]:hover {
 
 
 /*******************
-    6.Reviews
+    7.Reviews
 *******************/
+
 .testers-box {
   position: relative;
-  box-shadow: 0 10px 35px 0 rgba(154, 161, 171, 0.1);
+  box-shadow: 0 7px 15px 0 rgb(42, 181, 154);
   border-radius: 7px;
 }
+
 
 .testers-box .testers-img img {
   max-width: 64px;
@@ -436,15 +438,11 @@ input#search_submit[type="submit"]:hover {
   color: #f4f4f4;
 }
 
-.review-images img {
-  margin: 10px auto;
-  opacity: 0.7;
-}
-
 
 /*******************
-    7.Contact
+    8.Contact
 ********************/
+
 .custom-form .form-group {
   margin-bottom: 1.5rem;
 }
@@ -474,13 +472,6 @@ input#search_submit[type="submit"]:hover {
   color: #ff5d48;
 }
 
-#ajaxsuccess {
-  font-size: 16px;
-  width: 100%;
-  display: none;
-  clear: both;
-  margin: 8px 0px;
-}
 
 .error_message {
   padding: 10px;
@@ -493,24 +484,11 @@ input#search_submit[type="submit"]:hover {
   font-size: 14px;
 }
 
-.contact-loader {
-  display: none;
-}
-
-#success_page {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-#success_page h3 {
-  color: #10c469;
-  font-size: 22px;
-}
-
 
 /*******************
-    8.footer
+    9.footer
 ********************/
+
 .footer {
   padding: 40px 0px 20px 0px;
   background-color: #101d1b;
@@ -528,9 +506,6 @@ input#search_submit[type="submit"]:hover {
   color: #ffffff;
 }
 
-.footer .footer-border {
-  border-color: rgba(255, 255, 255, 0.07);
-}
 
 .footer .social-links li a {
   display: inline-block;
@@ -551,14 +526,121 @@ input#search_submit[type="submit"]:hover {
 
 
 /******************
-    9.Create User
+   10.Create User
 *******************/
+
 .container.create{
   margin-top: 150px;
 }
+
+
 /******************
-    10.Responsive
+    11.Carousel
 *******************/
+
+
+
+
+/******************
+   12.Login Page
+*******************/
+
+.login-form{
+  max-width: 400px;
+  max-height: 400px;
+}
+
+
+/******************
+  13.Edit Profile
+*******************/
+
+.panel {
+  box-shadow: none;
+}
+.panel-heading {
+  border-bottom: 0;
+}
+.panel-title {
+  font-size: 17px;
+}
+.panel-title > small {
+  font-size: .75em;
+  color: #999999;
+}
+.panel-body *:first-child {
+  margin-top: 0;
+}
+.panel-footer {
+  border-top: 0;
+}
+
+.form-horizontal, .form-group {
+  max-width: 500px;
+}
+@media (min-width: 768px) {
+  .form-horizontal .control-label {
+    margin-bottom: 0;
+    padding-top: 7px;
+  }
+}
+
+
+.profile-avatar {
+  width: 300px;
+  position: relative;
+  border: 4px solid #f3f3f3;
+  border-radius: 999px;
+}
+
+input::file-selector-button {
+  font-weight: bold;
+  padding: 0.5em;
+  border-radius: 7px;
+  color: #ffffff !important;
+  background-color: #f28153;
+  border: 1px solid #F28153;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #F9C0A9;
+  transition: 1s;
+}
+
+input[type='file'] {
+  color: rgb(255, 203, 165);
+
+}
+
+div .delete-profile, .pe-7s-delete-user{
+  color: #F28153;
+  height: 500px;
+  width: 500px;
+}
+
+.row .subtitle{
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*KEEP THIS LAST ON HERE PLEASE*/
+/******************
+    .Responsive
+*******************/
+
 @media (min-width: 200px) and (max-width: 1199px) {
   .container-fluid {
     max-width: 95%;
@@ -578,8 +660,6 @@ input#search_submit[type="submit"]:hover {
 }
 
 
-element.style {
-}
 .navbar-custom {
   padding: 20px 0px;
   width: 100%;
@@ -588,6 +668,7 @@ element.style {
   margin-bottom: 0px;
   transition: all 0.5s ease-in-out;
 }
+
 .navbar-custom {
   padding: 20px 0px;
   width: 100%;
@@ -596,6 +677,7 @@ element.style {
   margin-bottom: 0px;
   transition: all 0.5s ease-in-out;
 }
+
 .fixed-top {
   position: fixed;
   top: 0;
@@ -603,14 +685,16 @@ element.style {
   left: 0;
   z-index: 1030;
 }
+
 @media (min-width: 992px) {
 
   .column .search {
-  justify-content: end;
+    justify-content: end;
   }
 }
 
-  @media (max-width: 991px) {
+@media (max-width: 991px) {
+
   .features {
     bottom: 74px;
   }
@@ -677,315 +761,4 @@ element.style {
   }
 }
 
-/*# sourceMappingURL=style.css.map */
-
-/******************
-    Edit Profile
-*******************/
-
-.panel {
-  box-shadow: none;
-}
-.panel-heading {
-  border-bottom: 0;
-}
-.panel-title {
-  font-size: 17px;
-}
-.panel-title > small {
-  font-size: .75em;
-  color: #999999;
-}
-.panel-body *:first-child {
-  margin-top: 0;
-}
-.panel-footer {
-  border-top: 0;
-}
-
-.form-horizontal, .form-group {
-max-width: 500px;
-}
-@media (min-width: 768px) {
-  .form-horizontal .control-label {
-    margin-bottom: 0;
-    padding-top: 7px;
-  }
-}
-
-
-.profile-avatar {
-  width: 300px;
-  position: relative;
-  border: 4px solid #f3f3f3;
-  border-radius: 999px;
-}
-
-input::file-selector-button {
-  font-weight: bold;
-  padding: 0.5em;
-  border-radius: 7px;
-  color: #ffffff !important;
-  background-color: #f28153;
-  border: 1px solid #F28153;
-}
-
-input[type="file"]::file-selector-button:hover {
-  background-color: #F9C0A9;
-  transition: 1s;
-}
-
-input[type='file'] {
-  color: rgb(255, 203, 165);
-
-}
-
-div .delete-profile, .pe-7s-delete-user{
-  color: #F28153;
-  height: 500px;
-  width: 500px;
-}
-
-.row .subtitle{
-}
-
-
-/*******************************
-          13.Carousel
- ********************************/
-
-.carousel {
-  position: relative;
-}
-
-.carousel.pointer-event {
-  touch-action: pan-y;
-}
-
-.carousel-inner {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  @include clearfix();
-}
-
-.carousel-item {
-  position: relative;
-  display: none;
-  float: left;
-  width: 100%;
-  margin-right: -100%;
-  backface-visibility: hidden;
-  @include transition($carousel-transition);
-}
-
-.carousel-item.active,
-.carousel-item-next,
-.carousel-item-prev {
-  display: block;
-}
-
-.carousel-item-next:not(.carousel-item-start),
-.active.carousel-item-end {
-  transform: translateX(100%);
-}
-
-.carousel-item-prev:not(.carousel-item-end),
-.active.carousel-item-start {
-  transform: translateX(-100%);
-}
-
-
-/*// Alternate transitions*/
-
-.carousel-fade {
-.carousel-item {
-  opacity: 0;
-  transition-property: opacity;
-  transform: none;
-}
-
-
-.carousel-item.active,
-.carousel-item-next.carousel-item-start,
-.carousel-item-prev.carousel-item-end {
-  z-index: 1;
-  opacity: 1;
-}
-
-.active.carousel-item-start,
-.active.carousel-item-end {
-  z-index: 0;
-  opacity: 0;
-  @include transition(opacity 0s $carousel-transition-duration);
-}
-}
-
-
-/*// Left/right controls for nav*/
-
-.carousel-control-prev,
-.carousel-control-next {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  z-index: 1;
-// Use flex for alignment (1-3)
-display: flex; // 1. allow flex styles
-align-items: center; // 2. vertically center contents
-justify-content: center; // 3. horizontally center contents
-width: $carousel-control-width;
-  padding: 0;
-  color: $carousel-control-color;
-  text-align: center;
-  background: none;
-  border: 0;
-  opacity: $carousel-control-opacity;
-  @include transition($carousel-control-transition);
-
-/*// Hover/focus state*/
-  &:hover,
-&:focus {
-   color: $carousel-control-color;
-   text-decoration: none;
-   outline: 0;
-   opacity: $carousel-control-hover-opacity;
- }
-}
-.carousel-control-prev {
-  left: 0;
-  background-image: if($enable-gradients, linear-gradient(90deg, rgba($black, .25), rgba($black, .001)), null);
-}
-.carousel-control-next {
-  right: 0;
-  background-image: if($enable-gradients, linear-gradient(270deg, rgba($black, .25), rgba($black, .001)), null);
-}
-
-/*// Icons for within*/
-   .carousel-control-prev-icon,
-   .carousel-control-next-icon {
-     display: inline-block;
-     width: $carousel-control-icon-width;
-     height: $carousel-control-icon-width;
-     background-repeat: no-repeat;
-     background-position: 50%;
-     background-size: 100% 100%;
-   }
-
-/* rtl:options: {
-  "autoRename": true,
-  "stringMap":[ {
-    "name"    : "prev-next",
-    "search"  : "prev",
-    "replace" : "next"
-  } ]
-} */
-.carousel-control-prev-icon {
-  background-image: escape-svg($carousel-control-prev-icon-bg);
-}
-.carousel-control-next-icon {
-  background-image: escape-svg($carousel-control-next-icon-bg);
-}
-
-/*// Optional indicator pips/controls*/
-/*//*/
-/*// Add a container (such as a list) with the following class and add an item (ideally a focusable control,*/
-/*// like a button) with data-bs-target for each slide your carousel holds.*/
-
-                  .carousel-indicators {
-                    position: absolute;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                    z-index: 2;
-                    display: flex;
-                    justify-content: center;
-                    padding: 0;
-                  // Use the .carousel-control's width as margin so we don't overlay those
-                  margin-right: $carousel-control-width;
-                    margin-bottom: 1rem;
-                    margin-left: $carousel-control-width;
-
-[data-bs-target] {
-  box-sizing: content-box;
-  flex: 0 1 auto;
-  width: $carousel-indicator-width;
-  height: $carousel-indicator-height;
-  padding: 0;
-  margin-right: $carousel-indicator-spacer;
-  margin-left: $carousel-indicator-spacer;
-  text-indent: -999px;
-  cursor: pointer;
-  background-color: $carousel-indicator-active-bg;
-  background-clip: padding-box;
-  border: 0;
-/*// Use transparent borders to increase the hit area by 10px on top and bottom.*/
-border-top: $carousel-indicator-hit-area-height solid transparent;
-  border-bottom: $carousel-indicator-hit-area-height solid transparent;
-  opacity: $carousel-indicator-opacity;
-  @include transition($carousel-indicator-transition);
-}
-
-.active {
-  opacity: $carousel-indicator-active-opacity;
-}
-}
-
-
-
-
-
-
-/*#myCarousel{*/
-/*  width:600px;*/
-/*}*/
-
-/*.carousel img{*/
-/*  max-width: 500px;*/
-/*  max-height: 500px;*/
-/*}*/
-/*.caption-animate .item.active .carousel-caption {*/
-/*  -webkit-animation-duration: 1s;*/
-/*  animation-duration: 1s;*/
-/*  -webkit-animation-fill-mode: both;*/
-/*  animation-fill-mode: both;*/
-/*}*/
-/*.caption-animate  .item.active .carousel-caption.infinite {*/
-/*  -webkit-animation-iteration-count: infinite;*/
-/*  animation-iteration-count: infinite;*/
-/*}*/
-
-/*.caption-animate  .item.active .carousel-caption.hinge {*/
-/*  -webkit-animation-duration: 2s;*/
-/*  animation-duration: 2s;*/
-/*}*/
-
-/*.caption-animate .item.active .carousel-caption.flipOutX,*/
-/*.caption-animate .item.active .carousel-caption.flipOutY,*/
-/*.caption-animate .item.active .carousel-caption.bounceIn,*/
-/*.caption-animate .item.active .carousel-caption.bounceOut {*/
-/*  -webkit-animation-duration: .75s;*/
-/*  animation-duration: .75s;*/
-/*}*/
-/*.caption-animate .item .carousel-caption.fadeIn,*/
-/*.caption-animate .item .carousel-caption.fadeInDown,*/
-/*.caption-animate .item .carousel-caption.fadeInDownBig,*/
-/*.caption-animate .item .carousel-caption.fadeInLeft,*/
-/*.caption-animate .item .carousel-caption.fadeInLeftBig,*/
-/*.caption-animate .item .carousel-caption.fadeInRight,*/
-/*.caption-animate .item .carousel-caption.fadeInRightBig,*/
-/*.caption-animate .item .carousel-caption.fadeInUp,*/
-/*.caption-animate .item .carousel-caption.fadeInUpBig{*/
-/*  opacity:0;*/
-/*}*/
-
-
-/******************
-    Login Page
-*******************/
-
-.login-form{
-  max-width: 400px;
-  max-height: 400px;
-}
 /*# sourceMappingURL=style.css.map */
