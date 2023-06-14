@@ -1,10 +1,8 @@
 package com.codeup.plantapp.controllers;
 
-import com.codeup.plantapp.models.GardenPlant;
-import com.codeup.plantapp.models.Plant;
-import com.codeup.plantapp.models.User;
-import com.codeup.plantapp.models.sun_amount;
+import com.codeup.plantapp.models.*;
 import com.codeup.plantapp.repositories.GardenPlantRepository;
+import com.codeup.plantapp.repositories.PlantLogRepository;
 import com.codeup.plantapp.repositories.PlantRepository;
 import com.codeup.plantapp.repositories.UserRepository;
 import com.codeup.plantapp.services.Keys;
@@ -34,6 +32,7 @@ public class PlantController {
     private final UserRepository usersDao;
     private final PlantRepository plantsDao;
     private final GardenPlantRepository gardenPlantsDao;
+    private final PlantLogRepository plantLogsDao;
 
 
     @Autowired
@@ -43,18 +42,24 @@ public class PlantController {
 
     private final RestTemplate restTemplate;
 
-    public PlantController(UserRepository usersDao, PlantRepository plantsDao, GardenPlantRepository gardenPlantsDao) {
+    public PlantController(UserRepository usersDao, PlantRepository plantsDao, GardenPlantRepository gardenPlantsDao,
+                           PlantLogRepository plantLogsDao) {
         this.restTemplate = new RestTemplate();
         this.usersDao = usersDao;
         this.plantsDao = plantsDao;
         this.gardenPlantsDao = gardenPlantsDao;
+        this.plantLogsDao = plantLogsDao;
     }
 
     @GetMapping("/add")
     public String addPlantForm(){
         return "addPlantForm";
     }
-
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><FIND PLANT IN API ><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
     @GetMapping("/search")
     public String showSearchForm() {
         return "searchForm";
@@ -71,7 +76,14 @@ public class PlantController {
 
         return "searchResults";
     }
-
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><VIEW PLANT DETAILS><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
     @GetMapping("/{id}")
     public String showPlantDetails(@PathVariable("id") String id, Model model) {
         String apiUrl = "https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle();
@@ -124,7 +136,6 @@ public class PlantController {
                     }
                 }
             }
-            System.out.println("min: " + minimum_temperature);
 
             String maximum_temperature = null;
             if (mainSpeciesObject.containsKey("growth")) {
@@ -141,10 +152,6 @@ public class PlantController {
                     }
                 }
             }
-            System.out.println("max: " + maximum_temperature);
-
-
-
 
             String growth_habit = null;
             if (mainSpeciesObject.containsKey("specifications")) {
@@ -153,15 +160,9 @@ public class PlantController {
                     growth_habit = (String) specificationsObject.get("growth_habit");
                 }
             }
-            System.out.println("Growth Habit: " + growth_habit);
 
             Boolean edible = mainSpeciesObject.get("edible") == null ? false : (Boolean) mainSpeciesObject.get(
                     "edible");
-            System.out.println("Edible: " + edible);
-//            print out entire JSON response
-            System.out.println(jsonResponse);
-
-
 
             PlantDTO plant = new PlantDTO(plant_id_string, common_name, family_name, genus_name, image_url, scientific_name,
                     growth_habit, edible.toString(), minimum_temperature,maximum_temperature );
@@ -174,16 +175,10 @@ public class PlantController {
             apiUrl += "?api_key=" + "keys.getOpenFarm()";
 
             RestTemplate openFarmRestTemplate = new RestTemplate();
-            ResponseEntity<String> openFarmResponse = openFarmRestTemplate.getForEntity(openFarmApiUrl, String.class);
-
-            System.out.println("OpenFarm API Response:");
-            System.out.println(openFarmResponse.getBody());
+//            ResponseEntity<String> openFarmResponse = openFarmRestTemplate.getForEntity(openFarmApiUrl, String.class);
 
             model.addAttribute("plant", plant);
             model.addAttribute("selectedPlantCommonName", selectedPlantCommonName);
-            System.out.println("selectedPlantCommonName: " + selectedPlantCommonName);
-
-
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -212,12 +207,14 @@ public class PlantController {
         gardenPlantsDao.save(newGardenPlant);
         return "searchForm";
     }
-
-    /*
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><USER DELETE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    */
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><USER DELETE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
     @GetMapping("/{id}/delete")
     public String deletePlant(@PathVariable long id) {
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
@@ -227,21 +224,21 @@ public class PlantController {
         return "redirect:/users/profile";
     }
 
-    /*
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    */
-    @GetMapping("/plantEdit/{id}")
-    public String editUserPlant(@PathVariable long id, Model model) {
-        GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
-        Plant userPlant = userGardenPlant.getPlant();
-
-        model.addAttribute("gardenPlant", userGardenPlant);
-        model.addAttribute("plant", userPlant);
-
-        return "editPlant";
-    }
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+//    @GetMapping("/plantEdit/{id}")
+//    public String editUserPlant(@PathVariable long id, Model model) {
+//        GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
+//        Plant userPlant = userGardenPlant.getPlant();
+//
+//        model.addAttribute("gardenPlant", userGardenPlant);
+//        model.addAttribute("plant", userPlant);
+//
+//        return "editPlant";
+//    }
 
     @PostMapping("/plantEdit/{id}")
     public String updateUserPlant(
@@ -264,6 +261,136 @@ public class PlantController {
     }
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<ADD A PLANT LOG >><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+
+
+    @GetMapping("/garden/{id}")
+    public String viewPlantManager(
+            @PathVariable("id") long id,
+            Model model) {
+        String apiUrl = "https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle();
+
+        try {
+            URL url = new URL(apiUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+// Parse JSON response
+            JSONParser parser = new JSONParser();
+            JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
+
+            JSONObject plantObject = (JSONObject) jsonResponse.get("data");
+            long plant_id = (long) plantObject.get("id");
+            String plant_id_string = Long.toString(plant_id);
+            String common_name = (String) plantObject.get("common_name");
+            String scientific_name = (String) plantObject.get("scientific_name");
+            JSONObject family = (JSONObject) plantObject.get("family");
+            String family_name = (String) family.get("name");
+            JSONObject genus = (JSONObject) plantObject.get("genus");
+            String genus_name = (String) genus.get("name");
+            String image_url = (String) plantObject.get("image_url");
+
+            JSONObject mainSpeciesObject = (JSONObject) plantObject.get("main_species");
+
+            String minimum_temperature = null;
+            if (mainSpeciesObject.containsKey("growth")) {
+                JSONObject growthObject = (JSONObject) mainSpeciesObject.get("growth");
+                if (growthObject.containsKey("minimum_temperature")) {
+                    JSONObject temperatureObject = (JSONObject) growthObject.get("minimum_temperature");
+                    Object degCObject = temperatureObject.get("deg_f");
+                    if (degCObject != null) {
+                        if (degCObject instanceof Long) {
+                            minimum_temperature = Long.toString((Long) degCObject);
+                        } else if (degCObject instanceof String) {
+                            minimum_temperature = (String) degCObject;
+                        }
+                    }
+                }
+            }
+
+            String maximum_temperature = null;
+            if (mainSpeciesObject.containsKey("growth")) {
+                JSONObject growthObject = (JSONObject) mainSpeciesObject.get("growth");
+                if (growthObject.containsKey("maximum_temperature")) {
+                    JSONObject temperatureObject = (JSONObject) growthObject.get("maximum_temperature");
+                    Object degCObject = temperatureObject.get("deg_f");
+                    if (degCObject != null) {
+                        if (degCObject instanceof Long) {
+                            maximum_temperature = Long.toString((Long) degCObject);
+                        } else if (degCObject instanceof String) {
+                            maximum_temperature = (String) degCObject;
+                        }
+                    }
+                }
+            }
+
+            String growth_habit = null;
+            if (mainSpeciesObject.containsKey("specifications")) {
+                JSONObject specificationsObject = (JSONObject) mainSpeciesObject.get("specifications");
+                if (specificationsObject.containsKey("growth_habit")) {
+                    growth_habit = (String) specificationsObject.get("growth_habit");
+                }
+            }
+
+            Boolean edible = mainSpeciesObject.get("edible") == null ? false : (Boolean) mainSpeciesObject.get("edible");
+
+            PlantDTO plant = new PlantDTO(plant_id_string, common_name, family_name, genus_name, image_url, scientific_name,
+                    growth_habit, edible.toString(), minimum_temperature,maximum_temperature );
+
+            String selectedPlantCommonName = plant.getCommon_name() == null ? plant.getScientific_name() : plant.getCommon_name();
+
+            String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
+
+            String openFarmApiUrl = "https://openfarm.cc/api/v1/crops/" + plant_id_string;
+            apiUrl += "?api_key=" + "keys.getOpenFarm()";
+
+            RestTemplate openFarmRestTemplate = new RestTemplate();;
+
+            model.addAttribute("plant", plant);
+            model.addAttribute("selectedPlantCommonName", selectedPlantCommonName);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
+        Plant userPlant = userGardenPlant.getPlant();
+
+        model.addAttribute("userGardenPlant", userGardenPlant);
+        model.addAttribute("userPlant", userPlant);
+
+        return "userPlantManager";
+    }
+
+    @PostMapping("/garden/comment/{id}")
+    public String savePlantLog(
+            @PathVariable("id") long id,
+            @RequestParam(name="title") String title,
+            @RequestParam(name="content") String content) {
+
+        Date date = new Date();
+        GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
+
+        PlantLog plantLog = new PlantLog(title, content, date, userGardenPlant);
+        plantLogsDao.save(plantLog);
+        return "redirect:/garden/{id}";
+    }
+
+/*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
 }
