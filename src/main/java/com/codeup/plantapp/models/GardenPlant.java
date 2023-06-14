@@ -104,6 +104,13 @@ public class GardenPlant {
         this.is_outside = is_outside;
     }
 
+    public List<PlantLog> getPlantLogs() {
+        return plantLogs;
+    }
+    public void setPlantLogs(List<PlantLog> plantLogs) {
+        this.plantLogs = plantLogs;
+    }
+
     public GardenPlant() {}
     public GardenPlant(User user, Plant plant, com.codeup.plantapp.models.sun_amount sun_amount, Date last_watered, long water_interval, boolean is_outside) {
         this.user = user;

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -229,16 +230,6 @@ public class PlantController {
 |><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
-//    @GetMapping("/plantEdit/{id}")
-//    public String editUserPlant(@PathVariable long id, Model model) {
-//        GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
-//        Plant userPlant = userGardenPlant.getPlant();
-//
-//        model.addAttribute("gardenPlant", userGardenPlant);
-//        model.addAttribute("plant", userPlant);
-//
-//        return "editPlant";
-//    }
 
     @PostMapping("/plantEdit/{id}")
     public String updateUserPlant(
@@ -376,8 +367,9 @@ public class PlantController {
         return "userPlantManager";
     }
 
-    @PostMapping("/garden/comment/{id}")
+    @PostMapping("/comment/{id}")
     public String savePlantLog(
+            RedirectAttributes redirectAttributes,
             @PathVariable("id") long id,
             @RequestParam(name="title") String title,
             @RequestParam(name="content") String content) {
@@ -387,9 +379,11 @@ public class PlantController {
 
         PlantLog plantLog = new PlantLog(title, content, date, userGardenPlant);
         plantLogsDao.save(plantLog);
-        return "redirect:/garden/{id}";
-    }
 
+        redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");
+
+        return "redirect:/users/profile";
+    }
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */

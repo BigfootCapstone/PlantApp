@@ -87,6 +87,13 @@ public class UserController {
         User userFromDb = usersDao.findUserById(userId);
         model.addAttribute("user", userFromDb);
 
+        String successMessage = (String) model.asMap().get("successMessage");
+
+        // Pass the success message to the view if it exists
+        if (successMessage != null) {
+            model.addAttribute("successMessage", successMessage);
+        }
+
 //      Get Weather for User's City
         String city = userFromDb.getCity();
         String key = keys.getOpenWeather();
