@@ -397,26 +397,26 @@ public class PlantController {
         return "redirect:/plants/garden/{plant}";
     }
 
-    @PostMapping("/comment/edit/{plant.{id}")
-    public String updatePlantLog(
-            RedirectAttributes redirectAttributes,
-            @PathVariable long id,
-            @PathVariable long plant,
-            @RequestParam(name="title") String title,
-            @RequestParam(name="content") String content ){
-        Date date = new Date();
-
-        PlantLog userNewPlantLog =  plantLogsDao.findPlantLogById(id);
-        userNewPlantLog.setTitle(title);
-        userNewPlantLog.setContent(content);
-        userNewPlantLog.setCreated_at(date);
-
-        plantLogsDao.save(userNewPlantLog);
-
-        redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");
-
-        return "redirect:/plants/garden/{plant}";
-    }
+//    @PostMapping("/comment/edit/{plant.{id}")
+//    public String updatePlantLog(
+//            RedirectAttributes redirectAttributes,
+//            @PathVariable long id,
+//            @PathVariable long plant,
+//            @RequestParam(name="title") String title,
+//            @RequestParam(name="content") String content ){
+//        Date date = new Date();
+//
+//        PlantLog userNewPlantLog =  plantLogsDao.findPlantLogById(id);
+//        userNewPlantLog.setTitle(title);
+//        userNewPlantLog.setContent(content);
+//        userNewPlantLog.setCreated_at(date);
+//
+//        plantLogsDao.save(userNewPlantLog);
+//
+//        redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");
+//
+//        return "redirect:/plants/garden/{plant}";
+//    }
 
 
 /*
