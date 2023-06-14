@@ -1,25 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-
-    <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
 
 <body>
-<!--User Info-->
-    <div>
-        <h1 th:text="${user.getUsername()} + '\'s Profile'"></h1>
-        <p th:text="'Date Created: ' + ${user.getCreated_at()}"></p>
-        <p th:text="'First Name: ' + ${user.getFirst_name()}"></p>
-        <p th:text="'Last Name: ' + ${user.getLast_name()}"></p>
-        <p th:text="'City: ' + ${user.getCity()}"></p>
-        <p th:text="'Email: ' + ${user.getEmail()}"></p>
+<!--Navbar Start-->
+    <header th:replace="partials/navbar :: navbar"></header>
+<!-- Navbar End -->
+    <div class="d-flex container create justify-content-center align-content-center">
+        <div class="d-flex row flex-grow-1">
+
+        <h1  class="subtitle" th:text="${user.username} + '\'s Profile'"></h1>
+        <p class="quote" th:text="'Date Created: ' + ${user.created_at}"></p>
+        <p class="quote" th:text="'First Name: ' + ${user.first_name}"></p>
+        <p class="quote" th:text="'Last Name: ' + ${user.last_name}"></p>
+        <p class="quote" th:text="'City: ' + ${user.city}"></p>
+        <p class="quote" th:text="'Email: ' + ${user.email}"></p>
+        </div>
     </div>
     <div>
-        <a th:href="@{/users/{id}/edit}">
+        <a th:href="@{/users/{id}/edit(id=${id})}">
             <h3>Edit Your Profile</h3>
         </a>
     </div>
 
-<!--Weather Banner-->
+    <!--Weather Banner-->
     <div>
         <h3>Weather Banner</h3>
         <div th:if="${weather}">
@@ -33,7 +40,7 @@
         </div>
     </div>
 
-<!--Outdoor Plant Warning-->
+    <!--Outdoor Plant Warning-->
     <div th:if="${outdoorPlants}">
         <h3>Outdoor Plant Warning</h3>
         <div class="row justify-content-between">
@@ -47,23 +54,31 @@
         </div>
     </div>
 
-<!--Garden Preview-->
+    <!--Garden Preview-->
     <div>
         <h3>Garden Preview</h3>
         <div class="column" th:each="plant : ${userPlants}">
             <p><span  th:text="${plant.plant.id}"></span></p>
-            <p><span th:text="${plant.plant.name}"></span></p>
+            <a th:href="@{/plants/garden/{id}(id=${plant.id})}"><span th:text="${plant.plant.name}"></span></a>
             <p><span  th:text="${plant.sun_amount}"></span></p>
             <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
             <p><span  th:text="${plant.getSun_tip}"></span></p>
             <p><span  th:text="${plant.getWater_tip}"></span></p>
+<!--            button for delete path-->
+            <div class="row">
+                <a th:href="@{/plants/{id}/delete(id=${plant.id})}">Delete</a>
+
+                <a th:href="@{/plants/garden/{id}(id=${plant.id})}">Edit</a>
+            </div>
+
         </div>
     </div>
 
-<!--Plant Log Preview-->
+    <!--Plant Log Preview-->
     <div>
         <h3>Plant Log Preview</h3>
 
     </div>
+
 </body>
 </html>

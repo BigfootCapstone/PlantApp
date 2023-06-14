@@ -1,45 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
 <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
 
-
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="58" class="scrollspy-example">
-
 <!--Navbar Start-->
-<nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="nav-sticky">
-    <div class="container ps-3 pe-3">
-        <!-- LOGO -->
-        <a class="logo justify-items-center align-items-center gap" href="index.html">
-            <img src="/css/images/carrotguy(fknawesome).png" alt="" class="logo-dark" height="100" />
-            <h1 class="logo-text text-white">BotaniBuddy</h1>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="mdi mdi-menu"></i>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-
-            <ul class="navbar-nav" id="mySidenav">
-                <li class="nav-item">
-                    <a href="#home" class="nav-link active">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#reviews" class="nav-link">Reviews</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
-                <button type="button" class="btn login">
-                    <a class="login-text" th:href="@{/users/login}">Login</a>
-                </button>
-            </ul>
-        </div>
-    </div>
-</nav>
+<header th:replace="partials/navbar :: navbar"></header>
 <!-- Navbar End -->
-
 <!-- home start -->
 <section class="bg-home" id="home">
     <div class="home-center">
@@ -54,46 +22,24 @@
                             </p>
                             <div class="d-flex justify-content-center mt-5">
                                 <button class="btn-custom btn-sign-up justify-content-center align-items-center">
-                                    <a  class="btn-sign-text" th:href="@{/users/create}">SIGN UP!</a>
+                                    <a  class="btn-sign-text text-center signup" th:href="@{/users/create}">SIGN UP!</a>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <!-- start carousel -->
-                    <div class="container slider">
-                        <div class="row grow carouselHolder">
-                            <div class="slider-mask">
-                                <div class="slides">
-                                </div>
-                                <div class="controls car-con">
-
-                                    <div class="arrow">
-                                        <img class='svgLeft arrow-left' src="/css/images/icons/leftarrowtag.png" alt="left arrow">
-                                    </div>
-                                    <div class="col-lg-5 offset-lg-1 col-sm-6 image-holder">
-                                        <div class="home-img-div">
-                                            <img src="/css/images/PlantSlide1.png" alt="Plants make us happy" class=" home-img img-fluid">
-                                        </div>
-                                    </div>
-                                    <div class="arrow">
-                                        <img class='svgRight arrow-right' src="/css/images/icons/rightarrowtag.png" alt="right arrow">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- end carousel -->
+<!-- start carousel -->
+<div>
+    <img src="/css/images/PlantSlide1.png" alt="Plant Story">
+</div>
+<!-- end carousel -->
                 </div>
-                <!-- end row -->
-
+<!-- end row -->
             </div>
-            <!-- end container-fluid -->
+<!-- end container-fluid -->
         </div>
     </div>
 </section>
 <!-- home end -->
-
 <!-- About Us start -->
 <section class="section" id="about">
     <div class="container-fluid">
@@ -117,7 +63,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-l-6 col-sm-6">
                 <div class="about-box p-4 mt-4">
                     <div class="about-img float-start me-4">
@@ -130,6 +75,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row align-items-center justify-content-center">
             <div class="col-l-6 col-sm-6">
                 <div class="about-box p-4 mt-4">
@@ -142,7 +88,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-l-6 col-sm-6">
                 <div class="about-box p-4 mt-4">
                     <div class="about-img float-start me-4">
@@ -154,11 +99,10 @@
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- end row -->
+<!-- end row -->
     </div>
-    <!-- end container-fluid -->
+<!-- end container-fluid -->
 </section>
 <!-- About Us end -->
 
@@ -174,44 +118,40 @@
                 </div>
             </div>
         </div>
-        <!-- end row -->
+<!-- end row -->
         <div class="row">
             <div class="col-lg-4">
                 <div class="testers-box p-4 bg-white mt-4 text-center">
                     <p class="text-muted mb-4">" With BotaniBuddy I have been able to provide a level of care for my plants that I did not know was possible! No more parsing through tons of websites or books with conflicting tips, or feeling terrible because I lost a plant. BotaniBuddy's watering notifications, day-to-day journaling feature, and it's wonderful community are invaluable to me and I could not be happier! 5 stars! "</p>
                     <div class="testers-img mb-4">
-                        <img src="/css/images/testers/img-1.jpg" alt="" class="rounded-circle img-thumbnail">
+                        <img src="/css/images/testers/img-1.jpg" alt="Drake's Profile photo" class="rounded-circle img-thumbnail">
                     </div>
                     <p class="text-muted mb-1"> - Drake Jacquez</p>
                     <h5 class="font-18">ManDr@k3</h5>
-
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="testers-box p-4 bg-white mt-4 text-center">
                     <p class="text-muted mb-4">" My tomatoes kept dying and I could not figure out why! Using the advice from BotaniBuddy, I was able to recover a few of them and they even bore some fruit! "</p>
                     <div class="testers-img mb-4">
-                        <img src="/css/images/testers/img-2.png" alt="" class="rounded-circle img-thumbnail">
+                        <img src="/css/images/testers/img-2.png" alt="Brendan's Profile photo" class="rounded-circle img-thumbnail">
                     </div>
                     <p class="text-muted mb-1"> - Brendan Thomas</p>
                     <h5 class="font-18">BTomat!ll0</h5>
-
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="testers-box p-4 bg-white mt-4 text-center">
                     <p class="text-muted mb-4">" Thanks to BotaniBuddy, my garden has blossomed into a fruitful paradise! It's an absolute joy to watch my plants thrive and produce an abundance of fruits and vegetables. With helpful tips, reminders, and a supportive community, this app has transformed me into a green-thumbed gardener. I'm now sharing my bountiful harvest with grateful neighbors. Highly recommended! "</p>
                     <div class="testers-img mb-4">
-                        <img src="/css/images/testers/img-3.jpg" alt="" class="rounded-circle img-thumbnail">
+                        <img src="/css/images/testers/img-3.jpg" alt="Hazel's Profile photo" class="rounded-circle img-thumbnail">
                     </div>
                     <p class="text-muted mb-1"> - Hazel Gutierrez-Diaz</p>
                     <h5 class="font-18">W!tchyHaz3l</h5>
-
                 </div>
             </div>
         </div>
-        <!-- end row -->
-
+<!-- end row -->
         <div class="row mt-5 pt-5">
             <div class="col-lg-3 col-sm-6">
                 <div class="reviews-images">
@@ -234,8 +174,9 @@
                 </div>
             </div>
         </div>
+<!-- end row -->
     </div>
-    <!-- end container-fluid -->
+<!-- end container-fluid -->
 </section>
 <!-- reviews end -->
 
@@ -247,18 +188,16 @@
                 <div class="title text-center mb-5">
                     <h6 class="small-title">Contact</h6>
                     <h4 class="subtitle">Have any Questions ?</h4>
-                    <p class="quote">Ask us question or provide feedback.</p>
+                    <p class="quote">Ask us a question or provide feedback.</p>
                 </div>
             </div>
         </div>
-        <!-- end row -->
-
+<!-- end row -->
         <div class="row">
             <div class="col-lg-4">
                 <div class="get-in-touch">
                     <h5 class="subtitle">Get in touch</h5>
                     <p class="quote mb-5">Ways to contact us :</p>
-
                     <div class="mb-3">
                         <div class="get-touch-icon float-start me-3">
                             <h2><i class="pe-7s-mail text-white"></i></h2>
@@ -288,6 +227,7 @@
                     </div>
                 </div>
             </div>
+<!-- Start Contact Form -->
             <div class="col-lg-8">
                 <div class="custom-form">
                     <span id="error-msg"></span>
@@ -306,8 +246,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end row -->
-
+<!-- end row -->
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="mb-3">
@@ -316,8 +255,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end row -->
-
+<!-- end row -->
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="mb-3">
@@ -326,23 +264,21 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- end row -->
-
+<!-- end row -->
                         <div class="row">
                             <div class="col-lg-12 text-end">
                                 <input type="submit" id="submit" name="send" class="submitBnt btn btn-custom" value="Send Message" />
                             </div>
                         </div>
-                        <!-- end row -->
+<!-- end row -->
                     </form>
                 </div>
-                <!-- end custom-form -->
-
             </div>
+<!-- End Contact form -->
         </div>
-        <!-- end row -->
+<!-- end row -->
     </div>
-    <!-- end container-fluid -->
+<!-- end container-fluid -->
 </section>
 <!-- contact end -->
 

@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html  lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="partials/head :: head('Plant Search')"></head>
 
 
 <body>
 <h1>Plant Search</h1>
-<form action="#" th:action="@{/search}" method="post">
+<form action="#" th:action="@{/plants/search}" method="post">
   <input type="text" name="query" placeholder="Enter a plant name" required>
   <button type="submit">Search</button>
 </form>

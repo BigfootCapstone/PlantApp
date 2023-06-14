@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+     >
 <head th:insert="partials/head :: head('Create User')"></head>
 
 <body>
+
 <!--Needed:
 Date created_at, country, state, city,username, first_name, last_name, email, password-->
 
@@ -18,7 +21,7 @@ Date created_at, country, state, city,username, first_name, last_name, email, pa
                 <div class="custom-form">
 
         <!-- Create Form start -->
-                    <form method="post" th:action="@{/users/create}" th:object="${user}">
+                    <form  method="post" th:action="@{/users/create}" th:object="${user}">
                         <div class="col-lg-12">
                             <div class="mb-3">
                                 <label class="form-label" for="username">Username:</label>
