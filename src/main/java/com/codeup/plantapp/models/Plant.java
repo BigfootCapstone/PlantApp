@@ -13,6 +13,9 @@ public class Plant {
     @Column
     private String trefle_id;
 
+    @Column
+    private String openfarm_id;
+
     @Column(nullable = true, length = 100)
     private String name;
 
@@ -31,6 +34,13 @@ public class Plant {
     }
     public void setTrefle_id(String trefle_id) {
         this.trefle_id = trefle_id;
+    }
+
+    public String getOpenfarm_id() {
+        return openfarm_id;
+    }
+    public void setOpenfarm_id(String openfarm_id) {
+        this.openfarm_id = openfarm_id;
     }
 
     public String getName() {

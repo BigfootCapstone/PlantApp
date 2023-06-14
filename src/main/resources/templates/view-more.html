@@ -27,13 +27,23 @@
         <p><strong>Scientific Name:</strong> <span th:text="${plant.scientific_name}"></span></p>
         <p><strong>Growth Habit:</strong> <span th:text="${plant.growth_habit}"></span></p>
         <p><strong>Edible:</strong> <span th:text="${plant.edible}"></span></p>
-        <p><strong>Minimum Temperature:</strong></p>
-        <p th:text="${plant.minimum_temperature}"></p>
-          <p><strong>Maximum Temperature:</strong></p>
-          <p th:text="${plant.maximum_temperature}"></p>
+        <p th:if="${plant.minimum_temperature}"><strong>Minimum Temperature:</strong>  <span
+                th:text="${plant.minimum_temperature}"></span></p>
+        <p th:if="${plant.maximum_temperature}"><strong>Maximum Temperature:</strong>  <span
+                th:text="${plant.maximum_temperature}"></span></p>
+        <p th:if="${plant.ph_minimum}"><strong>Minimum PH:</strong>  <span th:text="${plant.ph_minimum}"></span></p>
+        <p th:if="${plant.ph_maximum}"><strong>Maximum PH:</strong>  <span th:text="${plant.ph_maximum}"></span></p>
+        <p th:if="${plant.description}"><strong>Description</strong>  <span th:text="${plant.description}"></span></p>
+        <p th:if="${plant.sun_requirements}"><strong>Sun_requirements</strong>  <span
+                th:text="${plant.sun_requirements}"></span></p>
+        <p th:if="${plant.sowing_method}"><strong>Sowing_method</strong>  <span
+                th:text="${plant.sowing_method}"></span></p>
+        <p th:if="${plant.spread}"><strong>Spread</strong>  <span th:text="${plant.spread}"></span></p>
+        <p th:if="${plant.row_spacing}"><strong>Row_spacing</strong>  <span th:text="${plant.row_spacing}"></span></p>
       </div>
 
       <div class="row">
+          <h3>ADD to your Garden</h3>
         <form method="post" th:action="@{/plants/{id}(id=${plant.id})}">
 <!--          get trefle-->
           <input type="text" th:text="${plant.common_name}" name="name">
