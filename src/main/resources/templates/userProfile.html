@@ -93,9 +93,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-2">
-                <input type="submit"  class="profile-edit-btn" name="btnAddMore" value="Edit Profile" th:href="@{/users/{id}/edit(id=${id})}">
-            </div>
+            <form sec:authorize="isAuthenticated()" class="col-md-2">
+                <input type="submit"  class="profile-edit-btn" name="btnAddMore" value="Edit Profile" th:action="@{/users/{id}/edit(id=${id})}">
+            </form>
         </div>
         <div class="row">
             <div class="col-md-4">

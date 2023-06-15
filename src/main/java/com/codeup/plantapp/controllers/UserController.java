@@ -134,9 +134,10 @@ public class UserController {
 
     @GetMapping("/{id}/edit")
     public String editUserProfileForm(@PathVariable Long id, Model model) {
-        User user = usersDao.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
-        model.addAttribute("user", user);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = user.getId();
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+        model.addAttribute("user", userId);
         return "editUserForm";
     }
 
