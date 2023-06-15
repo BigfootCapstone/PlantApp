@@ -44,6 +44,10 @@ public class User {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Comment> comments;
 
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    private List<Friend> friends;
+
+
     public long getId() {
         return id;
     }
@@ -126,6 +130,12 @@ public class User {
         this.comments = comments;
     }
 
+    public List<Friend> getFriends() {
+        return friends;
+    }
+    public void setFriends(List<Friend> friends) {
+        this.friends = friends;
+    }
 
     public User() {
     }

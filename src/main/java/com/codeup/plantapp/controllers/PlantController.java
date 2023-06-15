@@ -176,8 +176,9 @@ public class PlantController {
     public String viewPlantManager(
             @PathVariable("id") long id,
             Model model) throws MalformedURLException {
+        String treflePlantId = gardenPlantsDao.findGardenPlantsById(id).getPlant().getTrefle_id();
 
-        URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle());
+        URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + treflePlantId + "?token=" + keys.getTrefle());
         PlantDTO plant =  getTreflePlant(trefleApiUrl);
 
         String selectedPlantCommonName = plant.getCommon_name();
