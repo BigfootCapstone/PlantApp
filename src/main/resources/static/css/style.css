@@ -2,21 +2,28 @@
 01.General
 02.Helper
 03.Navbar
-04.Home
-05.About Us
-06.Reviews
-07.Contact
-08.footer
-09.Create User
-10.Responsive
+04.Search On Nav
+05.Home
+06.About Us
+07.Reviews
+08.Contact
+09.footer
+10.Create User
+11.Carousel
+12.Login
+13.Edit Profile
+  .Responsive
 ********************************/
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Karla:400,700");
 @import url(//db.onlinewebfonts.com/c/7218a2da5a03f622ca18085806382043?family=Pe-icon-7-stroke);
 @import url(https://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import url(https://raw.github.com/FortAwesome/Font-Awesome/master/docs/assets/css/font-awesome.min.css);
+
+
 /*******************
     1.General
 *******************/
+
 body {
   font-family: "Noto Sans", sans-serif;
   font-size: 14px;
@@ -75,18 +82,17 @@ p {
   font-size: 15px;
 }
 
-.row > * {
-  /*position: relative;*/
-}
 
 html {
   scroll-padding-top: 57px;
   /* height of sticky header */
 }
 
+
 /*******************
     2.Helper
 *******************/
+
 .section {
   position: relative;
   padding-top: 80px;
@@ -147,7 +153,7 @@ a.btn-sign-text{
 }
 
 .quote{
-color: #FFCBA5
+  color: #FFCBA5
 }
 
 .sign-up{
@@ -203,6 +209,7 @@ color: #FFCBA5
 .navbar-nav {
 
 }
+
 .logo-text {
   display: inline-block;
   color: white;
@@ -221,8 +228,10 @@ color: #FFCBA5
   line-height: 0px;
 }
 
-a.login-text{
-  color: #FFFFFF;
+button.login-nav{
+  background-color: transparent;
+  box-shadow: unset;
+  border: unset;
 }
 
 
@@ -269,10 +278,11 @@ a.login-text{
 .nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link:hover, .nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link.active, .nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link:active {
   color: #FFCBA5;
 }
+
+
 /*******************
   4.Search on Nav
 *******************/
-
 
 li#wrap {
   margin: -60px 75px;
@@ -343,11 +353,12 @@ input#search_submit[type="submit"]:hover {
 
 
 /*******************
-    4.Home
+    5.Home
 *******************/
+
 .bg-home {
   position: relative;
-  padding: 200px 0px 240px;
+  padding: 185px 0px 240px;
 }
 
 .row .sign-up {
@@ -375,30 +386,24 @@ input#search_submit[type="submit"]:hover {
 
 .home-title .play-icon-circle {
   background: #ffffff;
-  height: 36px;
-  width: 36px;
+  height: 80px;
+  width: 80px;
   line-height: 36px;
   text-align: center;
   border-radius: 50%;
   display: inline-block;
-  color: #672fed;
-
+  color: red;
 }
 
-.how-it-work {
-  margin-top: 80px;
-  position: relative;
-  top: 30px;
-}
-
-.tab-content {
-  border: none;
+.infographic{
+  max-height: 560px;
 }
 
 
 /*******************
-    5.About Us
+    6.About Us
 *******************/
+
 .about-box {
   background-color: rgb(118, 156, 105);
   border-radius: 10px;
@@ -415,13 +420,15 @@ input#search_submit[type="submit"]:hover {
 
 
 /*******************
-    6.Reviews
+    7.Reviews
 *******************/
+
 .testers-box {
   position: relative;
-  box-shadow: 0 10px 35px 0 rgba(154, 161, 171, 0.1);
+  box-shadow: 0 7px 15px 0 rgb(42, 181, 154);
   border-radius: 7px;
 }
+
 
 .testers-box .testers-img img {
   max-width: 64px;
@@ -434,15 +441,11 @@ input#search_submit[type="submit"]:hover {
   color: #f4f4f4;
 }
 
-.review-images img {
-  margin: 10px auto;
-  opacity: 0.7;
-}
-
 
 /*******************
-    7.Contact
+    8.Contact
 ********************/
+
 .custom-form .form-group {
   margin-bottom: 1.5rem;
 }
@@ -472,13 +475,6 @@ input#search_submit[type="submit"]:hover {
   color: #ff5d48;
 }
 
-#ajaxsuccess {
-  font-size: 16px;
-  width: 100%;
-  display: none;
-  clear: both;
-  margin: 8px 0px;
-}
 
 .error_message {
   padding: 10px;
@@ -491,24 +487,11 @@ input#search_submit[type="submit"]:hover {
   font-size: 14px;
 }
 
-.contact-loader {
-  display: none;
-}
-
-#success_page {
-  text-align: center;
-  margin-bottom: 50px;
-}
-
-#success_page h3 {
-  color: #10c469;
-  font-size: 22px;
-}
-
 
 /*******************
-    8.footer
+    9.footer
 ********************/
+
 .footer {
   padding: 40px 0px 20px 0px;
   background-color: #101d1b;
@@ -526,9 +509,6 @@ input#search_submit[type="submit"]:hover {
   color: #ffffff;
 }
 
-.footer .footer-border {
-  border-color: rgba(255, 255, 255, 0.07);
-}
 
 .footer .social-links li a {
   display: inline-block;
@@ -549,14 +529,222 @@ input#search_submit[type="submit"]:hover {
 
 
 /******************
-    9.Create User
+   10.Create User
 *******************/
+
 .container.create{
   margin-top: 150px;
 }
+
+
 /******************
-    10.Responsive
+    11.Carousel
 *******************/
+
+
+
+
+/******************
+   12.Login Page
+*******************/
+
+.login-form{
+  max-width: 400px;
+  max-height: 400px;
+}
+
+
+/******************
+  13.Edit Profile
+*******************/
+
+.panel {
+  box-shadow: none;
+}
+.panel-heading {
+  border-bottom: 0;
+}
+.panel-title {
+  font-size: 17px;
+}
+.panel-title > small {
+  font-size: .75em;
+  color: #999999;
+}
+.panel-body *:first-child {
+  margin-top: 0;
+}
+.panel-footer {
+  border-top: 0;
+}
+
+.form-horizontal, .form-group {
+  max-width: 500px;
+}
+@media (min-width: 768px) {
+  .form-horizontal .control-label {
+    margin-bottom: 0;
+    padding-top: 7px;
+  }
+}
+
+
+.profile-avatar {
+  width: 300px;
+  position: relative;
+  border: 4px solid #f3f3f3;
+  border-radius: 999px;
+}
+
+input::file-selector-button {
+  font-weight: bold;
+  padding: 0.5em;
+  border-radius: 7px;
+  color: #ffffff !important;
+  background-color: #f28153;
+  border: 1px solid #F28153;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #F9C0A9;
+  transition: 1s;
+}
+
+input[type='file'] {
+  color: rgb(255, 203, 165);
+
+}
+
+div .delete-profile, .pe-7s-delete-user{
+  color: #F28153;
+  height: 500px;
+  width: 500px;
+}
+
+.row .subtitle{
+}
+
+
+
+
+.emp-profile{
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+.profile-img{
+  text-align: center;
+}
+.profile-img img{
+  width: 70%;
+  height: 100%;
+}
+.profile-img .file {
+  position: relative;
+  overflow: hidden;
+  margin-top: -20%;
+  width: 70%;
+  border: none;
+  border-radius: 0;
+  font-size: 15px;
+  background: #212529b8;
+}
+.profile-img .file input {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+.profile-head h5{
+  color: #333;
+}
+.profile-head h6{
+  color: #0062cc;
+}
+.profile-edit-btn{
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
+}
+.proile-rating{
+  font-size: 12px;
+  color: #818182;
+  margin-top: 5%;
+}
+.proile-rating span{
+  color: #495057;
+  font-size: 15px;
+  font-weight: 600;
+}
+.profile-head .nav-tabs{
+  margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+  font-weight:600;
+  border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+  border: none;
+  border-bottom:2px solid #0062cc;
+}
+.profile-work{
+  padding: 14%;
+  margin-top: -15%;
+}
+.profile-work p{
+  font-size: 12px;
+  color: #818182;
+  font-weight: 600;
+  margin-top: 10%;
+}
+.profile-work a{
+  text-decoration: none;
+  color: #495057;
+  font-weight: 600;
+  font-size: 14px;
+}
+.profile-work ul{
+  list-style: none;
+}
+.profile-tab label{
+  font-weight: 600;
+}
+.profile-tab p{
+  font-weight: 600;
+  color: #0062cc;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*KEEP THIS LAST ON HERE PLEASE*/
+/******************
+    .Responsive
+*******************/
+
 @media (min-width: 200px) and (max-width: 1199px) {
   .container-fluid {
     max-width: 95%;
@@ -576,8 +764,6 @@ input#search_submit[type="submit"]:hover {
 }
 
 
-element.style {
-}
 .navbar-custom {
   padding: 20px 0px;
   width: 100%;
@@ -586,6 +772,7 @@ element.style {
   margin-bottom: 0px;
   transition: all 0.5s ease-in-out;
 }
+
 .navbar-custom {
   padding: 20px 0px;
   width: 100%;
@@ -594,6 +781,7 @@ element.style {
   margin-bottom: 0px;
   transition: all 0.5s ease-in-out;
 }
+
 .fixed-top {
   position: fixed;
   top: 0;
@@ -601,14 +789,16 @@ element.style {
   left: 0;
   z-index: 1030;
 }
+
 @media (min-width: 992px) {
 
   .column .search {
-  justify-content: end;
+    justify-content: end;
   }
 }
 
-  @media (max-width: 991px) {
+@media (max-width: 991px) {
+
   .features {
     bottom: 74px;
   }
@@ -675,158 +865,4 @@ element.style {
   }
 }
 
-/*# sourceMappingURL=style.css.map */
-
-/******************
-    Edit Profile
-*******************/
-
-.panel {
-  box-shadow: none;
-}
-.panel-heading {
-  border-bottom: 0;
-}
-.panel-title {
-  font-size: 17px;
-}
-.panel-title > small {
-  font-size: .75em;
-  color: #999999;
-}
-.panel-body *:first-child {
-  margin-top: 0;
-}
-.panel-footer {
-  border-top: 0;
-}
-
-.form-horizontal, .form-group {
-max-width: 500px;
-}
-@media (min-width: 768px) {
-  .form-horizontal .control-label {
-    margin-bottom: 0;
-    padding-top: 7px;
-  }
-}
-
-
-.profile-avatar {
-  width: 300px;
-  position: relative;
-  border: 4px solid #f3f3f3;
-  border-radius: 999px;
-}
-
-input::file-selector-button {
-  font-weight: bold;
-  padding: 0.5em;
-  border-radius: 7px;
-  color: #ffffff !important;
-  background-color: #f28153;
-  border: 1px solid #F28153;
-}
-
-input[type="file"]::file-selector-button:hover {
-  background-color: #F9C0A9;
-  transition: 1s;
-}
-
-input[type='file'] {
-  color: rgb(255, 203, 165);
-
-}
-
-div .delete-profile, .pe-7s-delete-user{
-  color: #F28153;
-  height: 500px;
-  width: 500px;
-}
-
-.row .subtitle{
-}
-
-
-/*******************************
-  13.carousel
- ********************************/
-.container.slider{
-  min-height: 70vh;
-}
-.slider-mask {
-  overflow: hidden;
-  align-self: stretch;
-  flex: 1 0 0;
-  position: relative;
-}
-.slides {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-.controls>*{
-  font-size: 35px;
-}
-.car-con{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.arrow-left{
-  position: absolute;
-  top: 50%;
-  left: 290px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: rgba(255, 222, 173, 0.78);
-  border: unset;
-}
-.arrow-right{
-  position: absolute;
-  top: 50%;
-  right: 203px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: rgba(255, 222, 173, 0.78);
-  border: unset;
-}
-.slide{
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgb(17, 9, 30, 0.65);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  transition: all ease .3s;
-  max-height: 630px;
-  border-radius: 15px;
-  color: rgba(255, 222, 173, 0.78);
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
-}
-.slide.left{
-  left: -100%;
-}
-.slide.right{
-  left: 100%;
-}
-.carouselHolder{
-  margin: 45px;
-}
-
-
-/******************
-    Login Page
-*******************/
-
-.login-form{
-  max-width: 400px;
-  max-height: 400px;
-}
 /*# sourceMappingURL=style.css.map */

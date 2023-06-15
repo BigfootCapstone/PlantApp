@@ -3,44 +3,21 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
-
-    <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
+<head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
 
 <body>
-<div>
+<!--Navbar Start-->
     <header th:replace="partials/navbar :: navbar"></header>
+<!-- Navbar End -->
 
-    <div>
-        <h1 th:text="${user.username} + '\'s Profile'"></h1>
-        <p th:text="'Date Created: ' + ${user.created_at}"></p>
-        <p th:text="'First Name: ' + ${user.first_name}"></p>
-        <p th:text="'Last Name: ' + ${user.last_name}"></p>
-        <p th:text="'City: ' + ${user.city}"></p>
-        <p th:text="'Email: ' + ${user.email}"></p>
-    </div>
-    <div>
-        <a th:href="@{/users/{id}/edit(id=${id})}">
-            <h3>Edit Your Profile</h3>
-        </a>
-    </div>
+
 
     <!--Weather Banner-->
-    <div>
-        <h3>Weather Banner</h3>
-        <div th:if="${weather}">
-            <p th:text="${weather.getTempAvg()}"></p>
-            <p th:text="${weather.getHumidity()}"></p>
-            <p th:text="${weather.getSunrise()}"></p>
-            <p th:text="${weather.getSunset()}"></p>
-            <p th:text="${weather.getCloudiness()}"></p>
-            <p th:text="${weather.getCloudDesc()}"></p>
-            <p th:text="${weather.getWindSpeed()}"></p>
-        </div>
-    </div>
+
 
     <!--Outdoor Plant Warning-->
     <div th:if="${outdoorPlants}">
-        <h3>Outdoor Plant Warning</h3>
+        <h3 class="subtitle">Outdoor Plant Warning</h3>
         <div class="row justify-content-between">
             <div class="column" th:each="plant : ${outdoorPlants}">
                 <p> Plant Name: <span th:text="${plant.plant.name}"></span></p>
@@ -54,23 +31,185 @@
 
     <!--Garden Preview-->
     <div>
-        <h3>Garden Preview</h3>
         <div class="column" th:each="plant : ${userPlants}">
             <p><span  th:text="${plant.plant.id}"></span></p>
-            <p><span th:text="${plant.plant.name}"></span></p>
+            <a th:href="@{/plants/garden/{id}(id=${plant.id})}"><span th:text="${plant.plant.name}"></span></a>
             <p><span  th:text="${plant.sun_amount}"></span></p>
             <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
             <p><span  th:text="${plant.getSun_tip}"></span></p>
             <p><span  th:text="${plant.getWater_tip}"></span></p>
+<!--            button for delete path-->
+            <div class="row">
+                <a th:href="@{/plants/{id}/delete(id=${plant.id})}">Delete</a>
+
+                <a th:href="@{/plants/garden/{id}(id=${plant.id})}">Edit</a>
+            </div>
+
         </div>
     </div>
 
-    <!--Plant Log Preview-->
-    <div>
-        <h3>Plant Log Preview</h3>
 
-    </div>
 
+
+
+
+
+
+<div class="d-flex container create justify-content-center align-content-center">
+
+
+
+<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file"/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5  class="subtitle" th:text="${user.first_name} + ' ' + ${user.last_name}"></h5>
+                    <h6 class="quote" th:text="${user.username}"></h6>
+                    <h6 class="quote" th:text="'Date Joined: ' + ${user.created_at}"></h6>
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" th:href="@{/users/profile}" role="tab" aria-controls="home" aria-selected="true">User Info</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="garden-tab" data-toggle="tab" th:href="@{#profile}" role="tab" aria-controls="profile" aria-selected="false">Your Garden</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="journal-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Plant Journal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="weather-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Weather</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <input type="submit"  class="profile-edit-btn" name="btnAddMore" value="Edit Profile" th:href="@{/users/{id}/edit(id=${id})}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+<!--EMPTY DIV FOR MAINTAINING FORMAT OF PAGE-->
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>User Id</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="quote" th:text="${user.username}"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p  class="subtitle" th:text="${user.first_name} + ' ' + ${user.last_name}"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="quote" th:text="${user.email}"></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>City</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="quote" th:text="${user.city}"></p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+
+
+                                    <h3 class="subtitle">Weather Banner</h3>
+                                    <div th:if="${weather}">
+                                        <p th:text="${weather.getTempAvg()}"></p>
+                                        <p th:text="${weather.getHumidity()}"></p>
+                                        <p th:text="${weather.getSunrise()}"></p>
+                                        <p th:text="${weather.getSunset()}"></p>
+                                        <p th:text="${weather.getCloudiness()}"></p>
+                                        <p th:text="${weather.getCloudDesc()}"></p>
+                                        <p th:text="${weather.getWindSpeed()}"></p>
+                                    </div>
+
+
+                                <label>Experience</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Expert</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Hourly Rate</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>10$/hr</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Total Projects</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>230</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>English Level</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>Expert</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Availability</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>6 months</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Your Bio</label><br/>
+                                <p>Your detail description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
+</div>
+
+
+
 </body>
 </html>

@@ -26,6 +26,20 @@ public class PlantLog {
     @JoinColumn(name = "gardenplant_id")
     private GardenPlant gardenPlant;
 
+    public long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public GardenPlant getGardenPlant() {
+        return gardenPlant;
+    }
+    public void setGardenPlant(GardenPlant gardenPlant) {
+        this.gardenPlant = gardenPlant;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -47,6 +61,12 @@ public class PlantLog {
         this.created_at = created_at;
     }
 
-    public PlantLog() {
+    public PlantLog() {}
+
+    public PlantLog(String title, String content, Date created_at, GardenPlant gardenPlant) {
+        this.title = title;
+        this.content = content;
+        this.created_at = created_at;
+        this.gardenPlant = gardenPlant;
     }
 }
