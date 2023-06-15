@@ -33,7 +33,7 @@ public class PlantsCall {
             System.out.println(jsonResponse.toString());
 
             JSONObject plantObject = (JSONObject) jsonResponse.get("data");
-            long plant_id = (long) plantObject.get("id");
+            long plant_id = (long) plantObject.get("main_species_id");
             String plant_id_string = Long.toString(plant_id);
             String common_name = (String) plantObject.get("common_name");
             String scientific_name = (String) plantObject.get("scientific_name");
