@@ -133,6 +133,7 @@ public class UserController {
         return "editUserForm";
     }
 
+
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
 //        User user = userDao.findUserById(1L);

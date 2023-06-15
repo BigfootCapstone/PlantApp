@@ -13,6 +13,8 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 
 
+
+
 @Configuration
 public class SecConfig {
 
@@ -20,8 +22,8 @@ public class SecConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/**").permitAll()
-                .requestMatchers("/search","/users/*", "weather").authenticated()
-                .requestMatchers("/search", "/users/*", "/plants/*", "/register", "/users/login","/").permitAll()
+                .requestMatchers("/search","/users/*", "weather","/create", "/posts/comment", "/posts/*/edit", "/logout","/postss/*").authenticated()
+                .requestMatchers("/posts", "/posts/*", "/search", "/users/*", "/plants/*", "/register", "/users/login","/").permitAll()
                 .requestMatchers("/css/**", "/js/**").permitAll()
         );
 
