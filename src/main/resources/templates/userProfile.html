@@ -19,13 +19,21 @@
             <div class="row">
                 <div class="col-md-4">
 <!--Start Profile Img-->
+                    <form class="form-horizontal flex-grow-1"
+                          th:action="@{/users/profile}"
+                          th:object="${user}" th:method="post"
+                          enctype="multipart/form-data"
+                    >
                     <div class="profile-img">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                        <div class="file btn btn-lg btn-primary">
-                            Change Photo
-                            <input type="file" name="file"/>
+                        <div class="panel-body text-center">
+                            <img class="img-circle profile-avatar" id="profile-img" src="" alt="User avatar">
+                            <div class="file btn btn-lg btn primary">
+                                Change Photo
+                                <input type="file" name="image" accept="image/*" />
+                            </div>
                         </div>
                     </div>
+                    </form>
                 </div>
 <!--End Profile Img-->
 
@@ -59,10 +67,9 @@
                     </div>
             </div>
 <!--End Profile Header-->
-
 <!--Start EDIT PROFILE BUTTON-->
             <div class="col-md-2">
-                <input type="submit"  class="profile-edit-btn" name="btnAddMore" value="Edit Profile" th:href="@{/users/{id}/edit(id=${id})}">
+                <a type="submit"  class="profile-edit-btn" name="btnAddMore" th:href="@{/users/{id}/edit(id=${user.id})}">Edit Profile</a>
             </div>
 <!--End EDIT PROFILE BUTTON-->
             </div>
@@ -204,7 +211,6 @@
                     </div>
                 </div>
             </div>
-        </form>
         <!--Outdoor Plant Warning-->
         <div th:if="${outdoorPlants}">
             <h3 class="subtitle">Outdoor Plant Warning</h3>
@@ -220,5 +226,10 @@
         </div>
     </div>
 </div>
+<!-- End Page Container -->
+
+<!-- footer start -->
+<footer th:replace="partials/footer :: footer"></footer>
+<!-- footer end -->
 </body>
 </html>
