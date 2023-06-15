@@ -8,6 +8,27 @@ import java.util.List;
 
 public class FriendsManager {
 
+    public static List<User> showUnknownFriends(List<User> allUsers, List<Friend> userFriends){
+        List<User> unassociatedUsers = new ArrayList<>();
+
+        for (User unknownUser : allUsers) {
+            boolean isAssociated = false; // Flag to track if the user is associated with any friend
+
+            for (Friend friend : userFriends) {
+                if (friend.getUserID2().equals(unknownUser)) {
+                    isAssociated = true;
+                    break;
+                }
+            }
+
+            if (!isAssociated) {
+                unassociatedUsers.add(unknownUser);
+            }
+        }
+
+        return unassociatedUsers;
+    }
+
     public static List<User> knownFriends(User user) {
         List<Friend> friendsRequest = user.getFriends();
         List<User> friends = new ArrayList<>();

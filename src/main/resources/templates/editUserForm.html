@@ -4,108 +4,106 @@
        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="partials/head :: head('Edit Profile')"></head>
 
-
 <body>
-<!--Navbar Start-->
-<header th:replace="partials/navbar :: navbar"></header>
-<!-- Navbar End -->
+  <!--Navbar Start-->
+  <header th:replace="partials/navbar :: navbar"></header>
+  <!-- Navbar End -->
 
 <div class="d-flex container create justify-content-center align-content-center">
-    <div class="row subtitle">
-        <div class="col subtitle text-center">
-            <h1 class="subtitle mb-4">EDIT PROFILE</h1>
-
-            <div class="container bootstrap snippets bootdeys">
-                <div class="row">
-                    <div class="d-flex col justify-content-center">
-                        <form class="form-horizontal flex-grow-1"
-                              th:action="@{/users/{id}/edit}"
-                              th:object="${user}" th:method="post"
-                              enctype="multipart/form-data"
-                        >
-                            <div class="panel ">
-                                <div class="panel-body text-center">
-                                    <img class="img-circle profile-avatar" id="profile-img" src="" alt="User avatar">
-                                    <input type="file" name="image" accept="image/*" />
-                                </div>
-                            </div>
-                            <div class="d-block panel ">
-                                <div class="subtitle">
-                                    <h4 class="panel-title subtitle">User info</h4>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <label class="d-flex col control-label quote">Username <span th:text="${user.username}"></span> </label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" th:field="*{username}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col control-label quote">First Name</label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" th:field="*{first_name}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col control-label quote">Last Name</label>
-                                        <div class="col">
-                                            <input type="text" class="form-control" th:field="*{last_name}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col control-label quote" for="city">Current City</label>
-                                        <div class="col">
-                                            <input type="text" id="city" class="form-control" th:field="*{city}" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="panel ">
-                                <div class="subtitle">
-                                    <h4 class="panel-title subtitle">Contact info</h4>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <label class="col control-label quote">E-mail address</label>
-                                        <div class="col">
-                                            <input type="email" class="form-control" th:value="*{email}">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="panel ">
-                                <div class="subtitle">
-                                    <h4 class="panel-title subtitle">Security</h4>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <label class="col control-label quote">Current password</label>
-                                        <div class="col">
-                                            <input type="password" class="form-control" th:field="*{password}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col control-label quote">New password</label>
-                                        <div class="col">
-                                            <input type="password" class="form-control" th:field="*{password}">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="d-flex col">
-                                            <input type="hidden" name="id" th:attr="value=${user.id}" />
-                                            <button type="submit" class="btn btn-custom" value="save">Save</button>
-                                            <button type="reset" class="btn nav-link">Cancel</button>
-                                        </div>
-                                        <div class="col font-16 delete-profile pe-7s-delete-user mt-3">    Delete Profile</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+  <div class="row subtitle">
+    <div class="col subtitle text-center">
+      <h1 class="subtitle mb-4">EDIT PROFILE</h1>
+    </div>
+   </div>
+      <div class="container bootstrap snippets bootdeys">
+        <div class="row">
+          <div class="d-flex col justify-content-center">
+            <form class="form-horizontal flex-grow-1"
+                  th:action="@{/users/{id}/edit(id=${user.id})}"
+                  th:object="${user}" th:method="post"
+                  enctype="multipart/form-data"
+            >
+              <div class="panel ">
+                <div class="panel-body text-center">
+                  <img class="img-circle profile-avatar" id="profile-img" src="" alt="User avatar">
+                  <input type="file" name="image" accept="image/*" />
                 </div>
-            </div>
+              </div>
+              <div class="d-block panel ">
+                <div class="subtitle">
+                  <h4 class="panel-title subtitle">User info</h4>
+                </div>
+                <div class="panel-body">
+                  <div class="form-group">
+                    <label class="d-flex col control-label quote">Username <span th:text="${user.username}"></span> </label>
+                    <div class="col">
+                      <input type="text" class="form-control" th:field="*{username}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col control-label quote">First Name</label>
+                    <div class="col">
+                      <input type="text" class="form-control" th:field="*{first_name}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col control-label quote">Last Name</label>
+                    <div class="col">
+                      <input type="text" class="form-control" th:field="*{last_name}">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col control-label quote" for="city">Current City</label>
+                    <div class="col">
+                      <input type="text" id="city" class="form-control" th:field="*{city}" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel ">
+                <div class="subtitle">
+                  <h4 class="panel-title subtitle">Contact info</h4>
+                </div>
+                <div class="panel-body">
+                  <div class="form-group">
+                    <label class="col control-label quote">E-mail address</label>
+                    <div class="col">
+                      <input type="email" class="form-control" th:field="*{email}">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+<!--              <div class="panel ">-->
+<!--                <div class="subtitle">-->
+<!--                  <h4 class="panel-title subtitle">Security</h4>-->
+<!--                </div>-->
+<!--                <div class="panel-body">-->
+<!--                  <div class="form-group">-->
+<!--                    <label class="col control-label quote">Current password</label>-->
+<!--                    <div class="col">-->
+<!--                      <input type="password" class="form-control" th:field="*{password}">-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="form-group">-->
+<!--                    <label class="col control-label quote">New password</label>-->
+<!--                    <div class="col">-->
+<!--                      <input type="password" class="form-control" th:field="*{password}">-->
+<!--                    </div>-->
+<!--                  </div>-->
+<!--                  <div class="form-group">-->
+                    <div class="d-flex col">
+                      <input type="hidden" name="id" th:attr="value=${user.id}" />
+                      <button type="submit" class="btn btn-custom" value="save">Save</button>
+                      <button type="reset" class="btn nav-link">Cancel</button>
+                    </div>
+              <a class="col font-16 delete-profile pe-7s-delete-user mt-3" th:href="@{/users/{id}/delete(id=${user.id})}">Delete Profile</a>
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+            </form>
+          </div>
         </div>
     </div>
 </div>
