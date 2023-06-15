@@ -11,6 +11,9 @@
 <!-- Navbar End -->
 
 
+<!--Start Page Container-->
+
+
 
     <!--Weather Banner-->
 
@@ -69,63 +72,84 @@
     </div>
 
 
-
-
-
-
-
-
 <div class="d-flex container create justify-content-center align-content-center">
-
-
-
-<div class="container emp-profile">
-    <form method="post">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                    <div class="file btn btn-lg btn-primary">
-                        Change Photo
-                        <input type="file" name="file"/>
+<!--Start Profile-->
+    <div class="container emp-profile">
+        <form method="post">
+<!--Start Row-->
+            <div class="row">
+                <div class="col-md-4">
+<!--Start Profile Img-->
+                    <form class="form-horizontal flex-grow-1"
+                          th:action="@{/users/profile}"
+                          th:object="${user}" th:method="post"
+                          enctype="multipart/form-data"
+                    >
+                    <div class="profile-img">
+                        <div class="panel-body text-center">
+                            <img class="img-circle profile-avatar" id="profile-img" src="" alt="User avatar">
+                            <div class="file btn btn-lg btn primary">
+                                Change Photo
+                                <input type="file" name="image" accept="image/*" />
+                            </div>
+                        </div>
                     </div>
+                    </form>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                    <h5  class="subtitle" th:text="${user.first_name} + ' ' + ${user.last_name}"></h5>
-                    <h6 class="quote" th:text="${user.username}"></h6>
-                    <h6 class="quote" th:text="'Date Joined: ' + ${user.created_at}"></h6>
+<!--End Profile Img-->
 
+<!--Start Profile Header-->
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5  class="subtitle" th:text="${user.first_name} + ' ' + ${user.last_name}"></h5>
+                        <h6 class="quote" th:text="${user.username}"></h6>
+                        <h6 class="quote" th:text="'Date Joined: ' + ${user.created_at}"></h6>
+
+<!--Start Profile Tabs-->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" th:href="@{/users/profile}" role="tab" aria-controls="home" aria-selected="true">User Info</a>
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" th:href="@{#profile}" role="tab" aria-controls="profile" aria-selected="true">User Info</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="garden-tab" data-toggle="tab" th:href="@{#profile}" role="tab" aria-controls="profile" aria-selected="false">Your Garden</a>
+                            <a class="nav-link" id="garden-tab" data-toggle="tab" th:href="@{#garden}" role="tab" aria-controls="profile" aria-selected="false">Your Garden</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="journal-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Plant Journal</a>
+                            <a class="nav-link" id="journal-tab" data-toggle="tab" th:href="@{#journal}" role="tab" aria-controls="profile" aria-selected="false">Plant Journal</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="weather-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Weather</a>
+                            <a class="nav-link" id="weather-tab" data-toggle="tab" th:href="@{#weather}" role="tab" aria-controls="profile" aria-selected="false">Weather</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="friends-tab" data-toggle="tab" th:href="@{#friends}" role="tab" aria-controls="profile" aria-selected="false">Friends</a>
                         </li>
                     </ul>
-                </div>
+<!--End Profile Tabs-->
+
+                    </div>
             </div>
+<!--End Profile Header-->
+<!--Start EDIT PROFILE BUTTON-->
             <div class="col-md-2">
-                <input type="submit"  class="profile-edit-btn" name="btnAddMore" value="Edit Profile" th:href="@{/users/{id}/edit(id=${id})}">
+
+                <a type="submit"  class="profile-edit-btn" name="btnAddMore" th:href="@{/users/{id}/edit(id=${user.id})}">Edit Profile</a>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-work">
+<!--End EDIT PROFILE BUTTON-->
+            </div>
+<!--End Row-->
+
+<!--Start Tab Panels-->
+            <div class="row">
 <!--EMPTY DIV FOR MAINTAINING FORMAT OF PAGE-->
+                <div class="col-md-4">
+                    <div class="profile-work">
+
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+<!--End EMPTY DIV FOR MAINTAINING FORMAT OF PAGE-->
+
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                     <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>User Id</label>
@@ -158,39 +182,28 @@
                                 <p class="quote" th:text="${user.city}"></p>
                             </div>
                         </div>
-
                     </div>
-                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="tab-pane fade" id="garden" role="tabpanel" aria-labelledby="garden-tab">
                         <div class="row">
                             <div class="col-md-6">
-
-
-                                    <h3 class="subtitle">Weather Banner</h3>
-                                    <div th:if="${weather}">
-                                        <p th:text="${weather.getTempAvg()}"></p>
-                                        <p th:text="${weather.getHumidity()}"></p>
-                                        <p th:text="${weather.getSunrise()}"></p>
-                                        <p th:text="${weather.getSunset()}"></p>
-                                        <p th:text="${weather.getCloudiness()}"></p>
-                                        <p th:text="${weather.getCloudDesc()}"></p>
-                                        <p th:text="${weather.getWindSpeed()}"></p>
+                                <div>
+                                    <div class="column" th:each="plant : ${userPlants}">
+                                        <p><span  th:text="${plant.plant.id}"></span></p>
+                                        <a th:href="@{/plants/garden/{id}(id=${plant.id})}"><span th:text="${plant.plant.name}"></span></a>
+                                        <p><span  th:text="${plant.sun_amount}"></span></p>
+                                        <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
+                                        <p><span  th:text="${plant.getSun_tip}"></span></p>
+                                        <p><span  th:text="${plant.getWater_tip}"></span></p>
+<!--------button for delete plant path------->
+                                        <div class="row">
+                                            <a th:href="@{/plants/{id}/delete(id=${plant.id})}">Delete</a>
+                                        </div>
                                     </div>
-
-
-                                <label>Experience</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Expert</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Hourly Rate</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>10$/hr</p>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="journal" role="tabpanel" aria-labelledby="journal-tab">
                         <div class="row">
                             <div class="col-md-6">
                                 <label>Total Projects</label>
@@ -222,14 +235,64 @@
                             </div>
                         </div>
                     </div>
+                    <div class="tab-pane fade" id="weather" role="tabpanel" aria-labelledby="weather-tab">
+                        <h3 class="subtitle">Weather Banner</h3>
+                        <div th:if="${weather}">
+                            <p th:text="${weather.getTempAvg()}"></p>
+                            <p th:text="${weather.getHumidity()}"></p>
+                            <p th:text="${weather.getSunrise()}"></p>
+                            <p th:text="${weather.getSunset()}"></p>
+                            <p th:text="${weather.getCloudiness()}"></p>
+                            <p th:text="${weather.getCloudDesc()}"></p>
+                            <p th:text="${weather.getWindSpeed()}"></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
+                        <!--    Friends Request Placeholder-->
+                        <div>
+                            <h3 class="subtitle">Friend Requests</h3>
+                            <div class="row justify-content-between">
+                                <div class="column" th:each="request : ${friendsRequest}">
+                                    <p th:text="${request.id}"></p>
+                                    <p th:text="${request.username}"></p>
+                                    <p th:text="${request.last_name}"></p>
+                                    <p th:text="${request.username}"></p>
+                                    <p th:text="${request.email}"></p>
+                                    <a th:href="@{/friends/accept/{id}(id=${request.id})}">Accept</a>
+                                    <a th:href="@{/friends/ignore/{id}(id=${request.id})}">Ignore</a>
+                                </div>
+                                <!--            <div class="column" th:each="friend : ${friends}">-->
+                                <!--                <p th:text="${friend.first_name}"></p>-->
+                                <!--                <p th:text="${friend.last_name}"></p>-->
+                                <!--                <p th:text="${friend.username}"></p>-->
+                                <!--                <p th:text="${friend.email}"></p>-->
+                                <!--            </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        <!--Outdoor Plant Warning-->
+        <div th:if="${outdoorPlants}">
+            <h3 class="subtitle">Outdoor Plant Warning</h3>
+            <div class="row justify-content-between">
+                <div class="column" th:each="plant : ${outdoorPlants}">
+                    <p> Plant Name: <span th:text="${plant.plant.name}"></span></p>
+                    <p> Req'd Sun Amount: <span  th:text="${plant.sun_amount}"></span></p>
+                    <p> Water Every <span th:text="${plant.water_interval}"></span> Day(s)</p>
+                    <p> BotaniBuddy SunTip: <span  th:text="${plant.getSun_tip}"></span></p>
+                    <p> BotaniBuddy WaterTip: <span  th:text="${plant.getWater_tip}"></span></p>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
-</div>
 
+<!-- End Page Container -->
 
-
+<!-- footer start -->
+<footer th:replace="partials/footer :: footer"></footer>
+<!-- footer end -->
 </body>
 </html>
