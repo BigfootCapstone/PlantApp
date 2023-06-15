@@ -28,10 +28,10 @@ public class Friend {
         this.id = id;
     }
 
-    public User getUserID1() {
+    public User getUser() {
         return user;
     }
-    public void setUserID1(User userID1) {
+    public void setUser(User user) {
         this.user = user;
     }
 

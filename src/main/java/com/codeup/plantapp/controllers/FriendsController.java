@@ -1,6 +1,7 @@
 package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.Friend;
+import com.codeup.plantapp.models.GardenPlant;
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.repositories.FriendRepository;
 import com.codeup.plantapp.repositories.UserRepository;
@@ -57,29 +58,26 @@ public class FriendsController {
 |><<>><<>><<>><<>><<>><<>>USER ACC/IGN FRIEND REQUEST <<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
-
     @GetMapping("/accept/{id}")
-    public String acceptFriend(@PathVariable long id,
-                            RedirectAttributes redirectAttributes){
+    public String acceptFriend(@PathVariable long id){
         User user = usersDao.findUserById(id);
-        System.out.println(user.getUsername());
-        Friend friend = friendDao.findFriendByUser(user);
+        Friend friend = friendDao.findFriendByUserID2(user);
+
         friend.setConfirmed(true);
+        friendDao.save(friend);
 
         return "redirect:/users/profile";
     }
 
     @GetMapping("/ignore/{id}")
-    public String ignoreFriend(@PathVariable long id,
-                            RedirectAttributes redirectAttributes){
+    public String ignoreFriend(@PathVariable long id){
         User user = usersDao.findUserById(id);
-        System.out.println(user.getUsername());
-        Friend friend = friendDao.findFriendByUser(user);
-        friendDao.delete(friend);
+        Friend friend = friendDao.findFriendByUserID2(user);
+
+        friendDao.deleteById(friend.getId());
 
         return "redirect:/users/profile";
     }
-
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
