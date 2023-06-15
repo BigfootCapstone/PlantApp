@@ -76,7 +76,10 @@ public class PostController {
                              @ModelAttribute Post post,
                              @RequestParam(name = "title") String title,
                              @RequestParam(name = "body") String body) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        post.setUser(user);
+//        postsDao.save(post);
+        User user = usersDao.findUserById(1L);
         post.setUser(user);
         postsDao.save(post);
 //        emailService.prepareAndSend(posts, title, body);
