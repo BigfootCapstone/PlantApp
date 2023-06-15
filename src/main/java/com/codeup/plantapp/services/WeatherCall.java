@@ -1,6 +1,5 @@
 package com.codeup.plantapp.services;
 
-import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.models.Weather;
 import com.codeup.plantapp.util.Time;
 import org.json.simple.JSONArray;
@@ -15,7 +14,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
 import static com.codeup.plantapp.util.Time.convertTimestampToLocalDateTime;
 
 @Service
@@ -24,10 +22,6 @@ public class WeatherCall {
     @Autowired
     private Keys keys;
 
-    //  HOW GET WEATHER WORKS:
-//      Date date = new Date(); // Fri Jun 09 08:42:40 CDT 2023
-//      User user = new User(date, "username", "first_name", "last_name", "San Antonio", "email", "password");
-//      Weather usersLocalWeather = getWeather(user);
     public static Weather getWeather(URL url) {
         try {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -42,7 +36,6 @@ public class WeatherCall {
             }
             reader.close();
 
-            // Parse JSON response
             JSONParser parser = new JSONParser();
             JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
 
@@ -71,17 +64,5 @@ public class WeatherCall {
             return null;
         }
     }
-
-
-//    public List<GardenPlant> checkForOutdoorPlants(User user) {
-//        List<GardenPlant> userPlants = user.getGardenPlants();
-//        List<GardenPlant> outdoor = new ArrayList<>();
-//        for (GardenPlant plant: userPlants) {
-//            if (plant.isIs_outside()) {
-//                outdoor.add(plant);
-//            }
-//        }
-//        return outdoor;
-//    }
 
 }

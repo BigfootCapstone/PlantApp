@@ -1,6 +1,7 @@
 package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.*;
+import com.codeup.plantapp.repositories.FriendRepository;
 import com.codeup.plantapp.repositories.GardenPlantRepository;
 import com.codeup.plantapp.repositories.PlantRepository;
 import com.codeup.plantapp.repositories.UserRepository;
@@ -20,6 +21,8 @@ import java.util.List;
 import static com.codeup.plantapp.services.WeatherCall.getWeather;
 import static com.codeup.plantapp.util.CareTips.checkForOutdoorPlants;
 import static com.codeup.plantapp.util.CareTips.plantTipCheck;
+import static com.codeup.plantapp.util.FriendsManager.friendsRequests;
+import static com.codeup.plantapp.util.FriendsManager.knownFriends;
 
 @Controller
 @RequestMapping("/users")
@@ -29,16 +32,19 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final GardenPlantRepository gardenPlantDao;
     private final PlantRepository plantDao;
+    private final FriendRepository friendDao;
 
 
 //    private final UserRepository userDao;
 
     public UserController(UserRepository usersDao, GardenPlantRepository gardenPlantDao,
+                          FriendRepository friendDao,
                           PlantRepository plantDao, PasswordEncoder passwordEncoder){
         this.usersDao = usersDao;
         this.gardenPlantDao = gardenPlantDao;
         this.passwordEncoder = passwordEncoder;
         this.plantDao =  plantDao;
+        this.friendDao = friendDao;
     }
 
     @Autowired
@@ -87,6 +93,13 @@ public class UserController {
         User userFromDb = usersDao.findUserById(userId);
         model.addAttribute("user", userFromDb);
 
+        String successMessage = (String) model.asMap().get("successMessage");
+
+//      Pass the success message to the view if it exists
+        if (successMessage != null) {
+            model.addAttribute("successMessage", successMessage);
+        }
+
 //      Get Weather for User's City
         String city = userFromDb.getCity();
         String key = keys.getOpenWeather();
@@ -103,6 +116,16 @@ public class UserController {
             GardenPlant checked = plantTipCheck(gardenPlant, userWeather);
             gardenPlantDao.save(checked);
         }
+
+        List <User> friendsRequest = friendsRequests(userFromDb);
+        List <User> friends = knownFriends(userFromDb);
+
+        for (User userTest : friends) {
+            System.out.println(userTest.getCity());
+        }
+
+        model.addAttribute("friendsRequest", friendsRequest);
+        model.addAttribute("friends", friends);
 
 //      Set Weather for View
         model.addAttribute("weather", userWeather);
