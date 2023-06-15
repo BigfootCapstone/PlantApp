@@ -16,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeup.plantapp.util.FriendsManager.showUnknownFriends;
+
 @Controller
 @RequestMapping("/friends")
 public class FriendsController {
@@ -42,24 +44,7 @@ public class FriendsController {
         List<User> botaniUsers  = usersDao.findAllByIdIsNot(user.getId()); // all users except current user
         List<Friend> friendsAssoc = friendDao.findAllByUser(user); // all friends associations
 
-        List<User> unassociatedFriends = new ArrayList<>();
-
-        for (User unknownUser : botaniUsers) {
-            boolean isAssociated = false; // Flag to track if the user is associated with any friend
-
-            for (Friend friend : friendsAssoc) {
-                if (friend.getUserID2().equals(unknownUser)) {
-                    isAssociated = true;
-                    break;
-                }
-            }
-
-            if (!isAssociated) {
-                unassociatedFriends.add(unknownUser);
-            }
-        }
-
-        model.addAttribute("users", unassociatedFriends);
+        model.addAttribute("users", showUnknownFriends(botaniUsers, friendsAssoc));
         return "friends";
     }
 
