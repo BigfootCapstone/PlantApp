@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,15 +30,47 @@ public class FriendsController {
 
         @Autowired
         private Keys keys;
-
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>>SEE UNASIGNED FRIENDS <<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
     @GetMapping("/")
     public String allUsers(Model model) {
-        List<User> users  = usersDao.findAll();
-        model.addAttribute("users", users);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        List<User> botaniUsers  = usersDao.findAllByIdIsNot(user.getId()); // all users except current user
+        List<Friend> friendsAssoc = friendDao.findAllByUser(user); // all friends associations
+
+        List<User> unassociatedFriends = new ArrayList<>();
+
+        for (User unknownUser : botaniUsers) {
+            boolean isAssociated = false; // Flag to track if the user is associated with any friend
+
+            for (Friend friend : friendsAssoc) {
+                if (friend.getUserID2().equals(unknownUser)) {
+                    isAssociated = true;
+                    break;
+                }
+            }
+
+            if (!isAssociated) {
+                unassociatedFriends.add(unknownUser);
+            }
+        }
+
+        model.addAttribute("users", unassociatedFriends);
         return "friends";
     }
 
-
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>> USER ADD FRIEND   ><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
     @GetMapping("/{id}")
     public String addFriend(@PathVariable long id,
                             RedirectAttributes redirectAttributes){
@@ -51,8 +84,9 @@ public class FriendsController {
 
         return "redirect:/friends/";
     }
-
-
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>>USER ACC/IGN FRIEND REQUEST <<>><<>><<>><<>><<>><<>><|
