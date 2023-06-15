@@ -57,7 +57,7 @@
         <div class="row">
           <div class="d-flex col justify-content-center">
             <form class="form-horizontal flex-grow-1"
-                  th:action="@{/users/{id}/edit}"
+                  th:action="@{/users/{id}/edit(id=${user.id})}"
                   th:object="${user}" th:method="post"
                   enctype="multipart/form-data"
             >
