@@ -14,6 +14,6 @@ triggerTabList.forEach(triggerEl => {
 
     triggerEl.addEventListener('click', event => {
         event.preventDefault()
-        tabTrigger.show(journal-tab)
+        tabTrigger.show()
     })
 })
