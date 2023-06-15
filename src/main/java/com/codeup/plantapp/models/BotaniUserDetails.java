@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 
-public class UserRolls extends User implements UserDetails {
+public class BotaniUserDetails extends User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -32,8 +32,10 @@ public class UserRolls extends User implements UserDetails {
         return true;
     }
 
+    public BotaniUserDetails(){}
+
     //  At construction USER is created first, then this class is created
-    public UserRolls(long id, String username, String email, String password) {
+    public BotaniUserDetails(long id, String username, String email, String password) {
         super(id, username, email, password);
     }
 
