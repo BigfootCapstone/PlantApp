@@ -132,28 +132,34 @@ public class UserController {
         return "userProfile";
     }
 
-    @GetMapping("/{id}/edit")
-    public String editUserProfileForm(@PathVariable Long id, Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        long userId = user.getId();
+//    @GetMapping("/{id}/edit")
+//    public String editUserProfileForm(@PathVariable Long id, Model model) {
+//        User user = usersDao.findById(id)
 //                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
-        model.addAttribute("user", userId);
-        return "editUserForm";
-    }
+//        model.addAttribute("user", user);
+//        return "editUserForm";
+//    }
 
 
     @PostMapping("/{id}/edit")
-    public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
+    public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser, Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = user.getId();
+
+        User userFromDb = usersDao.findUserById(userId);
+
+        userFromDb.setUsername(updatedUser.getUsername());
+        userFromDb.setFirst_name(updatedUser.getFirst_name());
+        userFromDb.setLast_name(updatedUser.getLast_name());
+        userFromDb.setCity(updatedUser.getCity());
+        userFromDb.setEmail(updatedUser.getEmail());
+        model.addAttribute("user", userFromDb);
 //        User user = userDao.findUserById(1L);
-        User users = usersDao.findUserById(1L);
+//        User users = usersDao.findUserById(1L);
 //                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
-        users.setUsername(updatedUser.getUsername());
-        users.setFirst_name(updatedUser.getFirst_name());
-        users.setLast_name(updatedUser.getLast_name());
-        users.setCity(updatedUser.getCity());
-        users.setEmail(updatedUser.getEmail());
+
 //        userDao.save(user);
-        usersDao.save(users);
+        usersDao.save(userFromDb);
         return "redirect:/users/" + id;
     }
 
