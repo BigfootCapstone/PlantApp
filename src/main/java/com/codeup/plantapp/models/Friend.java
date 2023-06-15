@@ -56,4 +56,11 @@ public class Friend {
         this.userID2 = userID2;
         this.confirmed = confirmed;
     }
+
+    public Friend(long id, User user, User userID2, boolean confirmed) {
+        this.id = id;
+        this.user = user;
+        this.userID2 = userID2;
+        this.confirmed = confirmed;
+    }
 }
