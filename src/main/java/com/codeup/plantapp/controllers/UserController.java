@@ -1,6 +1,7 @@
 package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.*;
+import com.codeup.plantapp.repositories.FriendRepository;
 import com.codeup.plantapp.repositories.GardenPlantRepository;
 import com.codeup.plantapp.repositories.PlantRepository;
 import com.codeup.plantapp.repositories.UserRepository;
@@ -20,6 +21,8 @@ import java.util.List;
 import static com.codeup.plantapp.services.WeatherCall.getWeather;
 import static com.codeup.plantapp.util.CareTips.checkForOutdoorPlants;
 import static com.codeup.plantapp.util.CareTips.plantTipCheck;
+import static com.codeup.plantapp.util.FriendsManager.friendsRequests;
+import static com.codeup.plantapp.util.FriendsManager.knownFriends;
 
 @Controller
 @RequestMapping("/users")
@@ -29,16 +32,19 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final GardenPlantRepository gardenPlantDao;
     private final PlantRepository plantDao;
+    private final FriendRepository friendDao;
 
 
 //    private final UserRepository userDao;
 
     public UserController(UserRepository usersDao, GardenPlantRepository gardenPlantDao,
+                          FriendRepository friendDao,
                           PlantRepository plantDao, PasswordEncoder passwordEncoder){
         this.usersDao = usersDao;
         this.gardenPlantDao = gardenPlantDao;
         this.passwordEncoder = passwordEncoder;
         this.plantDao =  plantDao;
+        this.friendDao = friendDao;
     }
 
     @Autowired
@@ -89,7 +95,7 @@ public class UserController {
 
         String successMessage = (String) model.asMap().get("successMessage");
 
-        // Pass the success message to the view if it exists
+//      Pass the success message to the view if it exists
         if (successMessage != null) {
             model.addAttribute("successMessage", successMessage);
         }
@@ -110,6 +116,16 @@ public class UserController {
             GardenPlant checked = plantTipCheck(gardenPlant, userWeather);
             gardenPlantDao.save(checked);
         }
+
+        List <User> friendsRequest = friendsRequests(userFromDb);
+        List <User> friends = knownFriends(userFromDb);
+
+        for (User userTest : friends) {
+            System.out.println(userTest.getCity());
+        }
+
+        model.addAttribute("friendsRequest", friendsRequest);
+        model.addAttribute("friends", friends);
 
 //      Set Weather for View
         model.addAttribute("weather", userWeather);
@@ -132,34 +148,27 @@ public class UserController {
         return "userProfile";
     }
 
-//    @GetMapping("/{id}/edit")
-//    public String editUserProfileForm(@PathVariable Long id, Model model) {
-//        User user = usersDao.findById(id)
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
-//        model.addAttribute("user", user);
-//        return "editUserForm";
-//    }
+    @GetMapping("/{id}/edit")
+    public String editUserProfileForm(@PathVariable Long id, Model model) {
+        User user = usersDao.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+        model.addAttribute("user", user);
+        return "editUserForm";
+    }
 
 
     @PostMapping("/{id}/edit")
-    public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser, Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        long userId = user.getId();
-
-        User userFromDb = usersDao.findUserById(userId);
-
-        userFromDb.setUsername(updatedUser.getUsername());
-        userFromDb.setFirst_name(updatedUser.getFirst_name());
-        userFromDb.setLast_name(updatedUser.getLast_name());
-        userFromDb.setCity(updatedUser.getCity());
-        userFromDb.setEmail(updatedUser.getEmail());
-        model.addAttribute("user", userFromDb);
+    public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
 //        User user = userDao.findUserById(1L);
-//        User users = usersDao.findUserById(1L);
+        User users = usersDao.findUserById(1L);
 //                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
-
+        users.setUsername(updatedUser.getUsername());
+        users.setFirst_name(updatedUser.getFirst_name());
+        users.setLast_name(updatedUser.getLast_name());
+        users.setCity(updatedUser.getCity());
+        users.setEmail(updatedUser.getEmail());
 //        userDao.save(user);
-        usersDao.save(userFromDb);
+        usersDao.save(users);
         return "redirect:/users/" + id;
     }
 
