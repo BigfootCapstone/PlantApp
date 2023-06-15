@@ -1,7 +1,7 @@
 package com.codeup.plantapp.services;
 
 import com.codeup.plantapp.models.User;
-import com.codeup.plantapp.models.UserRolls;
+import com.codeup.plantapp.models.BotaniUserDetails;
 import com.codeup.plantapp.repositories.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,7 +24,7 @@ public class UserServices implements UserDetailsService {
             throw new UsernameNotFoundException("No user found for " + username);
         } else {
 //          Returns SpringBlogUserDetails object
-            return new UserRolls(user.getId(), user.getUsername(), user.getEmail(),user.getPassword());
+            return new BotaniUserDetails(user.getId(), user.getUsername(), user.getEmail(),user.getPassword());
         }
     }
 

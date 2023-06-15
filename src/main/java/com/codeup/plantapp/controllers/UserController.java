@@ -46,7 +46,7 @@ public class UserController {
     private Keys keys;
 
     @GetMapping("/create")
-    public String showCreateUserForm(Model model) {
+    public String createUserForm(Model model) {
         model.addAttribute("user", new User());
         return "createUserForm";
     }
@@ -64,13 +64,12 @@ public class UserController {
     public String viewLoginPage() {
         return "login";
     }
-
-    @PostMapping("/login")
-    public String loginSessionSetter(Model model, HttpSession session){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        session.setAttribute("user", user);
-        return "redirect:/users/profile";
-    }
+//    @PostMapping("/login")
+//    public String loginSessionSetter(Model model, HttpSession session){
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        session.setAttribute("user", user);
+//        return "redirect: /users/profile";
+//    }
 //    @GetMapping("/logout")
 //    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -86,6 +85,13 @@ public class UserController {
         long userId = user.getId();
         User userFromDb = usersDao.findUserById(userId);
         model.addAttribute("user", userFromDb);
+
+        String successMessage = (String) model.asMap().get("successMessage");
+
+        // Pass the success message to the view if it exists
+        if (successMessage != null) {
+            model.addAttribute("successMessage", successMessage);
+        }
 
 //      Get Weather for User's City
         String city = userFromDb.getCity();
@@ -145,17 +151,10 @@ public class UserController {
         return "redirect:/users/" + id;
     }
 
-
-//    @PostMapping("/{id}/delete")
-//    public String deleteUserProfile(@PathVariable long id) {
-//        usersDao.deleteById(id);
-//        return "redirect:/users";
-//    }
-
-    // maybe keep - connecting to user services
-    @DeleteMapping("/{id}/delete")
-    public void deleteEmployee(@PathVariable("id") int id) {
-//        UserServices.deleteEmployeeById(id);
+    @PostMapping("/{id}/delete")
+    public String deleteUserProfile(@PathVariable Long id) {
+        usersDao.deleteById(id);
+        return "redirect:/users";
     }
 
     @GetMapping
