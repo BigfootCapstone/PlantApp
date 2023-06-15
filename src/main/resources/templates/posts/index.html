@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="en">
+<head th:insert="partials/head :: head('BotaniBuddy')"></head>
+<body>
+<header th:replace="partials/navbar :: navbar"></header>
+
+<div class="page-wrapper">
+    <div class="container feed" >
+        <div class="row">
+            <div class="column">
+
+                <div class="column" th:if="${allPosts}">
+                    <div th:each="post : ${allPosts}">
+
+                        <div class="card container" style="width: 100%">
+                            <div class="card-body">
+                                <div class="card-title"> [[${post.title}]] </div>
+                                <p class="card-text"> [[${post.body}]] </p>
+                                <!--                <a th:href="${posts.id}" class="btn btn-primary">View</a>-->
+
+                                <div th:if="${session.user == null}" class="row justify-right">
+                                    <a th:href="${'posts/' + post.id}" class="btn btn-primary">View</a>
+                                </div>
+
+                                <div th:if="${session.user != null}" class="row justify-right">
+                                    <a th:href="${'posts/' + post.id}" class="btn">View</a>
+                                    <a th:if="${session.user.id} == ${post.user.id}" th:href="${post.id + '/edit'}" class="btn-secondary">Edit</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="partials/footer :: footer"></footer>
+</body>
+</html>

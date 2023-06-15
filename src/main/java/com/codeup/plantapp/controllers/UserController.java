@@ -70,12 +70,12 @@ public class UserController {
     public String viewLoginPage() {
         return "login";
     }
-    @PostMapping("/login")
-    public String loginSessionSetter(Model model, HttpSession session){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        session.setAttribute("user", user);
-        return "redirect:/users/profile";
-    }
+//    @PostMapping("/login")
+//    public String loginSessionSetter(Model model, HttpSession session){
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        session.setAttribute("user", user);
+//        return "redirect: /users/profile";
+//    }
 //    @GetMapping("/logout")
 //    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -150,11 +150,13 @@ public class UserController {
 
     @GetMapping("/{id}/edit")
     public String editUserProfileForm(@PathVariable Long id, Model model) {
-        User user = usersDao.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
-        model.addAttribute("user", user);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        long userId = user.getId();
+//                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+        model.addAttribute("user", userId);
         return "editUserForm";
     }
+
 
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
