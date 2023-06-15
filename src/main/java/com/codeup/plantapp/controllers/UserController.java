@@ -170,6 +170,7 @@ public class UserController {
     public String deleteUser(@PathVariable(name = "id") Long id, Model model) {
         User user = usersDao.findUserById(id);
         model.addAttribute("user", user);
+        usersDao.deleteById(id);
         return "deleteProfile";
     }
 
