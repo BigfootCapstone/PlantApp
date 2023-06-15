@@ -5,6 +5,7 @@ import com.codeup.plantapp.repositories.GardenPlantRepository;
 import com.codeup.plantapp.repositories.PlantRepository;
 import com.codeup.plantapp.repositories.UserRepository;
 import com.codeup.plantapp.services.Keys;
+import com.codeup.plantapp.services.UserServices;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -144,10 +145,17 @@ public class UserController {
         return "redirect:/users/" + id;
     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteUserProfile(@PathVariable long id) {
-        usersDao.deleteById(id);
-        return "redirect:/users";
+
+//    @PostMapping("/{id}/delete")
+//    public String deleteUserProfile(@PathVariable long id) {
+//        usersDao.deleteById(id);
+//        return "redirect:/users";
+//    }
+
+    // maybe keep - connecting to user services
+    @DeleteMapping("/{id}/delete")
+    public void deleteEmployee(@PathVariable("id") int id) {
+//        UserServices.deleteEmployeeById(id);
     }
 
     @GetMapping
