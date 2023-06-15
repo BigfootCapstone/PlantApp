@@ -4,17 +4,36 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="partials/head :: head('Plant Search Results')"></head>
 <body>
-<h1>Search Results for "<span th:text="${query}"></span>"</h1>
-<ul>
-  <li th:each="plant : ${plants}">
-    <p th:text="${plant.common_name}"></p>
-    <img th:if="${plant.image_url}" th:src="${plant.image_url}" alt="Plant Photo">
-    <p th:text="${plant.family}"></p>
-    <p th:text="${plant.genus}"></p>
-    <p th:text="${plant.id}"></p>
+<!--Navbar Start-->
+<header th:replace="partials/navbar :: navbar"></header>
+<!-- Navbar End -->
 
-    <a th:href="@{/plants/{id}(id=${plant.id})}">View Details</a>
-  </li>
-</ul>
+<!--Start Page Container-->
+<div class="d-flex container create justify-content-center align-content-center">
+  <div class="row">
+    <div class="column">
+      <h1 class="subtitle mb-5">Search Results for "<span class="text-white" th:text="${query}"></span>"</h1>
+
+      <ul class="carrot">
+        <li class="quote col-2" th:each="plant : ${plants}">
+          <p class="d-block mb-4 text-white plant-name" th:text="${plant.common_name}"></p>
+          <div class="">
+          <img class="plantSearchImg" th:if="${plant.image_url}" th:src="${plant.image_url}" alt="Plant Photo">
+          </div>
+          <div class="d-flex">
+          <p class=" plant-info" th:text="'Plant Family:   ' + ${plant.family}"></p>
+          <p class=" plant-info" th:text="'Plant Genus:   ' + ${plant.genus}"></p>
+          <a class=" plant-info" th:href="@{/plants/{id}(id=${plant.id})}">View Details</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- End Page Container -->
+
+<!-- footer start -->
+<footer th:replace="partials/footer :: footer"></footer>
+<!-- footer end -->
 </body>
 </html>

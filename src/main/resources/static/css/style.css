@@ -536,6 +536,10 @@ input#search_submit[type="submit"]:hover {
   margin-top: 150px;
 }
 
+.row.create{
+  margin-top: 150px;
+}
+
 
 /******************
     11.Carousel
@@ -625,7 +629,9 @@ div .delete-profile, .pe-7s-delete-user{
 }
 
 
-
+/******************
+  14.Profile
+*******************/
 
 .emp-profile{
   padding: 3%;
@@ -720,12 +726,36 @@ div .delete-profile, .pe-7s-delete-user{
   color: #0062cc;
 }
 
+/***********************
+  15.Plant Search View
+************************/
 
+img.plantSearchImg{
+  height: 350px;
+  width: 350px;
+  border-radius: 10px;
+}
 
+ul.carrot {
+  list-style: url("./images/carrotguy(fknawesome) list.png");
+}
 
+.search-header{
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
 
+p.plant-name{
+  width: 400px;
+  height: 60px;
+  font-size: 50px;
+}
 
-
+p.plant-info, a.plant-info{
+  /*width: 400px;*/
+  /*height: 60px;*/
+}
 
 
 
