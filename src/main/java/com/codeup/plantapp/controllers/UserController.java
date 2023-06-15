@@ -61,7 +61,7 @@ public class UserController {
         user.setCreated_at(LocalDate.now());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
-        return "redirect:/users/" + user.getId();
+        return "redirect:/users/login";
     }
 
     @GetMapping("/login")
@@ -166,11 +166,13 @@ public class UserController {
         return "redirect:/users/" + id;
     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteUserProfile(@PathVariable Long id) {
-        usersDao.deleteById(id);
-        return "redirect:/users";
+    @GetMapping("/{id}/delete")
+    public String deleteUser(@PathVariable(name = "id") Long id, Model model) {
+        User user = usersDao.findUserById(id);
+        model.addAttribute("user", user);
+        return "deleteProfile";
     }
+
 
     @GetMapping
     public String getAllUsers(Model model) {
