@@ -149,7 +149,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editUserProfileForm(@PathVariable Long id, Model model) {
+    public String editUserProfileForm(@PathVariable(name ="id") Long id, Model model) {
         User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
@@ -158,7 +158,7 @@ public class UserController {
 
 
     @PostMapping("/{id}/edit")
-    public String updateUserProfile(@PathVariable Long id, @ModelAttribute("user") User updatedUser) {
+    public String updateUserProfile(@PathVariable(name ="id") Long id, @ModelAttribute("user") User updatedUser) {
 //        User user = userDao.findUserById(1L);
         User users = usersDao.findUserById(1L);
 //                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));

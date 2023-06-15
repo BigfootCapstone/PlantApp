@@ -114,7 +114,8 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <input type="submit"  class="profile-edit-btn" name="btnAddMore" value="Edit Profile" th:href="@{/users/{id}/edit(id=${id})}">
+                <a type="submit"  class="profile-edit-btn" name="btnAddMore"
+                   th:href="@{/users/{id}/edit(id=${user.id})}">Edit Profile</a>
             </div>
         </div>
         <div class="row">
