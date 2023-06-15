@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="partials/head :: head('Plant Search Results')"></head>
+<body>
+<h1>Users</h1>
+<ul>
+    <li th:each="user : ${users}">
+        <div>
+            <p th:text="${user.username}"></p>
+            <p th:text="${user.email}"></p>
+            <p th:text="${user.first_name}"></p>
+            <p th:text="${user.last_name}"></p>
+            <p th:text="${user.city}"></p>
+            <p th:text="${user.created_at}"></p>
+            <a th:href="@{/friends/{id}(id=${user.id})}">Add</a>
+        </div>
+    </li>
+</ul>
+</body>
+</html>
