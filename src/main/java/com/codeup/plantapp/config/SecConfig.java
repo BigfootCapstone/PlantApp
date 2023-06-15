@@ -21,7 +21,7 @@ public class SecConfig {
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/**").permitAll()
                 .requestMatchers("/search","/users/*", "weather").authenticated()
-                .requestMatchers("/search", "/users/*", "/plants/*", "/register", "/users/login","/").permitAll()
+                .requestMatchers("/search", "/users/*", "/plants/*", "/friends/*", "/register", "/users/login","/").permitAll()
                 .requestMatchers("/css/**", "/js/**").permitAll()
         );
 
