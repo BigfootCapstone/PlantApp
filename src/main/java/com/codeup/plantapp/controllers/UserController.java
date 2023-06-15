@@ -35,8 +35,6 @@ public class UserController {
     private final FriendRepository friendDao;
 
 
-//    private final UserRepository userDao;
-
     public UserController(UserRepository usersDao, GardenPlantRepository gardenPlantDao,
                           FriendRepository friendDao,
                           PlantRepository plantDao, PasswordEncoder passwordEncoder){
@@ -63,9 +61,8 @@ public class UserController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
         return "redirect:/users/login";
-//        usersDao.save(user);
-//        return "redirect:/userProfile";
     }
+
     @GetMapping("/login")
     public String viewLoginPage() {
         return "login";
@@ -141,7 +138,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String getUserProfile(@PathVariable Long id, Model model) {
+    public String getUserProfile(@PathVariable("id") long id, Model model) {
         User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         model.addAttribute("user", user);
@@ -149,26 +146,23 @@ public class UserController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editUserProfileForm(@PathVariable(name ="id") Long id, Model model) {
-        User user = usersDao.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+    public String editUserProfileForm(@PathVariable(name = "id") Long id, Model model) {
+        User user = usersDao.findUserById(id);
         model.addAttribute("user", user);
         return "editUserForm";
     }
 
 
     @PostMapping("/{id}/edit")
-    public String updateUserProfile(@PathVariable(name ="id") Long id, @ModelAttribute("user") User updatedUser) {
-//        User user = userDao.findUserById(1L);
-        User users = usersDao.findUserById(1L);
-//                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
-        users.setUsername(updatedUser.getUsername());
-        users.setFirst_name(updatedUser.getFirst_name());
-        users.setLast_name(updatedUser.getLast_name());
-        users.setCity(updatedUser.getCity());
-        users.setEmail(updatedUser.getEmail());
-//        userDao.save(user);
-        usersDao.save(users);
+    public String updateUserProfile(@PathVariable(name = "id") Long id, @ModelAttribute User updatedUser) {
+        User user = usersDao.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+        user.setUsername(updatedUser.getUsername());
+        user.setFirst_name(updatedUser.getFirst_name());
+        user.setLast_name(updatedUser.getLast_name());
+        user.setCity(updatedUser.getCity());
+        user.setEmail(updatedUser.getEmail());
+        usersDao.save(user);
         return "redirect:/users/" + id;
     }
 

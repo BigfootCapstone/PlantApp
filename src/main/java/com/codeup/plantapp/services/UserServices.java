@@ -27,4 +27,5 @@ public class UserServices implements UserDetailsService {
             return new BotaniUserDetails(user.getId(), user.getUsername(), user.getEmail(),user.getPassword());
         }
     }
+
 }
