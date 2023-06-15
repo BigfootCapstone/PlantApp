@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 
 <html  lang="en" xmlns:th="http://www.thymeleaf.org"
+
+       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"><!--<head th:insert="partials/head :: head('Edit Profile')"></head>-->
 <head>
   <meta charset="utf-8" />
@@ -37,7 +40,8 @@
   <link rel="stylesheet" type="text/css" href="/static/css/style.css" />
 </head>
 
-<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head th:insert="partials/head :: head('Edit Profile')"></head>
 
 <body>
@@ -141,13 +145,13 @@
             </form>
           </div>
         </div>
-      </div>
-  </div>
+    </div>
+</div>
 
 
 
-<script th:src="@{/css/js/staticElements.js}"></script>
-<footer th:replace="partials/footer :: footer"></footer>
+        <script th:src="@{/css/js/staticElements.js}"></script>
+        <footer th:replace="partials/footer :: footer"></footer>
 
 </body>
 </html>
