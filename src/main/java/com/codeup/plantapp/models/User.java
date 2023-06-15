@@ -52,6 +52,10 @@ public class User {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public LocalDate getCreated_at() {
         return created_at;
     }
@@ -91,7 +95,11 @@ public class User {
         return email;
     }
     public void setEmail(String email) {
-        this.email = email;
+        if (email == null) {
+            throw new IllegalArgumentException("Email cannot be null");
+        } else {
+            this.email = email;
+        }
     }
 
     public String getPassword() {
