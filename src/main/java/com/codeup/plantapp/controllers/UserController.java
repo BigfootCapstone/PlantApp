@@ -36,8 +36,6 @@ public class UserController {
     private final FriendRepository friendDao;
 
 
-//    private final UserRepository userDao;
-
     public UserController(UserRepository usersDao, GardenPlantRepository gardenPlantDao,
                           FriendRepository friendDao,
                           PlantRepository plantDao, PasswordEncoder passwordEncoder){
