@@ -51,4 +51,42 @@ public class FriendsController {
         return "redirect:/friends/";
     }
 
+
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>>USER ACC/IGN FRIEND REQUEST <<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+/*
+    @PostMapping("/accept/{id}")
+    public String acceptFriend(@PathVariable long id,
+                            RedirectAttributes redirectAttributes){
+        User user1 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = usersDao.findUserById(id);
+
+        Friend newRequest = new Friend(user1, user, false);
+        friendDao.save(newRequest);
+
+        redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");
+
+        return "redirect:/users/profile";
+    }
+
+    @PostMapping("/ignore/{id}")
+    public String ignoreFriend(@PathVariable long id,
+                            RedirectAttributes redirectAttributes){
+        User user1 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = usersDao.findUserById(id);
+
+        Friend newRequest = new Friend(user1, user, false);
+        friendDao.save(newRequest);
+
+        redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");
+
+        return "redirect:/users/profile";
+    }
+*/
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
 }

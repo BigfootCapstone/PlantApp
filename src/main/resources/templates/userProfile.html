@@ -48,6 +48,27 @@
         </div>
     </div>
 
+<!--    Friends Request Placeholder-->
+    <div>
+        <h3 class="subtitle">Friend Requests</h3>
+        <div class="row justify-content-between">
+            <div class="column" th:each="request : ${friendsRequest}">
+                <p th:text="${request.username}"></p>
+                <p th:text="${request.last_name}"></p>
+                <p th:text="${request.username}"></p>
+                <p th:text="${request.email}"></p>
+                <a th:href="@{/friends/{id}(id=${user.id})}">Accept</a>
+                <a th:href="@{/friends/{id}(id=${user.id})}">Ignore</a>
+            </div>
+<!--            <div class="column" th:each="friend : ${friends}">-->
+<!--                <p th:text="${friend.first_name}"></p>-->
+<!--                <p th:text="${friend.last_name}"></p>-->
+<!--                <p th:text="${friend.username}"></p>-->
+<!--                <p th:text="${friend.email}"></p>-->
+<!--            </div>-->
+        </div>
+    </div>
+
 
 
 

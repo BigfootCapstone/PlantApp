@@ -12,7 +12,7 @@ public class Friend {
 
     @ManyToOne
     @JoinColumn(name = "user_id1")
-    private User userID1;
+    private User user;
 
     @ManyToOne
     @JoinColumn(name = "user_id2")
@@ -29,10 +29,10 @@ public class Friend {
     }
 
     public User getUserID1() {
-        return userID1;
+        return user;
     }
     public void setUserID1(User userID1) {
-        this.userID1 = userID1;
+        this.user = user;
     }
 
     public User getUserID2() {
@@ -51,8 +51,8 @@ public class Friend {
 
     public Friend() {
     }
-    public Friend(User userID1, User userID2, boolean confirmed) {
-        this.userID1 = userID1;
+    public Friend(User user, User userID2, boolean confirmed) {
+        this.user = user;
         this.userID2 = userID2;
         this.confirmed = confirmed;
     }
