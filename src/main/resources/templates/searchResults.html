@@ -4,9 +4,9 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="partials/head :: head('Plant Search Results')"></head>
 <body>
-<h1>Search Results for "<span th:text="${query}"></span>"</h1>
+<h1 class="subtitle">Search Results for "<span th:text="${query}"></span>"</h1>
 <ul>
-  <li th:each="plant : ${plants}">
+  <li class="quote" th:each="plant : ${plants}">
     <p th:text="${plant.common_name}"></p>
     <img th:if="${plant.image_url}" th:src="${plant.image_url}" alt="Plant Photo">
     <p th:text="${plant.family}"></p>
