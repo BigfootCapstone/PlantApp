@@ -8,11 +8,7 @@ import com.codeup.plantapp.repositories.UserRepository;
 import com.codeup.plantapp.services.Keys;
 import com.codeup.plantapp.util.PlantDTO;
 import com.codeup.plantapp.util.PlantResultDTO;
-import jdk.swing.interop.SwingInterOpUtils;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +16,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
@@ -30,7 +23,6 @@ import java.util.List;
 
 import static com.codeup.plantapp.services.PlantsCall.getOpenFarmPrimer;
 import static com.codeup.plantapp.services.PlantsCall.getTreflePlant;
-import static com.codeup.plantapp.services.WeatherCall.getWeather;
 
 @Controller
 @RequestMapping("/plants")

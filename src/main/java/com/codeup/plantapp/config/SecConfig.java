@@ -35,4 +35,6 @@ public class SecConfig {
     public PasswordEncoder passwordEncoder () {
         return new BCryptPasswordEncoder();
     }
+
+
 }
