@@ -1,8 +1,9 @@
 import { Configuration, OpenAIApi} from "openai";
 
+
 const configuration = new Configuration({
     organization: "org-zEo7FbMYDlcAINcYlH3JseJg",
-    apiKey: "",
+    apiKey: CHATGPT_API_TOKEN,
 });
 
 const openai = new OpenAIApi(configuration);
