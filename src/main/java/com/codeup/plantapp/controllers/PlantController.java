@@ -53,10 +53,16 @@ public class PlantController {
         this.plantLogsDao = plantLogsDao;
     }
 
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><ADD PLANT NOT IN API ><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+
     @GetMapping("/add")
     public String addPlantForm(HttpSession session, Model model){
         session.getAttribute("user");
-        model.addAttribute("user", new User());
+        model.addAttribute("plant", new Plant());
         return "addPlantForm";
     }
 
