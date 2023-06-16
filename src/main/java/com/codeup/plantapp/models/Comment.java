@@ -2,6 +2,7 @@ package com.codeup.plantapp.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,7 +17,7 @@ public class Comment {
     private String content;
 
     @Column(nullable = true)
-    private Date created_at;
+    private LocalDate created_at;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -55,16 +56,16 @@ public class Comment {
     public void setPost(Post post) {
         this.post = post;
     }
-    public Date getCreated_at() {
+    public LocalDate getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Date created_at) {
+    public void setCreated_at(LocalDate created_at) {
         this.created_at = created_at;
     }
     public Comment() {}
 
-    public Comment(String content, User user, Post post,  Date created_at) {
+    public Comment(String content, User user, Post post,  LocalDate created_at) {
         this.content = content;
         this.user = user;
         this.post = post;

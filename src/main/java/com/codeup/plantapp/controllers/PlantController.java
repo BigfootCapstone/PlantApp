@@ -79,7 +79,7 @@ public class PlantController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userFound = usersDao.findUserById(user.getId());
 
-        Date date = new Date();
+        LocalDate date = LocalDate.now();
 
         GardenPlant newGardenPlant = new GardenPlant(userFound, newPlant, sun_amount, date, water_interval, is_outside);
 
@@ -165,7 +165,7 @@ public class PlantController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userFound = usersDao.findUserById(user.getId());
 
-        Date date = new Date();
+        LocalDate date = LocalDate.now();
 
         GardenPlant newGardenPlant = new GardenPlant(userFound, userPlant, sun_amount, date, water_interval, is_outside);
 
