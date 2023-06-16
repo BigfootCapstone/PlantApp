@@ -1,23 +1,17 @@
-const { Configuration, OpenAIApi } = require("openai");
+import { Configuration, OpenAIApi} from "openai";
 
-async function run() {
-    const configuration = new Configuration({
-        headers: {
-            organization: "org-zEo7FbMYDlcAINcYlH3JseJg",
-            Authorization: "Bearer sk-HD1n647e568e98fbe1165",
-        },
-    });
+const configuration = new Configuration({
+    organization: "org-zEo7FbMYDlcAINcYlH3JseJg",
+    apiKey: "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",
+});
 
-    const openai = new OpenAIApi(configuration);
+const openai = new OpenAIApi(configuration);
 
-    const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: "Say this is a test",
-        max_tokens: 7,
-        temperature: 1,
-    });
+const complpetion = await openai.createCompletion({
+    model: "text-davinci-003",
+    prompt: "Give me a guide on how to care for a strawberry plant.",
+    max_tokens: 100,
+    temperature: 0
+});
 
-    console.log(response);
-}
-
-run().catch((error) => console.error(error));
+console.log(complpetion.data.choices[0].text);
