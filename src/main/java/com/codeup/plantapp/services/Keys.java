@@ -19,6 +19,9 @@ public class Keys {
     @Value("${openfarm.key}")
     private String openfarm;
 
+    @Value("${chatGPT.key}")
+    private String chatGPT;
+
     public String getOpenWeather() {
         return weather;
     }
@@ -31,5 +34,7 @@ public class Keys {
     public String getPerenual() {
         return perenual;
     }
-
+    public String getChatGPT() {
+        return chatGPT;
+    }
 }
