@@ -1,7 +1,6 @@
 package com.codeup.plantapp.models;
 
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.util.List;

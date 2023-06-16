@@ -119,7 +119,7 @@ public class PlantController {
         GardenPlant newGardenPlant = new GardenPlant(userFound, userPlant, sun_amount, date, water_interval, is_outside);
 
         gardenPlantsDao.save(newGardenPlant);
-        return "searchForm";
+        return "redirect:/users/profile";
     }
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
@@ -132,6 +132,8 @@ public class PlantController {
     @GetMapping("/{id}/delete")
     public String deletePlant(@PathVariable long id) {
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
+        List<PlantLog> remove = plantLogsDao.findPlantLogByGardenPlant(userGardenPlant);
+        plantLogsDao.deleteAll(remove);
         gardenPlantsDao.deleteById(id);
         long userPlant = userGardenPlant.getPlant().getId();
         plantsDao.deleteById(userPlant);
