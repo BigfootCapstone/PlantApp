@@ -208,10 +208,12 @@
                                         </div>
                                     </div>
                                     <div th:unless="${not #lists.isEmpty(userPlants)}">
-                                        <p>Add A Plant!</p>
+
                                         <form action="#" th:action="@{/plants/search}" method="post">
-                                            <input style="color: black;" type="text" name="query" placeholder="Lookin' for a plant ?" required autocomplete="on">
-                                            <input style="color: black;" id="search_submit" value="Search" type="submit">
+                                            <label>Add A Plant!
+                                                <input style="color: black;" type="text" name="query" placeholder="Lookin' for a plant ?" required autocomplete="on">
+                                            </label>
+                                            <input style="color: black;" value="Search" type="submit">
                                         </form>
                                     </div>
                                 </div>
@@ -292,19 +294,23 @@
                     </div>
                 </div>
             </div>
-        <!--Outdoor Plant Warning-->
-        <div th:if="${outdoorPlants}">
-            <h3 class="subtitle">Outdoor Plant Warning</h3>
-            <div class="row justify-content-between">
-                <div class="column" th:each="plant : ${outdoorPlants}">
-                    <p> Plant Name: <span th:text="${plant.plant.name}"></span></p>
-                    <p> Req'd Sun Amount: <span  th:text="${plant.sun_amount}"></span></p>
-                    <p> Water Every <span th:text="${plant.water_interval}"></span> Day(s)</p>
-                    <p> BotaniBuddy SunTip: <span  th:text="${plant.getSun_tip}"></span></p>
-                    <p> BotaniBuddy WaterTip: <span  th:text="${plant.getWater_tip}"></span></p>
+
+            <div th:if="${not #lists.isEmpty(outdoorPlants)}">
+                <h3 class="subtitle">Outdoor Plant Warning</h3>
+                <div class="row justify-content-between">
+                    <div class="column" th:each="plant : ${outdoorPlants}">
+                        <p> Plant Name: <span th:text="${plant.plant.name}"></span></p>
+                        <p> Req'd Sun Amount: <span  th:text="${plant.sun_amount}"></span></p>
+                        <p> Water Every <span th:text="${plant.water_interval}"></span> Day(s)</p>
+                        <p> BotaniBuddy SunTip: <span  th:text="${plant.getSun_tip}"></span></p>
+                        <p> BotaniBuddy WaterTip: <span  th:text="${plant.getWater_tip}"></span></p>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div th:unless="${not #lists.isEmpty(outdoorPlants)}">
+
+            </div>
+
         </form>
     </div>
 </div>
