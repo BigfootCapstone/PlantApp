@@ -225,16 +225,49 @@
 <!--                        recentPlantLogs-->
                         <div th:if="${not #lists.isEmpty(recentPlantLogs)}">
                             <div class="row justify-content-between">
-                                <div class="row" th:each="log : ${recentPlantLogs}">
-                                    <div class="column">
-                                        <span th:text="${log.created_at}"></span>
-                                    </div>
-                                    <div class="column">
-                                        <p> Plant Name: <span th:text="${log.gardenPlant.plant.name}"></span></p>
-                                        <p> Title: <span th:text="${log.title}"></span></p>
-                                        <p> Content:<span th:text="${log.content}"></span></p>
+<!--                                <div class="row" th:each="log : ${recentPlantLogs}">-->
+<!--                                    <div class="column">-->
+<!--                                        <span th:text="${log.created_at}"></span>-->
+<!--                                    </div>-->
+<!--                                    <div class="column">-->
+<!--                                        <p> Plant Name: <span th:text="${log.gardenPlant.plant.name}"></span></p>-->
+<!--                                        <p> Title: <span th:text="${log.title}"></span></p>-->
+<!--                                        <p> Content:<span th:text="${log.content}"></span></p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+                                <div th:each="plant : ${userPlants}">
+                                    <div th:if="${not #lists.isEmpty(plant.getPlantLogs())}">
+                                        <div class="row">
+                                            <div class="col">
+                                                <a th:href="@{/plants/garden/{id}(id=${plant.id})}">
+                                                    <span th:text="${plant.plant.name}"></span>
+                                                </a>
+                                            </div>
+                                            <div style=" max-width: fit-content; border-radius: 99px; color: white;"
+                                                 class="col bg-primary"
+                                                 th:text="${plant.getPlantLogs().size()}"></div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
+                                                       th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at}"></p>
+                                                </div>
+                                                <div class="col">
+                                                    <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
+                                                       th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).title}"></p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
+                                                   th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).content}"></p>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         <div th:unless="${not #lists.isEmpty(recentPlantLogs)}">

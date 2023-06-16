@@ -2,6 +2,7 @@ package com.codeup.plantapp.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -20,7 +21,7 @@ public class PlantLog {
     private String content;
 
     @Column(nullable = false, length = 128)
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
 //    many plant logs to one garden plant
     @ManyToOne
@@ -67,19 +68,19 @@ public class PlantLog {
         this.content = content;
     }
 
-    public LocalDateTime getCreated_at() {
+    public LocalDate getCreated_at() {
         return createdAt;
     }
-    public void setCreated_at(LocalDateTime created_at) {
+    public void setCreated_at(LocalDate created_at) {
         this.createdAt = created_at;
     }
 
     public PlantLog() {}
 
-    public PlantLog(String title, String content, LocalDateTime createdAt, GardenPlant gardenPlant, User user) {
+    public PlantLog(String title, String content, LocalDate createdAt, GardenPlant gardenPlant, User user) {
         this.title = title;
         this.content = content;
-        this.createdAt = createdAt;
+        this.createdAt = LocalDate.now();
         this.gardenPlant = gardenPlant;
         this.user = user;
     }

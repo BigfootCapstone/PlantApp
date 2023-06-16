@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -210,7 +210,7 @@ public class PlantController {
             @RequestParam(name="title") String title,
             @RequestParam(name="content") String content) {
 
-        LocalDateTime date = LocalDateTime.now();
+        LocalDate date = LocalDate.now();
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
