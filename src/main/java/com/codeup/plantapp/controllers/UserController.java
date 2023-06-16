@@ -162,6 +162,7 @@ public class UserController {
         user.setCity(updatedUser.getCity());
         user.setEmail(updatedUser.getEmail());
         usersDao.save(user);
+
         return "redirect:/users/profile";
     }
 

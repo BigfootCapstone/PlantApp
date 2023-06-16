@@ -278,13 +278,13 @@
                     <div class="tab-pane fade" id="weather" role="tabpanel" aria-labelledby="weather-tab">
                         <h3 class="subtitle">Weather Banner</h3>
                         <div th:if="${weather}">
-                            <p th:text="${weather.getTempAvg()}"></p>
-                            <p th:text="${weather.getHumidity()}"></p>
-                            <p th:text="${weather.getSunrise()}"></p>
-                            <p th:text="${weather.getSunset()}"></p>
-                            <p th:text="${weather.getCloudiness()}"></p>
-                            <p th:text="${weather.getCloudDesc()}"></p>
-                            <p th:text="${weather.getWindSpeed()}"></p>
+                            <p th:text="'Temp: ' + ${weather.getTempAvg()}"></p>
+                            <p th:text="'Humidity: ' + ${weather.getHumidity()}"></p>
+                            <p th:text="'Sunrise: ' + ${weather.getSunrise()}"></p>
+                            <p th:text="'Sunset: ' + ${weather.getSunset()}"></p>
+                            <p th:text="'Cloudiness: ' + ${weather.getCloudiness()}"></p>
+                            <p th:text="'Description: ' + ${weather.getCloudDesc()}"></p>
+                            <p th:text="'Wind Speed: ' + ${weather.getWindSpeed()}"></p>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
