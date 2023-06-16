@@ -166,11 +166,14 @@ public class UserController {
         return "redirect:/users/" + id;
     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteUserProfile(@PathVariable Long id) {
+    @GetMapping("/{id}/delete")
+    public String deleteUser(@PathVariable(name = "id") Long id, Model model) {
+        User user = usersDao.findUserById(id);
+        model.addAttribute("user", user);
         usersDao.deleteById(id);
-        return "redirect:/users";
+        return "deleteProfile";
     }
+
 
     @GetMapping
     public String getAllUsers(Model model) {
