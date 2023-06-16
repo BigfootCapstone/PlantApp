@@ -22,7 +22,7 @@ public class SecConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/**").permitAll()
-                .requestMatchers("/users/*/edit","/search","/users/**", "/friends/*", "weather","/create", "/posts" +
+                .requestMatchers("/users/*/edit","/users/**", "/friends/*", "weather","/create", "/posts" +
                                 "/comment",
                         "/posts/*/edit", "/logout","/posts/**").authenticated()
                 .requestMatchers("/posts", "/posts/*", "/search", "/plants/*", "/register", "/users/login","/").permitAll()

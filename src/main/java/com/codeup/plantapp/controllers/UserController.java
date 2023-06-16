@@ -117,10 +117,6 @@ public class UserController {
         List <User> friendsRequest = friendsRequests(userFromDb);
         List <User> friends = knownFriends(userFromDb);
 
-        for (User userTest : friends) {
-            System.out.println(userTest.getCity());
-        }
-
         model.addAttribute("friendsRequest", friendsRequest);
         model.addAttribute("friends", friends);
 

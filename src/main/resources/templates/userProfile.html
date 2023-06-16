@@ -14,68 +14,68 @@
     <!--Weather Banner-->
 
 
-    <!--Outdoor Plant Warning-->
-    <div th:if="${outdoorPlants}">
-        <h3 class="subtitle">Outdoor Plant Warning</h3>
-        <div class="row justify-content-between">
-            <div class="column" th:each="plant : ${outdoorPlants}">
-                <p> Plant Name: <span th:text="${plant.plant.name}"></span></p>
-                <p> Req'd Sun Amount: <span  th:text="${plant.sun_amount}"></span></p>
-                <p> Water Every <span th:text="${plant.water_interval}"></span> Day(s)</p>
-                <p> BotaniBuddy SunTip: <span  th:text="${plant.getSun_tip}"></span></p>
-                <p> BotaniBuddy WaterTip: <span  th:text="${plant.getWater_tip}"></span></p>
-            </div>
-        </div>
-    </div>
+<!--    &lt;!&ndash;Outdoor Plant Warning&ndash;&gt;-->
+<!--    <div th:if="${outdoorPlants}">-->
+<!--        <h3 class="subtitle">Outdoor Plant Warning</h3>-->
+<!--        <div class="row justify-content-between">-->
+<!--            <div class="column" th:each="plant : ${outdoorPlants}">-->
+<!--                <p> Plant Name: <span th:text="${plant.plant.name}"></span></p>-->
+<!--                <p> Req'd Sun Amount: <span  th:text="${plant.sun_amount}"></span></p>-->
+<!--                <p> Water Every <span th:text="${plant.water_interval}"></span> Day(s)</p>-->
+<!--                <p> BotaniBuddy SunTip: <span  th:text="${plant.getSun_tip}"></span></p>-->
+<!--                <p> BotaniBuddy WaterTip: <span  th:text="${plant.getWater_tip}"></span></p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
-    <!--Garden Preview-->
+<!--    &lt;!&ndash;Garden Preview&ndash;&gt;-->
 
-    <form autocomplete="off" action="/action_page.php">
-        <div class="autocomplete" style="width:300px;">
-            <input id="myInput" type="text" name="myCountry" placeholder="Country">
-        </div>
-        <input type="submit">
-    </form>
-    <div>
-        <div class="column" th:each="plant : ${userPlants}">
-            <p><span  th:text="${plant.plant.id}"></span></p>
-            <a th:href="@{/plants/garden/{id}(id=${plant.id})}"><span th:text="${plant.plant.name}"></span></a>
-            <p><span  th:text="${plant.sun_amount}"></span></p>
-            <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
-            <p><span  th:text="${plant.getSun_tip}"></span></p>
-            <p><span  th:text="${plant.getWater_tip}"></span></p>
-<!--            button for delete path-->
-            <div class="row">
-                <a th:href="@{/plants/{id}/delete(id=${plant.id})}">Delete</a>
-            </div>
+<!--    <form autocomplete="off" action="/action_page.php">-->
+<!--        <div class="autocomplete" style="width:300px;">-->
+<!--            <input id="myInput" type="text" name="myCountry" placeholder="Country">-->
+<!--        </div>-->
+<!--        <input type="submit">-->
+<!--    </form>-->
+<!--    <div>-->
+<!--        <div class="column" th:each="plant : ${userPlants}">-->
+<!--            <p><span  th:text="${plant.plant.id}"></span></p>-->
+<!--            <a th:href="@{/plants/garden/{id}(id=${plant.id})}"><span th:text="${plant.plant.name}"></span></a>-->
+<!--            <p><span  th:text="${plant.sun_amount}"></span></p>-->
+<!--            <p><span th:text="${plant.water_interval}"></span> Day(s)</p>-->
+<!--            <p><span  th:text="${plant.getSun_tip}"></span></p>-->
+<!--            <p><span  th:text="${plant.getWater_tip}"></span></p>-->
+<!--&lt;!&ndash;            button for delete path&ndash;&gt;-->
+<!--            <div class="row">-->
+<!--                <a th:href="@{/plants/{id}/delete(id=${plant.id})}">Delete</a>-->
+<!--            </div>-->
 
-        </div>
-    </div>
+<!--        </div>-->
+<!--    </div>-->
 
-<!--    Friends Request Placeholder-->
-    <div>
-        <h3 class="subtitle">Friend Requests</h3>
-        <div class="row justify-content-between">
-            <div class="column" th:each="request : ${friendsRequest}">
-                <p th:text="${request.id}"></p>
-                <p th:text="${request.username}"></p>
-                <p th:text="${request.last_name}"></p>
-                <p th:text="${request.username}"></p>
-                <p th:text="${request.email}"></p>
-                <a th:href="@{/friends/accept/{id}(id=${request.id})}">Accept</a>
-                <a th:href="@{/friends/ignore/{id}(id=${request.id})}">Ignore</a>
-            </div>
-        </div>
-    </div>
-<div>
-    <h3 class="subtitle">Friends</h3>
-    <div class="column" th:each="friend : ${friends}">
-        <p th:text="${friend.first_name}"></p>
-        <p th:text="${friend.last_name}"></p>
-        <p th:text="${friend.username}"></p>
-        <p th:text="${friend.email}"></p>
-    </div>
-</div>
+<!--&lt;!&ndash;    Friends Request Placeholder&ndash;&gt;-->
+<!--    <div>-->
+<!--        <h3 class="subtitle">Friend Requests</h3>-->
+<!--        <div class="row justify-content-between">-->
+<!--            <div class="column" th:each="request : ${friendsRequest}">-->
+<!--                <p th:text="${request.id}"></p>-->
+<!--                <p th:text="${request.username}"></p>-->
+<!--                <p th:text="${request.last_name}"></p>-->
+<!--                <p th:text="${request.username}"></p>-->
+<!--                <p th:text="${request.email}"></p>-->
+<!--                <a th:href="@{/friends/accept/{id}(id=${request.id})}">Accept</a>-->
+<!--                <a th:href="@{/friends/ignore/{id}(id=${request.id})}">Ignore</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--<div>-->
+<!--    <h3 class="subtitle">Friends</h3>-->
+<!--    <div class="column" th:each="friend : ${friends}">-->
+<!--        <p th:text="${friend.first_name}"></p>-->
+<!--        <p th:text="${friend.last_name}"></p>-->
+<!--        <p th:text="${friend.username}"></p>-->
+<!--        <p th:text="${friend.email}"></p>-->
+<!--    </div>-->
+<!--</div>-->
 
 
 <div class="d-flex container create justify-content-center align-content-center">
@@ -266,12 +266,16 @@
                                     <a th:href="@{/friends/accept/{id}(id=${request.id})}">Accept</a>
                                     <a th:href="@{/friends/ignore/{id}(id=${request.id})}">Ignore</a>
                                 </div>
-                                <!--            <div class="column" th:each="friend : ${friends}">-->
-                                <!--                <p th:text="${friend.first_name}"></p>-->
-                                <!--                <p th:text="${friend.last_name}"></p>-->
-                                <!--                <p th:text="${friend.username}"></p>-->
-                                <!--                <p th:text="${friend.email}"></p>-->
-                                <!--            </div>-->
+                                <h3 class="subtitle">Friends</h3>
+                                <div class="column" th:each="friend : ${friends}">
+<!--                                                <p th:text="${friend.first_name}"></p>-->
+<!--                                                <p th:text="${friend.last_name}"></p>-->
+                                    <div class="row">
+                                        <p style="color: black;">
+                                            [[${friend.username}]]
+                                            <span style="color: blue;" th:text="${friend.email}"></span></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
