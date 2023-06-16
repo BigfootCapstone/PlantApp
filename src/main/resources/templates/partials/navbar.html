@@ -21,15 +21,36 @@
                 <li class="nav-item">
                     <a th:href="@{/}" class="nav-link">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a th:href="@{/#about}" class="nav-link">About</a>
+<!--                <li class="nav-item">-->
+<!--                    <a th:href="@{/#about}" class="nav-link">About</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a th:href="@{/#reviews}" class="nav-link">Reviews</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a th:href="@{/#contact}" class="nav-link">Contact</a>-->
+<!--                </li>-->
+                <li class="nav-item" sec:authorize="isAuthenticated()">
+                    <form th:action="@{/posts/all}" >
+                        <button class=" nav-link " style="border: unset; background: unset">Social</button>
+                    </form>
                 </li>
-                <li class="nav-item">
-                    <a th:href="@{/#reviews}" class="nav-link">Reviews</a>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <form th:action="@{/#about}" >
+                        <button class="login-nav` nav-link " style="border: unset; background: unset" >About</button>
+                    </form>
                 </li>
-                <li class="nav-item">
-                    <a th:href="@{/#contact}" class="nav-link">Contact</a>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <form th:action="@{/#reviews}">
+                        <button  class=" nav-link " style="border: unset; background: unset" >Reviews</button>
+                    </form>
                 </li>
+                <li class="nav-item" sec:authorize="!isAuthenticated()">
+                    <form th:action="@{/#contact}" >
+                        <button class=" nav-link " style="border: unset; background: unset" >Contact</button>
+                    </form>
+                </li>
+
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <form th:action="@{/users/profile}" >
                         <button class="login-nav nav-link active" >Profile</button>
@@ -45,7 +66,7 @@
                         <button th:method="post" class="login-nav nav-link active" >Logout</button>
                     </form>
                 </li>
-                <li id="wrap">
+                <li id="wrap" sec:authorize="isAuthenticated()">
                     <form action="#" th:action="@{/plants/search}" method="post">
                         <input id="search" class="d-flex" type="text" name="query" placeholder="Lookin' for a plant ?" required autocomplete="off">
                         <input id="search_submit" value="Search" type="submit">

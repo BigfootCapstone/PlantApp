@@ -17,17 +17,19 @@
                                 <div class="card-title"> [[${post.title}]] </div>
                                 <p class="card-text"> [[${post.body}]] </p>
                                 <!--                <a th:href="${posts.id}" class="btn btn-primary">View</a>-->
-
-                                <div th:if="${session.user == null}" class="row justify-right">
-                                    <a th:href="${'posts/' + post.id}" class="btn btn-primary">View</a>
-                                </div>
-
-                                <div th:if="${session.user != null}" class="row justify-right">
-                                    <a th:href="${'posts/' + post.id}" class="btn">View</a>
-                                    <a th:if="${session.user.id} == ${post.user.id}" th:href="${post.id + '/edit'}" class="btn-secondary">Edit</a>
-                                </div>
+                                <ul>
+                                    <li class="row justify-right" sec:authorize="!isAuthenticated()">
+                                        <form th:action="@{/posts/{id}(id=${post.id})}" >
+                                            <button  class="btn btn-primary" >view</button>
+                                        </form>
+                                    </li>
+                                    <li class="row justify-right" sec:authorize="isAuthenticated()">
+                                        <form th:action="@{/posts/{id}(id=${post.id})}" >
+                                            <button  class="btn btn-primary" >view</button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </div>
-
                         </div>
                     </div>
                 </div>

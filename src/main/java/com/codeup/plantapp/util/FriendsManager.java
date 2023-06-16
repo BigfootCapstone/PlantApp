@@ -34,17 +34,44 @@ public class FriendsManager {
         List<User> friends = new ArrayList<>();
         for (Friend friend: friendsRequest) {
             if (friend.isConfirmed()) {
-                friends.add(friend.getUserID2());
+                if (friend.getUser().equals(user)) {
+                    friends.add(friend.getUserID2());
+                } else {
+                    friends.add(friend.getUser());
+                }
             }
+        }
+        for (User friend: friends){
+            System.out.println(friend.getUsername());
         }
         return friends;
     }
 
-    public static List<User> friendsRequests (User user) {
+//    public static List<User> friendsRequests (User user) {
+////      TODO: SHOW friend requests TO user not FROM
+//        List<Friend> friendsRequest = user.getFriends();
+//        List<User> friendReq = new ArrayList<>();
+//        for (Friend friend: friendsRequest) {
+//            if (friend.getUser() != user && !friend.isConfirmed()) {
+//                System.out.println("request from other user:" + user.getUsername());
+//                friendReq.add(friend.getUser());
+//            } else if (!friend.isConfirmed()) {
+//                System.out.println("request from user:" + user.getUsername());
+//                friendReq.add(friend.getUserID2());
+//            }
+//        }
+//        return friendReq;
+//    }
+
+    public static List<User> friendsRequests(User user) {
         List<Friend> friendsRequest = user.getFriends();
         List<User> friendReq = new ArrayList<>();
-        for (Friend friend: friendsRequest) {
-            if (!friend.isConfirmed()) {
+        for (Friend friend : friendsRequest) {
+            if (!friend.isConfirmed() && !friend.getUser().equals(user)) {
+                System.out.println("Request from other user: " + friend.getUser().getUsername());
+                friendReq.add(friend.getUser());
+            } else if (!friend.isConfirmed()) {
+                System.out.println("Request to user: " + friend.getUserID2().getUsername());
                 friendReq.add(friend.getUserID2());
             }
         }
