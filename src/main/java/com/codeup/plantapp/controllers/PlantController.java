@@ -62,11 +62,11 @@ public class PlantController {
 */
     @GetMapping("/search")
     public String showSearchForm() {
-        URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle());
-        PlantDTO plant =  getTreflePlant(trefleApiUrl);
-
-        String selectedPlantCommonName = plant.getCommon_name();
-        String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
+//        URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle());
+//        PlantDTO plant =  getTreflePlant(trefleApiUrl);
+//
+//        String selectedPlantCommonName = plant.getCommon_name();
+//        String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
 
         return "searchForm";
     }
