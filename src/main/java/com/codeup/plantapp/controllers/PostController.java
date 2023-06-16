@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -53,8 +54,9 @@ public class PostController {
     public String submitComment(@RequestParam(name="content") String content,
                                 @RequestParam(name="postId") long postId){
         Post post = postsDao.findById(postId);
+        Date created_at = new Date();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Comment comment = new Comment(content, user, post);
+        Comment comment = new Comment(content, user, post, created_at);
         commentsDao.save(comment);
         return "redirect:/posts/all";
     }
