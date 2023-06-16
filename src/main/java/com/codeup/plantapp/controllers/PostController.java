@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -53,10 +54,11 @@ public class PostController {
     public String submitComment(@RequestParam(name="content") String content,
                                 @RequestParam(name="postId") long postId){
         Post post = postsDao.findById(postId);
+        Date created_at = new Date();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        Comment comment = new Comment(content, user, post);
+        Comment comment = new Comment(content, user, post, created_at);
         commentsDao.save(comment);
-        return "redirect:/post/all";
+        return "redirect:/posts/all";
     }
 
     /*
@@ -76,7 +78,10 @@ public class PostController {
                              @ModelAttribute Post post,
                              @RequestParam(name = "title") String title,
                              @RequestParam(name = "body") String body) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        post.setUser(user);
+//        postsDao.save(post);
+        User user = usersDao.findUserById(1L);
         post.setUser(user);
         postsDao.save(post);
 //        emailService.prepareAndSend(posts, title, body);
@@ -107,7 +112,11 @@ public class PostController {
         thingpost.setTitle(title);
         thingpost.setBody(body);
         postsDao.save(thingpost);
-        return "redirect:/";
+        return "redirect:/posts/all";
+    }
+    @GetMapping("/users/login")
+    public String viewLoginPage() {
+        return "login";
     }
 
 }

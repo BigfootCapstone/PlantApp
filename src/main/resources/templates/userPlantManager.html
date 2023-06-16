@@ -69,8 +69,11 @@
                 <div id="comments-feed" class="column justify-top gap-15">
                     <div th:each="plantLog: ${usersPlantLogs}">
                         <div>
-                            <p th:text="${plantLog.title}"></p>
-                            <p th:text="${plantLog.content}"></p>
+                            <p style="color: white;">[[${plantLog.title}]]
+                                <span style="color: gray;" th:text="${plantLog.created_at}"></span>
+                            </p>
+
+                            <p style="color: white;" th:text="${plantLog.content}"></p>
                             <div class="row">
                                 <a th:href="@{/plants/comment/delete/{plant}.{id}(id=${plantLog.id}, plant=${userGardenPlant.id})}">Delete</a>
 <!--                                <a th:href="@{/plants/comment/edit/{plant}.{id}(id=${plantLog.id}, plant=${userGardenPlant.id})}">Edit</a>-->

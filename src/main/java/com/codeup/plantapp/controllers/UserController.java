@@ -6,7 +6,6 @@ import com.codeup.plantapp.repositories.GardenPlantRepository;
 import com.codeup.plantapp.repositories.PlantRepository;
 import com.codeup.plantapp.repositories.UserRepository;
 import com.codeup.plantapp.services.Keys;
-import com.codeup.plantapp.services.UserServices;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -61,19 +60,19 @@ public class UserController {
         user.setCreated_at(LocalDate.now());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
-        return "redirect:/users/" + user.getId();
+        return "redirect:/users/login";
     }
 
     @GetMapping("/login")
     public String viewLoginPage() {
         return "login";
     }
-    @PostMapping("/login")
-    public String loginSessionSetter(Model model, HttpSession session){
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        session.setAttribute("user", user);
-        return "redirect:/users/profile";
-    }
+//    @PostMapping("/login")
+//    public String loginSessionSetter(Model model, HttpSession session){
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        session.setAttribute("user", user);
+//        return "redirect: /users/profile";
+//    }
 //    @GetMapping("/logout")
 //    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
 //        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -118,10 +117,6 @@ public class UserController {
         List <User> friendsRequest = friendsRequests(userFromDb);
         List <User> friends = knownFriends(userFromDb);
 
-        for (User userTest : friends) {
-            System.out.println(userTest.getCity());
-        }
-
         model.addAttribute("friendsRequest", friendsRequest);
         model.addAttribute("friends", friends);
 
@@ -153,6 +148,7 @@ public class UserController {
         return "editUserForm";
     }
 
+
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable(name = "id") Long id, @ModelAttribute User updatedUser) {
         User user = usersDao.findById(id)
@@ -166,15 +162,20 @@ public class UserController {
         return "redirect:/users/" + id;
     }
 
-    @PostMapping("/{id}/delete")
-    public String deleteUserProfile(@PathVariable Long id) {
+    @GetMapping("/{id}/delete")
+    public String deleteUser(@PathVariable(name = "id") Long id, Model model) {
+        User user = usersDao.findUserById(id);
+        model.addAttribute("user", user);
         usersDao.deleteById(id);
-        return "redirect:/users";
+        return "deleteProfile";
     }
+
 
     @GetMapping
     public String getAllUsers(Model model) {
         model.addAttribute("users", usersDao.findAll());
         return "users";
     }
+
+
 }
