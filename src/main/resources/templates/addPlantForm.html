@@ -20,27 +20,47 @@
             <div class="col-lg-8">
                 <div class="custom-form">
                     <span id="error-msg"></span>
-                    <form method="post" name="addPlantForm" th:action="@{/plants/add}" >
+                    <form method="post" name="addPlantForm" th:action="@{/plants/add}" th:object="${plant}">
                         <div class="row">
-                            <div class="col-lg-6">
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Plant Name</label>
-                                    <input name="name" id="name" type="text" class="form-control" placeholder="Enter your plants name...">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="family" class="form-label">Plant Family</label>
-                                    <input name="family" id="family" type="text" class="form-control" placeholder="Enter the plants family...">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="genus" class="form-label">Plant Genus</label>
-                                    <input name="name" id="genus" type="text" class="form-control" placeholder="Enter plant genus...">
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12 text-end">
-                                        <input type="submit" id="submit" name="send" class="submitBnt btn btn-custom" value="Add Plant" />
-                                    </div>
-                                </div>
-                            </div>
+                                <!--          get trefle-->
+                                <label for="common_name">Plant's Common name</label>
+                                <input id= common_name type="text" name="name" th:text="${name}">
+                                <label for="sun_amount">Sun Amount</label>
+                                <select name="sun_amount" id="sun_amount">
+                                    <option value="FULL_SUN">Full Sun</option>
+                                    <option value="PARTIAL_SUN">Partial Sun</option>
+                                    <option value="FULL_SHADE">Shaded</option>
+                                </select>
+                                <label for="water_interval">Water Interval</label>
+                                <input type="number" id="water_interval" name="water_interval" min="1" max="30">
+                                <label>Is this plant Outside</label>
+                                <label for="yes">Yes
+                                    <input name="is_outside" id="yes" type="radio" value="true">
+                                </label>
+                                <label for="no">No
+                                    <input name="is_outside" id="no" type="radio" value="false">
+                                </label>
+
+                                <input type="submit" class="ui button">Save
+<!--                            <div class="col-lg-6">-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="name" class="form-label">Plant Name</label>-->
+<!--                                    <input name="name" id="name" type="text" class="form-control" placeholder="Enter your plants name...">-->
+<!--                                </div>-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="family" class="form-label">Plant Family</label>-->
+<!--                                    <input name="family" id="family" type="text" class="form-control" placeholder="Enter the plants family...">-->
+<!--                                </div>-->
+<!--                                <div class="mb-3">-->
+<!--                                    <label for="genus" class="form-label">Plant Genus</label>-->
+<!--                                    <input name="name" id="genus" type="text" class="form-control" placeholder="Enter plant genus...">-->
+<!--                                </div>-->
+<!--                                <div class="row">-->
+<!--                                    <div class="col-lg-12 text-end">-->
+<!--                                        <input type="submit" id="submit" name="send" class="submitBnt btn btn-custom" value="Add Plant" />-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
                     </form>
                 </div>

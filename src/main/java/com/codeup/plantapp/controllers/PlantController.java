@@ -67,12 +67,45 @@ public class PlantController {
     }
 
     @PostMapping("/add")
-    public String addPlant(@ModelAttribute Post post,
-                           @RequestParam(name = "title") String title,
-                           @RequestParam(name = "body") String body){
+    public String addPlant(@ModelAttribute Plant plant,
+                           @RequestParam(name="name") String plant_name,
+                           @RequestParam(name="sun_amount") sun_amount sun_amount,
+                           @RequestParam(name="water_interval") long water_interval,
+                           @RequestParam(name="is_outside") boolean is_outside){
+        Plant newPlant = new Plant();
+        plantsDao.save(newPlant);
 
-        return "addPlantForm";
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userFound = usersDao.findUserById(user.getId());
+
+        Date date = new Date();
+
+        GardenPlant newGardenPlant = new GardenPlant(userFound, newPlant, sun_amount, date, water_interval, is_outside);
+
+        gardenPlantsDao.save(newGardenPlant);
+        return "redirect:/users/profile";
     }
+
+//    @PostMapping("/{id}")
+//    public String savePlant(@PathVariable("id") String id,
+//                            @RequestParam(name="name") String plant_name,
+//                            @RequestParam(name="sun_amount") sun_amount sun_amount,
+//                            @RequestParam(name="water_interval") long water_interval,
+//                            @RequestParam(name="is_outside") boolean is_outside
+//    ) {
+//        Plant userPlant = new Plant(id, plant_name);
+//        plantsDao.save(userPlant);
+//
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User userFound = usersDao.findUserById(user.getId());
+//
+//        Date date = new Date();
+//
+//        GardenPlant newGardenPlant = new GardenPlant(userFound, userPlant, sun_amount, date, water_interval, is_outside);
+//
+//        gardenPlantsDao.save(newGardenPlant);
+//        return "redirect:/users/profile";
+//    }
 
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
