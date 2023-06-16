@@ -8,8 +8,10 @@ import com.codeup.plantapp.repositories.UserRepository;
 import com.codeup.plantapp.services.Keys;
 import com.codeup.plantapp.util.PlantDTO;
 import com.codeup.plantapp.util.PlantResultDTO;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,9 +54,20 @@ public class PlantController {
     }
 
     @GetMapping("/add")
-    public String addPlantForm(){
+    public String addPlantForm(HttpSession session, Model model){
+        session.getAttribute("user");
+        model.addAttribute("user", new User());
         return "addPlantForm";
     }
+
+    @PostMapping("/add")
+    public String addPlant(@ModelAttribute Post post,
+                           @RequestParam(name = "title") String title,
+                           @RequestParam(name = "body") String body){
+
+        return "addPlantForm";
+    }
+
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><FIND PLANT IN API ><<>><<>><<>><<>><<>><<>><<>><|
@@ -76,9 +89,7 @@ public class PlantController {
 
         return "searchResults";
     }
-/*
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-*/
+
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><VIEW PLANT DETAILS><<>><<>><<>><<>><<>><<>><<>><|
@@ -121,6 +132,7 @@ public class PlantController {
         gardenPlantsDao.save(newGardenPlant);
         return "searchForm";
     }
+
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
