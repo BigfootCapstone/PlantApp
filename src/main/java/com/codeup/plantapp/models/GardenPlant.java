@@ -1,6 +1,8 @@
 package com.codeup.plantapp.models;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class GardenPlant {
     private String sun_tip;
 
     @Column(nullable = false, length = 128)
-    private Date last_watered;
+    private LocalDate last_watered;
 
     private String water_tip;
 
@@ -76,10 +78,10 @@ public class GardenPlant {
         this.sun_tip = sun_tip;
     }
 
-    public Date getLast_watered() {
+    public LocalDate getLast_watered() {
         return last_watered;
     }
-    public void setLast_watered(Date created_at) {
+    public void setLast_watered(LocalDate created_at) {
         this.last_watered = created_at;
     }
 
@@ -112,7 +114,7 @@ public class GardenPlant {
     }
 
     public GardenPlant() {}
-    public GardenPlant(User user, Plant plant, com.codeup.plantapp.models.sun_amount sun_amount, Date last_watered, long water_interval, boolean is_outside) {
+    public GardenPlant(User user, Plant plant, com.codeup.plantapp.models.sun_amount sun_amount, LocalDate last_watered, long water_interval, boolean is_outside) {
         this.user = user;
         this.plant = plant;
         this.sun_amount = sun_amount;

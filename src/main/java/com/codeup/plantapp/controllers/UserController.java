@@ -1,10 +1,7 @@
 package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.*;
-import com.codeup.plantapp.repositories.FriendRepository;
-import com.codeup.plantapp.repositories.GardenPlantRepository;
-import com.codeup.plantapp.repositories.PlantRepository;
-import com.codeup.plantapp.repositories.UserRepository;
+import com.codeup.plantapp.repositories.*;
 import com.codeup.plantapp.services.Keys;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,16 +30,18 @@ public class UserController {
     private final GardenPlantRepository gardenPlantDao;
     private final PlantRepository plantDao;
     private final FriendRepository friendDao;
+    private final PlantLogRepository plantlogsDao;
 
 
     public UserController(UserRepository usersDao, GardenPlantRepository gardenPlantDao,
-                          FriendRepository friendDao,
+                          FriendRepository friendDao,PlantLogRepository plantlogsDao,
                           PlantRepository plantDao, PasswordEncoder passwordEncoder){
         this.usersDao = usersDao;
         this.gardenPlantDao = gardenPlantDao;
         this.passwordEncoder = passwordEncoder;
         this.plantDao =  plantDao;
         this.friendDao = friendDao;
+        this.plantlogsDao = plantlogsDao;
     }
 
     @Autowired
@@ -129,7 +128,11 @@ public class UserController {
 //      Set All Plants for Garden Preview
         model.addAttribute("userPlants", allPlants);
 
-        System.out.println(userFromDb.getUsername());
+        model.addAttribute("recentPlantLogs", plantlogsDao.findTop5ByUserOrderByCreatedAtDesc(user));
+        for (PlantLog plantLog : plantlogsDao.findTop5ByUserOrderByCreatedAtDesc(user)
+             ) {
+            System.out.println(plantLog.getCreated_at());
+        }
         return "userProfile";
     }
 
@@ -159,7 +162,7 @@ public class UserController {
         user.setCity(updatedUser.getCity());
         user.setEmail(updatedUser.getEmail());
         usersDao.save(user);
-//        return "redirect:/users/" + id;
+
         return "redirect:/users/profile";
     }
 
