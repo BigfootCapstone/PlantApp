@@ -56,7 +56,7 @@ public class PostController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Comment comment = new Comment(content, user, post);
         commentsDao.save(comment);
-        return "redirect:/post/all";
+        return "redirect:/posts/all";
     }
 
     /*
@@ -111,6 +111,10 @@ public class PostController {
         thingpost.setBody(body);
         postsDao.save(thingpost);
         return "redirect:/posts/all";
+    }
+    @GetMapping("/users/login")
+    public String viewLoginPage() {
+        return "login";
     }
 
 }
