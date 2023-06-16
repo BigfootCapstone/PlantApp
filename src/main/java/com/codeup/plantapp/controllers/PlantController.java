@@ -8,8 +8,10 @@ import com.codeup.plantapp.repositories.UserRepository;
 import com.codeup.plantapp.services.Keys;
 import com.codeup.plantapp.util.PlantDTO;
 import com.codeup.plantapp.util.PlantResultDTO;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,10 +53,60 @@ public class PlantController {
         this.plantLogsDao = plantLogsDao;
     }
 
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><ADD PLANT NOT IN API ><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+
     @GetMapping("/add")
-    public String addPlantForm(){
+    public String addPlantForm(HttpSession session, Model model){
+        session.getAttribute("user");
+        model.addAttribute("plant", new Plant());
         return "addPlantForm";
     }
+
+    @PostMapping("/add")
+    public String addPlant(@ModelAttribute Plant plant,
+                           @RequestParam(name="name") String plant_name,
+                           @RequestParam(name="sun_amount") sun_amount sun_amount,
+                           @RequestParam(name="water_interval") long water_interval,
+                           @RequestParam(name="is_outside") boolean is_outside){
+        Plant newPlant = new Plant();
+        plantsDao.save(newPlant);
+
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userFound = usersDao.findUserById(user.getId());
+
+        Date date = new Date();
+
+        GardenPlant newGardenPlant = new GardenPlant(userFound, newPlant, sun_amount, date, water_interval, is_outside);
+
+        gardenPlantsDao.save(newGardenPlant);
+        return "redirect:/users/profile";
+    }
+
+//    @PostMapping("/{id}")
+//    public String savePlant(@PathVariable("id") String id,
+//                            @RequestParam(name="name") String plant_name,
+//                            @RequestParam(name="sun_amount") sun_amount sun_amount,
+//                            @RequestParam(name="water_interval") long water_interval,
+//                            @RequestParam(name="is_outside") boolean is_outside
+//    ) {
+//        Plant userPlant = new Plant(id, plant_name);
+//        plantsDao.save(userPlant);
+//
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        User userFound = usersDao.findUserById(user.getId());
+//
+//        Date date = new Date();
+//
+//        GardenPlant newGardenPlant = new GardenPlant(userFound, userPlant, sun_amount, date, water_interval, is_outside);
+//
+//        gardenPlantsDao.save(newGardenPlant);
+//        return "redirect:/users/profile";
+//    }
+
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><FIND PLANT IN API ><<>><<>><<>><<>><<>><<>><<>><|
@@ -76,9 +128,7 @@ public class PlantController {
 
         return "searchResults";
     }
-/*
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-*/
+
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><VIEW PLANT DETAILS><<>><<>><<>><<>><<>><<>><<>><|
@@ -121,6 +171,7 @@ public class PlantController {
         gardenPlantsDao.save(newGardenPlant);
         return "redirect:/users/profile";
     }
+
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */

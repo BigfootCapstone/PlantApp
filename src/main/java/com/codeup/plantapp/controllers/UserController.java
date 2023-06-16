@@ -159,7 +159,8 @@ public class UserController {
         user.setCity(updatedUser.getCity());
         user.setEmail(updatedUser.getEmail());
         usersDao.save(user);
-        return "redirect:/users/" + id;
+//        return "redirect:/users/" + id;
+        return "redirect:/users/profile";
     }
 
     @GetMapping("/{id}/delete")
