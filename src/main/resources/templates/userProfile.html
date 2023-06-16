@@ -221,37 +221,27 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="journal" role="tabpanel" aria-labelledby="journal-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Total Projects</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>230</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>English Level</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>Expert</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Availability</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p>6 months</p>
+
+<!--                        recentPlantLogs-->
+                        <div th:if="${not #lists.isEmpty(recentPlantLogs)}">
+                            <div class="row justify-content-between">
+                                <div class="row" th:each="log : ${recentPlantLogs}">
+                                    <div class="column">
+                                        <span th:text="${log.created_at}"></span>
+                                    </div>
+                                    <div class="column">
+                                        <p> Plant Name: <span th:text="${log.gardenPlant.plant.name}"></span></p>
+                                        <p> Title: <span th:text="${log.title}"></span></p>
+                                        <p> Content:<span th:text="${log.content}"></span></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label>Your Bio</label><br/>
-                                <p>Your detail description</p>
-                            </div>
+                        <div th:unless="${not #lists.isEmpty(recentPlantLogs)}">
+                            <p>no logs</p>
                         </div>
-                    </div>
+
+                        </div>
                     <div class="tab-pane fade" id="weather" role="tabpanel" aria-labelledby="weather-tab">
                         <h3 class="subtitle">Weather Banner</h3>
                         <div th:if="${weather}">

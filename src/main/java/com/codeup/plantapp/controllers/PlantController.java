@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -209,10 +210,11 @@ public class PlantController {
             @RequestParam(name="title") String title,
             @RequestParam(name="content") String content) {
 
-        Date date = new Date();
+        LocalDateTime date = LocalDateTime.now();
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        PlantLog plantLog = new PlantLog(title, content, date, userGardenPlant);
+        PlantLog plantLog = new PlantLog(title, content, date, userGardenPlant, user);
         plantLogsDao.save(plantLog);
 
         redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");

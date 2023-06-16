@@ -2,6 +2,7 @@ package com.codeup.plantapp.models;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -19,18 +20,30 @@ public class PlantLog {
     private String content;
 
     @Column(nullable = false, length = 128)
-    private Date created_at;
+    private LocalDateTime createdAt;
 
 //    many plant logs to one garden plant
     @ManyToOne
     @JoinColumn(name = "gardenplant_id")
     private GardenPlant gardenPlant;
 
+//    many plant logs to one user
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     public long getId() {
         return id;
     }
     public void setId(long id) {
         this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public GardenPlant getGardenPlant() {
@@ -54,19 +67,20 @@ public class PlantLog {
         this.content = content;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    public LocalDateTime getCreated_at() {
+        return createdAt;
     }
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
+    public void setCreated_at(LocalDateTime created_at) {
+        this.createdAt = created_at;
     }
 
     public PlantLog() {}
 
-    public PlantLog(String title, String content, Date created_at, GardenPlant gardenPlant) {
+    public PlantLog(String title, String content, LocalDateTime createdAt, GardenPlant gardenPlant, User user) {
         this.title = title;
         this.content = content;
-        this.created_at = created_at;
+        this.createdAt = createdAt;
         this.gardenPlant = gardenPlant;
+        this.user = user;
     }
 }
