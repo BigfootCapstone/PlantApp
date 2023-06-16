@@ -15,7 +15,7 @@ public class Comment {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date created_at;
 
     @ManyToOne
@@ -25,6 +25,8 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "post_id")
     private Post post;
+
+
 
     public long getId() {
         return id;
@@ -53,11 +55,26 @@ public class Comment {
     public void setPost(Post post) {
         this.post = post;
     }
+    public Date getCreated_at() {
+        return created_at;
+    }
 
+    public void setCreated_at(Date created_at) {
+        this.created_at = created_at;
+    }
     public Comment() {}
-    public Comment(String content, User user, Post post) {
+
+    public Comment(String content, User user, Post post,  Date created_at) {
         this.content = content;
         this.user = user;
         this.post = post;
+        this.created_at = created_at;
     }
+    public Comment(String content, Post post) {
+        this.content = content;
+        this.post = post;
+
+    }
+
+
 }

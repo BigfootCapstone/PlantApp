@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="row justify-center">
-                    <a sec:authorize="!isAuthenticated()" href="/login" class="btn-secondary">Login</a>
+                    <a sec:authorize="!isAuthenticated()" th:href="@{users/login}" class="btn-secondary">Login</a>
                 </div>
 
                 <div sec:authorize="isAuthenticated()" class="nb-li">
