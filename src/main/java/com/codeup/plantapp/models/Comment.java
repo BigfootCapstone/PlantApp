@@ -69,7 +69,7 @@ public class Comment {
         this.content = content;
         this.user = user;
         this.post = post;
-        this.created_at = created_at;
+        this.created_at = LocalDate.now();
     }
     public Comment(String content, Post post) {
         this.content = content;

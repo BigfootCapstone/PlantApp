@@ -252,7 +252,9 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
-                                                       th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at}"></p>
+                                                       th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at.getMonth()}"></p>
+                                                    <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
+                                                       th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at.getDayOfMonth()}"></p>
                                                 </div>
                                                 <div class="col">
                                                     <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"

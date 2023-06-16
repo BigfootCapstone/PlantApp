@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 public class CareTips {
 
     public static GardenPlant plantTipCheck(GardenPlant plant, Weather weather) {
@@ -38,12 +40,9 @@ public class CareTips {
         long waterInDays = plant.getWater_interval(); //How often plant needs water
 
         LocalDate lastWatered = plant.getLast_watered(); //When plant was last watered
-        long diff = Math.abs(lastWatered.getDayOfMonth() - currentDay.getDayOfMonth()); //Difference between current date and
-        // last
-        // watered
-        long diffDays = diff; //!!! Convert difference to days !!!
+        long diff = DAYS.between(lastWatered, currentDay); //Difference between current date and
 
-        long daysToWater = waterInDays - diffDays; //How many days since plant was last watered
+        long daysToWater = waterInDays - diff; //How many days since plant was last watered
 
         boolean rainCheck = weather.getCloudDesc().contains("rain"); //Check for rain in forecast
 
@@ -54,7 +53,7 @@ public class CareTips {
             if (daysToWater < 0) {
                 plant.setWater_tip("You are " + Math.abs(daysToWater) + " day(s) behind on watering");
                 return plant;
-            } else if (diffDays == waterInDays) {
+            } else if (diff == waterInDays) {
                 plant.setWater_tip("Water today");
                 return plant;
             } else {
@@ -98,18 +97,15 @@ public class CareTips {
         long waterInDays = plant.getWater_interval(); //How often plant needs water
 
         LocalDate lastWatered = plant.getLast_watered(); //When plant was last watered
-        long diff = Math.abs(lastWatered.getDayOfMonth() - currentDay.getDayOfMonth()); //Difference between current
-        // date and last
-        // watered
-        long diffDays = diff; //!!! Convert difference to days !!!
+        long diff = DAYS.between(lastWatered, currentDay); //Difference between current
 
-        long daysToWater = waterInDays - diffDays; //How many days since plant was last watered
+        long daysToWater = waterInDays - diff; //How many days since plant was last watered
 
         if (plant.getLast_watered().isBefore(currentDay)) {
             if (daysToWater < 0) {
                 plant.setWater_tip("You are " + Math.abs(daysToWater) + " day(s) behind on watering");
                 return plant;
-            } else if (diffDays == waterInDays) {
+            } else if (diff == waterInDays) {
                 plant.setWater_tip("Water today");
                 return plant;
             } else {
