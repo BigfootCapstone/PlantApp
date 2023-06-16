@@ -279,7 +279,9 @@ button.login-nav{
   color: #FFCBA5;
 }
 
-
+.homepage .navbar .homelinks{
+  margin-right: 36px;
+}
 /*******************
   4.Search on Nav
 *******************/
@@ -731,13 +733,17 @@ div .delete-profile, .pe-7s-delete-user{
 ************************/
 
 img.plantSearchImg{
-  height: 350px;
-  width: 350px;
-  border-radius: 10px;
+  height: 400px;
+  width: 400px;
+  border-radius: 999px;
 }
 
 ul.carrot {
   list-style: url("./images/carrotguy(fknawesome) list.png");
+  flex-direction: column;
+  flex-wrap: wrap;
+  padding: unset;
+  margin: unset;
 }
 
 .search-header{
@@ -749,7 +755,13 @@ ul.carrot {
 p.plant-name{
   width: 400px;
   height: 60px;
-  font-size: 50px;
+  font-size: 34px;
+}
+
+.plant-box{
+position: relative;
+box-shadow: 0 7px 15px 0 rgb(42, 181, 154);
+border-radius: 10px;
 }
 
 
