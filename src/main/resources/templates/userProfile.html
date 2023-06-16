@@ -192,25 +192,26 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div>
-                                    <div class="column" th:if="userPlants" th:each="plant : ${userPlants}">
-<!--                                        <p><span  th:text="${plant.plant.id}"></span></p>-->
-                                        <a th:href="@{/plants/garden/{id}(id=${plant.id})}"><span th:text="${plant.plant.name}"></span></a>
-                                        <p><span  th:text="${plant.sun_amount}"></span></p>
-                                        <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
-                                        <p><span  th:text="${plant.getSun_tip}"></span></p>
-                                        <p><span  th:text="${plant.getWater_tip}"></span></p>
-<!--------button for delete plant path------->
-                                        <div class="row">
-                                            <a th:href="@{/plants/{id}/delete(id=${plant.id})}">Delete</a>
+                                    <div th:if="${not #lists.isEmpty(userPlants)}">
+                                        <div class="column" th:each="plant : ${userPlants}">
+                                            <a th:href="@{/plants/garden/{id}(id=${plant.id})}">
+                                                <span th:text="${plant.plant.name}"></span>
+                                            </a>
+                                            <p><span th:text="${plant.sun_amount}"></span></p>
+                                            <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
+                                            <p><span th:text="${plant.getSun_tip}"></span></p>
+                                            <p><span th:text="${plant.getWater_tip}"></span></p>
+                                            <!-- button for delete plant path -->
+                                            <div class="row">
+                                                <a th:href="@{/plants/{id}/delete(id=${plant.id})}">Delete</a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div th:else>
+                                    <div th:unless="${not #lists.isEmpty(userPlants)}">
                                         <p>Add A Plant!</p>
                                         <form action="#" th:action="@{/plants/search}" method="post">
-                                            <input style="color: black;" type="text"
-                                                   name="query" placeholder="Lookin' for a plant ?" required autocomplete="on">
-                                            <input style="color: black;" id="search_submit" value="Search"
-                                                   type="submit">
+                                            <input style="color: black;" type="text" name="query" placeholder="Lookin' for a plant ?" required autocomplete="on">
+                                            <input style="color: black;" id="search_submit" value="Search" type="submit">
                                         </form>
                                     </div>
                                 </div>
