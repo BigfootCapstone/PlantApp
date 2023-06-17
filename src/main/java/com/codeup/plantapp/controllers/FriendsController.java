@@ -45,7 +45,7 @@ public class FriendsController {
         List<User> botaniUsers  = usersDao.findAllByIdIsNot(user.getId());
 
 //  ALL BUT CURRENT FRIEND ASSOCIATIONS (TRUE OR FALSE)
-        List<Friend> friendsAssoc = friendDao.findAllByUser(user);
+        List<Friend> friendsAssoc = friendDao.findAllByUserID2(user);
 
         model.addAttribute("users", showUnknownFriends(botaniUsers, friendsAssoc));
         return "friends";

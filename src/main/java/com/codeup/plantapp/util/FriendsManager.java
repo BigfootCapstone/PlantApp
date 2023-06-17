@@ -15,7 +15,7 @@ public class FriendsManager {
             boolean isAssociated = false; // Flag to track if the user is associated with any friend
 
             for (Friend friend : userFriends) {
-                if (friend.getUserID2().equals(unknownUser)) {
+                if (friend.getUser().equals(unknownUser)) {
                     isAssociated = true;
                     break;
                 }
