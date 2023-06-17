@@ -46,6 +46,9 @@ public class User {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<Friend> friends;
 
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    private List<PlantLog> plantLogs;
+
 
     public long getId() {
         return id;
@@ -134,6 +137,13 @@ public class User {
     }
     public void setFriends(List<Friend> friends) {
         this.friends = friends;
+    }
+
+    public List<PlantLog> getPlantLogs() {
+        return plantLogs;
+    }
+    public void setPlantLogs(List<PlantLog> plantLogs) {
+        this.plantLogs = plantLogs;
     }
 
     public User() {

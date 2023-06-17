@@ -15,7 +15,7 @@
             <h1 class="text-white mb-5">Search Results for "<span class="plant-query" th:text="${query}"></span>"</h1>
 
             <ul class="d-flex carrot">
-                <li class="d-flex col mb-5 plant-box" th:each="plant : ${plants}">
+                <li class="d-flex col mb-5 plant-box" th:each="plant : ${plants}" th:if="${plant.common_name != null && plant.image_url != null && plant.family != null && plant.genus != null}">
                     <p class="d-block mb-4 plant-name" th:text="${plant.common_name}"></p>
                     <div class="">
                         <img class="plantSearchImg" th:if="${plant.image_url}" th:src="${plant.image_url}" alt="Plant Photo">

@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -78,7 +79,7 @@ public class PlantController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userFound = usersDao.findUserById(user.getId());
 
-        Date date = new Date();
+        LocalDate date = LocalDate.now();
 
         GardenPlant newGardenPlant = new GardenPlant(userFound, newPlant, sun_amount, date, water_interval, is_outside);
 
@@ -164,7 +165,7 @@ public class PlantController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User userFound = usersDao.findUserById(user.getId());
 
-        Date date = new Date();
+        LocalDate date = LocalDate.now();
 
         GardenPlant newGardenPlant = new GardenPlant(userFound, userPlant, sun_amount, date, water_interval, is_outside);
 
@@ -260,10 +261,11 @@ public class PlantController {
             @RequestParam(name="title") String title,
             @RequestParam(name="content") String content) {
 
-        Date date = new Date();
+        LocalDate date = LocalDate.now();
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        PlantLog plantLog = new PlantLog(title, content, date, userGardenPlant);
+        PlantLog plantLog = new PlantLog(title, content, date, userGardenPlant, user);
         plantLogsDao.save(plantLog);
 
         redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");
