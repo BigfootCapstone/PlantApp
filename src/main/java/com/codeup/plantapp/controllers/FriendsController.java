@@ -41,8 +41,11 @@ public class FriendsController {
     public String allUsers(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        List<User> botaniUsers  = usersDao.findAllByIdIsNot(user.getId()); // all users except current user
-        List<Friend> friendsAssoc = friendDao.findAllByUser(user); // all friends associations
+//  ALL BUT CURRENT USER
+        List<User> botaniUsers  = usersDao.findAllByIdIsNot(user.getId());
+
+//  ALL BUT CURRENT FRIEND ASSOCIATIONS (TRUE OR FALSE)
+        List<Friend> friendsAssoc = friendDao.findAllByUser(user);
 
         model.addAttribute("users", showUnknownFriends(botaniUsers, friendsAssoc));
         return "friends";
@@ -59,11 +62,21 @@ public class FriendsController {
     @GetMapping("/{id}")
     public String addFriend(@PathVariable long id,
                             RedirectAttributes redirectAttributes){
-        User user1 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = usersDao.findUserById(id);
+//  USER
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//  USER2
+        User friend = usersDao.findUserById(id);
 
-        Friend newRequest = new Friend(user1, user, false);
-        friendDao.save(newRequest);
+//  USER to USER2
+        Friend userToFriend = new Friend(user, friend, false);
+//  USER2 to USER
+        Friend friendToUser = new Friend(friend, user, false);
+
+//  USER REQUESTS FRIENDSHIP
+        friendDao.save(userToFriend);
+
+//  USER2 MAY ACCEPT OR IGNORE
+        friendDao.save(friendToUser);
 
         redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");
 
@@ -79,21 +92,46 @@ public class FriendsController {
 */
     @GetMapping("/accept/{id}")
     public String acceptFriend(@PathVariable long id){
-        User user = usersDao.findUserById(id);
-        Friend friend = friendDao.findFriendByUserID2(user);
 
-        friend.setConfirmed(true);
-        friendDao.save(friend);
+//  USER2
+        User user2 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//  USER
+        User user = usersDao.findUserById(id);
+
+//  USER2 to USER
+        Friend decider = friendDao.findFriendByUser(user2);
+//  USER to USER2
+        Friend sender = friendDao.findFriendByUser(user);
+
+//  USER2 FRIENDS W/ USER
+        decider.setConfirmed(true);
+//  USER FRIENDS W/ USER2
+        sender.setConfirmed(true);
+
+//  USER2 ACCEPTS FRIEND REQUEST
+        friendDao.save(decider);
+        friendDao.save(sender);
 
         return "redirect:/users/profile";
     }
 
     @GetMapping("/ignore/{id}")
     public String ignoreFriend(@PathVariable long id){
-        User user = usersDao.findUserById(id);
-        Friend friend = friendDao.findFriendByUserID2(user);
 
-        friendDao.deleteById(friend.getId());
+//  USER2
+        User user2 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//  USER
+        User user = usersDao.findUserById(id);
+
+//  USER2 to USER
+        Friend decider = friendDao.findFriendByUser(user2);
+//  USER to USER2
+        Friend sender = friendDao.findFriendByUser(user);
+
+//  USER2 IGNORES FRIEND USER
+        friendDao.deleteById(decider.getId());
+//  USER LOSES ASSOC WITH USER2
+        friendDao.deleteById(sender.getId());
 
         return "redirect:/users/profile";
     }

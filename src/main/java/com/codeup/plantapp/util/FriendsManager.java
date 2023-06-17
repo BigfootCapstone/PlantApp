@@ -31,12 +31,13 @@ public class FriendsManager {
 
     public static List<User> knownFriends(User user) {
         List<Friend> friendsRequest = user.getFriends();
+
         List<User> friends = new ArrayList<>();
         for (Friend friend: friendsRequest) {
             if (friend.isConfirmed()) {
                 if (friend.getUser().equals(user)) {
                     friends.add(friend.getUserID2());
-                } else {
+                } else if (friend.getUserID2().equals(user)) {
                     friends.add(friend.getUser());
                 }
             }
@@ -46,22 +47,6 @@ public class FriendsManager {
         }
         return friends;
     }
-
-//    public static List<User> friendsRequests (User user) {
-////      TODO: SHOW friend requests TO user not FROM
-//        List<Friend> friendsRequest = user.getFriends();
-//        List<User> friendReq = new ArrayList<>();
-//        for (Friend friend: friendsRequest) {
-//            if (friend.getUser() != user && !friend.isConfirmed()) {
-//                System.out.println("request from other user:" + user.getUsername());
-//                friendReq.add(friend.getUser());
-//            } else if (!friend.isConfirmed()) {
-//                System.out.println("request from user:" + user.getUsername());
-//                friendReq.add(friend.getUserID2());
-//            }
-//        }
-//        return friendReq;
-//    }
 
     public static List<User> friendsRequests(User user) {
         List<Friend> friendsRequest = user.getFriends();

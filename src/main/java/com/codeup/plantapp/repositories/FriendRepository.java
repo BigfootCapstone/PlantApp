@@ -10,10 +10,10 @@ import java.util.List;
 @Repository
 public interface FriendRepository extends JpaRepository<Friend, Long>{
 
+//  IOT Limit the USERS view of users they have not requests or already associated with
     List<Friend> findAllByUser(User user);
 
-    Friend findFriendByUser(User user);
 
-    Friend findFriendByUserID2(User user);
+    Friend findFriendByUser(User user);
 
 }
