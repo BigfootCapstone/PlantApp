@@ -1,7 +1,6 @@
 package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.Friend;
-import com.codeup.plantapp.models.GardenPlant;
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.repositories.FriendRepository;
 import com.codeup.plantapp.repositories.UserRepository;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeup.plantapp.util.FriendsManager.showUnknownFriends;
