@@ -42,21 +42,24 @@ public class FriendsManager {
                 }
             }
         }
-        for (User friend: friends){
-            System.out.println(friend.getUsername());
-        }
         return friends;
     }
 
     public static List<User> friendsRequests(User user) {
+//  GET ALL ASSOC WHERE BOB is USER
         List<Friend> friendsRequest = user.getFriends();
+
+//  HOLD ALL USER2 WHERE BOB is USER
         List<User> friendReq = new ArrayList<>();
+
+//      RUNS ASSOC WHERE BOB is USER
         for (Friend friend : friendsRequest) {
-            if (!friend.isConfirmed() && !friend.getUser().equals(user)) {
-                System.out.println("Request from other user: " + friend.getUser().getUsername());
-                friendReq.add(friend.getUser());
-            } else if (!friend.isConfirmed()) {
-                System.out.println("Request to user: " + friend.getUserID2().getUsername());
+
+            if (!friend.isConfirmed()) {
+//              SHOWS EACH REQUEST WHERE BOB is USER
+//                friendReq.add(friend.getUser());
+//              SHOWS EACH USER2 WHERE BOB is USER
+                System.out.println(friend.getUser().getUsername());
                 friendReq.add(friend.getUserID2());
             }
         }

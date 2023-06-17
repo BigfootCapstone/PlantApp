@@ -68,12 +68,12 @@ public class FriendsController {
         User friend = usersDao.findUserById(id);
 
 //  USER to USER2
-        Friend userToFriend = new Friend(user, friend, false);
+//        Friend userToFriend = new Friend(user, friend, false);
 //  USER2 to USER
         Friend friendToUser = new Friend(friend, user, false);
 
 //  USER REQUESTS FRIENDSHIP
-        friendDao.save(userToFriend);
+//        friendDao.save(userToFriend);
 
 //  USER2 MAY ACCEPT OR IGNORE
         friendDao.save(friendToUser);
@@ -94,23 +94,21 @@ public class FriendsController {
     public String acceptFriend(@PathVariable long id){
 
 //  USER2
-        User user2 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User userDecider = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 //  USER
-        User user = usersDao.findUserById(id);
+        User userRequestor = usersDao.findUserById(id);
 
 //  USER2 to USER
-        Friend decider = friendDao.findFriendByUser(user2);
-//  USER to USER2
-        Friend sender = friendDao.findFriendByUser(user);
+        Friend decider = friendDao.findFriendByUser(userDecider);
 
 //  USER2 FRIENDS W/ USER
         decider.setConfirmed(true);
-//  USER FRIENDS W/ USER2
-        sender.setConfirmed(true);
 
 //  USER2 ACCEPTS FRIEND REQUEST
         friendDao.save(decider);
-        friendDao.save(sender);
+
+        Friend reqToDec = new Friend(userRequestor, userDecider, true);
+        friendDao.save(reqToDec);
 
         return "redirect:/users/profile";
     }
