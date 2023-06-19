@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -97,8 +98,8 @@ public class UserController {
 
 //      Get Weather for User's City
         String city = userFromDb.getCity();
-        String key = keys.getOpenWeather();
-        URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + key +
+        String weatherKey = keys.getOpenWeather();
+        URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + weatherKey +
                 "&units=imperial");
         Weather userWeather = getWeather(url);
 
@@ -117,16 +118,12 @@ public class UserController {
 
         model.addAttribute("friendsRequest", friendsRequest);
         model.addAttribute("friends", friends);
-
 //      Set Weather for View
         model.addAttribute("weather", userWeather);
-
 //      Set Outdoor plants for quick weather reference and warnings
         model.addAttribute("outdoorPlants", checkForOutdoorPlants(userFromDb));
-
 //      Set All Plants for Garden Preview
         model.addAttribute("userPlants", allPlants);
-
         model.addAttribute("recentPlantLogs", plantlogsDao.findTop5ByUserOrderByCreatedAtDesc(user));
         for (PlantLog plantLog : plantlogsDao.findTop5ByUserOrderByCreatedAtDesc(user)
              ) {
@@ -147,12 +144,16 @@ public class UserController {
     public String editUserProfileForm(@PathVariable(name = "id") Long id, Model model) {
         User user = usersDao.findUserById(id);
         model.addAttribute("user", user);
+
+        String fileStackKey = keys.getfileStack();
+        model.addAttribute("filestackKey", fileStackKey);
         return "editUserForm";
     }
 
 
     @PostMapping("/{id}/edit")
-    public String updateUserProfile(@PathVariable(name = "id") Long id, @ModelAttribute User updatedUser) {
+    public String updateUserProfile(@PathVariable(name = "id") Long id,
+                                    @ModelAttribute User updatedUser) {
         User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         user.setUsername(updatedUser.getUsername());
@@ -160,6 +161,7 @@ public class UserController {
         user.setLast_name(updatedUser.getLast_name());
         user.setCity(updatedUser.getCity());
         user.setEmail(updatedUser.getEmail());
+        user.setProfile_pic(updatedUser.getProfile_pic());
         usersDao.save(user);
 
         return "redirect:/users/profile";

@@ -22,6 +22,9 @@ public class Keys {
     @Value("${chatGPT.key}")
     private String chatGPT;
 
+    @Value("${fileStack.key}")
+    private String fileStack;
+
     public String getOpenWeather() {
         return weather;
     }
@@ -36,5 +39,9 @@ public class Keys {
     }
     public String getChatGPT() {
         return chatGPT;
+    }
+
+    public String getfileStack() {
+        return fileStack;
     }
 }
