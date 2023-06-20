@@ -1,6 +1,7 @@
 package com.codeup.plantapp.services;
 
 import com.codeup.plantapp.util.PlantDTO;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,48 @@ import java.net.URL;
 
 @Service
 public class PlantsCall {
+
+    public static String getChatGPTResponse(String prompt) throws Exception {
+        URL openaiApiUrl = new URL("https://api.openai.com/v1/completions");
+        HttpURLConnection conn = (HttpURLConnection) openaiApiUrl.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/json");
+        conn.setRequestProperty("Authorization", "Bearer  ");
+
+        JSONObject payload = new JSONObject();
+        payload.put("model", "text-davinci-003");
+        payload.put("prompt", prompt);
+        payload.put("max_tokens", 100);
+        payload.put("temperature", 0);
+
+        conn.setDoOutput(true);
+        conn.getOutputStream().write(payload.toJSONString().getBytes());
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        StringBuilder response = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            response.append(line);
+        }
+        reader.close();
+
+        JSONParser parser = new JSONParser();
+        JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
+        JSONArray choicesArray = (JSONArray) jsonResponse.get("choices");
+
+        if (choicesArray.size() > 0) {
+            JSONObject choiceObject = (JSONObject) choicesArray.get(0);
+            String completion = (String) choiceObject.get("text");
+            System.out.println(completion);
+            return completion;
+        } else {
+            return ""; // Handle empty response as needed
+        }
+    }
+
+
+
+
 
     public static PlantDTO getTreflePlant(URL url) {
         try {
@@ -136,6 +179,10 @@ public class PlantsCall {
             long height = openFarm_attributes.get("height") == null ? 0 : (long) openFarm_attributes.get("height");
             String height_string = Long.toString(height) == null ? "N/A" : (String) Long.toString(height);
 
+            String prompt = "Give me a care guide for " + plant.getCommon_name() + "!";
+            String careGuide = getChatGPTResponse(prompt);
+
+
             plant.setOpenFarm_name(openFarm_name);
             plant.setDescription(description);
             plant.setSun_requirements(sun_requirements);
@@ -143,6 +190,7 @@ public class PlantsCall {
             plant.setSpread(spread_string);
             plant.setRow_spacing(row_spacing_string);
             plant.setHeight(height_string);
+            plant.setCareGuide(careGuide);
 
             return plant;
         } catch (Exception e) {
