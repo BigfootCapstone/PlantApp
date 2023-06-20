@@ -788,6 +788,11 @@ a.plant-info{
 a.search-add{
   background-color: #F28153;
   color: #FFFFFF;
+  font-size: 18px;
+  width: 250px;
+  height: 45px;
+  border-radius: 10px;
+  padding: 10px;
 }
 
 
