@@ -18,7 +18,8 @@
       <div class="container bootstrap snippets bootdeys">
         <div class="row">
           <div class="d-flex col justify-content-center">
-            <form class="form-horizontal flex-grow-1"
+            <form id="myForm"
+                  class="form-horizontal flex-grow-1"
                   th:action="@{/users/{id}/edit(id=${user.id})}"
                   th:object="${user}" th:method="post"
                   enctype="multipart/form-data"
@@ -27,11 +28,28 @@
               <div class="panel ">
                 <div class="panel-body text-center">
                   <script th:inline="javascript">
+
+                      function setSessionAttribute(attributeName, attributeValue) {
+                        // Create a hidden input field with the session attribute
+                        let hiddenInput = document.createElement('input');
+                        hiddenInput.type = 'hidden';
+                        hiddenInput.name = attributeName;
+                        hiddenInput.value = attributeValue;
+
+                        // Append the hidden input field to the form
+                        let form = document.getElementById('myForm');
+                        form.appendChild(hiddenInput);
+
+                        // Submit the form
+                        form.submit();
+                      }
+
                     window.addEventListener('DOMContentLoaded', function () {
                       var apiKey = [[${filestackKey}]];
                       const options = {
                         onFileUploadFinished: (file) => {
-                          console.log(file);
+                          console.log(file.url);
+                          setSessionAttribute("filestackUrl", file.url);
                           const img = document.getElementById('profile-img');
                           img.src = file.url;
                         },
@@ -49,11 +67,11 @@
                         picker.open();
                       });
                     })
+
                   </script>
 
                   <div>
-                    <img class="img-circle profile-avatar" th:src="${imageURL}" id="profile-img" height ="64px"
-                         alt="User avatar">
+                    <img class="img-circle profile-avatar" th:src="${user.profile_pic}" id="profile-img" height ="64px" alt="User avatar">
                   </div>
 
                   <button id="open"> Change Profile </button>

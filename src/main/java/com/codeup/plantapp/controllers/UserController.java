@@ -3,6 +3,7 @@ package com.codeup.plantapp.controllers;
 import com.codeup.plantapp.models.*;
 import com.codeup.plantapp.repositories.*;
 import com.codeup.plantapp.services.Keys;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -153,6 +154,7 @@ public class UserController {
 
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable(name = "id") Long id,
+                                    @RequestParam(name = "filestackUrl", required = false) String fileStackLink,
                                     @ModelAttribute User updatedUser) {
         User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
@@ -161,7 +163,11 @@ public class UserController {
         user.setLast_name(updatedUser.getLast_name());
         user.setCity(updatedUser.getCity());
         user.setEmail(updatedUser.getEmail());
-        user.setProfile_pic(updatedUser.getProfile_pic());
+
+        String userPic = fileStackLink == null ? "https://cdn.filestackcontent.com/mzEXQKGFQvW4pbksWgeB" : fileStackLink;
+        user.setProfile_pic(userPic);
+        System.out.println("User Pic url" + userPic);
+
         usersDao.save(user);
 
         return "redirect:/users/profile";
