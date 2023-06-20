@@ -14,46 +14,107 @@ import java.net.URL;
 @Service
 public class PlantsCall {
 
-    public static String getChatGPTResponse(String prompt) throws Exception {
-        URL openaiApiUrl = new URL("https://api.openai.com/v1/completions");
-        HttpURLConnection conn = (HttpURLConnection) openaiApiUrl.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "application/json");
-        conn.setRequestProperty("Authorization", "Bearer  ");
+    public static String getChatGPTResponse(String prompt, String key) throws Exception {
+        try {
+            URL openaiApiUrl = new URL("https://api.openai.com/v1/completions");
+            HttpURLConnection conn = (HttpURLConnection) openaiApiUrl.openConnection();
+            String auth = "Bearer " + key;
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Authorization", auth);
 
-        JSONObject payload = new JSONObject();
-        payload.put("model", "text-davinci-003");
-        payload.put("prompt", prompt);
-        payload.put("max_tokens", 100);
-        payload.put("temperature", 0);
+            JSONObject payload = new JSONObject();
+            payload.put("model", "text-davinci-003");
+            payload.put("prompt", prompt);
+            payload.put("max_tokens", 100);
+            payload.put("temperature", 0);
 
-        conn.setDoOutput(true);
-        conn.getOutputStream().write(payload.toJSONString().getBytes());
+            conn.setDoOutput(true);
+            conn.getOutputStream().write(payload.toJSONString().getBytes());
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-        StringBuilder response = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            response.append(line);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            JSONParser parser = new JSONParser();
+            JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
+            JSONArray choicesArray = (JSONArray) jsonResponse.get("choices");
+
+            if (choicesArray.size() > 0) {
+                JSONObject choiceObject = (JSONObject) choicesArray.get(0);
+                String completion = (String) choiceObject.get("text");
+                System.out.println("CHATGPT RESPONSE" + "\n" + completion + "\n"+ "\n");
+                return completion;
+            } else {
+                return ""; // Handle empty response as needed
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-        reader.close();
 
-        JSONParser parser = new JSONParser();
-        JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
-        JSONArray choicesArray = (JSONArray) jsonResponse.get("choices");
-
-        if (choicesArray.size() > 0) {
-            JSONObject choiceObject = (JSONObject) choicesArray.get(0);
-            String completion = (String) choiceObject.get("text");
-            System.out.println(completion);
-            return completion;
-        } else {
-            return ""; // Handle empty response as needed
-        }
     }
 
 
-
+//    public static String getChatGPTResponse(String prompt, String key) throws Exception {
+//        try {
+//            URL openaiApiUrl = new URL("https://api.openai.com/v1/completions");
+//            HttpURLConnection conn = (HttpURLConnection) openaiApiUrl.openConnection();
+//            String auth = "Bearer " + key;
+//            conn.setRequestMethod("POST");
+//            conn.setRequestProperty("Content-Type", "application/json");
+//            conn.setRequestProperty("Authorization", auth);
+//
+//            JSONObject payload = new JSONObject();
+//            payload.put("model", "text-davinci-003");
+//            payload.put("prompt", prompt);
+//            payload.put("max_tokens", 100);
+//            payload.put("temperature", 0);
+//
+//            conn.setDoOutput(true);
+//            conn.getOutputStream().write(payload.toJSONString().getBytes());
+//
+//            int responseCode = conn.getResponseCode();
+//            if (responseCode == 429) {
+//                // Rate limit exceeded, wait for a while and retry
+//                int retryAfter = conn.getHeaderFieldInt("Retry-After", 0);
+//                Thread.sleep(retryAfter * 1000); // Wait in milliseconds
+//                return getChatGPTResponse(prompt, key); // Retry the request
+//            } else if (responseCode == HttpURLConnection.HTTP_OK) {
+//                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+//                StringBuilder response = new StringBuilder();
+//                String line;
+//                while ((line = reader.readLine()) != null) {
+//                    response.append(line);
+//                }
+//                reader.close();
+//
+//                JSONParser parser = new JSONParser();
+//                JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
+//                JSONArray choicesArray = (JSONArray) jsonResponse.get("choices");
+//
+//                if (choicesArray.size() > 0) {
+//                    JSONObject choiceObject = (JSONObject) choicesArray.get(0);
+//                    String completion = (String) choiceObject.get("text");
+//                    System.out.println("CHATGPT RESPONSE" + "\n" + completion + "\n"+ "\n");
+//                    return completion;
+//                } else {
+//                    return ""; // Handle empty response as needed
+//                }
+//            } else {
+//                // Handle other response codes
+//                // You can throw an exception or return an appropriate value based on your requirements
+//                return null;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
 
 
     public static PlantDTO getTreflePlant(URL url) {
@@ -73,7 +134,7 @@ public class PlantsCall {
             JSONParser parser = new JSONParser();
             JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
 
-            System.out.println(jsonResponse.toString());
+//            System.out.println(jsonResponse.toString());
 
             JSONObject plantObject = (JSONObject) jsonResponse.get("data");
             long plant_id = (long) plantObject.get("main_species_id");
@@ -86,7 +147,7 @@ public class PlantsCall {
             String genus_name = (String) genus.get("name");
             String image_url = (String) plantObject.get("image_url");
 
-            System.out.println(plantObject);
+//            System.out.println(plantObject);
 
             JSONObject mainSpeciesObject = (JSONObject) plantObject.get("main_species");
 
@@ -129,10 +190,10 @@ public class PlantsCall {
                     growth_habit = (String) specificationsObject.get("growth_habit");
                 }
             }
-            System.out.println("Growth Habit: " + growth_habit);
+//            System.out.println("Growth Habit: " + growth_habit);
 
             Boolean edible = mainSpeciesObject.get("edible") == null ? false : (Boolean) mainSpeciesObject.get("edible");
-            System.out.println("Edible: " + edible);
+//            System.out.println("Edible: " + edible);
 
             String ph_maximum =  mainSpeciesObject.get("edible") == null ? "NA" : (String) plantObject.get(
                     "ph_maximum");
@@ -146,7 +207,7 @@ public class PlantsCall {
         }
     }
 
-    public static PlantDTO getOpenFarmPrimer(URL url, PlantDTO plant) {
+    public static PlantDTO getOpenFarmPrimer(URL url, PlantDTO plant, String chatKey) {
         try {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
@@ -163,7 +224,7 @@ public class PlantsCall {
             JSONParser parser = new JSONParser();
             JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
 
-            System.out.println(jsonResponse.toString());
+//            System.out.println(jsonResponse.toString());
 
             JSONObject openFarm = (JSONObject) jsonResponse.get("data");
             String openFarm_id_string = (String) openFarm.get("id");
@@ -180,7 +241,7 @@ public class PlantsCall {
             String height_string = Long.toString(height) == null ? "N/A" : (String) Long.toString(height);
 
             String prompt = "Give me a care guide for " + plant.getCommon_name() + "!";
-            String careGuide = getChatGPTResponse(prompt);
+            String careGuide = getChatGPTResponse(prompt, chatKey);
 
 
             plant.setOpenFarm_name(openFarm_name);

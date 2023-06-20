@@ -57,6 +57,7 @@ public class SecConfig {
                         "/plants/{id}",
                         "/plants/{id}/delete",
                         "/plants/plantEdit/{id}",
+                        "/plants/quickWater/{id}",
                         "/plants/garden/{id}",
                         "/plants/comments/{id}",
                         "/plants/comments/delete/{plant}.{id}",
