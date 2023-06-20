@@ -40,7 +40,6 @@ public class Keys {
     public String getChatGPT() {
         return chatGPT;
     }
-
     public String getfileStack() {
         return fileStack;
     }
