@@ -19,7 +19,7 @@ public class PlantsCall {
         HttpURLConnection conn = (HttpURLConnection) openaiApiUrl.openConnection();
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/json");
-        conn.setRequestProperty("Authorization", "Bearer "); // Replace YOUR_API_KEY with your actual API key
+        conn.setRequestProperty("Authorization", "Bearer  ");
 
         JSONObject payload = new JSONObject();
         payload.put("model", "text-davinci-003");
