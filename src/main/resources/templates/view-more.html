@@ -44,7 +44,7 @@
 
       <div class="row">
           <h3>ADD to your Garden</h3>
-        <form method="post" th:action="@{/plants/{id}(id=${plant.id})}">
+        <form method="post" th:action="@{/plants/{id}.{of}(id=${plant.id}, of=${plant.openFarm_id})}">
 <!--          get trefle-->
           <input type="text" th:text="${plant.common_name}" name="name">
           <label for="sun_amount">Sun Amount</label>
@@ -63,7 +63,7 @@
                 <input name="is_outside" id="no" type="radio" value="false">
             </label>
 
-          <input type="submit" class="ui button">Save
+          <input type="submit" class="ui button">
         </form>
       </div>
     </div>
