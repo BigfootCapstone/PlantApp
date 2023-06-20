@@ -178,6 +178,23 @@ public class UserController {
         return "redirect:/users/profile";
     }
 
+    @PostMapping("/{id}/pic")
+    public String changeProfPic (
+            @PathVariable(name = "id") Long id,
+            @RequestParam(name = "filestackUrl", required = false) String fileStackLink) {
+
+        User user = usersDao.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+
+        String userPic = fileStackLink == null ? "https://cdn.filestackcontent.com/mzEXQKGFQvW4pbksWgeB" : fileStackLink;
+        user.setProfile_pic(userPic);
+        System.out.println("User Pic url" + userPic);
+
+        usersDao.save(user);
+
+        return "redirect:/users/profile";
+    }
+
     @GetMapping("/{id}/delete")
     public String deleteUser(@PathVariable(name = "id") Long id, Model model) {
         User user = usersDao.findUserById(id);

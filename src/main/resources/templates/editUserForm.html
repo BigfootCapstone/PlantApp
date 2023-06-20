@@ -18,31 +18,23 @@
       <div class="container bootstrap snippets bootdeys">
         <div class="row">
           <div class="d-flex col justify-content-center">
-            <form id="myForm"
-                  class="form-horizontal flex-grow-1"
-                  th:action="@{/users/{id}/edit(id=${user.id})}"
-                  th:object="${user}" th:method="post"
-                  enctype="multipart/form-data"
-            >
+            <form id="myForm" class="form-horizontal flex-grow-1" th:action="@{/users/{id}/edit(id=${user.id})}" th:object="${user}" th:method="post" enctype="multipart/form-data">
+              <!-- Form content -->
 
-              <div class="panel ">
+              <div class="panel">
                 <div class="panel-body text-center">
                   <script th:inline="javascript">
+                    function setSessionAttribute(attributeName, attributeValue) {
+                      // Create a hidden input field with the session attribute
+                      let hiddenInput = document.createElement('input');
+                      hiddenInput.type = 'hidden';
+                      hiddenInput.name = attributeName;
+                      hiddenInput.value = attributeValue;
 
-                      function setSessionAttribute(attributeName, attributeValue) {
-                        // Create a hidden input field with the session attribute
-                        let hiddenInput = document.createElement('input');
-                        hiddenInput.type = 'hidden';
-                        hiddenInput.name = attributeName;
-                        hiddenInput.value = attributeValue;
-
-                        // Append the hidden input field to the form
-                        let form = document.getElementById('myForm');
-                        form.appendChild(hiddenInput);
-
-                        // Submit the form
-                        form.submit();
-                      }
+                      // Append the hidden input field to the form
+                      let form = document.getElementById('myForm');
+                      form.appendChild(hiddenInput);
+                    }
 
                     window.addEventListener('DOMContentLoaded', function () {
                       var apiKey = [[${filestackKey}]];
@@ -52,6 +44,15 @@
                           setSessionAttribute("filestackUrl", file.url);
                           const img = document.getElementById('profile-img');
                           img.src = file.url;
+
+                          // Capture the submit event of the form
+                          document.getElementById('myForm').addEventListener('submit', function (event) {
+                            // Prevent the default form submission behavior
+                            event.preventDefault();
+
+                            // Manually trigger the form submission
+                            event.target.submit();
+                          });
                         },
                         accept: ["image/*"],
                         transformations: {
@@ -62,22 +63,21 @@
                       const client = filestack.init(apiKey);
                       const picker = client.picker(options);
                       const openBtn = document.getElementById('open');
-                      openBtn.addEventListener('click',  (e) => {
+                      openBtn.addEventListener('click', function (e) {
                         e.preventDefault();
                         picker.open();
                       });
-                    })
-
+                    });
                   </script>
 
                   <div>
-                    <img class="img-circle profile-avatar" th:src="${user.profile_pic}" id="profile-img" height ="64px" alt="User avatar">
+                    <img class="img-circle profile-avatar" th:src="${user.profile_pic}" id="profile-img" height="64px" alt="User avatar">
                   </div>
 
                   <button id="open"> Change Profile </button>
-
                 </div>
               </div>
+
               <div class="d-block panel ">
                 <div class="subtitle">
                   <h4 class="panel-title subtitle">User info</h4>
