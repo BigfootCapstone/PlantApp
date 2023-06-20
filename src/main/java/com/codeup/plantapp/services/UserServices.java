@@ -27,7 +27,7 @@ public class UserServices implements UserDetailsService {
             throw new UsernameNotFoundException("No user found for " + username);
         } else {
 //          Returns SpringBlogUserDetails object
-            return new BotaniUserDetails(user.getId(), user.getUsername(), user.getEmail(),user.getPassword());
+            return new BotaniUserDetails(user);
         }
     }
 
