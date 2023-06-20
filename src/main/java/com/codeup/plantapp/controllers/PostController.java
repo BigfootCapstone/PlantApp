@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class PostController {
     public String submitComment(@RequestParam(name="content") String content,
                                 @RequestParam(name="postId") long postId){
         Post post = postsDao.findById(postId);
-        Date created_at = new Date();
+        LocalDate created_at = LocalDate.now();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Comment comment = new Comment(content, user, post, created_at);
         commentsDao.save(comment);

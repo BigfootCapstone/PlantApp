@@ -86,6 +86,8 @@ public class PlantsCall {
             String genus_name = (String) genus.get("name");
             String image_url = (String) plantObject.get("image_url");
 
+            System.out.println(plantObject);
+
             JSONObject mainSpeciesObject = (JSONObject) plantObject.get("main_species");
 
             String minimum_temperature = null;
