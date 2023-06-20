@@ -97,7 +97,7 @@ public class FriendsController {
         User userRequestor = usersDao.findUserById(id);
 
 //  USER2 to USER
-        Friend decider = friendDao.findFriendByUser(userDecider);
+        Friend decider = friendDao.findFriendByUserAndUserID2(userDecider, userRequestor);
 
 //  USER2 FRIENDS W/ USER
         decider.setConfirmed(true);
