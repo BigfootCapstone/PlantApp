@@ -5,6 +5,17 @@ import org.json.simple.JSONObject;
 //  TODO: ReCreate PlantDTO object
 public class PlantDTO {
     private String id;
+
+    private String careGuide;
+
+    public String getCareGuide() {
+        return careGuide;
+    }
+
+    public void setCareGuide(String careGuide) {
+        this.careGuide = careGuide;
+    }
+
     private String common_name;
     private String family;
     private String genus;
