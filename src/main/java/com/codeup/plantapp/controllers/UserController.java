@@ -64,7 +64,9 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String viewLoginPage() {
+    public String viewLoginPage(Model model) {
+//        model.addAttribute("user", new User());
+//        return "redirect:/users/login";
         return "login";
     }
 //    @PostMapping("/login")
@@ -169,7 +171,6 @@ public class UserController {
         usersDao.deleteById(id);
         return "deleteProfile";
     }
-
 
     @GetMapping
     public String getAllUsers(Model model) {

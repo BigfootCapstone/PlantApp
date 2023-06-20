@@ -19,6 +19,20 @@ public class Keys {
     @Value("${openfarm.key}")
     private String openfarm;
 
+    @Value("chatGBT.key")
+    private String chatGBt;
+
+    @Value("fileStack.key")
+    private String fileStack;
+
+    public String getFileStack() {
+        return fileStack;
+    }
+
+    public String getChatGBt() {
+        return chatGBt;
+    }
+
     public String getOpenWeather() {
         return weather;
     }

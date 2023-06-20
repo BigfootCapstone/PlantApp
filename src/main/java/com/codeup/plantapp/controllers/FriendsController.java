@@ -30,8 +30,6 @@ public class FriendsController {
             this.friendDao = friendDao;
         }
 
-        @Autowired
-        private Keys keys;
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>>SEE UNASIGNED FRIENDS <<>><<>><<>><<>><<>><<>><|

@@ -57,13 +57,13 @@
                     </form>
                 </li>
                 <li class="nav-item" sec:authorize="!isAuthenticated()">
-                    <form th:action="@{/users/login}" th:method="post">
-                        <button th:method="post" class="login-nav nav-link active" >Login</button>
+                    <form th:action="@{/users/login}" th:method="get">
+                        <button class="login-nav nav-link active" >Login</button>
                     </form>
                 </li>
                 <li class="nav-item" sec:authorize="isAuthenticated()">
                     <form th:action="@{/logout}" th:method="post">
-                        <button th:method="post" class="login-nav nav-link active" >Logout</button>
+                        <button class="login-nav nav-link active" >Logout</button>
                     </form>
                 </li>
                 <li id="wrap" sec:authorize="isAuthenticated()">

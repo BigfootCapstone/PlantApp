@@ -90,6 +90,7 @@ public class PlantController {
 |><<>><<>><<>><<>><<>><<>><<>><VIEW PLANT DETAILS><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
+    
     @GetMapping("/{id}")
     public String showPlantDetails(@PathVariable("id") String id, Model model) throws MalformedURLException {
         URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle());
