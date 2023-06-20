@@ -17,9 +17,11 @@ public class PlantsCall {
     public static String getChatGPTResponse(String prompt) throws Exception {
         URL openaiApiUrl = new URL("https://api.openai.com/v1/completions");
         HttpURLConnection conn = (HttpURLConnection) openaiApiUrl.openConnection();
+
+
         conn.setRequestMethod("POST");
         conn.setRequestProperty("Content-Type", "application/json");
-        conn.setRequestProperty("Authorization", "Bearer  ");
+        conn.setRequestProperty("Authorization", "Bearer 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 " );
 
         JSONObject payload = new JSONObject();
         payload.put("model", "text-davinci-003");

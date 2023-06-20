@@ -37,6 +37,7 @@ public class Keys {
     public String getPerenual() {
         return perenual;
     }
+
     public String getChatGPT() {
         return chatGPT;
     }
