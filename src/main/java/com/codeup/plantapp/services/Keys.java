@@ -19,19 +19,11 @@ public class Keys {
     @Value("${openfarm.key}")
     private String openfarm;
 
-    @Value("chatGBT.key")
-    private String chatGBt;
+    @Value("${chatGPT.key}")
+    private String chatGPT;
 
-    @Value("fileStack.key")
+    @Value("${fileStack.key}")
     private String fileStack;
-
-    public String getFileStack() {
-        return fileStack;
-    }
-
-    public String getChatGBt() {
-        return chatGBt;
-    }
 
     public String getOpenWeather() {
         return weather;
@@ -45,5 +37,11 @@ public class Keys {
     public String getPerenual() {
         return perenual;
     }
+    public String getChatGPT() {
+        return chatGPT;
+    }
 
+    public String getfileStack() {
+        return fileStack;
+    }
 }

@@ -10,23 +10,33 @@
 
 <!--Start Page Container-->
 <div class="d-flex container create justify-content-center align-content-center">
+    <div class="row">
+        <div class="column search-column">
+            <h1 class="text-white mb-5">Search Results for "<span class="plant-query" th:text="${query}"></span>"</h1>
+
+            <ul class="d-flex carrot">
+                <li class="d-flex col mb-5 plant-box" th:each="plant : ${plants}" th:if="${plant.common_name != null && plant.image_url != null && plant.family != null && plant.genus != null}">
+                    <p class="d-block mb-4 plant-name" th:text="${plant.common_name}"></p>
+                    <div class="">
+                        <img class="plantSearchImg" th:if="${plant.image_url}" th:src="${plant.image_url}" alt="Plant Photo">
+                    </div>
+                    <div class="ms-2 plant-info-holder align-self-center">
+                        <p class="plant-info justify-content-center" th:text="'Plant Family:   ' + ${plant.family}"></p>
+                        <p class="plant-info justify-content-center" th:text="'Plant Genus:   ' + ${plant.genus}"></p>
+                        <a class="plant-info justify-content-center" th:href="@{/plants/{id}(id=${plant.id})}">View Details</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Add plant to API -->
+<div class="d-flex container create justify-content-center align-content-center">
   <div class="row">
     <div class="column">
-      <h1 class="subtitle mb-5">Search Results for "<span class="text-white" th:text="${query}"></span>"</h1>
-
-      <ul class="carrot">
-        <li class="quote col-2" th:each="plant : ${plants}">
-          <p class="d-block mb-4 text-white plant-name" th:text="${plant.common_name}"></p>
-          <div class="">
-          <img class="plantSearchImg" th:if="${plant.image_url}" th:src="${plant.image_url}" alt="Plant Photo">
-          </div>
-          <div class="d-flex">
-          <p class=" plant-info" th:text="'Plant Family:   ' + ${plant.family}"></p>
-          <p class=" plant-info" th:text="'Plant Genus:   ' + ${plant.genus}"></p>
-          <a class=" plant-info" th:href="@{/plants/{id}(id=${plant.id})}">View Details</a>
-          </div>
-        </li>
-      </ul>
+      <h1 class="subtitle mb-5">Don't see the plant you're looking for?</h1>
+      <a type="submit" class="subtitle mb-5 text-white" th:href="@{/plants/add}">Add a Plant!</a>
     </div>
   </div>
 </div>

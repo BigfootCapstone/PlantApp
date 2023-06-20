@@ -1,7 +1,6 @@
 package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.Friend;
-import com.codeup.plantapp.models.GardenPlant;
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.repositories.FriendRepository;
 import com.codeup.plantapp.repositories.UserRepository;
@@ -13,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.codeup.plantapp.util.FriendsManager.showUnknownFriends;
@@ -39,8 +37,11 @@ public class FriendsController {
     public String allUsers(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        List<User> botaniUsers  = usersDao.findAllByIdIsNot(user.getId()); // all users except current user
-        List<Friend> friendsAssoc = friendDao.findAllByUser(user); // all friends associations
+//  ALL BUT CURRENT USER
+        List<User> botaniUsers  = usersDao.findAllByIdIsNot(user.getId());
+
+//  ALL BUT CURRENT FRIEND ASSOCIATIONS (TRUE OR FALSE)
+        List<Friend> friendsAssoc = friendDao.findAllByUserID2(user);
 
         model.addAttribute("users", showUnknownFriends(botaniUsers, friendsAssoc));
         return "friends";
@@ -57,11 +58,21 @@ public class FriendsController {
     @GetMapping("/{id}")
     public String addFriend(@PathVariable long id,
                             RedirectAttributes redirectAttributes){
-        User user1 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = usersDao.findUserById(id);
+//  USER
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//  USER2
+        User friend = usersDao.findUserById(id);
 
-        Friend newRequest = new Friend(user1, user, false);
-        friendDao.save(newRequest);
+//  USER to USER2
+//        Friend userToFriend = new Friend(user, friend, false);
+//  USER2 to USER
+        Friend friendToUser = new Friend(friend, user, false);
+
+//  USER REQUESTS FRIENDSHIP
+//        friendDao.save(userToFriend);
+
+//  USER2 MAY ACCEPT OR IGNORE
+        friendDao.save(friendToUser);
 
         redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");
 
@@ -77,21 +88,44 @@ public class FriendsController {
 */
     @GetMapping("/accept/{id}")
     public String acceptFriend(@PathVariable long id){
-        User user = usersDao.findUserById(id);
-        Friend friend = friendDao.findFriendByUserID2(user);
 
-        friend.setConfirmed(true);
-        friendDao.save(friend);
+//  USER2
+        User userDecider = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//  USER
+        User userRequestor = usersDao.findUserById(id);
+
+//  USER2 to USER
+        Friend decider = friendDao.findFriendByUser(userDecider);
+
+//  USER2 FRIENDS W/ USER
+        decider.setConfirmed(true);
+
+//  USER2 ACCEPTS FRIEND REQUEST
+        friendDao.save(decider);
+
+        Friend reqToDec = new Friend(userRequestor, userDecider, true);
+        friendDao.save(reqToDec);
 
         return "redirect:/users/profile";
     }
 
     @GetMapping("/ignore/{id}")
     public String ignoreFriend(@PathVariable long id){
-        User user = usersDao.findUserById(id);
-        Friend friend = friendDao.findFriendByUserID2(user);
 
-        friendDao.deleteById(friend.getId());
+//  USER2
+        User user2 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//  USER
+        User user = usersDao.findUserById(id);
+
+//  USER2 to USER
+        Friend decider = friendDao.findFriendByUser(user2);
+//  USER to USER2
+        Friend sender = friendDao.findFriendByUser(user);
+
+//  USER2 IGNORES FRIEND USER
+        friendDao.deleteById(decider.getId());
+//  USER LOSES ASSOC WITH USER2
+        friendDao.deleteById(sender.getId());
 
         return "redirect:/users/profile";
     }
