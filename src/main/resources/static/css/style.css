@@ -500,12 +500,12 @@ input#search_submit[type="submit"]:hover {
 ********************/
 
 .footer {
-  padding: 40px 0px 20px 0px;
-  background-color: #101d1b;
-    margin-left: 0px;
-    margin-right: 0px;
-    display: flex;
+    padding: 40px 0px 20px 0px;
+    background-color: #101d1b;
+    margin: 0px 0px 0px 0px;
+    max-width: unset;
 }
+
 
 .footer .footer-list li a {
   color: rgba(255, 255, 255, 0.5);
@@ -806,6 +806,11 @@ a.search-add{
 img.cool-cactus{
   max-height: 25px;
   max-width: 25px;
+}
+
+.container.plant-info-holder{
+    display: block;
+    flex-direction: row;
 }
 
 
