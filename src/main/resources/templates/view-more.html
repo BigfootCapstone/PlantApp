@@ -11,10 +11,9 @@
 <!--Start Page Container-->
 <div class="d-flex container create justify-content-center align-content-center">
     <div class="row">
-        <div class="column search-column">
-            <div th:if="${plant}" class="ui container">
+        <div class="column search-column" th:if="${plant}">
                 <form>
-                    <button class="nav-buttons nav-link" onclick="history.go(-1)">Go Back!</button>
+                    <button class="nav-buttons nav-link" onclick="history.back()">Go Back!</button>
                 </form>
                 <h1 class="text-white">Plant Details</h1>
                 <div class="d-flex col mb-5 plant-box">
@@ -36,7 +35,8 @@
                         <p class="plant-info justify-content-center" th:if="${plant.sun_requirements}" th:text="'Sun_requirements:   ' + ${plant.sun_requirements}"></p>
                         <p class="plant-info justify-content-center" th:if="${plant.sowing_method}" th:text="'Sowing_method:   ' + ${plant.sowing_method}"></p>
                         <p class="plant-info justify-content-center" th:if="${plant.spread}" th:text="'Spread:   ' + ${plant.spread}"></p>
-                        <p class="plant-info justify-content-center" th:if="${plant.row_spacing}" th:text="'Row Spacing:   ' + ${plant.row_spacing}"></p><p class="plant-info justify-content-center" th:if="${plant.careGuide}" th:text="'Care Guide:   ' + ${plant.careGuide}"></p>
+                        <p class="plant-info justify-content-center" th:if="${plant.row_spacing}" th:text="'Row Spacing:   ' + ${plant.row_spacing}"></p>
+                        <p class="plant-info justify-content-center" th:if="${plant.careGuide}" th:text="'Care Guide:   ' + ${plant.careGuide}"></p>
                     </div>
                 </div>
                 <div class="row">
@@ -63,12 +63,11 @@
                         <input type="submit" class="ui button">Save
                     </form>
                 </div>
-            </div>
+
         </div>
     </div>
 </div>
 <!-- footer start -->
-<footer th:replace="partials/footer :: footer"></footer>
 <!-- footer end -->
 </body>
 </html>

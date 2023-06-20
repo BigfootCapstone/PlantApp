@@ -24,11 +24,15 @@
     1.General
 *******************/
 
-body {
-  font-family: "Noto Sans", sans-serif;
-  font-size: 14px;
-  background: linear-gradient(to right, #0d3830, #176354);
 
+html{
+
+}
+body {
+    font-family: "Noto Sans", sans-serif;
+    font-size: 14px;
+    background: linear-gradient(to right, #0d3830, #176354);
+    /*width: 100%;*/
 }
 
 h1 {
@@ -498,8 +502,9 @@ input#search_submit[type="submit"]:hover {
 .footer {
   padding: 40px 0px 20px 0px;
   background-color: #101d1b;
-  max-width: 100%;
-  margin: unset;
+    margin-left: 0px;
+    margin-right: 0px;
+    display: flex;
 }
 
 .footer .footer-list li a {
@@ -818,30 +823,28 @@ img.cool-cactus{
     .Responsive
 *******************/
 
-@media (min-width: 200px) and (max-width: 1199px) {
-  .container-fluid {
-    max-width: 95%;
-  }
-}
+/*@media (min-width: 200px) and (max-width: 1199px) {*/
+/*  .container-fluid {*/
+/*    max-width: 100%;*/
+/*  }*/
+/*}*/
 
-@media (min-width: 1200px) {
-  .container-fluid {
-    max-width: 85%;
-  }
-}
+/*@media (min-width: 1200px) {*/
+/*  .container-fluid {*/
+/*    max-width: 85%;*/
+/*  }*/
+/*}*/
 
-@media (min-width: 1600px) {
-  .container-fluid {
-    max-width: 70%;
-  }
-}
+/*@media (min-width: 1600px) {*/
+/*  .container-fluid {*/
+/*    max-width: 70%;*/
+/*  }*/
+/*}*/
 
 
 .navbar-custom {
   padding: 20px 0px;
   width: 100%;
-  /* border-radius: 0px; */
-  /* z-index: 999; */
   margin-bottom: 0px;
   transition: all 0.5s ease-in-out;
 }
