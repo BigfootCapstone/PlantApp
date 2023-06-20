@@ -58,13 +58,19 @@ public class UserController {
     @PostMapping("/create")
     public String createUserProfile(@ModelAttribute("user") User user) {
         user.setCreated_at(LocalDate.now());
+        String userPic = "https://cdn.filestackcontent.com/mzEXQKGFQvW4pbksWgeB";
+        user.setProfile_pic(userPic);
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
         return "redirect:/users/login";
     }
 
     @GetMapping("/login")
-    public String viewLoginPage() {
+    public String viewLoginPage(Model model) {
+        System.out.println("Inside viewLoginPage");
+//        model.addAttribute("user", new User());
+//        return "redirect:/users/login";
         return "login";
     }
 //    @PostMapping("/login")
@@ -180,7 +186,6 @@ public class UserController {
         usersDao.deleteById(id);
         return "deleteProfile";
     }
-
 
     @GetMapping
     public String getAllUsers(Model model) {
