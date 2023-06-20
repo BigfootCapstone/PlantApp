@@ -115,6 +115,12 @@ public class PlantController {
 */
     @GetMapping("/search")
     public String showSearchForm() {
+//        URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle());
+//        PlantDTO plant =  getTreflePlant(trefleApiUrl);
+//
+//        String selectedPlantCommonName = plant.getCommon_name();
+//        String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
+
         return "searchForm";
     }
 
@@ -135,6 +141,7 @@ public class PlantController {
 |><<>><<>><<>><<>><<>><<>><<>><VIEW PLANT DETAILS><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
+    
     @GetMapping("/{id}")
     public String showPlantDetails(@PathVariable("id") String id, Model model) throws MalformedURLException {
         URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle());
