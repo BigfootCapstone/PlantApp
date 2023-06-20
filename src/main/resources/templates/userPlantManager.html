@@ -66,6 +66,11 @@
                         <input name="is_outside" id="no" type="radio" value="false">
                     </label>
 
+<!--                    QUICK ACTION WATERED TODAY-->
+                    <div class="row">
+                        <a th:href="@{/plants/quickWater/{id}(id=${plant.id})}">Watered</a>
+                    </div>
+
                     <button class="ui button">Save</button>
                 </form>
             </div>

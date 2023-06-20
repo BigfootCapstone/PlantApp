@@ -141,7 +141,7 @@ public class PlantController {
 |><<>><<>><<>><<>><<>><<>><<>><VIEW PLANT DETAILS><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
-    
+
     @GetMapping("/{id}")
     public String showPlantDetails(@PathVariable("id") String id, Model model) throws MalformedURLException {
         URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle());
@@ -204,7 +204,6 @@ public class PlantController {
 |><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
-
     @PostMapping("/plantEdit/{id}")
     public String updateUserPlant(
             @PathVariable("id") long id,
@@ -224,6 +223,19 @@ public class PlantController {
 
         return "redirect:/users/profile";
     }
+
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<USER QUICK WATER>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+    @GetMapping("/quickWater/{id}")
+    public String quickWater(@PathVariable("id") long id) {
+        GardenPlant updateGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
+        updateGardenPlant.setLast_watered(LocalDate.now());
+        gardenPlantsDao.save(updateGardenPlant);
+        return "redirect:/users/profile";
+    }
+
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
