@@ -229,15 +229,16 @@ a.btn-sign-text{
 }
 
 button.nav-buttons{
-  background-color: transparent;
-  box-shadow: unset;
-  border: unset;
+    background-color: transparent;
+    box-shadow: unset;
+    border: unset;
+    color: #FFFFFF;
 }
 
 
 .navbar-custom .navbar-nav .nav-item .nav-link {
   line-height: 26px;
-  color: rgb(255, 255, 255);
+  color: #FFFFFF;
   transition: all 0.4s;
   padding: 6px 10px;
   margin: 0 20px;
@@ -256,7 +257,7 @@ button.nav-buttons{
 }
 
 .navbar-toggler:focus {
-  box-shadow: 0 0 0 0.15rem #3a59af;
+  box-shadow: 0 0 0 0.15rem rgba(172, 8, 8, 0.5);
 }
 
 /*--- navbar sticky ---*/
@@ -763,7 +764,7 @@ p.plant-name{
   color: rgba(253, 229, 180, 0.8);
 }
 
-li.plant-box{
+li.plant-box, .plant-box{
   position: relative;
   box-shadow: 0 7px 15px 0 rgb(42, 181, 154);
   border-radius: 10px;
@@ -773,12 +774,13 @@ li.plant-box{
 
 
 p.plant-info, a.plant-info{
-  display: flex;
-  height: 100px;
-  width: 343px;
-  flex-wrap: wrap;
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    height: 100px;
+    width: 343px;
+    flex-wrap: wrap;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    align-items: center;
 }
 
 a.plant-info{
@@ -796,7 +798,10 @@ a.search-add{
 }
 
 
-
+img.cool-cactus{
+  max-height: 25px;
+  max-width: 25px;
+}
 
 
 
@@ -891,7 +896,7 @@ a.search-add{
 
   .navbar-custom .navbar-nav .nav-item .nav-link {
     transition: all 0.4s;
-    color: rgba(40, 40, 46, 0.8) !important;
+    color: rgba(107, 107, 222, 0.8) !important;
     margin: 0px;
     padding: 6px 0px;
   }
