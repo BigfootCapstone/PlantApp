@@ -93,10 +93,8 @@
                     >
                     <div class="profile-img">
                         <div class="panel-body text-center">
-                            <img class="img-circle profile-avatar" id="profile-img" src="" alt="User avatar">
-                            <div class="file btn btn-lg btn primary">
-                                Change Photo
-                                <input type="file" name="image" accept="image/*" />
+                            <div>
+                                <img class="img-circle profile-avatar" th:src="${user.profile_pic}" id="profile-img" height ="64px" alt="User avatar">
                             </div>
                         </div>
                     </div>

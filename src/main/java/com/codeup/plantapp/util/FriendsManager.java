@@ -15,7 +15,7 @@ public class FriendsManager {
             boolean isAssociated = false; // Flag to track if the user is associated with any friend
 
             for (Friend friend : userFriends) {
-                if (friend.getUserID2().equals(unknownUser)) {
+                if (friend.getUser().equals(unknownUser)) {
                     isAssociated = true;
                     break;
                 }
@@ -31,47 +31,35 @@ public class FriendsManager {
 
     public static List<User> knownFriends(User user) {
         List<Friend> friendsRequest = user.getFriends();
+
         List<User> friends = new ArrayList<>();
         for (Friend friend: friendsRequest) {
             if (friend.isConfirmed()) {
                 if (friend.getUser().equals(user)) {
                     friends.add(friend.getUserID2());
-                } else {
+                } else if (friend.getUserID2().equals(user)) {
                     friends.add(friend.getUser());
                 }
             }
         }
-        for (User friend: friends){
-            System.out.println(friend.getUsername());
-        }
         return friends;
     }
 
-//    public static List<User> friendsRequests (User user) {
-////      TODO: SHOW friend requests TO user not FROM
-//        List<Friend> friendsRequest = user.getFriends();
-//        List<User> friendReq = new ArrayList<>();
-//        for (Friend friend: friendsRequest) {
-//            if (friend.getUser() != user && !friend.isConfirmed()) {
-//                System.out.println("request from other user:" + user.getUsername());
-//                friendReq.add(friend.getUser());
-//            } else if (!friend.isConfirmed()) {
-//                System.out.println("request from user:" + user.getUsername());
-//                friendReq.add(friend.getUserID2());
-//            }
-//        }
-//        return friendReq;
-//    }
-
     public static List<User> friendsRequests(User user) {
+//  GET ALL ASSOC WHERE BOB is USER
         List<Friend> friendsRequest = user.getFriends();
+
+//  HOLD ALL USER2 WHERE BOB is USER
         List<User> friendReq = new ArrayList<>();
+
+//      RUNS ASSOC WHERE BOB is USER
         for (Friend friend : friendsRequest) {
-            if (!friend.isConfirmed() && !friend.getUser().equals(user)) {
-                System.out.println("Request from other user: " + friend.getUser().getUsername());
-                friendReq.add(friend.getUser());
-            } else if (!friend.isConfirmed()) {
-                System.out.println("Request to user: " + friend.getUserID2().getUsername());
+
+            if (!friend.isConfirmed()) {
+//              SHOWS EACH REQUEST WHERE BOB is USER
+//                friendReq.add(friend.getUser());
+//              SHOWS EACH USER2 WHERE BOB is USER
+                System.out.println(friend.getUser().getUsername());
                 friendReq.add(friend.getUserID2());
             }
         }
