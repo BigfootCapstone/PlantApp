@@ -58,6 +58,9 @@ public class UserController {
     @PostMapping("/create")
     public String createUserProfile(@ModelAttribute("user") User user) {
         user.setCreated_at(LocalDate.now());
+        String userPic = "https://cdn.filestackcontent.com/mzEXQKGFQvW4pbksWgeB";
+        user.setProfile_pic(userPic);
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersDao.save(user);
         return "redirect:/users/login";
