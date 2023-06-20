@@ -34,6 +34,9 @@ public class User {
     @Column(nullable = false, length = 128)
     private String password;
 
+    @Column(nullable = false, length = 128)
+    private String profile_pic;
+
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<GardenPlant> gardenPlants;
 
@@ -146,6 +149,13 @@ public class User {
         this.plantLogs = plantLogs;
     }
 
+    public String getProfile_pic() {
+        return profile_pic;
+    }
+    public void setProfile_pic(String profile_pic) {
+        this.profile_pic = profile_pic;
+    }
+
     public User() {
     }
 
@@ -157,6 +167,19 @@ public class User {
         this.city = city;
         this.email = email;
         this.password = password;
+    }
+
+//  TEST CONSTRUCTION W/ PROFILE PIC
+    public User(LocalDate created_at, String username, String first_name, String last_name, String city, String email
+            , String password, String profile_pic) {
+        this.created_at = LocalDate.now();
+        this.username = username;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.city = city;
+        this.email = email;
+        this.password = password;
+        this.profile_pic = profile_pic;
     }
 
     //  SECURITY LOAD USER FROM DATABASE
