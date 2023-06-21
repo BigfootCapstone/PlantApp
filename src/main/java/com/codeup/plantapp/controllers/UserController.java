@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -162,7 +163,7 @@ public class UserController {
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable(name = "id") Long id,
                                     @RequestParam(name = "filestackUrl", required = false) String fileStackLink,
-                                    @ModelAttribute User updatedUser) {
+                                    @ModelAttribute User updatedUser) throws IOException {
         User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         user.setUsername(updatedUser.getUsername());
@@ -177,9 +178,7 @@ public class UserController {
 
         usersDao.save(user);
 
-        String email = "quintyn96@gmail.com";
-        String mailKey = keys.getMailGun();
-        sendSimpleMessage(mailKey, email);
+        sendSimpleMessage(keys.getAwsSES(), keys.getAwsSESSecret());
 
         return "redirect:/users/profile";
     }

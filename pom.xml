@@ -81,11 +81,13 @@
             <artifactId>delegating-spring-request-context</artifactId>
             <version>1.0</version>
         </dependency>
+<!--        https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-ses/1.12.491-->
         <dependency>
-            <groupId>com.mailgun</groupId>
-            <artifactId>mailgun-java</artifactId>
-            <version>1.0.8</version>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-ses</artifactId>
+            <version>1.12.491</version>
         </dependency>
+
     </dependencies>
 
     <build>

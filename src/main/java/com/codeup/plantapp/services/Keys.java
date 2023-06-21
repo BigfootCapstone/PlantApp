@@ -25,8 +25,11 @@ public class Keys {
     @Value("${fileStack.key}")
     private String fileStack;
 
-    @Value("${mailGun.key}")
-    private String mailGun;
+    @Value("${aws.accessKey}")
+    private String awsSESAccess;
+
+    @Value("${aws.secretKey}")
+    private String awsSESSecret;
 
     public String getOpenWeather() {
         return weather;
@@ -46,7 +49,10 @@ public class Keys {
     public String getfileStack() {
         return fileStack;
     }
-    public String getMailGun() {
-        return mailGun;
+    public String getAwsSES() {
+        return awsSESAccess;
+    }
+    public String getAwsSESSecret() {
+        return awsSESSecret;
     }
 }
