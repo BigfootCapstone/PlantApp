@@ -16,7 +16,7 @@ public class PlantsCall {
 
     public static String getChatGPTResponse(String commonName, String key) throws Exception {
         try {
-            String prompt = "Give me a care guide for " + commonName + "!";
+            String prompt = "without cutting off give me a care guide for " + commonName + "including best grow months";
 
             URL openaiApiUrl = new URL("https://api.openai.com/v1/completions");
             HttpURLConnection conn = (HttpURLConnection) openaiApiUrl.openConnection();
@@ -28,7 +28,7 @@ public class PlantsCall {
             JSONObject payload = new JSONObject();
             payload.put("model", "text-davinci-003");
             payload.put("prompt", prompt);
-            payload.put("max_tokens", 100);
+            payload.put("max_tokens", 175);
             payload.put("temperature", 0);
 
             conn.setDoOutput(true);
