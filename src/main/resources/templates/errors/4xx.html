@@ -1,0 +1,63 @@
+<!--- I STILL NEED TO CONNECT THIS TO ACTUALLY WORK -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Oops, Not Found</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      margin-top: 50px;
+    }
+
+    p {
+      margin-top: 20px;
+    }
+
+    iframe {
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+<h1>Page not found!</h1>
+<h3>ERROR 404</h3>
+<p>Watch a video about how how growing plants is good for you:</p>
+<div id="video-container"></div>
+
+<script>
+  function getRandomVideoId() {
+    // Add YouTube video IDs here
+    let videoIds = ["t3osRE2ccrM", "-Jvervkz22M", "Xo9hQS1wz-A", "oEt_JgVZ69A"];
+
+
+    let randomIndex = Math.floor(Math.random() * videoIds.length);
+    return videoIds[randomIndex];
+  }
+
+  function createVideoIframe() {
+    let videoId = getRandomVideoId();
+    let iframe = document.createElement("iframe");
+    iframe.src = "https://www.youtube.com/embed/" + videoId;
+    iframe.width = "560";
+    iframe.height = "315";
+    iframe.title = "YouTube video player";
+    iframe.frameborder = "0";
+    iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowfullscreen = true;
+
+    let videoContainer = document.getElementById("video-container");
+    videoContainer.innerHTML = "";
+    videoContainer.appendChild(iframe);
+  }
+
+
+  createVideoIframe();
+</script>
+</body>
+</html>
