@@ -28,9 +28,7 @@
                             <p class="plant-info " th:text="'Genus:   ' + ${plant.genus}"></p>
                             <p class="plant-info " th:text="'Scientific Name:   ' + ${plant.scientific_name}"></p>
                             <p class="plant-info " th:if="${plant.growth_habit}" th:text="'Growth Habit:   ' + ${plant.growth_habit}"></p>
-                            <p class="plant-info " th:if="${plant.edible == true}" th:text="'Edible:   ' + 'Yes'"></p>
-                            <p class="plant-info " th:if="${plant.edible == false}" th:text="'Edible:   ' + 'No'"></p>
-
+                            <p class="plant-info " th:text="'Edible:   ' + ${plant.edible ? 'Yes' : 'No'}"></p>
                             <p class="plant-info " th:if="${plant.minimum_temperature}" th:text="'Minimum Temperature:   ' + ${plant.minimum_temperature}"></p>
                             <p class="plant-info " th:if="${plant.maximum_temperature}" th:text="'Maximum Temperature:   ' + ${plant.maximum_temperature}"></p>
                             <p class="plant-info " th:if="${plant.ph_minimum}" th:text="'Minimum PH:   ' + ${plant.ph_minimum}"></p>
