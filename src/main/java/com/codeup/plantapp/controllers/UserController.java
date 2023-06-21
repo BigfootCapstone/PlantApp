@@ -178,7 +178,7 @@ public class UserController {
         }
         usersDao.save(user);
 
-        sendSimpleMessage(keys.getAwsSES(), keys.getAwsSESSecret());
+//        sendSimpleMessage(keys.getAwsSES(), keys.getAwsSESSecret());
 
         return "redirect:/users/profile";
     }
@@ -197,7 +197,6 @@ public class UserController {
 
         String userPic = fileStackLink == null ? "https://cdn.filestackcontent.com/mzEXQKGFQvW4pbksWgeB" : fileStackLink;
         user.setProfile_pic(userPic);
-        System.out.println("User Pic url" + userPic);
 
         usersDao.save(user);
 
