@@ -67,6 +67,8 @@
 * <a href="https://developer.oracle.com/languages/javascript.html">JavaScript</a>
 * <a href="https://whatwg.org/">HTML</a>
 * <a href="https://www.w3.org/">CSS</a>
+* <a href="https://openai.com/">ChatGPT</a>
+* <a href="https://aws.amazon.com/ses/">AWS SES</a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
