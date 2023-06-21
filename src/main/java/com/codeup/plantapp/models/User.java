@@ -37,6 +37,9 @@ public class User {
     @Column(nullable = false, length = 128)
     private String profile_pic;
 
+    @Column(nullable = false)
+    private Boolean is_emailNotifiable;
+
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<GardenPlant> gardenPlants;
 
@@ -56,7 +59,6 @@ public class User {
     public long getId() {
         return id;
     }
-
     public void setId(long id) {
         this.id = id;
     }
@@ -114,6 +116,13 @@ public class User {
         this.password = password;
     }
 
+    public Boolean getIs_emailNotifiable() {
+        return is_emailNotifiable;
+    }
+    public void setIs_emailNotifiable(Boolean is_emailNotifiable) {
+        this.is_emailNotifiable = is_emailNotifiable;
+    }
+
     public List<GardenPlant> getGardenPlants() {
         return gardenPlants;
     }
@@ -159,7 +168,8 @@ public class User {
     public User() {
     }
 
-    public User(LocalDate created_at, String username, String first_name, String last_name, String city, String email, String password) {
+    public User(LocalDate created_at, String username, String first_name, String last_name, String city, String email
+            , String password, Boolean is_emailNotifiable) {
         this.created_at = LocalDate.now();
         this.username = username;
         this.first_name = first_name;
@@ -167,11 +177,12 @@ public class User {
         this.city = city;
         this.email = email;
         this.password = password;
+        this.is_emailNotifiable = is_emailNotifiable;
     }
 
 //  TEST CONSTRUCTION W/ PROFILE PIC
     public User(LocalDate created_at, String username, String first_name, String last_name, String city, String email
-            , String password, String profile_pic) {
+            , String password, String profile_pic, Boolean is_emailNotifiable) {
         this.created_at = LocalDate.now();
         this.username = username;
         this.first_name = first_name;
@@ -180,6 +191,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.profile_pic = profile_pic;
+        this.is_emailNotifiable = is_emailNotifiable;
     }
 
     //  SECURITY LOAD USER FROM DATABASE
