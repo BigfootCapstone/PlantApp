@@ -5,14 +5,22 @@ import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.repositories.FriendRepository;
 import com.codeup.plantapp.repositories.UserRepository;
 import com.codeup.plantapp.services.Keys;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import com.fasterxml.jackson.core.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.codeup.plantapp.util.FriendsManager.showUnknownFriends;
 
@@ -132,4 +140,18 @@ public class FriendsController {
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
+
+    @GetMapping("/search")
+    public ResponseEntity<String> searchUsers(@RequestParam("query") String query) throws JsonProcessingException {
+        List<User> users = usersDao.findByUsernameContainingIgnoreCase(query);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule()); // Register the JavaTimeModule to handle LocalDate serialization/deserialization
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS); // Disable writing dates as timestamps
+
+        String json = objectMapper.writeValueAsString(users);
+
+        return ResponseEntity.ok(json);
+    }
+
 }

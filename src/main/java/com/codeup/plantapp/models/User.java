@@ -55,6 +55,10 @@ public class User {
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
     private List<PlantLog> plantLogs;
 
+    public String getCreated_atAsString() {
+        return created_at.toString();
+    }
+
 
     public long getId() {
         return id;
