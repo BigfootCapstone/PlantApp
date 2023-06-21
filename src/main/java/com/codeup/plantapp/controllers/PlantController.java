@@ -11,7 +11,7 @@ import com.codeup.plantapp.util.PlantResultDTO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +24,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-import static com.codeup.plantapp.services.PlantsCall.getOpenFarmPrimer;
-import static com.codeup.plantapp.services.PlantsCall.getTreflePlant;
+import static com.codeup.plantapp.services.PlantsCall.*;
 
 @Controller
 @RequestMapping("/plants")
@@ -141,9 +140,9 @@ public class PlantController {
 |><<>><<>><<>><<>><<>><<>><<>><VIEW PLANT DETAILS><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
-    
+
     @GetMapping("/{id}")
-    public String showPlantDetails(@PathVariable("id") String id, Model model) throws MalformedURLException {
+    public String showPlantDetails(@PathVariable("id") String id, Model model) throws Exception {
         URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle());
         PlantDTO plant =  getTreflePlant(trefleApiUrl);
 
@@ -151,7 +150,9 @@ public class PlantController {
         String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
 
         URL openfarmApiUrl = new URL("https://openfarm.cc/api/v1/crops/" + commonNameSlug);
-        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant);
+        String chatKey = keys.getChatGPT();
+        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant, chatKey);
+
 
         model.addAttribute("plant", primedPlant);
         model.addAttribute("selectedPlantCommonName", plant.getCommon_name());
@@ -204,7 +205,6 @@ public class PlantController {
 |><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
-
     @PostMapping("/plantEdit/{id}")
     public String updateUserPlant(
             @PathVariable("id") long id,
@@ -224,6 +224,19 @@ public class PlantController {
 
         return "redirect:/users/profile";
     }
+
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<USER QUICK WATER>><<>><<>><<>><<>><<>><<>><<>><|
+*/
+    @GetMapping("/quickWater/{id}")
+    public String quickWater(@PathVariable("id") long id) {
+        GardenPlant updateGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
+        updateGardenPlant.setLast_watered(LocalDate.now());
+        gardenPlantsDao.save(updateGardenPlant);
+        return "redirect:/users/profile";
+    }
+
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
@@ -246,7 +259,8 @@ public class PlantController {
         String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
 
         URL openfarmApiUrl = new URL("https://openfarm.cc/api/v1/crops/" + commonNameSlug);
-        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant);
+        String chatKey = keys.getChatGPT();
+        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant, chatKey);
 
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
         Plant userPlant = userGardenPlant.getPlant();
