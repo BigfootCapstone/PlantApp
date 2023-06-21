@@ -11,7 +11,7 @@ import com.codeup.plantapp.util.PlantResultDTO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -86,32 +86,12 @@ public class PlantController {
         return "redirect:/users/profile";
     }
 
-//    @PostMapping("/{id}")
-//    public String savePlant(@PathVariable("id") String id,
-//                            @RequestParam(name="name") String plant_name,
-//                            @RequestParam(name="sun_amount") sun_amount sun_amount,
-//                            @RequestParam(name="water_interval") long water_interval,
-//                            @RequestParam(name="is_outside") boolean is_outside
-//    ) {
-//        Plant userPlant = new Plant(id, plant_name);
-//        plantsDao.save(userPlant);
-//
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User userFound = usersDao.findUserById(user.getId());
-//
-//        Date date = new Date();
-//
-//        GardenPlant newGardenPlant = new GardenPlant(userFound, userPlant, sun_amount, date, water_interval, is_outside);
-//
-//        gardenPlantsDao.save(newGardenPlant);
-//        return "redirect:/users/profile";
-//    }
 
-/*
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><FIND PLANT IN API ><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-*/
+    /*
+    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+    |><<>><<>><<>><<>><<>><<>><<>><FIND PLANT IN API ><<>><<>><<>><<>><<>><<>><<>><|
+    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+    */
     @GetMapping("/search")
     public String showSearchForm() {
 //        URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle());
@@ -144,18 +124,20 @@ public class PlantController {
     @GetMapping("/{id}")
     public String showPlantDetails(@PathVariable("id") String id, Model model) throws Exception {
         URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle());
-        PlantDTO plant =  getTreflePlant(trefleApiUrl);
+        PlantDTO plant = getTreflePlant(trefleApiUrl);
 
+        assert plant != null;
         String selectedPlantCommonName = plant.getCommon_name();
-        String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
 
-        URL openfarmApiUrl = new URL("https://openfarm.cc/api/v1/crops/" + commonNameSlug);
+        // Call ChatGPT to get the care guide
         String chatKey = keys.getChatGPT();
-        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant, chatKey);
+        String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
+        String careGuide = getChatGPTResponse(prompt, chatKey);
 
+        plant.setCareGuide(careGuide);
 
-        model.addAttribute("plant", primedPlant);
-        model.addAttribute("selectedPlantCommonName", plant.getCommon_name());
+        model.addAttribute("plant", plant);
+        model.addAttribute("selectedPlantCommonName", selectedPlantCommonName);
 
         return "view-more";
     }
@@ -186,9 +168,9 @@ public class PlantController {
         return "redirect:/users/profile";
     }
 
-/*
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-*/
+    /*
+    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+    */
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><USER DELETE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
@@ -205,11 +187,11 @@ public class PlantController {
         return "redirect:/users/profile";
     }
 
-/*
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-*/
+    /*
+    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+    |><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
+    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+    */
     @PostMapping("/plantEdit/{id}")
     public String updateUserPlant(
             @PathVariable("id") long id,
@@ -230,10 +212,10 @@ public class PlantController {
         return "redirect:/users/profile";
     }
 
-/*
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><<USER QUICK WATER>><<>><<>><<>><<>><<>><<>><<>><|
-*/
+    /*
+    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+    |><<>><<>><<>><<>><<>><<>><<>><<USER QUICK WATER>><<>><<>><<>><<>><<>><<>><<>><|
+    */
     @GetMapping("/quickWater/{id}")
     public String quickWater(@PathVariable("id") long id) {
         GardenPlant updateGardenPlant = gardenPlantsDao.findGardenPlantsById(id);

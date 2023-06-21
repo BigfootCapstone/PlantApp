@@ -14,8 +14,10 @@ import java.net.URL;
 @Service
 public class PlantsCall {
 
-    public static String getChatGPTResponse(String prompt, String key) throws Exception {
+    public static String getChatGPTResponse(String commonName, String key) throws Exception {
         try {
+            String prompt = "Give me a care guide for " + commonName + "!";
+
             URL openaiApiUrl = new URL("https://api.openai.com/v1/completions");
             HttpURLConnection conn = (HttpURLConnection) openaiApiUrl.openConnection();
             String auth = "Bearer " + key;
@@ -56,7 +58,6 @@ public class PlantsCall {
             e.printStackTrace();
             return null;
         }
-
     }
 
     public static PlantDTO getTreflePlant(URL url) {
@@ -166,8 +167,6 @@ public class PlantsCall {
             JSONParser parser = new JSONParser();
             JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
 
-//            System.out.println(jsonResponse.toString());
-
             JSONObject openFarm = (JSONObject) jsonResponse.get("data");
             System.out.println(openFarm.toString());
             String openFarm_id_string = (String) openFarm.get("id");
@@ -184,8 +183,6 @@ public class PlantsCall {
             long height = openFarm_attributes.get("height") == null ? 0 : (long) openFarm_attributes.get("height");
             String height_string = Long.toString(height) == null ? "N/A" : (String) Long.toString(height);
 
-            String prompt = "Give me a care guide for " + plant.getCommon_name() + "!";
-            String careGuide = getChatGPTResponse(prompt, chatKey);
 
 
             plant.setOpenFarm_name(openFarm_name);
@@ -196,7 +193,7 @@ public class PlantsCall {
             plant.setSpread(spread_string);
             plant.setRow_spacing(row_spacing_string);
             plant.setHeight(height_string);
-            plant.setCareGuide(careGuide);
+
 
             return plant;
         } catch (Exception e) {
@@ -204,5 +201,6 @@ public class PlantsCall {
             return plant;
         }
     }
+
 
 }
