@@ -32,43 +32,44 @@ public class SecConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
-                .requestMatchers(
-                        "/css/**",
-                        "/js/**",
-                        "/",
-                        "/users/create",
-                        "/users/login",
-                        "/login"
-                ).permitAll()
-                .requestMatchers(
-//                        "/login",
+                        .requestMatchers("/**").permitAll()
+//                .requestMatchers(
+//                        "/css/**",
+//                        "/js/**",
+//                        "/",
+//                        "/users/create",
 //                        "/users/login",
-                        "/users/{id}",
-                        "/users/{id}",
-                        "/users/{id}/edit",
-                        "/users/profile",
-                        "/users/{id}/delete",
-                        "/friends/",
-                        "/friends/{id}",
-                        "/friends/accept/{id}",
-                        "/friends/ignore/{id}",
-                        "/plants/add",
-                        "/plants/search",
-                        "/plants/{id}",
-                        "/plants/{id}/delete",
-                        "/plants/plantEdit/{id}",
-                        "/plants/quickWater/{id}",
-                        "/plants/garden/{id}",
-                        "/plants/comments/{id}",
-                        "/plants/comments/delete/{plant}.{id}",
-                        "/posts/all",
-                        "/posts/create",
-                        "/posts/{id}",
-                        "/posts/comments",
-                        "/posts/{id}/edit",
-                        "/posts/users/login"
-                ).authenticated()
-
+//                        "/login"
+//                ).permitAll()
+//                .requestMatchers(
+////                        "/login",
+////                        "/users/login",
+//                        "/users/{id}",
+//                        "/users/{id}",
+//                        "/users/{id}/edit",
+//                        "/users/profile",
+//                        "/users/{id}/delete",
+//                        "/friends/",
+//                        "/friends/{id}",
+//                        "/friends/accept/{id}",
+//                        "/friends/ignore/{id}",
+//                        "/plants/add",
+//                        "/plants/search",
+//                        "/plants/{id}",
+//                        "/plants/{id}/delete",
+//                        "/plants/plantEdit/{id}",
+//                        "/plants/quickWater/{id}",
+//                        "/plants/garden/{id}",
+//                        "/plants/comments/{id}",
+//                        "/plants/comments/delete/{plant}.{id}",
+//                        "/posts/all",
+//                        "/posts/create",
+//                        "/posts/{id}",
+//                        "/posts/comments",
+//                        "/posts/{id}/edit",
+//                        "/posts/users/login"
+//                ).authenticated()
+//
 
         );
 

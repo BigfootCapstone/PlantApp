@@ -163,6 +163,7 @@ a.btn-sign-text{
 .sign-up{
   background-color: #76908C;
   border-radius: 10px;
+  margin-left: 8px;
 }
 
 .descriptions{
@@ -285,7 +286,7 @@ button.nav-buttons{
 }
 
 .homepage .navbar .homelinks{
-  margin-right: 36px;
+  margin-right: 44px;
 }
 /*******************
   4.Search on Nav
@@ -446,6 +447,16 @@ input#search_submit[type="submit"]:hover {
   bottom: 0;
   left: 0;
   color: #f4f4f4;
+}
+
+.reviews-images.codeup {
+  width: 332px;
+  height: 40px;
+}
+
+img.codeup{
+  width: 159px;
+  height: 50px;
 }
 
 
@@ -808,13 +819,31 @@ img.cool-cactus{
   max-width: 25px;
 }
 
-.container.plant-info-holder{
-    display: block;
-    flex-direction: row;
+
+.container-fluid.plant-box{
+  max-width: unset;
+}
+.row.plant-info-holder{
+    padding: 0px 20px 0px 20px;
 }
 
 
+p.plant-name{
+  padding-left: 20px;
+}
 
+p.plant-info.special{
+  width: unset;
+}
+
+.col-md-3.yes-no{
+  margin-left: 900px;
+}
+
+
+.plant-details{
+  margin-left: 20px;
+}
 
 
 
