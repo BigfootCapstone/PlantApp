@@ -25,6 +25,9 @@ public class Keys {
     @Value("${fileStack.key}")
     private String fileStack;
 
+    @Value("${mailGun.key}")
+    private String mailGun;
+
     public String getOpenWeather() {
         return weather;
     }
@@ -40,8 +43,10 @@ public class Keys {
     public String getChatGPT() {
         return chatGPT;
     }
-
     public String getfileStack() {
         return fileStack;
+    }
+    public String getMailGun() {
+        return mailGun;
     }
 }

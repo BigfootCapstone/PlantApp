@@ -59,7 +59,8 @@ public class PostController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Comment comment = new Comment(content, user, post, created_at);
         commentsDao.save(comment);
-        return "redirect:/posts/all";
+//      Change to render "live feed"
+        return "redirect:/posts/" + postId;
     }
 
     /*

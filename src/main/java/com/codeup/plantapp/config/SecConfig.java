@@ -46,7 +46,6 @@ public class SecConfig {
                         "/users/{id}",
                         "/users/{id}",
                         "/users/{id}/edit",
-                        "/users/{id}/pic",
                         "/users/profile",
                         "/users/{id}/delete",
                         "/friends/",

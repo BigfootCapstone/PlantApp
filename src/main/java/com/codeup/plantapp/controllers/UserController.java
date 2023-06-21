@@ -14,6 +14,8 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 
+
+import static com.codeup.plantapp.services.EmailService.sendSimpleMessage;
 import static com.codeup.plantapp.services.WeatherCall.getWeather;
 import static com.codeup.plantapp.util.CareTips.checkForOutdoorPlants;
 import static com.codeup.plantapp.util.CareTips.plantTipCheck;
@@ -174,6 +176,10 @@ public class UserController {
         System.out.println("User Pic url" + userPic);
 
         usersDao.save(user);
+
+        String email = "quintyn96@gmail.com";
+        String mailKey = keys.getMailGun();
+        sendSimpleMessage(mailKey, email);
 
         return "redirect:/users/profile";
     }
