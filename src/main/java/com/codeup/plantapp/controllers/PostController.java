@@ -45,8 +45,10 @@ public class PostController {
     @GetMapping("/{id}")
     public String onePost(@PathVariable long id, Model model) {
         Post post = postsDao.findById(id);
-        User user = post.getUser();
-        model.addAttribute("user", user);
+        User postUser = post.getUser();
+//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", postUser);
+//        model.addAttribute("loggedInUser", user);
         model.addAttribute("post", post);
         return "posts/show";
     }

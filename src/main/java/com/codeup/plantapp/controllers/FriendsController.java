@@ -1,8 +1,10 @@
 package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.Friend;
+import com.codeup.plantapp.models.Post;
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.repositories.FriendRepository;
+import com.codeup.plantapp.repositories.PostRepository;
 import com.codeup.plantapp.repositories.UserRepository;
 import com.codeup.plantapp.services.Keys;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,10 +33,12 @@ public class FriendsController {
 
         private final UserRepository usersDao;
         private final FriendRepository friendDao;
+        private final PostRepository postsDao;
 
-        public FriendsController(UserRepository usersDao, FriendRepository friendDao){
+        public FriendsController(UserRepository usersDao, FriendRepository friendDao, PostRepository postsDao){
             this.usersDao = usersDao;
             this.friendDao = friendDao;
+            this.postsDao = postsDao;
         }
 
 /*
@@ -152,6 +157,19 @@ public class FriendsController {
         String json = objectMapper.writeValueAsString(users);
 
         return ResponseEntity.ok(json);
+    }
+
+
+    @GetMapping("/view/{id}")
+    public String viewUser(@PathVariable(name = "id") long id, Model model) {
+        User user = usersDao.findUserById(id);
+
+        model.addAttribute("user", user);
+
+        List<Post> allPosts = postsDao.findAllById(Collections.singleton(id));
+        model.addAttribute("allPosts", allPosts);
+
+        return "visitProfile";
     }
 
 }

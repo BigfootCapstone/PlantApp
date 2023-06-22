@@ -5,31 +5,47 @@
 <header th:replace="partials/navbar :: navbar"></header>
 
 
+<!--TODO: SHOW LAST 25 Posts-->
+<!--       switch (like user comments)-->
+<!--TODO: SHOW LAST 3days of posts by friends and posts with their comments-->
 <div class="page-wrapper">
     <div class="container feed" >
         <div class="row">
-            <div class="column justify-content-end" style="margin-top: 300px;">
+            <div class="column justify-content-end" style="margin-top: 250px;">
 
                 <script th:inline="javascript">
 
                     document.addEventListener("DOMContentLoaded", function() {
                         let searchInput = document.querySelector("#searchInput");
+
                         searchInput.addEventListener("keyup", function() {
                             let query = this.value.trim();
 
+                            if (query.length === 0) {
+                                document.querySelector("#searchResults").innerHTML = "";
+                                return;
+                            }
+
                             let xhr = new XMLHttpRequest();
                             xhr.open("GET", "/friends/search?query=" + query);
+
                             xhr.onload = function() {
                                 if (xhr.status === 200) {
                                     let data = JSON.parse(xhr.responseText);
                                     let searchResults = document.getElementById("searchResults");
                                     searchResults.innerHTML = ""; // Clear previous search results
-
+//
+//              TODO: Add a link to the user's profile page
                                     data.forEach(function(user) {
                                         if (user.username.toLowerCase().includes(query.toLowerCase())) {
                                             // Create HTML element to display the user information
                                             let userElement = document.createElement("div");
-                                            userElement.textContent = user.username;
+                                            let userLink = document.createElement("a");
+
+                                            userLink.textContent = user.username;
+                                            userLink.setAttribute("href", "/friends/view/" + user.id);
+                                            userElement.setAttribute("name", user.id);
+                                            userElement.appendChild(userLink);
                                             searchResults.appendChild(userElement);
                                         }
                                     });
@@ -47,7 +63,9 @@
                            name="query"
                            type="text"
                            placeholder="Search users">
+
                     <ul id="searchResults"></ul>
+
                 </div>
 
 
@@ -56,15 +74,18 @@
 
                         <div class="card container" style="width: 100%">
                             <div class="card-body">
+                                <div>
+                                    <img class="img-circle profile-avatar" style="width: unset;"
+                                         th:src="${post.user.profile_pic}"
+                                         id="profile-img" height="64px" width="64px" alt="User avatar">
+                                </div>
+                                <div class="row justify-right">
+                                    <a th:href="@{/friends/view/{id}(id=${post.user.id})}"
+                                       th:text="${post.user.username}"></a>
+                                </div>
                                 <div class="card-title"> [[${post.title}]] </div>
                                 <p class="card-text"> [[${post.body}]] </p>
-                                <!--                <a th:href="${posts.id}" class="btn btn-primary">View</a>-->
                                 <ul>
-                                    <li class="row justify-right" sec:authorize="!isAuthenticated()">
-                                        <form th:action="@{/posts/{id}(id=${post.id})}" >
-                                            <button  class="btn btn-primary" >view</button>
-                                        </form>
-                                    </li>
                                     <li class="row justify-right" sec:authorize="isAuthenticated()">
                                         <form th:action="@{/posts/{id}(id=${post.id})}" >
                                             <button  class="btn btn-primary" >view</button>

@@ -1,5 +1,6 @@
 package com.codeup.plantapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -41,18 +42,23 @@ public class User {
     private Boolean is_emailNotifiable;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    @JsonIgnore
     private List<GardenPlant> gardenPlants;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    @JsonIgnore
     private List<Post> posts;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    @JsonIgnore
     private List<Comment> comments;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    @JsonIgnore
     private List<Friend> friends;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user")
+    @JsonIgnore
     private List<PlantLog> plantLogs;
 
     public String getCreated_atAsString() {

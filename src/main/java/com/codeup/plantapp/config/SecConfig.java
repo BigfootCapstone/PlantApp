@@ -64,6 +64,7 @@ public class SecConfig {
                         "/plants/comments/{id}",
                         "/plants/comments/delete/{plant}.{id}",
                         "/posts/all",
+                        "/friends/view/{id}",
                         "/friends/search",
                         "/posts/create",
                         "/posts/{id}",

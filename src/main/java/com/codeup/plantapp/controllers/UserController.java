@@ -183,10 +183,6 @@ public class UserController {
         return "redirect:/users/profile";
     }
 
-
-
-
-
     @PostMapping("/{id}/pic")
     public String changeProfPic (
             @PathVariable(name = "id") Long id,
