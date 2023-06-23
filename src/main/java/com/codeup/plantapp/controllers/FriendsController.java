@@ -89,7 +89,7 @@ public class FriendsController {
 
         redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");
 
-        return "redirect:/friends/";
+        return "redirect:/friends/view/" + id;
     }
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
@@ -127,18 +127,12 @@ public class FriendsController {
 
 //  USER2
         User user2 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//  USER
-        User user = usersDao.findUserById(id);
 
 //  USER2 to USER
         Friend decider = friendDao.findFriendByUser(user2);
-//  USER to USER2
-        Friend sender = friendDao.findFriendByUser(user);
 
 //  USER2 IGNORES FRIEND USER
         friendDao.deleteById(decider.getId());
-//  USER LOSES ASSOC WITH USER2
-        friendDao.deleteById(sender.getId());
 
         return "redirect:/users/profile";
     }
@@ -162,11 +156,22 @@ public class FriendsController {
 
     @GetMapping("/view/{id}")
     public String viewUser(@PathVariable(name = "id") long id, Model model) {
-        User user = usersDao.findUserById(id);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-        model.addAttribute("user", user);
+//  ALL BUT CURRENT USER
+        List<User> botaniUsers  = usersDao.findAllByIdIsNot(user.getId());
 
-        List<Post> allPosts = postsDao.findAllById(Collections.singleton(id));
+//  ALL BUT CURRENT FRIEND ASSOCIATIONS (TRUE OR FALSE)
+        List<Friend> friendsAssoc = friendDao.findAllByUserID2(user);
+
+        model.addAttribute("users", showUnknownFriends(botaniUsers, friendsAssoc));
+
+        User botaniUser = usersDao.findUserById(id);
+
+        model.addAttribute("user", botaniUser);
+
+        List<Post> allPosts = postsDao.findPostByUser(botaniUser);
+
         model.addAttribute("allPosts", allPosts);
 
         return "visitProfile";

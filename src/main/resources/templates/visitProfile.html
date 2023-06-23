@@ -21,12 +21,16 @@
       <p th:text="${user.username}"></p>
     </div>
   </div>
-  <div class="col-9">
+  <div class="col-3">
       <div>
         <h1 th:text="${user.first_name}"></h1>
         <p th:text="${user.email}"></p>
         <p th:text="${user.city}"></p>
       </div>
+  </div>
+
+  <div th:if="${users.contains(user)}">
+    <a th:href="@{/friends/{id}(id=${user.id})}">Add</a>
   </div>
 </div>
 

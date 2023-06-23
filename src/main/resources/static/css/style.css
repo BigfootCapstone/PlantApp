@@ -925,7 +925,10 @@ a.plant-info{
 
 /*# sourceMappingURL=style.css.map */
 
-/* Style The Dropdown Button */
+
+/************************************
+  XX.FRIENDS SEARCH ON POSTS INDEX
+*************************************/
 .dropbtn {
   background-color: #ffffff1c;
   width: 100%;
@@ -936,16 +939,15 @@ a.plant-info{
   padding: 12px 16px;
 }
 
-/* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
-/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   /*display: none;*/
   /*position: absolute;*/
+  font-size: 16px;
   margin-bottom: 24px;
   padding: 0;
   background-color: #f9f9f9;
@@ -954,17 +956,20 @@ a.plant-info{
   z-index: 1;
 }
 
+.user-tag {
+  background-color: #f1f1f1;
+  padding: 12px 16px;
+}
 
-/* Links inside the dropdown */
 .dropdown-content a {
+  font-size: 16px;
   color: black;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
 
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
+/*.dropdown-content div .row:hover {background-color: #f1f1f1}*/
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {

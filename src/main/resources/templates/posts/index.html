@@ -40,12 +40,28 @@
                                         if (user.username.toLowerCase().includes(query.toLowerCase())) {
                                             // Create HTML element to display the user information
                                             let userElement = document.createElement("div");
-                                            let userLink = document.createElement("a");
+                                            userElement.setAttribute("class", "row user-tag");
 
+                                            let userImgHold = document.createElement("div");
+                                            userImgHold.setAttribute("class", "col-2 justify-content-center");
+                                            let userImage = document.createElement("img");
+                                            userImage.setAttribute("src", user.profile_pic);
+                                            userImage.setAttribute("height", "48px");
+                                            userImage.setAttribute("width", "48px");
+                                            userImgHold.appendChild(userImage);
+
+                                            let userNameHold = document.createElement("div");
+                                            userNameHold.setAttribute("class", "col-10")
+                                            let userLink = document.createElement("a");
                                             userLink.textContent = user.username;
                                             userLink.setAttribute("href", "/friends/view/" + user.id);
+                                            userNameHold.appendChild(userLink);
+
                                             userElement.setAttribute("name", user.id);
-                                            userElement.appendChild(userLink);
+
+                                            userElement.appendChild(userImgHold);
+                                            userElement.appendChild(userNameHold);
+
                                             searchResults.appendChild(userElement);
                                         }
                                     });
