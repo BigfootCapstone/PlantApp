@@ -66,7 +66,8 @@ public class SecConfig {
                         "/posts/{id}",
                         "/posts/comments",
                         "/posts/{id}/edit",
-                        "/posts/users/login"
+                        "/posts/users/login",
+                        "/posts/post/edit"
                 ).authenticated()
 
 

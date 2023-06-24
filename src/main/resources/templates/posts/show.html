@@ -4,7 +4,7 @@
 <body>
 <header th:replace="partials/navbar :: navbar"></header>
 
-<div class="page-wrapper">
+<div class="page-wrapper d-flex container create justify-content-center align-content-center">
     <div class="container">
         <div class="row">
             <div class="column gap-10">
@@ -30,6 +30,9 @@
                             </div>
                         </div>
                         <p class="post-text"> [[${post.body}]] </p>
+                        <div class="row justify-center">
+                            <a sec:authorize="isAuthenticated()" th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn-secondary">Edit</a>
+                        </div>
                     </div>
 
                 </div>
@@ -55,12 +58,12 @@
                 </div>
 
                 <div class="row justify-center">
-                    <a sec:authorize="!isAuthenticated()" th:href="@{users/login}" class="btn-secondary">Login</a>
+                    <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn-secondary">Login</a>
                 </div>
 
                 <div sec:authorize="isAuthenticated()" class="nb-li">
                     <form class="row comment-user-container" th:action="@{/posts/comment}" th:method="post">
-                        <label for="content"></label>
+                        <label for="content">Content</label>
                         <div class="comment-user-peek column align-center justify-center shrink">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                  class="bi bi-person-circle" viewBox="0 0 16 16">
@@ -77,6 +80,7 @@
                         <button class="btn-secondary">Submit</button>
                     </form>
                 </div>
+
 
 
             </div>
