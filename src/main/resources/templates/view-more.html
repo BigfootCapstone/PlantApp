@@ -4,15 +4,13 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="partials/head :: head('BotaniBuddy Plant Details')"></head>
 <body>
+<div id="loader" class="loading"> </div>
 
 <header th:replace="partials/navbar :: navbar"></header>
-
 
 <div th:if="${plant}" class="ui container">
 
   <a href="/search" class="ui button">Back</a>
-
-
 
   <h1>Plant Details</h1>
   <div class="ui segment">
@@ -70,5 +68,18 @@
   </div>
 
 </div>
+<script>
+    const nav = document.querySelector("#nav");
+    nav.classList.add('loading-hidden')
+    window.addEventListener('load',()=>{
+        const loader = document.querySelector('.loading');
+        loader.classList.add('loading-hidden');
+        nav.classList.remove('loading-hidden')
+        loader.addEventListener('transitioned', ()=>{
+            document.body.removeChild("loading");
+        });
+    });
+</script>
+
 </body>
 </html>

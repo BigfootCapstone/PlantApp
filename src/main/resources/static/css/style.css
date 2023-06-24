@@ -832,7 +832,7 @@ a.plant-info{
 }
 
 .navbar-custom {
-  padding: 20px 0px;
+  padding: 51px 0px 0px;
   width: 100%;
   /* border-radius: 0px; */
   /* z-index: 999; */
@@ -842,10 +842,11 @@ a.plant-info{
 
 .fixed-top {
   position: fixed;
-  top: 0;
   right: 0;
   left: 0;
   z-index: 1030;
+  background: linear-gradient(to right, #0d3830, #176354);
+  top: -25px;
 }
 
 @media (min-width: 992px) {
@@ -924,3 +925,27 @@ a.plant-info{
 }
 
 /*# sourceMappingURL=style.css.map */
+/* LOADER*/
+#loader{
+  top: 0;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: #368679 url("https://cdn.dribbble.com/users/3651832/screenshots/13959869/media/4c2ed7c84e517248523388f6ad9cb450.gif") no-repeat center;
+  z-index: 9999999999;
+  transition: 1s, visibility 1s;
+  /*background-size: cover;*/
+}
+.loading-hidden{
+  opacity: 0;
+  visibility: hidden;
+}
+/*posts index*/
+.create-btn{
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 20px;
+}
+.post-btn{
+  border-radius: 999px;
+}
