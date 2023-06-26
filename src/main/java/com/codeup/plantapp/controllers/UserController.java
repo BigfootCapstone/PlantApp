@@ -83,10 +83,8 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String viewLoginPage(Model model) {
+    public String viewLoginPage() {
         System.out.println("Inside viewLoginPage");
-//        model.addAttribute("user", new User());
-//        return "redirect:/users/login";
         return "login";
     }
 

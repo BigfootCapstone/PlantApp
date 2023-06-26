@@ -12,120 +12,112 @@
     <div class="container feed" >
         <div class="row">
             <div class="column">
-                <div class="row justify-right align-center " sec:authorize="isAuthenticated()">
+                <div class="row justify-right align-center " >
                     <form class="create-btn align-center " th:action="@{/posts/create}" >
                         <h1 class="text-white text-center align-center">Public Feed</h1>
                         <button id="create-button" class="btn btn-primary post-btn" >Create Post</button>
                     </form>
                 </div>
-                <div class="column posts" th:if="${allPosts}">
-                    <div class="post-wrapper" th:each="post : ${allPosts}">
-            <div class="column justify-content-end" style="margin-top: 250px;">
 
-                <script th:inline="javascript">
+                <div class="column justify-content-end" style="margin-top: 250px;">
+                    <div class="col dropdown" style="width: 100%">
+                        <label for="searchInput"></label>
+                        <input id="searchInput" class="d-flex dropbtn" name="query"
+                                                                type="text" placeholder="Find a Buddy">
+                        <ul id="searchResults" class="dropdown-content"></ul>
+                    </div>
+                    <div class="col" th:if="${allPosts}">
+                        <div th:each="post : ${allPosts}">
 
-                    document.addEventListener("DOMContentLoaded", function() {
-                        let searchInput = document.querySelector("#searchInput");
-
-                        searchInput.addEventListener("keyup", function() {
-                            let query = this.value.trim();
-
-                            if (query.length === 0) {
-                                document.querySelector("#searchResults").innerHTML = "";
-                                return;
-                            }
-
-                            let xhr = new XMLHttpRequest();
-                            xhr.open("GET", "/friends/search?query=" + query);
-
-                            xhr.onload = function() {
-                                if (xhr.status === 200) {
-                                    let data = JSON.parse(xhr.responseText);
-                                    let searchResults = document.getElementById("searchResults");
-                                    searchResults.innerHTML = ""; // Clear previous search results
-//
-//              TODO: Add a link to the user's profile page
-                                    data.forEach(function(user) {
-                                        if (user.username.toLowerCase().includes(query.toLowerCase())) {
-                                            // Create HTML element to display the user information
-                                            let userElement = document.createElement("div");
-                                            userElement.setAttribute("class", "row user-tag");
-
-                                            let userImgHold = document.createElement("div");
-                                            userImgHold.setAttribute("class", "col-2 justify-content-center");
-                                            let userImage = document.createElement("img");
-                                            userImage.setAttribute("src", user.profile_pic);
-                                            userImage.setAttribute("height", "48px");
-                                            userImage.setAttribute("width", "48px");
-                                            userImgHold.appendChild(userImage);
-
-                                            let userNameHold = document.createElement("div");
-                                            userNameHold.setAttribute("class", "col-10")
-                                            let userLink = document.createElement("a");
-                                            userLink.textContent = user.username;
-                                            userLink.setAttribute("href", "/friends/view/" + user.id);
-                                            userNameHold.appendChild(userLink);
-
-                                            userElement.setAttribute("name", user.id);
-
-                                            userElement.appendChild(userImgHold);
-                                            userElement.appendChild(userNameHold);
-
-                                            searchResults.appendChild(userElement);
-                                        }
-                                    });
-                                }
-                            };
-                            xhr.send();
-                        });
-                    });
-
-                </script>
-
-
-                <div class="col dropdown" style="width: 100%">
-                    <input id="searchInput" class="d-flex dropbtn" name="query"
-                           type="text" placeholder="Find a Buddy">
-
-                    <ul id="searchResults" class="dropdown-content"></ul>
-
-                </div>
-
-
-                <div class="col" th:if="${allPosts}">
-                    <div th:each="post : ${allPosts}">
-
-                        <div class="card container" style="width: 100%">
-                            <div class="card-body">
-                                <div>
-                                    <img class="img-circle profile-avatar" style="width: unset;"
-                                         th:src="${post.user.profile_pic}"
-                                         id="profile-img" height="64px" width="64px" alt="User avatar">
+                            <div class="card container" style="width: 100%">
+                                <div class="card-body">
+                                    <div>
+                                        <img class="img-circle profile-avatar" style="width: unset;"
+                                             th:src="${post.user.profile_pic}"
+                                             id="profile-img" height="64px" width="64px" alt="User avatar">
+                                    </div>
+                                    <div class="row justify-right">
+                                        <a th:href="@{/friends/view/{id}(id=${post.user.id})}"
+                                           th:text="${post.user.username}"></a>
+                                    </div>
+                                    <div class="card-title"> [[${post.title}]] </div>
+                                    <p class="card-text"> [[${post.body}]] </p>
+                                    <ul>
+                                        <li class="row justify-right">
+                                            <form id="view-post-btn"  th:action="@{/posts/{id}(id=${post.id})}" >
+                                                <button  class="btn btn-primary post-btn" >Comments</button>
+                                            </form>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="row justify-right">
-                                    <a th:href="@{/friends/view/{id}(id=${post.user.id})}"
-                                       th:text="${post.user.username}"></a>
-                                </div>
-                                <div class="card-title"> [[${post.title}]] </div>
-                                <p class="card-text"> [[${post.body}]] </p>
-                                <!--                <a th:href="${posts.id}" class="btn btn-primary">View</a>-->
-                                <ul>
-                                    <li class="row justify-right" sec:authorize="isAuthenticated()">
-                                        <form id="view-post-btn"  th:action="@{/posts/{id}(id=${post.id})}" >
-                                            <button  class="btn btn-primary post-btn" >Comments</button>
-                                        </form>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-
 <footer th:replace="partials/footer :: footer"></footer>
+<script th:inline="javascript">
+
+    document.addEventListener("DOMContentLoaded", function() {
+        let searchInput = document.querySelector("#searchInput");
+
+        searchInput.addEventListener("keyup", function() {
+            let query = this.value.trim();
+
+            if (query.length === 0) {
+                document.querySelector("#searchResults").innerHTML = "";
+                return;
+            }
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "/friends/search?query=" + query);
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    let data = JSON.parse(xhr.responseText);
+                    let searchResults = document.getElementById("searchResults");
+                    searchResults.innerHTML = ""; // Clear previous search results
+//
+//              TODO: Add a link to the user's profile page
+                    data.forEach(function(user) {
+                        if (user.username.toLowerCase().includes(query.toLowerCase())) {
+                            // Create HTML element to display the user information
+                            let userElement = document.createElement("div");
+                            userElement.setAttribute("class", "row user-tag");
+
+                            let userImgHold = document.createElement("div");
+                            userImgHold.setAttribute("class", "col-2 justify-content-center");
+                            let userImage = document.createElement("img");
+                            userImage.setAttribute("src", user.profile_pic);
+                            userImage.setAttribute("height", "48px");
+                            userImage.setAttribute("width", "48px");
+                            userImgHold.appendChild(userImage);
+
+                            let userNameHold = document.createElement("div");
+                            userNameHold.setAttribute("class", "col-10")
+                            let userLink = document.createElement("a");
+                            userLink.textContent = user.username;
+                            userLink.setAttribute("href", "/friends/view/" + user.id);
+                            userNameHold.appendChild(userLink);
+
+                            userElement.setAttribute("name", user.id);
+
+                            userElement.appendChild(userImgHold);
+                            userElement.appendChild(userNameHold);
+
+                            searchResults.appendChild(userElement);
+                        }
+                    });
+                }
+            };
+            xhr.send();
+        });
+    });
+
+</script>
+
 </body>
 </html>
