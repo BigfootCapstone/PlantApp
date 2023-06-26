@@ -49,6 +49,11 @@ public class UserController {
     @Autowired
     private Keys keys;
 
+    @GetMapping("/about")
+    public String aboutUs() {
+        return "aboutus";
+    }
+
     @GetMapping("/create")
     public String createUserForm(Model model) {
         model.addAttribute("user", new User());

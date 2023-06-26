@@ -37,6 +37,7 @@ public class SecConfig {
                         "/css/**",
                         "/js/**",
                         "/",
+                        "/users/about",
                         "/users/create",
                         "/users/login",
                         "/login"
