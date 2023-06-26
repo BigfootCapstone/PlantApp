@@ -33,17 +33,17 @@ public class SecConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/**").permitAll()
+
 //                .requestMatchers(
 //                        "/css/**",
 //                        "/js/**",
 //                        "/",
+//                        "/users/about",
 //                        "/users/create",
 //                        "/users/login",
 //                        "/login"
 //                ).permitAll()
 //                .requestMatchers(
-////                        "/login",
-////                        "/users/login",
 //                        "/users/{id}",
 //                        "/users/{id}",
 //                        "/users/{id}/edit",
@@ -53,6 +53,7 @@ public class SecConfig {
 //                        "/friends/{id}",
 //                        "/friends/accept/{id}",
 //                        "/friends/ignore/{id}",
+//                        "/friends/search",
 //                        "/plants/add",
 //                        "/plants/search",
 //                        "/plants/{id}",
@@ -63,13 +64,16 @@ public class SecConfig {
 //                        "/plants/comments/{id}",
 //                        "/plants/comments/delete/{plant}.{id}",
 //                        "/posts/all",
+//                        "/friends/view/{id}",
+//                        "/friends/search",
 //                        "/posts/create",
 //                        "/posts/{id}",
 //                        "/posts/comments",
 //                        "/posts/{id}/edit",
-//                        "/posts/users/login"
+//                        "/posts/users/login",
+//                        "/posts/post/edit"
 //                ).authenticated()
-//
+
 
         );
 

@@ -5,10 +5,10 @@
 <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="58" class="scrollspy-example homepage">
+<!-- loader-->
+<div id="loader" class="loading"> </div>
 <!--Navbar Start-->
 <header th:replace="partials/navbar :: navbar"></header>
-
-
 <!-- Navbar End -->
 <!-- home start -->
 <section class="bg-home" id="home">
@@ -287,5 +287,17 @@
 <!-- footer start -->
 <footer th:replace="partials/footer :: footer"></footer>
 <!-- footer end -->
+<script>
+
+    window.addEventListener('load',()=>{
+        const loader = document.querySelector('.loading');
+        loader.classList.add('loading-hidden');
+        loader.addEventListener('transitioned', ()=>{
+            document.body.removeChild("loading");
+        });
+    });
+</script>
+// <!--<script type="module" src="/static/css/js/loader.js"></script>-->
+
 </body>
 </html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html  lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="partials/head :: head('Plant Search')"></head>
+
+
+<body>
+<div id="loader" class="loading"> </div>
+<h1>Plant Search</h1>
+<form action="#" th:action="@{/plants/search}" method="post">
+  <input type="text" name="query" placeholder="Enter a plant name" required>
+  <button type="submit">Search</button>
+</form>
+<script>
+
+  window.addEventListener('load',()=>{
+    const loader = document.querySelector('.loading');
+    loader.classList.add('loading-hidden');
+    loader.addEventListener('transitioned', ()=>{
+      document.body.removeChild("loading");
+    });
+  });
+</script>
+// <!--<script type="module" src="/static/css/js/loader.js"></script>-->
+
+</body>
+</html>

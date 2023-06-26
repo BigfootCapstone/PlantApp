@@ -3,7 +3,9 @@
 
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="partials/head :: head('Plant Search Results')"></head>
-<body>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="58" class="scrollspy-example homepage">
+
+<div id="loader" class="loading"> </div>
 <!--Navbar Start-->
 <header th:replace="partials/navbar :: navbar"></header>
 <!-- Navbar End -->
@@ -45,5 +47,19 @@
 <!-- footer start -->
 <footer th:replace="partials/footer :: footer"></footer>
 <!-- footer end -->
+<script>
+    const nav = document.querySelector("#nav");
+    nav.classList.add('loading-hidden')
+    window.addEventListener('load',()=>{
+        const loader = document.querySelector('.loading');
+        loader.classList.add('loading-hidden');
+        nav.classList.remove('loading-hidden')
+        loader.addEventListener('transitioned', ()=>{
+            document.body.removeChild("loading");
+        });
+    });
+</script>
+// <!--<script type="module" src="/static/css/js/loader.js"></script>-->
+
 </body>
 </html>
