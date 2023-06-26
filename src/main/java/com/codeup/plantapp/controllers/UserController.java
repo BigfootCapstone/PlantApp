@@ -10,10 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 
+
+import static com.codeup.plantapp.services.EmailService.sendSimpleMessage;
 import static com.codeup.plantapp.services.WeatherCall.getWeather;
 import static com.codeup.plantapp.util.CareTips.checkForOutdoorPlants;
 import static com.codeup.plantapp.util.CareTips.plantTipCheck;
@@ -46,6 +49,11 @@ public class UserController {
     @Autowired
     private Keys keys;
 
+    @GetMapping("/about")
+    public String aboutUs() {
+        return "aboutus";
+    }
+
     @GetMapping("/create")
     public String createUserForm(Model model) {
         model.addAttribute("user", new User());
@@ -54,13 +62,22 @@ public class UserController {
 
     //messing with it for the create user
     @PostMapping("/create")
-    public String createUserProfile(@ModelAttribute("user") User user) {
+    public String createUserProfile(@ModelAttribute("user") User user,
+                                    @RequestParam(name="subscribe", required = false) String subscribe) {
         user.setCreated_at(LocalDate.now());
 
         String userPic = "https://cdn.filestackcontent.com/mzEXQKGFQvW4pbksWgeB";
         user.setProfile_pic(userPic);
 
+        if (subscribe == null) {
+            user.setIs_emailNotifiable(false);
+        } else {
+            user.setIs_emailNotifiable(true);
+        }
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+
         usersDao.save(user);
         return "redirect:/users/login";
     }
@@ -72,20 +89,6 @@ public class UserController {
 //        return "redirect:/users/login";
         return "login";
     }
-//    @PostMapping("/login")
-//    public String loginSessionSetter(Model model, HttpSession session){
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        session.setAttribute("user", user);
-//        return "redirect: /users/profile";
-//    }
-//    @GetMapping("/logout")
-//    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        if (auth != null){
-//            new SecurityContextLogoutHandler().logout(request, response, auth);
-//        }
-//        return "redirect:/";
-//    }
 
     @GetMapping("/profile")
     public String showProfile(Model model) throws Exception{
@@ -159,8 +162,9 @@ public class UserController {
 
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable(name = "id") Long id,
+                                    @RequestParam(name="subscribe", required = false) String subscribe,
                                     @RequestParam(name = "filestackUrl", required = false) String fileStackLink,
-                                    @ModelAttribute User updatedUser) {
+                                    @ModelAttribute User updatedUser) throws IOException {
         User user = usersDao.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
         user.setUsername(updatedUser.getUsername());
@@ -169,9 +173,31 @@ public class UserController {
         user.setCity(updatedUser.getCity());
         user.setEmail(updatedUser.getEmail());
 
+        String userPic = fileStackLink == null ? user.getProfile_pic() : fileStackLink;
+        user.setProfile_pic(userPic);
+
+        if (subscribe == null) {
+            user.setIs_emailNotifiable(false);
+        } else {
+            user.setIs_emailNotifiable(true);
+        }
+        usersDao.save(user);
+
+//        sendSimpleMessage(keys.getAwsSES(), keys.getAwsSESSecret());
+
+        return "redirect:/users/profile";
+    }
+
+    @PostMapping("/{id}/pic")
+    public String changeProfPic (
+            @PathVariable(name = "id") Long id,
+            @RequestParam(name = "filestackUrl", required = false) String fileStackLink) {
+
+        User user = usersDao.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid user ID: " + id));
+
         String userPic = fileStackLink == null ? "https://cdn.filestackcontent.com/mzEXQKGFQvW4pbksWgeB" : fileStackLink;
         user.setProfile_pic(userPic);
-        System.out.println("User Pic url" + userPic);
 
         usersDao.save(user);
 

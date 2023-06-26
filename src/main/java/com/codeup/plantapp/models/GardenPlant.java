@@ -37,6 +37,9 @@ public class GardenPlant {
     @Column(nullable = false)
     private long water_interval;
 
+    @Column(nullable = false)
+    private long water_in_days;
+
     @Column(nullable = false, unique = false)
     private boolean is_outside;
 
@@ -97,6 +100,13 @@ public class GardenPlant {
     }
     public void setWater_interval(long water_interval) {
         this.water_interval = water_interval;
+    }
+
+    public long getWater_in_days() {
+        return water_in_days;
+    }
+    public void setWater_in_days(long water_in_days) {
+        this.water_in_days = water_in_days;
     }
 
     public boolean isIs_outside() {

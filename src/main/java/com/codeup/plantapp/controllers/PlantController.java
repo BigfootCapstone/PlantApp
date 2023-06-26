@@ -11,7 +11,6 @@ import com.codeup.plantapp.util.PlantResultDTO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 import static com.codeup.plantapp.services.PlantsCall.*;
@@ -142,14 +140,19 @@ public class PlantController {
         return "view-more";
     }
 
-    @PostMapping("/{id}")
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><USER SAVE A PLANT ><<>><<>><<>><<>><<>><<>><<>><|
+*/
+    @PostMapping("/{id}.{of}")
     public String savePlant(@PathVariable("id") String id,
+                            @PathVariable("of") String openfarm_id,
                             @RequestParam(name="name") String plant_name,
                             @RequestParam(name="sun_amount") sun_amount sun_amount,
                             @RequestParam(name="water_interval") long water_interval,
                             @RequestParam(name="is_outside") boolean is_outside
     ) {
-        Plant userPlant = new Plant(id, plant_name);
+        Plant userPlant = new Plant(id, openfarm_id, plant_name);
         plantsDao.save(userPlant);
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
