@@ -43,8 +43,6 @@ public class SecConfig {
                         "/login"
                 ).permitAll()
                 .requestMatchers(
-//                        "/login",
-//                        "/users/login",
                         "/users/{id}",
                         "/users/{id}",
                         "/users/{id}/edit",
@@ -71,7 +69,8 @@ public class SecConfig {
                         "/posts/{id}",
                         "/posts/comments",
                         "/posts/{id}/edit",
-                        "/posts/users/login"
+                        "/posts/users/login",
+                        "/posts/post/edit"
                 ).authenticated()
 
 

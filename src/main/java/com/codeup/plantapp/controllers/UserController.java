@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 
-import static com.codeup.plantapp.services.EmailService.sendSimpleMessage;
+//import static com.codeup.plantapp.services.EmailService.sendSimpleMessage;
 import static com.codeup.plantapp.services.WeatherCall.getWeather;
 import static com.codeup.plantapp.util.CareTips.checkForOutdoorPlants;
 import static com.codeup.plantapp.util.CareTips.plantTipCheck;
@@ -83,10 +83,8 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String viewLoginPage(Model model) {
+    public String viewLoginPage() {
         System.out.println("Inside viewLoginPage");
-//        model.addAttribute("user", new User());
-//        return "redirect:/users/login";
         return "login";
     }
 
