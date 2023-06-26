@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeup.plantapp.services.EmailService.sendSimpleMessage;
+//import static com.codeup.plantapp.services.EmailService.sendSimpleMessage;
 import static com.codeup.plantapp.services.WeatherCall.getWeather;
 import static com.codeup.plantapp.util.CareTips.plantTipCheck;
 

@@ -141,9 +141,8 @@ public class PlantController {
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><USER SAVE A PLANT ><<>><<>><<>><<>><<>><<>><<>><|
 */
-    @PostMapping("/{id}.{of}")
+    @PostMapping("/{id}")
     public String savePlant(@PathVariable("id") String id,
-                            @PathVariable("of") String openfarm_id,
                             @RequestParam(name="name") String plant_name,
                             @RequestParam(name="CommonName") String common_name,
                             @RequestParam(name="sun_amount") sun_amount sun_amount,
@@ -153,7 +152,7 @@ public class PlantController {
 
         String name = plant_name.isEmpty() ? common_name : plant_name;
 
-        Plant userPlant = new Plant(id, openfarm_id, name);
+        Plant userPlant = new Plant(id, "NA", name);
         plantsDao.save(userPlant);
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

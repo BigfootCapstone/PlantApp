@@ -5,18 +5,18 @@
 <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
 
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="58" class="scrollspy-example homepage">
+<!-- loader-->
+<div id="loader" class="loading"> </div>
 <!--Navbar Start-->
 <header th:replace="partials/navbar :: navbar"></header>
-
-
 <!-- Navbar End -->
 <!-- home start -->
 <section class="bg-home" id="home">
     <div class="home-center">
         <div class="home-desc-center">
             <div class="container-fluid">
-                <div class="row align-content-center">
-                    <div class="d-flex col-sm-6 sign-up align-items-center justify-content-center">
+                <div class="row align-content-center justify-content-center">
+                    <div class="d-flex col-sm-5 sign-up align-items-center justify-content-center">
                         <div class="home-title text-center">
                             <h5 class="mb-5 discover">Discover</h5>
                             <h2 class="mt-2 mb-5 text-white">BotaniBuddy</h2>
@@ -30,7 +30,7 @@
                         </div>
                     </div>
 <!-- start carousel -->
-<div class="d-flex col-sm-6 align-items-center justify-content-center">
+<div class="d-flex col-sm-6 ps-5 align-items-center justify-content-center">
     <img class="infographic" src="/css/images/PlantInfographicV2.png" alt="Plant Story">
 </div>
 <!-- end carousel -->
@@ -61,7 +61,7 @@
                     </div>
                     <div class="overflow-hidden">
                         <h5 class="text-white">Search THOUSANDS of Plants</h5>
-                        <p  class="descriptions">BotaniBuddy offers users a comprehensive platform to effortlessly explore and access information on thousands of plant species.</p>
+                        <p  class="descriptions">BotaniBuddy offers users a comprehensive platform to effortlessly explore and access information on thousands of plant species, their details, and care guides.</p>
                     </div>
                 </div>
             </div>
@@ -115,7 +115,7 @@
             <div class="col-lg-6">
                 <div class="title text-center mb-4">
                     <h6 class="small-title">Reviews</h6>
-                    <h4 class="subtitle">What our Users Says</h4>
+                    <h4 class="subtitle">What our Users Say</h4>
                     <p class="quote">From the roots of the ancient tree of life, countless branches sprout, each leading to a distinct journey.</p>
                 </div>
             </div>
@@ -166,8 +166,8 @@
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
-                <div class="reviews-images">
-                    <img src="/css/images/reviews/3.png" alt="logo-img" class="mx-auto img-fluid d-block">
+                <div class="reviews-images codeup">
+                    <img src="/css/images/reviews/codeupgray.png" alt="logo-img" class="codeup mx-auto img-fluid d-block">
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
@@ -287,5 +287,17 @@
 <!-- footer start -->
 <footer th:replace="partials/footer :: footer"></footer>
 <!-- footer end -->
+<script>
+
+    window.addEventListener('load',()=>{
+        const loader = document.querySelector('.loading');
+        loader.classList.add('loading-hidden');
+        loader.addEventListener('transitioned', ()=>{
+            document.body.removeChild("loading");
+        });
+    });
+</script>
+// <!--<script type="module" src="/static/css/js/loader.js"></script>-->
+
 </body>
 </html>

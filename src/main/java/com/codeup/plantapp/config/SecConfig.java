@@ -4,7 +4,6 @@ import com.codeup.plantapp.services.UserServices;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -33,6 +32,8 @@ public class SecConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
+                        .requestMatchers("/**").permitAll()
+
                 .requestMatchers(
                         "/css/**",
                         "/js/**",
@@ -40,11 +41,6 @@ public class SecConfig {
                         "/users/about",
                         "/users/create",
                         "/users/login",
-                        "/login"
-                ).permitAll()
-                .requestMatchers(
-//                        "/login",
-//                        "/users/login",
                         "/users/{id}",
                         "/users/{id}",
                         "/users/{id}/edit",
@@ -74,8 +70,6 @@ public class SecConfig {
                         "/posts/{id}/edit",
                         "/posts/users/login"
                 ).authenticated()
-
-
         );
 
         http.formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/users/profile"));
