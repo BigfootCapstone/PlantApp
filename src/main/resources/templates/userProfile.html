@@ -204,8 +204,9 @@
 
                         </div>
                     <div class="tab-pane fade" id="weather" role="tabpanel" aria-labelledby="weather-tab">
-                        <h3 class="subtitle">Weather Banner</h3>
+                        <h3 class="">Weather Banner</h3>
                         <div th:if="${weather}">
+                            <img th:src="${weather.getIcon()}"></img>
                             <p th:text="'Temp: ' + ${weather.getTempAvg()}"></p>
                             <p th:text="'Humidity: ' + ${weather.getHumidity()}"></p>
                             <p th:text="'Sunrise: ' + ${weather.getSunrise()}"></p>
