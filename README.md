@@ -61,7 +61,7 @@
 
 ### Built With
 * <a href="https://spring.io/">Spring Boot</a>
-* <a href="https://www.thymeleaf.org/">ThymLeaf</a>
+* <a href="https://www.thymeleaf.org/">ThymeLeaf</a>
 * <a href="https://www.mysql.com/">MySQL</a>
 * <a href="https://www.java.com/en/">Java</a>
 * <a href="https://developer.oracle.com/languages/javascript.html">JavaScript</a>
