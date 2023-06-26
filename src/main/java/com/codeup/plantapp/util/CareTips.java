@@ -12,6 +12,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class CareTips {
 
+//  Separates concerns for outdoor and indoor plants
     public static GardenPlant plantTipCheck(GardenPlant plant, Weather weather) {
         if (plant.isIs_outside()) {
             checkOutdoorForWater(plant, weather);
@@ -23,17 +24,7 @@ public class CareTips {
         }
     }
 
-    public static List<GardenPlant> checkForOutdoorPlants(User user) {
-        List<GardenPlant> userPlants = user.getGardenPlants();
-        List<GardenPlant> outdoor = new ArrayList<>();
-        for (GardenPlant plant: userPlants) {
-            if (plant.isIs_outside()) {
-                outdoor.add(plant);
-            }
-        }
-        return outdoor;
-    }
-
+//  Runs below functions based on plant location
     private static GardenPlant checkOutdoorForWater(GardenPlant plant, Weather weather) {
 //      GardenPlant checkPlant = gardenPlantDao.findById(plant.getId());
         LocalDate currentDay = LocalDate.now(); //Get current date
@@ -44,6 +35,8 @@ public class CareTips {
 
         long daysToWater = waterInDays - diff; //How many days since plant was last watered
 
+        plant.setWater_in_days(daysToWater);
+
         boolean rainCheck = weather.getCloudDesc().contains("rain"); //Check for rain in forecast
 
         if (rainCheck && plant.isIs_outside()) {
@@ -51,7 +44,7 @@ public class CareTips {
             return plant;
         } else if (plant.getLast_watered().isBefore(currentDay)) {
             if (daysToWater < 0) {
-                plant.setWater_tip("You are " + Math.abs(daysToWater) + " day(s) behind on watering");
+                plant.setWater_tip("You are " + daysToWater + " day(s) behind on watering");
                 return plant;
             } else if (diff == waterInDays) {
                 plant.setWater_tip("Water today");
@@ -65,7 +58,6 @@ public class CareTips {
             return plant;
         }
     }
-
     private static GardenPlant checkOutdoorForSun(GardenPlant plant, Weather weather) {
         long cloudiness = weather.getCloudiness();
 
@@ -101,9 +93,11 @@ public class CareTips {
 
         long daysToWater = waterInDays - diff; //How many days since plant was last watered
 
+        plant.setWater_in_days(daysToWater);
+
         if (plant.getLast_watered().isBefore(currentDay)) {
             if (daysToWater < 0) {
-                plant.setWater_tip("You are " + Math.abs(daysToWater) + " day(s) behind on watering");
+                plant.setWater_tip("You are " + daysToWater + " day(s) behind on watering");
                 return plant;
             } else if (diff == waterInDays) {
                 plant.setWater_tip("Water today");
@@ -117,6 +111,18 @@ public class CareTips {
             return plant;
         }
 
+    }
+
+//  renders list for user view
+    public static List<GardenPlant> checkForOutdoorPlants(User user) {
+        List<GardenPlant> userPlants = user.getGardenPlants();
+        List<GardenPlant> outdoor = new ArrayList<>();
+        for (GardenPlant plant: userPlants) {
+            if (plant.isIs_outside()) {
+                outdoor.add(plant);
+            }
+        }
+        return outdoor;
     }
 
 }

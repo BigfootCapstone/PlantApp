@@ -4,6 +4,7 @@ import com.codeup.plantapp.services.UserServices;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -36,6 +37,7 @@ public class SecConfig {
                         "/css/**",
                         "/js/**",
                         "/",
+                        "/users/about",
                         "/users/create",
                         "/users/login",
                         "/login"
@@ -52,6 +54,7 @@ public class SecConfig {
                         "/friends/{id}",
                         "/friends/accept/{id}",
                         "/friends/ignore/{id}",
+                        "/friends/search",
                         "/plants/add",
                         "/plants/search",
                         "/plants/{id}",
@@ -62,6 +65,8 @@ public class SecConfig {
                         "/plants/comments/{id}",
                         "/plants/comments/delete/{plant}.{id}",
                         "/posts/all",
+                        "/friends/view/{id}",
+                        "/friends/search",
                         "/posts/create",
                         "/posts/{id}",
                         "/posts/comments",

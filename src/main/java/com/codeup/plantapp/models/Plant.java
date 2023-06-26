@@ -59,8 +59,9 @@ public class Plant {
 
     public Plant () {}
 
-    public Plant(String trefle_id, String name) {
+    public Plant(String trefle_id, String openfarm_id, String name) {
         this.trefle_id = trefle_id;
+        this.openfarm_id = openfarm_id;
         this.name = name;
     }
 }

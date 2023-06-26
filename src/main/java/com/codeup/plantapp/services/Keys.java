@@ -25,6 +25,12 @@ public class Keys {
     @Value("${fileStack.key}")
     private String fileStack;
 
+    @Value("${aws.accessKey}")
+    private String awsSESAccess;
+
+    @Value("${aws.secretKey}")
+    private String awsSESSecret;
+
     public String getOpenWeather() {
         return weather;
     }
@@ -40,8 +46,13 @@ public class Keys {
     public String getChatGPT() {
         return chatGPT;
     }
-
     public String getfileStack() {
         return fileStack;
+    }
+    public String getAwsSES() {
+        return awsSESAccess;
+    }
+    public String getAwsSESSecret() {
+        return awsSESSecret;
     }
 }

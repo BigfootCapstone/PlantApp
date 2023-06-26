@@ -15,11 +15,11 @@
 
                 <div th:if="${post}" class="post row">
                     <div class="post-user-peek column align-center justify-center shrink">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor"
-                             class="bi bi-person-circle" viewBox="0 0 16 16">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                        </svg>
+<!--                TODO: SHOW POST-USER PROFILE PIC-->
+                        <div>
+                            <img class="img-circle profile-avatar" style="width: unset;" th:src="${user.profile_pic}"
+                                 id="profile-img" height="64px" width="64px" alt="User avatar">
+                        </div>
                     </div>
                     <div class="post-body column justify-center">
                         <div class="column post-head shrink">
@@ -43,11 +43,11 @@
                         <div th:each="comment: ${post.comments}"
                              class="comment-user-container row justify-left full-width no-gap">
                             <div class="comment-user-peek column align-center justify-center shrink">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                     class="bi bi-person-circle" viewBox="0 0 16 16">
-                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-                                </svg>
+<!--                        TODO: SHOW COMMENTED-USER PROFILE PIC-->
+                                <div>
+                                    <img class="img-circle profile-avatar" style="width: unset;" th:src="${comment.user.profile_pic}"
+                                         id="commentor-img" height="64px" width="64px" alt="User avatar">
+                                </div>
                             </div>
                             <div class="column align-left">
                                 <p class="comment-username" th:text="${comment.user.username}"></p>
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="row justify-center">
-                    <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn-secondary">Login</a>
+                    <a sec:authorize="!isAuthenticated()" th:href="@{users/login}" class="btn-secondary">Login</a>
                 </div>
 
                 <div sec:authorize="isAuthenticated()" class="nb-li">
@@ -77,10 +77,9 @@
                             <textarea name="content" id="content" maxlength="255"></textarea>
                             <input type="hidden" name="postId" th:value="${post.id}">
                         </div>
-                        <button class="btn btn-primary post-btn">Submit</button>
+                        <button class="btn-secondary">Submit</button>
                     </form>
                 </div>
-
 
 
             </div>
