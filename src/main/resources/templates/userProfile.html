@@ -37,11 +37,11 @@
 <!--End Profile Img-->
 
 <!--Start Profile Header-->
-                <div class="col-md-6">
+                <div class="col-sm-6">
                     <div class="profile-head">
-                        <h5  class="subtitle" th:text="${user.first_name} + ' ' + ${user.last_name}"></h5>
-                        <h6 class="quote" th:text="${user.username}"></h6>
-                        <h6 class="quote" th:text="'Date Joined: ' + ${user.created_at}"></h6>
+                        <h3  class="" th:text="${user.first_name} + ' ' + ${user.last_name}"></h3>
+                        <h6 class="username" th:text="${user.username}"></h6>
+                        <h6 class="" th:text="'Date Joined: ' + ${user.created_at}"></h6>
 
 <!--Start Profile Tabs-->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -68,7 +68,7 @@
 <!--End Profile Header-->
 <!--Start EDIT PROFILE BUTTON-->
             <div class="col-md-2">
-                <a type="submit"  class="profile-edit-btn" name="btnAddMore" th:href="@{/users/{id}/edit(id=${user.id})}">Edit Profile</a>
+                <a type="submit"  class="profile-edit-btn text-center" name="btnAddMore" th:href="@{/users/{id}/edit(id=${user.id})}">Edit Profile</a>
             </div>
 <!--End EDIT PROFILE BUTTON-->
             </div>
@@ -89,10 +89,10 @@
                      <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
                             <div class="col-md-6">
-                                <label>User Id</label>
+                                <label>Username</label>
                             </div>
                             <div class="col-md-6">
-                                <p class="quote" th:text="${user.username}"></p>
+                                <p class="" th:text="${user.username}"></p>
                             </div>
                         </div>
                         <div class="row">
@@ -100,7 +100,7 @@
                                 <label>Name</label>
                             </div>
                             <div class="col-md-6">
-                                <p  class="subtitle" th:text="${user.first_name} + ' ' + ${user.last_name}"></p>
+                                <p  class="" th:text="${user.first_name} + ' ' + ${user.last_name}"></p>
                             </div>
                         </div>
                         <div class="row">
@@ -108,7 +108,7 @@
                                 <label>Email</label>
                             </div>
                             <div class="col-md-6">
-                                <p class="quote" th:text="${user.email}"></p>
+                                <p class="" th:text="${user.email}"></p>
                             </div>
                         </div>
                         <div class="row">
@@ -116,7 +116,7 @@
                                 <label>City</label>
                             </div>
                             <div class="col-md-6">
-                                <p class="quote" th:text="${user.city}"></p>
+                                <p class="" th:text="${user.city}"></p>
                             </div>
                         </div>
                     </div>
@@ -146,11 +146,10 @@
                                     </div>
                                     <div th:unless="${not #lists.isEmpty(userPlants)}">
 
-                                        <form action="#" th:action="@{/plants/search}" method="post">
-                                            <label>Add A Plant!
-                                                <input style="color: black;" type="text" name="query" placeholder="Lookin' for a plant ?" required autocomplete="on">
-                                            </label>
-                                            <input style="color: black;" value="Search" type="submit">
+                                        <form class="d-flex custom-form profile-plant-add" action="#" th:action="@{/plants/search}" method="post">
+                                            <label class="d-flex label-plant-add justify-content-center align-self-center">Add A Plant!</label>
+                                            <input  class="form-control" type="text" name="query" placeholder="Search for your plant..." required autocomplete="on">
+                                            <input  class="btn-custom ms-3" value="Search" type="submit">
                                         </form>
                                     </div>
                                 </div>
