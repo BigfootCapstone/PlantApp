@@ -38,8 +38,9 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="mb-3">
-                                <label class="form-label" for="city">Current City:</label>
-                                <input type="text" id="city" class="form-control" th:field="*{city}" required>
+                                <label class="form-label" for="city">Zip Code:</label>
+                                <input id="city" name="zip" class="form-control" type="text" pattern="[0-9]*" th:field="*{city}" required>
+                                <!--                <input type="text" id="city" class="form-control" th:field="*{city}" required>-->
                             </div>
                         </div>
                         <div class="col-lg-12">
