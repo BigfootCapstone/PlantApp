@@ -31,7 +31,7 @@
                         </div>
                         <p class="post-text"> [[${post.body}]] </p>
                         <div class="row justify-center">
-                            <a sec:authorize="isAuthenticated()" th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn-secondary">Edit</a>
+                            <a sec:authorize="isAuthenticated()" th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary post-btn">Edit</a>
                         </div>
                     </div>
 
@@ -77,7 +77,7 @@
                             <textarea name="content" id="content" maxlength="255"></textarea>
                             <input type="hidden" name="postId" th:value="${post.id}">
                         </div>
-                        <button class="btn-secondary">Submit</button>
+                        <button class="btn btn-primary post-btn">Submit</button>
                     </form>
                 </div>
 

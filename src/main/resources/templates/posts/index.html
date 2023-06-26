@@ -8,13 +8,14 @@
     <div class="container feed" >
         <div class="row">
             <div class="column">
-                <div class="row justify-right " sec:authorize="isAuthenticated()">
-                    <form class="create-btn" th:action="@{/posts/create}" >
-                        <button  class="btn btn-primary post-btn" >Create Post</button>
+                <div class="row justify-right align-center " sec:authorize="isAuthenticated()">
+                    <form class="create-btn align-center " th:action="@{/posts/create}" >
+                        <h1 class="text-white text-center align-center">Public Feed</h1>
+                        <button id="create-button" class="btn btn-primary post-btn" >Create Post</button>
                     </form>
                 </div>
-                <div class="column" th:if="${allPosts}">
-                    <div th:each="post : ${allPosts}">
+                <div class="column posts" th:if="${allPosts}">
+                    <div class="post-wrapper" th:each="post : ${allPosts}">
 
                         <div class="card container" style="width: 100%">
                             <div class="card-body">
@@ -28,8 +29,8 @@
                                         </form>
                                     </li>
                                     <li class="row justify-right" sec:authorize="isAuthenticated()">
-                                        <form th:action="@{/posts/{id}(id=${post.id})}" >
-                                            <button  class="btn btn-primary post-btn" >view</button>
+                                        <form id="view-post-btn"  th:action="@{/posts/{id}(id=${post.id})}" >
+                                            <button  class="btn btn-primary post-btn" >Comments</button>
                                         </form>
                                     </li>
                                 </ul>

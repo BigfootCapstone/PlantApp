@@ -943,9 +943,36 @@ a.plant-info{
 /*posts index*/
 .create-btn{
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   margin-bottom: 20px;
+  justify-content: space-between;
 }
 .post-btn{
   border-radius: 999px;
+  border-color: #F28153;
+  background-color: #F28153;
+}
+/*post create form*/
+.create-pg{
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+.create-wrapper{
+  margin: 25px;
+  width: 1300px;
+  font-size: 20px;
+  color: aliceblue;
+}
+.create-header{
+  color: #F28153;
+
+}
+#view-post-btn{
+  display: flex;
+  justify-content: flex-end;
+}
+#create-button{
+  height: 100px;
+  width: 100px;
 }
