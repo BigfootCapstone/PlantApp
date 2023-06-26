@@ -6,8 +6,10 @@
 <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
 <!--commenting-->
 <body>
+<div id="loader" class="loading"> </div>
+
 <!--Navbar Start-->
-    <header th:replace="partials/navbar :: navbar"></header>
+<header th:replace="partials/navbar :: navbar"></header>
 <!-- Navbar End -->
 
 <div class="d-flex container create justify-content-center align-content-center">
@@ -268,6 +270,17 @@
 
 <!-- footer start -->
 <footer th:replace="partials/footer :: footer"></footer>
+<script>
+
+    window.addEventListener('load',()=>{
+        const loader = document.querySelector('.loading');
+        loader.classList.add('loading-hidden');
+        loader.addEventListener('transitioned', ()=>{
+            document.body.removeChild("loading");
+        });
+    });
+</script>
+
 <!-- footer end -->
 </body>
 </html>
