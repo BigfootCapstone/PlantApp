@@ -10,27 +10,27 @@
 <header th:replace="partials/navbar :: navbar"></header>
 <!-- Navbar End -->
 
-<div class="row" th:if="${user}" style="margin-top: 250px;">
+<div class="row" th:if="${owner}" style="margin-top: 250px;">
   <div class="col-3">
     <div>
       <img class="img-circle profile-avatar" style="width: unset;"
-           th:src="${user.profile_pic}"
+           th:src="${owner.profile_pic}"
            id="profile-img" height="64px" width="64px" alt="User avatar">
     </div>
     <div>
-      <p th:text="${user.username}"></p>
+      <p th:text="${owner.username}"></p>
     </div>
   </div>
   <div class="col-3">
       <div>
-        <h1 th:text="${user.first_name}"></h1>
-        <p th:text="${user.email}"></p>
-        <p th:text="${user.city}"></p>
+        <h1 th:text="${owner.first_name}"></h1>
+        <p th:text="${owner.email}"></p>
+        <p th:text="${owner.city}"></p>
       </div>
   </div>
 
-  <div th:if="${users.contains(user)}">
-    <a th:href="@{/friends/{id}(id=${user.id})}">Add</a>
+  <div th:if="${unknown.contains(owner) && !requested.contains(owner)}">
+    <a th:href="@{/friends/{id}(id=${owner.id})}">Add</a>
   </div>
 </div>
 

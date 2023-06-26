@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 
+import static com.codeup.plantapp.util.FriendsManager.friendsRequests;
 import static com.codeup.plantapp.util.FriendsManager.showUnknownFriends;
 
 @Controller
@@ -160,11 +161,11 @@ public class FriendsController {
 //  ALL BUT CURRENT FRIEND ASSOCIATIONS (TRUE OR FALSE)
         List<Friend> friendsAssoc = friendDao.findAllByUserID2(user);
 
-        model.addAttribute("users", showUnknownFriends(botaniUsers, friendsAssoc));
-
+        model.addAttribute("unknown", showUnknownFriends(botaniUsers, friendsAssoc));
+        model.addAttribute("requested", friendsRequests(usersDao.findUserById(user.getId())));
         User botaniUser = usersDao.findUserById(id);
 
-        model.addAttribute("user", botaniUser);
+        model.addAttribute("owner", botaniUser);
 
         List<Post> allPosts = postsDao.findPostByUser(botaniUser);
 
