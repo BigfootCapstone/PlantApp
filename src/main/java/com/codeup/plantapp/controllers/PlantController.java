@@ -21,6 +21,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 import static com.codeup.plantapp.services.PlantsCall.*;
 
@@ -126,6 +127,7 @@ public class PlantController {
 
         assert plant != null;
         String selectedPlantCommonName = plant.getCommon_name();
+        System.out.println("At selectedPlantCommonName GET" + selectedPlantCommonName);
 
         // Call ChatGPT to get the care guide
         String chatKey = keys.getChatGPT();
@@ -136,6 +138,8 @@ public class PlantController {
 
         model.addAttribute("plant", plant);
         model.addAttribute("selectedPlantCommonName", selectedPlantCommonName);
+        System.out.println("At addAttribute" + selectedPlantCommonName);
+
 
         return "view-more";
     }
@@ -148,11 +152,16 @@ public class PlantController {
     public String savePlant(@PathVariable("id") String id,
                             @PathVariable("of") String openfarm_id,
                             @RequestParam(name="name") String plant_name,
+                            @RequestParam(name="CommonName") String common_name,
                             @RequestParam(name="sun_amount") sun_amount sun_amount,
                             @RequestParam(name="water_interval") long water_interval,
                             @RequestParam(name="is_outside") boolean is_outside
     ) {
-        Plant userPlant = new Plant(id, openfarm_id, plant_name);
+        System.out.println("At selectedPlantCommonName POST" + common_name);
+
+        String name = plant_name.isEmpty() ? common_name : plant_name;
+
+        Plant userPlant = new Plant(id, openfarm_id, name);
         plantsDao.save(userPlant);
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

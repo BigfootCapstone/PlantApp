@@ -46,7 +46,8 @@
           <h3>ADD to your Garden</h3>
         <form method="post" th:action="@{/plants/{id}.{of}(id=${plant.id}, of=${plant.openFarm_id})}">
 <!--          get trefle-->
-          <input type="text" th:text="${plant.common_name}" name="name">
+            <input type="hidden" name="CommonName" th:value="${plant.common_name}" />
+            <input type="text" th:text="${plant.common_name}" name="name">
           <label for="sun_amount">Sun Amount</label>
           <select name="sun_amount" id="sun_amount">
             <option value="FULL_SUN">Full Sun</option>
