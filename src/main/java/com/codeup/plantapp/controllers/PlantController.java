@@ -21,7 +21,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 
 import static com.codeup.plantapp.services.PlantsCall.*;
 
@@ -91,19 +90,9 @@ public class PlantController {
     |><<>><<>><<>><<>><<>><<>><<>><FIND PLANT IN API ><<>><<>><<>><<>><<>><<>><<>><|
     |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
     */
-    @GetMapping("/search")
-    public String showSearchForm() {
-//        URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + id + "?token=" + keys.getTrefle());
-//        PlantDTO plant =  getTreflePlant(trefleApiUrl);
-//
-//        String selectedPlantCommonName = plant.getCommon_name();
-//        String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
 
-        return "searchForm";
-    }
-
-    @PostMapping("/search")
-    public String searchPlants(@RequestParam("query") String query, Model model) {
+    @GetMapping("/search/{query}")
+    public String showSearchForm(@PathVariable("query") String query, Model model) {
         String apiUrl = TREFLE_API_URL + "?token=" + keys.getTrefle() + "&q=" + query;
         PlantResultDTO plantResult = restTemplate.getForObject(apiUrl, PlantResultDTO.class);
 
@@ -113,6 +102,13 @@ public class PlantController {
 
         return "searchResults";
     }
+
+    @PostMapping("/search")
+    public String searchPlants(@RequestParam("query") String query) {
+        return "redirect:/plants/search/" + query;
+    }
+
+
 
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
@@ -127,7 +123,6 @@ public class PlantController {
 
         assert plant != null;
         String selectedPlantCommonName = plant.getCommon_name();
-        System.out.println("At selectedPlantCommonName GET" + selectedPlantCommonName);
 
         // Call ChatGPT to get the care guide
         String chatKey = keys.getChatGPT();
@@ -138,8 +133,6 @@ public class PlantController {
 
         model.addAttribute("plant", plant);
         model.addAttribute("selectedPlantCommonName", selectedPlantCommonName);
-        System.out.println("At addAttribute" + selectedPlantCommonName);
-
 
         return "view-more";
     }
@@ -157,7 +150,6 @@ public class PlantController {
                             @RequestParam(name="water_interval") long water_interval,
                             @RequestParam(name="is_outside") boolean is_outside
     ) {
-        System.out.println("At selectedPlantCommonName POST" + common_name);
 
         String name = plant_name.isEmpty() ? common_name : plant_name;
 
