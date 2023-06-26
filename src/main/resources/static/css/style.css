@@ -1006,7 +1006,7 @@ p #guide{
 .fixed-top {
     position: fixed;
     background: linear-gradient(to right, #0d3830, #176354);
-    top: 0;
+    top: -25px;
     right: 0;
     left: 0;
     z-index: 1030;
@@ -1014,6 +1014,7 @@ p #guide{
     width: 100%;
     margin-bottom: 0px;
     transition: all 0.5s ease-in-out;
+
 }
 
 
