@@ -10,31 +10,52 @@
 <header th:replace="partials/navbar :: navbar"></header>
 <!-- Navbar End -->
 
-<div class="row" th:if="${owner}" style="margin-top: 250px;">
-  <div class="col-3">
-    <div>
-      <img class="img-circle profile-avatar" style="width: unset;"
-           th:src="${owner.profile_pic}"
-           id="profile-img" height="64px" width="64px" alt="User avatar">
-    </div>
-    <div>
-      <p th:text="${owner.username}"></p>
-    </div>
-  </div>
-  <div class="col-3">
-      <div>
-        <h1 th:text="${owner.first_name}"></h1>
-        <p th:text="${owner.email}"></p>
-        <p th:text="${owner.city}"></p>
-      </div>
-  </div>
 
-  <div th:if="${unknown.contains(owner) && !requested.contains(owner)}">
-    <a th:href="@{/friends/{id}(id=${owner.id})}">Add</a>
+<div class="d-flex container create justify-content-center align-content-center">
+  <!--Start Profile-->
+  <div class="container emp-profile">
+    <form method="post">
+      <!--Start Row-->
+      <div class="row">
+        <div class="col-md-4">
+          <!--Start Profile Img-->
+          <form class="form-horizontal flex-grow-1">
+            <div class="profile-img">
+              <div class="panel-body text-center">
+                <div>
+                  <img class="img-circle profile-avatar" th:src="${owner.profile_pic}" id="user-img" height ="64px"
+                       alt="User avatar">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <!--End Profile Img-->
+
+        <!--Start Profile Header-->
+        <div class="col-md-6">
+          <div class="profile-head">
+            <h5  class="subtitle" th:text="${owner.first_name} + ' ' + ${owner.last_name}"></h5>
+            <h6 class="quote" th:text="${owner.username}"></h6>
+            <h6 class="quote" th:text="'Date Joined: ' + ${owner.created_at}"></h6>
+            <p th:text="${owner.city}"></p>
+          </div>
+        </div>
+        <div class="row justify-content-end">
+          <div class="col-3" th:if="${unknown.contains(owner) && !requested.contains(owner)}">
+            <a class="btn btn-primary" th:href="@{/friends/{id}(id=${owner.id})}">Add</a>
+          </div>
+        </div>
+
+
+      </div>
+    </form>
   </div>
 </div>
 
 <div class="col" th:if="${allPosts}">
+
+  <h1 class="text-white">Posts by <span class="text-info" th:text="${owner.username}"></span></h1>
   <div th:each="post : ${allPosts}">
 
     <div class="card container" style="width: 100%">
