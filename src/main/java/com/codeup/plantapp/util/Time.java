@@ -4,6 +4,11 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 
+//water scheduler
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 public class Time {
 
     public static LocalDateTime convertTimestampToLocalDateTime(long timestamp) {
@@ -49,6 +54,27 @@ public class Time {
             return (hour - 12) + " : " + minutes + " PM";
         } else {
             return hour + " : " + minutes + " AM";
+        }
+    }
+
+
+    public class PlantWateringScheduler {
+        private ScheduledExecutorService scheduler;
+
+        public PlantWateringScheduler() {
+            scheduler = Executors.newSingleThreadScheduledExecutor();
+        }
+
+        public void scheduleWateringReminder() {
+            scheduler.scheduleAtFixedRate(() -> {
+                // Retrieve the list of plants that need watering
+                // and send the reminder emails using your chosen
+                // email service provider's API or library
+            }, 0, 24, TimeUnit.HOURS);
+        }
+
+        public void stopScheduler() {
+            scheduler.shutdown();
         }
     }
 

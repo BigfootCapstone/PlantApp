@@ -1,18 +1,25 @@
 package com.codeup.plantapp.controllers;
 
 import com.codeup.plantapp.models.Friend;
+import com.codeup.plantapp.models.Post;
 import com.codeup.plantapp.models.User;
 import com.codeup.plantapp.repositories.FriendRepository;
+import com.codeup.plantapp.repositories.PostRepository;
 import com.codeup.plantapp.repositories.UserRepository;
-import com.codeup.plantapp.services.Keys;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+
 
 import static com.codeup.plantapp.util.FriendsManager.showUnknownFriends;
 
@@ -20,17 +27,19 @@ import static com.codeup.plantapp.util.FriendsManager.showUnknownFriends;
 @RequestMapping("/friends")
 public class FriendsController {
 
-        private final UserRepository usersDao;
-        private final FriendRepository friendDao;
+    private final UserRepository usersDao;
+    private final FriendRepository friendDao;
+    private final PostRepository postsDao;
 
-        public FriendsController(UserRepository usersDao, FriendRepository friendDao){
-            this.usersDao = usersDao;
-            this.friendDao = friendDao;
-        }
+    public FriendsController(UserRepository usersDao, FriendRepository friendDao, PostRepository postsDao){
+        this.usersDao = usersDao;
+        this.friendDao = friendDao;
+        this.postsDao = postsDao;
+    }
 
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>>SEE UNASIGNED FRIENDS <<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><SEE UNASSIGNED FRIENDS <<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
     @GetMapping("/")
@@ -52,7 +61,7 @@ public class FriendsController {
 */
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>> USER ADD FRIEND   ><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>>< USER ADD FRIEND >><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
     @GetMapping("/{id}")
@@ -76,7 +85,7 @@ public class FriendsController {
 
         redirectAttributes.addFlashAttribute("successMessage", "Comment submitted successfully!");
 
-        return "redirect:/friends/";
+        return "redirect:/friends/view/" + id;
     }
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
@@ -114,22 +123,54 @@ public class FriendsController {
 
 //  USER2
         User user2 = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//  USER
-        User user = usersDao.findUserById(id);
 
 //  USER2 to USER
         Friend decider = friendDao.findFriendByUser(user2);
-//  USER to USER2
-        Friend sender = friendDao.findFriendByUser(user);
 
 //  USER2 IGNORES FRIEND USER
         friendDao.deleteById(decider.getId());
-//  USER LOSES ASSOC WITH USER2
-        friendDao.deleteById(sender.getId());
 
         return "redirect:/users/profile";
     }
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
+
+    @GetMapping("/search")
+    public ResponseEntity<String> searchUsers(@RequestParam("query") String query) throws JsonProcessingException {
+        List<User> users = usersDao.findByUsernameContainingIgnoreCase(query);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule()); // Register the JavaTimeModule to handle LocalDate serialization/deserialization
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS); // Disable writing dates as timestamps
+
+        String json = objectMapper.writeValueAsString(users);
+
+        return ResponseEntity.ok(json);
+    }
+
+
+    @GetMapping("/view/{id}")
+    public String viewUser(@PathVariable(name = "id") long id, Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+//  ALL BUT CURRENT USER
+        List<User> botaniUsers  = usersDao.findAllByIdIsNot(user.getId());
+
+//  ALL BUT CURRENT FRIEND ASSOCIATIONS (TRUE OR FALSE)
+        List<Friend> friendsAssoc = friendDao.findAllByUserID2(user);
+
+        model.addAttribute("users", showUnknownFriends(botaniUsers, friendsAssoc));
+
+        User botaniUser = usersDao.findUserById(id);
+
+        model.addAttribute("user", botaniUser);
+
+        List<Post> allPosts = postsDao.findPostByUser(botaniUser);
+
+        model.addAttribute("allPosts", allPosts);
+
+        return "visitProfile";
+    }
+
 }

@@ -12,7 +12,7 @@
 <div class="d-flex container-fluid create justify-content-center align-content-center">
     <div class="row">
         <div class="column search-column" th:if="${plant}">
-                <h1 class="plant-details text-white">Plant Details</h1>
+            <h1 class="plant-details text-white">Plant Details</h1>
                 <div class="container-fluid view-one-box mb-5 g-0">
                     <div class="row">
                         <div>
@@ -46,65 +46,61 @@
                         </div>
                     </div>
                 </div>
-            <div class="d-flex row justify-content-center add-plant-box">
-                <div>
-                    <h3 class="subtitle">Add this plant to your Garden?</h3>
-                </div>
-            <div>
-                <form method="post" th:action="@{/plants/{id}(id=${plant.id})}">
-                        <!--          get trefle-->
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="">
-                                <label class="form-label" for="name">Name Your Plant?</label>
-                                <input class="form-control" type="text" name="name" id="name" placeholder="Only if you wanna :)">
-                            </div>
-                        </div>
-                        <div class="col-md-3 offset-md-3">
-                            <div class="">
-                                <label class="form-label font-18">Is this plant Outside?</label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3 yes-no">
-                                <div class="mb-3 radio">
-                                    <label  class="form-label font-18" for="yes">Yes</label>
+                <div class="d-flex row justify-content-center add-plant-box">
+                    <div>
+                        <h3 class="subtitle">Add this plant to your Garden?</h3>
+                    </div>
+                    <div>
+                        <form method="post" th:action="@{/plants/{id}(id=${plant.id})}">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="">
+                                        <label class="form-label" for="name">Name Your Plant?</label>
+                                        <input class="form-control" type="text" name="name" id="name" placeholder="Only if you wanna :)">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 offset-md-3">
+                                    <div class="">
+                                    <label class="form-label font-18">Is this plant Outside?</label>
+                                    </div>
+                                </div>
+                            <div class="row">
+                                <div class="col-md-3 yes-no">
+                                    <div class="mb-3 radio">
+                                        <label  class="form-label font-18" for="yes">Yes</label>
                                         <input class="ms-2 radio-1" name="is_outside" id="yes" type="radio" value="true">
-
-                                    <label  class="ms-5 form-label font-18" for="no">No</label>
+                                        <label  class="ms-5 form-label font-18" for="no">No</label>
                                         <input class="ms-2 radio-2" name="is_outside" id="no" type="radio" value="false">
-
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="mb-3">
-                                <label class="form-label" for="sun_amount">Sun Amount</label>
-                                <select class="form-control" name="sun_amount" id="sun_amount">
-                                    <option value="FULL_SUN">Full Sun</option>
-                                    <option value="PARTIAL_SUN">Partial Sun</option>
-                                    <option value="FULL_SHADE">Shaded</option>
-                                </select>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="mb-5">
-                                <label  class="form-label" for="water_interval">Water Interval</label>
-                                <input  class="form-control" type="number" id="water_interval" name="water_interval" min="1" max="30">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="sun_amount">Sun Amount</label>
+                                        <select class="form-control" name="sun_amount" id="sun_amount">
+                                            <option value="FULL_SUN">Full Sun</option>
+                                            <option value="PARTIAL_SUN">Partial Sun</option>
+                                            <option value="FULL_SHADE">Shaded</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-5">
+                                        <label  class="form-label" for="water_interval">Water Interval</label>
+                                        <input  class="form-control" type="number" id="water_interval" name="water_interval" min="1" max="30">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                            <div class="row">
+                                <div class="col-lg-12 text-end mb-3">
+                                    <input type="submit" id="submit" class="submitBnt btn btn-custom" value="Add Dis Plant!" />
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12 text-end mb-3">
-                            <input type="submit" id="submit" class="submitBnt btn btn-custom" value="Add Dis Plant!" />
-                        </div>
-                    </div>
-                </form>
-            </div>
                 </div>
-
         </div>
     </div>
 </div>

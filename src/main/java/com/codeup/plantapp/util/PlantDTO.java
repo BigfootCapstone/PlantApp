@@ -5,6 +5,7 @@ import org.json.simple.JSONObject;
 //  TODO: ReCreate PlantDTO object
 public class PlantDTO {
     private String id;
+    private String openFarm_id;
 
     private String careGuide;
 
@@ -46,6 +47,13 @@ public class PlantDTO {
         this.id = id;
     }
 
+    public String getOpenFarm_id() {
+        return openFarm_id;
+    }
+    public void setOpenFarm_id(String openFarm_id) {
+        this.openFarm_id = openFarm_id;
+    }
+
     public String getCommon_name() {
         return common_name;
     }
@@ -85,7 +93,6 @@ public class PlantDTO {
     public void setScientific_name(String scientific_name) {
         this.scientific_name = scientific_name;
     }
-
 
 
     public String getGrowth_habit() {
@@ -194,8 +201,10 @@ public class PlantDTO {
         this.ph_maximum = ph_maximum;
     }
 //OpenFarm Constructor
-    public PlantDTO(String id, String common_name, String family, String genus, String image_url, String scientific_name, String growth_habit, String edible, String minimum_temperature, String maximum_temperature, String openFarm_name, String description, String sun_requirements, String sowing_method, String spread, String row_spacing, String height, String ph_maximum, String ph_minimum) {
+    public PlantDTO(String id, String openFarm_id, String common_name, String family, String genus, String image_url,
+                    String scientific_name, String growth_habit, String edible, String minimum_temperature, String maximum_temperature, String openFarm_name, String description, String sun_requirements, String sowing_method, String spread, String row_spacing, String height, String ph_maximum, String ph_minimum) {
         this.id = id;
+        this.openFarm_id = openFarm_id;
         this.common_name = common_name;
         this.family = family;
         this.genus = genus;

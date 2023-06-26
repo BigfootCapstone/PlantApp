@@ -168,7 +168,9 @@ public class PlantsCall {
             JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
 
             JSONObject openFarm = (JSONObject) jsonResponse.get("data");
+            System.out.println(openFarm.toString());
             String openFarm_id_string = (String) openFarm.get("id");
+            System.out.println(openFarm_id_string);
             JSONObject openFarm_attributes = (JSONObject) openFarm.get("attributes");
             String openFarm_name = (String) openFarm_attributes.get("name");
             String description = (String) openFarm_attributes.get("description");
@@ -184,6 +186,7 @@ public class PlantsCall {
 
 
             plant.setOpenFarm_name(openFarm_name);
+            plant.setOpenFarm_id(openFarm_id_string);
             plant.setDescription(description);
             plant.setSun_requirements(sun_requirements);
             plant.setSowing_method(sowing_method);
