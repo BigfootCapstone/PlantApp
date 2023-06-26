@@ -9,11 +9,11 @@
 <!-- Navbar End -->
 
 <!--Start Page Container-->
-<div class="d-flex container create justify-content-center align-content-center">
+<div class="d-flex container-fluid create justify-content-center align-content-center">
     <div class="row">
         <div class="column search-column" th:if="${plant}">
                 <h1 class="plant-details text-white">Plant Details</h1>
-                <div class="container-fluid plant-box mb-5 g-0">
+                <div class="container-fluid view-one-box mb-5 g-0">
                     <div class="row">
                         <div>
                             <p class="mb-4 plant-name" th:text="${plant.common_name}"></p>
@@ -38,15 +38,15 @@
                             <p class="plant-info " th:if="${plant.spread}" th:text="'Spread:   ' + ${plant.spread}"></p>
                             <p class="plant-info " th:if="${plant.row_spacing}" th:text="'Row Spacing:   ' + ${plant.row_spacing}"></p>
                             <div>
-                            <p class="plant-info special  flex-grow-1" th:if="${plant.description}" th:text="'Description:   ' + ${plant.description}"></p>
+                                <p class="plant-info special  flex-grow-1" th:if="${plant.description}" th:text="'Description:   ' + ${plant.description}"></p>
                             </div>
-                            <div>
-                            <p class="plant-info special flex-grow-1 mt-3 mb-3" th:if="${plant.careGuide}" th:text="'Care Guide:   ' + ${plant.careGuide}"></p>
+                            <div id="careGuide" class="mb-3">
+                                <p id="guide"  class="plant-info special flex-grow-1" th:if="${plant.careGuide}" th:text="'Care Guide:   ' + ${plant.careGuide}"></p>
                             </div>
                         </div>
                     </div>
                 </div>
-            <div class="d-flex row justify-content-center">
+            <div class="d-flex row justify-content-center add-plant-box">
                 <div>
                     <h3 class="subtitle">Add this plant to your Garden?</h3>
                 </div>
@@ -90,7 +90,7 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-                            <div class="mb-3">
+                            <div class="mb-5">
                                 <label  class="form-label" for="water_interval">Water Interval</label>
                                 <input  class="form-control" type="number" id="water_interval" name="water_interval" min="1" max="30">
                             </div>
