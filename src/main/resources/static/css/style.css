@@ -915,8 +915,74 @@ p #guide{
   height: 100px;
   width: 100px;
 }
+.post-edit-btn{
+  background-color: #15594B;
+  border-color: #15594B;
+  max-width: 100px;
 
-
+}
+#edit-btn{
+  display: flex;
+  justify-content: flex-end;
+}
+.post-index-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 6px;
+}
+.all-post{
+    display: flex;
+    flex-direction: column-reverse;
+}
+.show-post-row{
+    margin: 40px;
+}
+.back-to-post{
+    position: absolute;
+    left: 80px;
+    margin-bottom: 10px;
+}
+.post{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: white;
+    position:relative;
+    margin-bottom: 25px;
+}
+.view-post{
+    max-width: 750px;
+}
+.post-row{
+    background-color: #176152e6;
+    color: white;
+    padding: 0px 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.post-user-peek{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background: #0e3a32b3;
+    gap: 11px;
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    border-radius: 5px;
+}
+.add-comment{
+    padding-bottom: 10px;
+}
+#content{
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+    min-height: 100px;
+}
 /************************************
   XX.FRIENDS SEARCH ON POSTS INDEX
 *************************************/
