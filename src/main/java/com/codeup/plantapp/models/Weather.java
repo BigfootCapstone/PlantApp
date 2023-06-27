@@ -16,6 +16,7 @@ public class Weather{
 
     private double tempAvg;
     private long humidity;
+    private String icon;
     private String sunriseDTG;
     private String sunsetDTG;
     private long cloudiness;
@@ -28,6 +29,7 @@ public class Weather{
     public long getHumidity() {
         return humidity;
     }
+    public String getIcon(){ return icon;}
     public String getSunrise() {
         return sunriseDTG;
     }
@@ -45,9 +47,10 @@ public class Weather{
     }
 
 
-    public Weather(double tempAvg, long humidity, String sunrise, String sunset, long cloudiness, String cloudDesc, String windSpeed) {
+    public Weather(double tempAvg, long humidity, String icon, String sunrise, String sunset, long cloudiness, String cloudDesc, String windSpeed) {
         this.tempAvg = tempAvg;
         this.humidity = humidity;
+        this.icon = icon;
         this.sunriseDTG = sunrise;
         this.sunsetDTG = sunset;
         this.cloudiness = cloudiness;
