@@ -34,47 +34,42 @@ public class SecConfig {
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/**").permitAll()
 
-//                .requestMatchers(
-//                        "/css/**",
-//                        "/js/**",
-//                        "/",
-//                        "/users/about",
-//                        "/users/create",
-//                        "/users/login",
-//                        "/login"
-//                ).permitAll()
-//                .requestMatchers(
-//                        "/users/{id}",
-//                        "/users/{id}",
-//                        "/users/{id}/edit",
-//                        "/users/profile",
-//                        "/users/{id}/delete",
-//                        "/friends/",
-//                        "/friends/{id}",
-//                        "/friends/accept/{id}",
-//                        "/friends/ignore/{id}",
-//                        "/friends/search",
-//                        "/plants/add",
-//                        "/plants/search",
-//                        "/plants/{id}",
-//                        "/plants/{id}/delete",
-//                        "/plants/plantEdit/{id}",
-//                        "/plants/quickWater/{id}",
-//                        "/plants/garden/{id}",
-//                        "/plants/comments/{id}",
-//                        "/plants/comments/delete/{plant}.{id}",
-//                        "/posts/all",
-//                        "/friends/view/{id}",
-//                        "/friends/search",
-//                        "/posts/create",
-//                        "/posts/{id}",
-//                        "/posts/comments",
-//                        "/posts/{id}/edit",
-//                        "/posts/users/login",
-//                        "/posts/post/edit"
-//                ).authenticated()
-
-
+                .requestMatchers(
+                        "/css/**",
+                        "/js/**",
+                        "/",
+                        "/users/about",
+                        "/users/create",
+                        "/users/login",
+                        "/users/{id}",
+                        "/users/{id}",
+                        "/users/{id}/edit",
+                        "/users/profile",
+                        "/users/{id}/delete",
+                        "/friends/",
+                        "/friends/{id}",
+                        "/friends/accept/{id}",
+                        "/friends/ignore/{id}",
+                        "/friends/search",
+                        "/plants/add",
+                        "/plants/search",
+                        "/plants/search/{query}",
+                        "/plants/{id}",
+                        "/plants/{id}/delete",
+                        "/plants/plantEdit/{id}",
+                        "/plants/quickWater/{id}",
+                        "/plants/garden/{id}",
+                        "/plants/comment/{id}",
+                        "/plants/comment/delete/{plant}.{id}",
+                        "/posts/all",
+                        "/friends/view/{id}",
+                        "/friends/search",
+                        "/posts/create",
+                        "/posts/{id}",
+                        "/posts/comments",
+                        "/posts/{id}/edit",
+                        "/posts/users/login"
+                ).authenticated()
         );
 
         http.formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/users/profile"));
