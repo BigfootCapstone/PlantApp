@@ -19,7 +19,7 @@
                     </form>
                 </div>
 
-                <div class="column justify-content-end">
+                <div class="column justify-content-end" style="margin-top: 250px;">
                     <div class="col dropdown" style="width: 100%">
                         <label for="searchInput"></label>
                         <input id="searchInput" class="d-flex dropbtn" name="query"
@@ -31,15 +31,15 @@
 
                             <div class="card container" style="width: 100%">
                                 <div class="card-body">
-<!--                                    <div>-->
-<!--                                        <img class="img-circle profile-avatar" style="width: unset;"-->
-<!--                                             th:src="${post.user.profile_pic}"-->
-<!--                                             id="profile-img" height="64px" width="64px" alt="User avatar">-->
-<!--                                    </div>-->
-<!--                                    <div class="row justify-right">-->
-<!--                                        <a th:href="@{/friends/view/{id}(id=${post.user.id})}"-->
-<!--                                           th:text="${post.user.username}"></a>-->
-<!--                                    </div>-->
+                                    <div>
+                                        <img class="img-circle profile-avatar" style="width: unset;"
+                                             th:src="${post.user.profile_pic}"
+                                             id="profile-img" height="64px" width="64px" alt="User avatar">
+                                    </div>
+                                    <div class="row justify-right">
+                                        <a th:href="@{/friends/view/{id}(id=${post.user.id})}"
+                                           th:text="${post.user.username}"></a>
+                                    </div>
                                     <div class="card-title"> [[${post.title}]] </div>
                                     <p class="card-text"> [[${post.body}]] </p>
                                     <ul class="post-index-btn">
@@ -48,11 +48,10 @@
                                                 <button  class="btn btn-primary post-btn" >Comments</button>
                                             </form>
                                         </li>
-                                        <li class="row justify-right">
-                                            <div id="edit-btn">
-
-                                                <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary post-btn post-edit-btn">Edit</a>
-                                            </div>
+                                        <li class="row justify-right" th:if="${user.id == post.user.id}">
+                                            <form id="edit-btn"  th:action="@{/posts/{id}/edit(id=${post.id})}" >
+                                                <button   class="btn btn-primary post-btn post-edit-btn">Edit</button>
+                                            </form>
                                         </li>
                                     </ul>
                                 </div>
