@@ -84,10 +84,7 @@ public class PostController {
                              @ModelAttribute Post post,
                              @RequestParam(name = "title") String title,
                              @RequestParam(name = "body") String body) {
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        post.setUser(user);
-//        postsDao.save(post);
-        User user = usersDao.findUserById(1L);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
         postsDao.save(post);
 //        emailService.prepareAndSend(posts, title, body);
@@ -103,9 +100,7 @@ public class PostController {
     public String editPost(HttpSession session,
                            @PathVariable long id,
                            Model model) {
-//        long userId = usersDao.getById();
         Post post = postsDao.findById(id);
-//        User user = usersDao.findUserById(userId);
         model.addAttribute("thingpost", post);
         return "posts/edit";
     }
