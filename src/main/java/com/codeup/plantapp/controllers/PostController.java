@@ -86,6 +86,7 @@ public class PostController {
                              @RequestParam(name = "body") String body) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
+        post.setCreated_at(LocalDate.now());
         postsDao.save(post);
 //        emailService.prepareAndSend(posts, title, body);
         return "redirect:/posts/all";
