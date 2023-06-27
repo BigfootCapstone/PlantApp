@@ -30,10 +30,7 @@
                             </div>
                         </div>
                         <p class="post-text"> [[${post.body}]] </p>
-                        <div class="row justify-center">
-                            <a sec:authorize="isAuthenticated()" th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary post-btn">Edit</a>
-                            <a th:if="${session.user.id} == ${post.user.id}" th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary post-btn">Edit</a>
-                        </div>
+
 
                     </div>
 
@@ -46,10 +43,10 @@
                              class="comment-user-container row justify-left full-width no-gap">
                             <div class="comment-user-peek column align-center justify-center shrink">
 <!--                        TODO: SHOW COMMENTED-USER PROFILE PIC-->
-                                <div>
-                                    <img class="img-circle profile-avatar" style="width: unset;" th:src="${comment.user.profile_pic}"
-                                         id="commentor-img" height="64px" width="64px" alt="User avatar">
-                                </div>
+<!--                                <div>-->
+<!--                                    <img class="img-circle profile-avatar" style="width: unset;" th:src="${comment.user.profile_pic}"-->
+<!--                                         id="commentor-img" height="64px" width="64px" alt="User avatar">-->
+<!--                                </div>-->
                             </div>
                             <div class="column align-left">
                                 <p class="comment-username" th:text="${comment.user.username}"></p>
@@ -60,7 +57,7 @@
                 </div>
 
                 <div class="row justify-center">
-                    <a sec:authorize="!isAuthenticated()" th:href="@{users/login}" class="btn-secondary">Login</a>
+                    <a sec:authorize="!isAuthenticated()" th:href="@{users/login}" class="btn btn-primary post-btn post-edit-btn">Login</a>
                 </div>
 
                 <div sec:authorize="isAuthenticated()" class="nb-li">
@@ -79,7 +76,7 @@
                             <textarea name="content" id="content" maxlength="255"></textarea>
                             <input type="hidden" name="postId" th:value="${post.id}">
                         </div>
-                        <button class="btn-secondary">Submit</button>
+                        <button class="btn btn-primary post-btn post-edit-btn">Submit</button>
                     </form>
                 </div>
 

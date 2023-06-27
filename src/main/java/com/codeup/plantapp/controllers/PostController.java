@@ -101,7 +101,9 @@ public class PostController {
     public String editPost(HttpSession session,
                            @PathVariable long id,
                            Model model) {
+//        long userId = usersDao.getById();
         Post post = postsDao.findById(id);
+//        User user = usersDao.findUserById(userId);
         model.addAttribute("thingpost", post);
         return "posts/edit";
     }

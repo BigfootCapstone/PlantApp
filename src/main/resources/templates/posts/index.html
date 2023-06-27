@@ -31,15 +31,15 @@
 
                             <div class="card container" style="width: 100%">
                                 <div class="card-body">
-                                    <div>
-                                        <img class="img-circle profile-avatar" style="width: unset;"
-                                             th:src="${post.user.profile_pic}"
-                                             id="profile-img" height="64px" width="64px" alt="User avatar">
-                                    </div>
-                                    <div class="row justify-right">
-                                        <a th:href="@{/friends/view/{id}(id=${post.user.id})}"
-                                           th:text="${post.user.username}"></a>
-                                    </div>
+<!--                                    <div>-->
+<!--                                        <img class="img-circle profile-avatar" style="width: unset;"-->
+<!--                                             th:src="${post.user.profile_pic}"-->
+<!--                                             id="profile-img" height="64px" width="64px" alt="User avatar">-->
+<!--                                    </div>-->
+<!--                                    <div class="row justify-right">-->
+<!--                                        <a th:href="@{/friends/view/{id}(id=${post.user.id})}"-->
+<!--                                           th:text="${post.user.username}"></a>-->
+<!--                                    </div>-->
                                     <div class="card-title"> [[${post.title}]] </div>
                                     <p class="card-text"> [[${post.body}]] </p>
                                     <ul class="post-index-btn">
@@ -50,8 +50,8 @@
                                         </li>
                                         <li class="row justify-right">
                                             <div id="edit-btn">
-                                                <!--th:if="${session.user.id} == ${post.user.id}"-->
-                                                <a  th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary post-btn post-edit-btn">Edit</a>
+
+                                                <a th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary post-btn post-edit-btn">Edit</a>
                                             </div>
                                         </li>
                                     </ul>
