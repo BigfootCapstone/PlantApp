@@ -891,8 +891,11 @@ p #guide{
     opacity: 0;
     visibility: hidden;
 }
-/*posts index*/
-.create-btn{
+
+
+/******************
+    .Posts Index
+*******************/.create-btn{
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
@@ -903,8 +906,11 @@ p #guide{
     border-color: #F28153;
     background-color: #F28153;
 }
-/*post create form*/
-.create-pg{
+
+
+/***********************
+    .Posts Create Form
+***********************/.create-pg{
     display: flex;
     flex-direction: column;
     gap: 13px;
@@ -995,6 +1001,8 @@ p #guide{
     margin-bottom: 10px;
     min-height: 100px;
 }
+
+
 /************************************
   XX.FRIENDS SEARCH ON POSTS INDEX
 *************************************/
@@ -1049,7 +1057,17 @@ p #guide{
 
 
 
-/*KEEP THIS LAST ON HERE PLEASE*/
+
+
+
+
+
+
+
+
+
+
+/*****************************************KEEP THIS LAST ON HERE PLEASE*******************************************************/
 /******************
     .Responsive
 *******************/
