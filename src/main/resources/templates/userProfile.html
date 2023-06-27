@@ -37,11 +37,11 @@
 <!--End Profile Img-->
 
 <!--Start Profile Header-->
-                <div class="col-sm-6">
+                <div class="col-sm-6 profile-head-holder">
                     <div class="profile-head">
                         <h3  class="" th:text="${user.first_name} + ' ' + ${user.last_name}"></h3>
                         <h6 class="username" th:text="${user.username}"></h6>
-                        <h6 class="" th:text="'Date Joined: ' + ${user.created_at}"></h6>
+                        <h6 class="" th:text="'Joined: ' + ${user.created_at}"></h6>
 
 <!--Start Profile Tabs-->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -78,9 +78,9 @@
             <div class="row">
 <!--EMPTY DIV FOR MAINTAINING FORMAT OF PAGE-->
                 <div class="col-md-4">
-                    <div class="profile-work">
 
-                    </div>
+
+
                 </div>
 <!--End EMPTY DIV FOR MAINTAINING FORMAT OF PAGE-->
 
@@ -121,15 +121,18 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="garden" role="tabpanel" aria-labelledby="garden-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div>
+                        <div class="d-flex row grow g-0 mb-3">
+<!--                            <div class="col-md-6">-->
                                     <div th:if="${not #lists.isEmpty(userPlants)}">
                                         <div class="column" th:each="plant : ${userPlants}">
-                                            <a th:href="@{/plants/garden/{id}(id=${plant.id})}">
+                                            <a class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
                                                 <span th:text="${plant.plant.name}"></span>
                                             </a>
-                                            <p><span th:text="${plant.sun_amount}"></span></p>
+                                            <p>
+                                                <span th:text="${#strings.capitalizeWords(#strings.replace(plant.sun_amount, '_', ' '))}"></span>
+                                            </p>
+
+
                                             <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
                                             <p><span th:text="${plant.getSun_tip}"></span></p>
                                             <p><span th:text="${plant.getWater_tip}"></span></p>
@@ -152,8 +155,7 @@
                                             <input  class="btn-custom ms-3" value="Search" type="submit">
                                         </form>
                                     </div>
-                                </div>
-                            </div>
+<!--                            </div>-->
                         </div>
                     </div>
                     <div class="tab-pane fade" id="journal" role="tabpanel" aria-labelledby="journal-tab">
@@ -204,16 +206,47 @@
 
                         </div>
                     <div class="tab-pane fade" id="weather" role="tabpanel" aria-labelledby="weather-tab">
-                        <h3 class="">Weather Banner</h3>
-                        <div th:if="${weather}">
-                            <img th:src="${weather.getIcon()}"></img>
-                            <p th:text="'Temp: ' + ${weather.getTempAvg()}"></p>
-                            <p th:text="'Humidity: ' + ${weather.getHumidity()}"></p>
-                            <p th:text="'Sunrise: ' + ${weather.getSunrise()}"></p>
-                            <p th:text="'Sunset: ' + ${weather.getSunset()}"></p>
-                            <p th:text="'Cloudiness: ' + ${weather.getCloudiness()}"></p>
-                            <p th:text="'Description: ' + ${weather.getCloudDesc()}"></p>
-                            <p th:text="'Wind Speed: ' + ${weather.getWindSpeed()}"></p>
+                        <div class="d-flex weather-title">
+                            <h3 class="">Today's Weather</h3>
+                        </div>
+                        <div class="weather-holder" th:if="${weather}">
+                            <div class="d-flex weather-icon-holder mb-2">
+                                <img class="weather-icon" th:src="${weather.getIcon()}"></img>
+                            </div>
+                            <div class="d-flex weather-desc-holder">
+                            <label>Description:</label>
+                            <p class="d-flex weather-description mb-2" th:text="${weather.getCloudDesc()}"></p>
+                            </div>
+                            <div class="d-flex row-cols-1 mb-5">
+                                <div class="col-lg-3 mb-2">
+                                    <div class="d-flex gap-3">
+                                        <label>Temp:</label>
+                                        <p class="mb-2" th:text="${weather.getTempAvg()} + '&#8457;'"></p>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <label>Sunrise:</label>
+                                        <p class="mb-2" th:text="${weather.getSunrise()}"></p>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <label>Cloudiness:</label>
+                                        <p class="mb-2" th:text="${weather.getCloudiness()}"></p>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 mb-2">
+                                    <div class="d-flex gap-3">
+                                        <label>Humidity:</label>
+                                        <p class="mb-2" th:text="${weather.getHumidity()}"></p>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <label>Sunset:</label>
+                                        <p class="mb-2" th:text="${weather.getSunset()}"></p>
+                                    </div>
+                                    <div class="d-flex gap-3">
+                                        <label>Wind Speed:</label>
+                                        <p class="mb-2" th:text="${weather.getWindSpeed()}"></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">

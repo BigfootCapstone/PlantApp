@@ -250,7 +250,7 @@ button.nav-buttons{
     font-family: "Karla", sans-serif;
 }
 
-.navbar-custom .navbar-nav .nav-item .nav-link:hover, .navbar-custom .navbar-nav .nav-item .nav-link.active, .navbar-custom .navbar-nav .nav-item .nav-link:active, #home-tab.nav-link:hover, #garden-tab.nav-link:hover, #journal-tab.nav-link:hover, #weather-tab.nav-link:hover, #friends-tab.nav-link:hover {
+.navbar-custom .navbar-nav .nav-item .nav-link:hover, .navbar-custom .navbar-nav .nav-item .nav-link.active, .navbar-custom .navbar-nav .nav-item .nav-link:active, #home-tab.nav-link:hover, #garden-tab.nav-link:hover, #journal-tab.nav-link:hover, #weather-tab.nav-link:hover, #friends-tab.nav-link:hover{
     color: #F28153;
 }
 
@@ -667,11 +667,12 @@ div .delete-profile, .pe-7s-delete-user{
 }
 
 .profile-img img{
-    width: 60%;
-    height: 100%;
+    width: 220px;
+    height: 220px;
+    border: 4px solid rgb(233 162 48);
 }
 
-.profile-head h3, .profile-head h6{
+.profile-head h3, .profile-head h6, #weather h3{
     color: rgb(61,132,132);
 }
 h6.username{
@@ -686,7 +687,12 @@ h6.username{
     color: #F28153;
     cursor: pointer;
 }
-
+.profile-edit-btn:hover{
+    color: rgb(61,132,132);
+}
+.profile-head-holder{
+    height: 150px;
+}
 .profile-head .nav-tabs{
     margin-bottom:5%;
 }
@@ -715,7 +721,10 @@ h6.username{
     font-weight: 600;
     color: rgb(154,167,118);
 }
-
+.personal-plant-name{
+    color: rgb(61,132,132);
+    font-size: 40px;
+}
 .custom-form.profile-plant-add{
     width: 500px;
 }
@@ -723,6 +732,29 @@ h6.username{
 label.label-plant-add{
     width: 150px;
     margin: 0px;
+}
+.weather-title{
+    margin-left: 80px;
+}
+div.weather-holder{
+    width: 800px;
+}
+.weather-icon-holder{
+    margin-left: 130px;
+}
+img.weather-icon{
+    height: 100px;
+    width: 100px;
+    margin: unset;
+}
+div.weather-holder p {
+    margin-bottom: unset;
+}
+.weather-desc-holder{
+    padding-left: 15px;
+}
+.weather-description{
+    margin-left: 115px;
 }
 
 /***********************
