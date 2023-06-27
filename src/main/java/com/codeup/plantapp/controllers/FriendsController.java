@@ -163,6 +163,7 @@ public class FriendsController {
 
         model.addAttribute("unknown", showUnknownFriends(botaniUsers, friendsAssoc));
         model.addAttribute("requested", friendsRequests(usersDao.findUserById(user.getId())));
+
         User botaniUser = usersDao.findUserById(id);
 
         model.addAttribute("owner", botaniUser);
