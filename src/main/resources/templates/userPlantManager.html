@@ -109,8 +109,50 @@
             <textarea name="content" id="content" rows="10" cols="35"></textarea>
 
             <button class="ui button">Save</button>
-        </form>
+            </form>
         </div>
+
+        <div>
+            <form method="post" th:action="@{/plants/diagnose/{id}(id=${userGardenPlant.id})}">
+                <h4>DIAGNOSIS Form</h4>
+                <label for="stems">Stems</label>
+                <select name="stems" id="stems">
+                    <option value="N/A">N/A</option>
+                    <option value="Discoloration (e.g., brown, black, yellowing)">Discoloration (e.g., brown, black, yellowing)</option>
+                    <option value="Lesions or cankers">Lesions or cankers</option>
+                    <option value="Soft or mushy areas">Soft or mushy areas</option>
+                    <option value="Swelling or galls">Swelling or galls</option>
+                    <option value="Splitting or cracking">Splitting or cracking</option>
+                    <option value="Presence of pests or insects (e.g., holes, tunnels)">Presence of pests or insects (e.g., holes, tunnels)</option>
+                </select>
+                <label for="leaves">Leaves</label>
+                <select name="leaves" id="leaves">
+                    <option value="N/A">N/A</option>
+                    <option value="Yellowing or chlorosis">Yellowing or chlorosis</option>
+                    <option value="Browning or necrosis">Browning or necrosis</option>
+                    <option value="Wilting or drooping">Wilting or drooping</option>
+                    <option value="Curling or distortion">Curling or distortion</option>
+                    <option value="Spots or lesions (e.g., brown, black, yellow, white)">Spots or lesions (e.g., brown, black, yellow, white)</option>
+                    <option value="Holes or chewed edges">Holes or chewed edges</option>
+                    <option value="Powdery or fuzzy growth">Powdery or fuzzy growth</option>
+                    <option value="Sticky residue (honeydew) or sap">Sticky residue (honeydew) or sap</option>
+                    <option value="Presence of pests or insects (e.g., eggs, larvae, adult insects)">Presence of pests or insects (e.g., eggs, larvae, adult insects)</option>
+                    <option value="Abnormal growth (e.g., stunted, dwarfed)">Abnormal growth (e.g., stunted, dwarfed)</option>
+                </select>
+                <label for="fruits">Fruits</label>
+                <select name="fruits" id="fruits">
+                    <option value="N/A">N/A</option>
+                    <option value="Discoloration (e.g., brown, black, yellowing)">Discoloration (e.g., brown, black, yellowing)</option>
+                    <option value="Lesions or rotting spots">Lesions or rotting spots</option>
+                    <option value="Wrinkling or shriveling">Wrinkling or shriveling</option>
+                    <option value="Deformed or misshapen">Deformed or misshapen</option>
+                    <option value="Stunted growth or smaller size than usual">Stunted growth or smaller size than usual</option>
+                    <option value="Presence of pests or insects (e.g., entry holes, feeding damage)">Presence of pests or insects (e.g., entry holes, feeding damage)</option>
+                </select>
+                <button>Send</button>
+            </form>
+        </div>
+
     </div>
 </div>
 <script>

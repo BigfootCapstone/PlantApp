@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="partials/head :: head('BotaniBuddy Plant Details')"></head>
+<body>
+
+<header th:replace="partials/navbar :: navbar"></header>
+
+<div th:if="${chatResponse}">
+
+    <p th:text="${chatResponse}"></p>
+
+</div>\
+
+
+
+
+<h1>Plant Details</h1>
+<div class="ui segment">
+    <h3>AI Diagnosis</h3>
+    <!--    API PLANT INFO-->
+    <div class="ui two column grid">
+        <div class="column">
+            <p th:text="${chatResponse}"></p>
+        </div>
+    </div>
+</div>
+
+<script>
+  window.addEventListener('load',()=>{
+    const loader = document.querySelector('.loading');
+    loader.classList.add('loading-hidden');
+    loader.addEventListener('transitioned', ()=>{
+      document.body.removeChild("loading");
+    });
+  });
+</script>
+
+</body>
