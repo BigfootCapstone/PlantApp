@@ -263,9 +263,9 @@ public class PlantController {
     @GetMapping("/diagnose/{id}.{stems}.{leaves}.{fruits}")
     public String diagnosePlant(Model model,
                                 @PathVariable("id") long id,
-                                @PathVariable("id") String stems,
-                                @PathVariable("id") String leaves,
-                                @PathVariable("id") String fruits) throws Exception {
+                                @PathVariable("stems") String stems,
+                                @PathVariable("leaves") String leaves,
+                                @PathVariable("fruits") String fruits) throws Exception {
         String treflePlantId = gardenPlantsDao.findGardenPlantsById(id).getPlant().getTrefle_id();
 
         URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + treflePlantId + "?token=" + keys.getTrefle());
@@ -282,9 +282,6 @@ public class PlantController {
 
         model.addAttribute("chatResponse", chatResponse);
 
-//        model.addAttribute("plant", plant);
-//        model.addAttribute("plantMedForm", plantMedForm);
-//        model.addAttribute("chatKey", chatKey);
 
         return "diagnosePlant";
     }
@@ -293,24 +290,7 @@ public class PlantController {
     public String diagnosePlant(@PathVariable("id") long id,
                                 @RequestParam(name="stems") String stems,
                                 @RequestParam(name="leaves") String leaves,
-                                @RequestParam(name="fruits") String fruits,
-                                Model model) throws Exception {
-
-//        String treflePlantId = gardenPlantsDao.findGardenPlantsById(id).getPlant().getTrefle_id();
-//
-//        URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + treflePlantId + "?token=" + keys.getTrefle());
-//        PlantDTO plant =  getTreflePlant(trefleApiUrl);
-//
-//        assert plant != null;
-//        String selectedPlantCommonName = plant.getCommon_name();
-//
-//        PlantMedForm plantMedForm = new PlantMedForm(selectedPlantCommonName, stems, leaves, fruits);
-//
-//        String chatKey = keys.getChatGPT();
-//
-//        String chatResponse = getChatGPTDiagnosis(plantMedForm, chatKey);
-//
-//        model.addAttribute("chatResponse", chatResponse);
+                                @RequestParam(name="fruits") String fruits) {
 
         return "redirect:/plants/diagnose/"+ id +"."+ stems +"."+ leaves +"."+ fruits;
     }
