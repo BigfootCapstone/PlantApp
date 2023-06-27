@@ -976,8 +976,22 @@ a.plant-info{
   height: 100px;
   width: 100px;
 }
+.post-edit-btn{
+  background-color: #15594B;
+  border-color: #15594B;
+  max-width: 100px;
 
-
+}
+#edit-btn{
+  display: flex;
+  justify-content: flex-end;
+}
+.post-index-btn{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 6px;
+}
 /************************************
   XX.FRIENDS SEARCH ON POSTS INDEX
 *************************************/

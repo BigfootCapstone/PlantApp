@@ -19,7 +19,7 @@
                     </form>
                 </div>
 
-                <div class="column justify-content-end" style="margin-top: 250px;">
+                <div class="column justify-content-end">
                     <div class="col dropdown" style="width: 100%">
                         <label for="searchInput"></label>
                         <input id="searchInput" class="d-flex dropbtn" name="query"
@@ -42,11 +42,17 @@
                                     </div>
                                     <div class="card-title"> [[${post.title}]] </div>
                                     <p class="card-text"> [[${post.body}]] </p>
-                                    <ul>
+                                    <ul class="post-index-btn">
                                         <li class="row justify-right">
-                                            <form id="view-post-btn"  th:action="@{/posts/{id}(id=${post.id})}" >
+                                            <form id="view-post-btn"  th:action="@{/posts/{id}(id=${post.id})}">
                                                 <button  class="btn btn-primary post-btn" >Comments</button>
                                             </form>
+                                        </li>
+                                        <li class="row justify-right">
+                                            <div id="edit-btn">
+                                                <!--th:if="${session.user.id} == ${post.user.id}"-->
+                                                <a  th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary post-btn post-edit-btn">Edit</a>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>

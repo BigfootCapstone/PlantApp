@@ -16,10 +16,10 @@
                 <div th:if="${post}" class="post row">
                     <div class="post-user-peek column align-center justify-center shrink">
 <!--                TODO: SHOW POST-USER PROFILE PIC-->
-                        <div>
-                            <img class="img-circle profile-avatar" style="width: unset;" th:src="${user.profile_pic}"
-                                 id="profile-img" height="64px" width="64px" alt="User avatar">
-                        </div>
+<!--                        <div>-->
+<!--                            <img class="img-circle profile-avatar" style="width: unset;" th:src="${user.profile_pic}"-->
+<!--                                 id="profile-img" height="64px" width="64px" alt="User avatar">-->
+<!--                        </div>-->
                     </div>
                     <div class="post-body column justify-center">
                         <div class="column post-head shrink">
@@ -32,7 +32,9 @@
                         <p class="post-text"> [[${post.body}]] </p>
                         <div class="row justify-center">
                             <a sec:authorize="isAuthenticated()" th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary post-btn">Edit</a>
+                            <a th:if="${session.user.id} == ${post.user.id}" th:href="@{/posts/{id}/edit(id=${post.id})}" class="btn btn-primary post-btn">Edit</a>
                         </div>
+
                     </div>
 
                 </div>
