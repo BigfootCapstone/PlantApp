@@ -37,6 +37,8 @@ public class PostController {
     */
     @GetMapping("/all")
     public String allPosts(Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        model.addAttribute("user", user);
         List<Post> allPosts = postsDao.findAll();
         model.addAttribute("allPosts", allPosts);
         return "posts/index";
