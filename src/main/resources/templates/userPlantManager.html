@@ -7,6 +7,7 @@
 
 <header th:replace="partials/navbar :: navbar"></header>
 
+<div id="loader" class="loading"> </div>
 
 <div th:if="${plant}" class="ui container">
 
@@ -112,5 +113,16 @@
         </div>
     </div>
 </div>
+<script>
+
+    window.addEventListener('load',()=>{
+        const loader = document.querySelector('.loading');
+        loader.classList.add('loading-hidden');
+        loader.addEventListener('transitioned', ()=>{
+            document.body.removeChild("loading");
+        });
+    });
+</script>
+
 </body>
 </html>
