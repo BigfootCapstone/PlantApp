@@ -48,6 +48,11 @@
                                                 <button  class="btn btn-primary post-btn" >Comments</button>
                                             </form>
                                         </li>
+                                        <li class="row justify-right" th:if="${user.id == post.user.id}">
+                                            <form id="edit-post-btn"  th:action="@{/posts/{id}/edit(id=${post.id})}" >
+                                                <button  class="btn btn-primary post-btn">edit</button>
+                                            </form>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
