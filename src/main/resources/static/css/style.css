@@ -977,7 +977,7 @@ p #guide{
 .add-comment{
     padding-bottom: 10px;
 }
-#content{
+#content #body{
     display: flex;
     width: 100%;
     margin-bottom: 10px;
