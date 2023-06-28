@@ -46,11 +46,14 @@ public class PostController {
 
     @GetMapping("/{id}")
     public String onePost(@PathVariable long id, Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User loggedUser = usersDao.findUserById(user.getId());
+
         Post post = postsDao.findById(id);
         User postUser = post.getUser();
 //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("user", postUser);
-//        model.addAttribute("loggedInUser", user);
+        model.addAttribute("loggedInUser", loggedUser);
         model.addAttribute("post", post);
         return "posts/show";
     }
@@ -86,6 +89,7 @@ public class PostController {
                              @RequestParam(name = "body") String body) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         post.setUser(user);
+        post.setCreated_at(LocalDate.now());
         postsDao.save(post);
 //        emailService.prepareAndSend(posts, title, body);
         return "redirect:/posts/all";

@@ -17,7 +17,7 @@ public class PlantLog {
     @Column(nullable = false, length = 100)
     private String title;
 
-    @Column(nullable = false, length = 350)
+    @Column(nullable = false, length = 950)
     private String content;
 
     @Column(nullable = false, length = 128)
