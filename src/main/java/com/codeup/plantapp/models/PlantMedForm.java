@@ -39,12 +39,12 @@ public class PlantMedForm {
 
     public PlantMedForm(String plantName, String stemADJ, String leaveADJ, String fruitADJ) {
         switch (stemADJ) {
-            case "1" -> stemADJ = "Discoloration (e.g., brown, black, yellowing)";
+            case "1" -> stemADJ = "Discoloration";
             case "2" -> stemADJ = "Lesions or cankers";
             case "3" -> stemADJ = "Soft or mushy areas";
             case "4" -> stemADJ = "Swelling or galls";
             case "5" -> stemADJ = "Splitting or cracking";
-            case "6" -> stemADJ = "Presence of pests or insects (e.g., holes, tunnels)";
+            case "6" -> stemADJ = "Presence of pests or insects";
             default -> stemADJ = "N/A";
         }
 
@@ -53,22 +53,22 @@ public class PlantMedForm {
            case "2" -> leaveADJ = "Browning or necrosis";
            case "3" -> leaveADJ = "Wilting or drooping";
            case "4" -> leaveADJ = "Curling or distortion";
-           case "5" -> leaveADJ = "Spots or lesions (e.g., brown, black, yellow, white)";
+           case "5" -> leaveADJ = "Spots or lesions";
            case "6" -> leaveADJ = "Holes or chewed edges";
            case "7" -> leaveADJ = "Powdery or fuzzy growth";
            case "8" -> leaveADJ = "Sticky residue (honeydew) or sap";
-           case "9" -> leaveADJ = "Presence of pests or insects (e.g., eggs, larvae, adult insects)";
-           case "10" -> leaveADJ = "Abnormal growth (e.g., stunted, dwarfed)";
+           case "9" -> leaveADJ = "Presence of pests or insects";
+           case "10" -> leaveADJ = "Abnormal growth";
            default -> leaveADJ = "N/A";
         }
 
         switch (fruitADJ) {
-           case "1" -> fruitADJ = "Discoloration (e.g., brown, black, yellowing)";
+           case "1" -> fruitADJ = "Discoloration";
            case "2" -> fruitADJ = "Lesions or rotting spots";
            case "3" -> fruitADJ = "Wrinkling or shriveling";
            case "4" -> fruitADJ = "Deformed or misshapen";
            case "5" -> fruitADJ = "Stunted growth or smaller size than usual";
-           case "6" -> fruitADJ = "Presence of pests or insects (e.g., entry holes, feeding damage)";
+           case "6" -> fruitADJ = "Presence of pests or insects";
            default -> fruitADJ = "N/A";
         }
 

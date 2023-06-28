@@ -280,6 +280,8 @@ public class PlantController {
 
         String chatResponse = getChatGPTDiagnosis(plantMedForm, chatKey);
 
+        model.addAttribute("plantID", id);
+        model.addAttribute("form", plantMedForm);
         model.addAttribute("chatResponse", chatResponse);
 
 
