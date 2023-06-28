@@ -32,9 +32,8 @@
                             <div class="card container" style="width: 100%">
                                 <div class="card-body">
                                     <div>
-                                        <img class="img-circle profile-avatar" style="width: unset;"
-                                             th:src="${post.user.profile_pic}"
-                                             id="profile-img" height="64px" width="64px" alt="User avatar">
+                                        <img th:src="${post.user.profile_pic}" alt="User avatar" class="img-fluid"
+                                             height="80px" width="80px">
                                     </div>
                                     <div class="row justify-right">
                                         <a th:href="@{/friends/view/{id}(id=${post.user.id})}"
