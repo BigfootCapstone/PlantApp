@@ -19,10 +19,10 @@ public class Keys {
     @Value("${openfarm.key}")
     private String openfarm;
 
-    @Value("${chatGPT.key}")
+    @Value("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")
     private String chatGPT;
 
-    @Value("${fileStack.key}")
+    @Value("Ai1d30uuQrOgdlEZkvLDgz")
     private String fileStack;
 
 //    @Value("${aws.accessKey}")
