@@ -138,7 +138,7 @@
                                         <div class="card" style="width: 200px;">
                                             <img src="/css/images/varigatedmonstera.jpeg" class="card-img-top" alt="...">
                                             <div class="card-body">
-                                                <a class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
+                                                <a id="plant" class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
                                                     <span th:text="${plant.plant.name}"></span>
                                                 </a>
                                                 <p>
