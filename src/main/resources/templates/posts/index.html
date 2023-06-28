@@ -22,8 +22,7 @@
                 <div class="column justify-content-end">
                     <div class="col dropdown" style="width: 100%">
                         <label for="searchInput"></label>
-                        <input id="searchInput" class="d-flex dropbtn" name="query"
-                                                                type="text" placeholder="Find a Buddy">
+                        <input id="searchInput" class="d-flex dropbtn" name="query" type="text" placeholder="Find a Buddy">
                         <ul id="searchResults" class="dropdown-content"></ul>
                     </div>
                     <div class="col all-post" th:if="${allPosts}">
@@ -32,7 +31,7 @@
                             <div class="card container" style="width: 100%">
                                 <div class="card-body">
                                     <div>
-                                        <img class="img-circle profile-avatar" style="width: unset;"
+                                        <img class="post-img img-circle profile-avatar" style="width: unset;"
                                              th:src="${post.user.profile_pic}"
                                              id="profile-img" height="64px" width="64px" alt="User avatar">
                                     </div>

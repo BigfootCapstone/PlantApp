@@ -41,7 +41,6 @@ public class SecConfig {
                                 "/login",
                                 "/users/about"
                         ).permitAll()
-
                 .requestMatchers(
                         "/users/{id}",
                         "/users/{id}",
