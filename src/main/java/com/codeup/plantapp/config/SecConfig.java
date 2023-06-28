@@ -33,15 +33,18 @@ public class SecConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers(
+
+
                                 "/css/**",
                                 "/js/**",
                                 "/",
+                                "/users/about",
                                 "/users/create",
                                 "/users/login",
                                 "/login",
                                 "/users/about"
-                        ).permitAll()
 
+                        ).permitAll()
                 .requestMatchers(
                         "/users/{id}",
                         "/users/{id}",
@@ -61,6 +64,7 @@ public class SecConfig {
                         "/plants/plantEdit/{id}",
                         "/plants/quickWater/{id}",
                         "/plants/garden/{id}",
+                        "/plants/diagnose/{id}.{stems}.{leaves}.{fruits}",
                         "/plants/comment/{id}",
                         "/plants/comment/delete/{plant}.{id}",
                         "/posts/all",

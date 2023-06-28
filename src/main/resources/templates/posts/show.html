@@ -17,7 +17,7 @@
                     <div class="post-user-peek column align-center justify-center shrink">
 <!--                TODO: SHOW POST-USER PROFILE PIC-->
                         <div>
-                            <img class="img-circle profile-avatar" style="width: unset;" th:src="${user.profile_pic}"
+                            <img class="img-circle profile-avatar post-img" style="width: unset;" th:src="${user.profile_pic}"
                                  id="profile-img" height="64px" width="64px" alt="User avatar">
                         </div>
                         <div class="row justify-space-between post-user" th:if="${user}">
@@ -38,7 +38,7 @@
                         <div id="comments-feed" class="column justify-top gap-15">
                             <div th:each="comment: ${post.comments}" class="comment-user-container row justify-left full-width no-gap">
                                 <div class=" column align-center justify-center shrink">
-                                    <img class="img-circle profile-avatar" style="width: unset;" th:src="${comment.user.profile_pic}"
+                                    <img class="img-circle profile-avatar post-img" style="width: unset; height: unset" th:src="${comment.user.profile_pic}"
                                          id="commentor-img" height="64px" width="64px" alt="User avatar">
                                 </div>
                                 <div class="column align-left">
@@ -60,7 +60,7 @@
                 <div sec:authorize="isAuthenticated()" class="nb-li">
                     <form class="post-row row comment-user-container post add-comment" th:action="@{/posts/comment}" th:method="post">
                         <div class="post-user-peek column align-center justify-center shrink">
-                            <img class="img-circle profile-avatar" style="width: unset;" th:src="${user.profile_pic}"
+                            <img class="img-circle profile-avatar post-img" style="width: unset;" th:src="${user.profile_pic}"
                                  id="commentor-img-txt" height="64px" width="64px" alt="User avatar">
                             <p class="comment-username" th:text="${#authentication.principal.username}"></p>
 
