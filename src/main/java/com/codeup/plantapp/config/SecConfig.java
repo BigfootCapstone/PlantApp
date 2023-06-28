@@ -33,7 +33,17 @@ public class SecConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers(
-                                "/**"
+
+
+                                "/css/**",
+                                "/js/**",
+                                "/",
+                                "/users/about",
+                                "/users/create",
+                                "/users/login",
+                                "/login",
+                                "/users/about"
+
                         ).permitAll()
                 .requestMatchers(
                         "/users/{id}",
