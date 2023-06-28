@@ -106,8 +106,7 @@ public class UserController {
 //      Get Weather for User's City
         String city = userFromDb.getCity();
         String weatherKey = keys.getOpenWeather();
-        URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + weatherKey +
-                "&units=imperial");
+        URL url = new URL("https://api.openweathermap.org/data/2.5/weather?zip=" + city + "&appid=" + weatherKey + "&units=imperial");
         Weather userWeather = getWeather(url);
 
 //      Aggregate all plants in user's garden
