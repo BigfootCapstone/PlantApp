@@ -4,7 +4,10 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
 <head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
-<!--commenting-->
+
+
+
+
 <body>
 <div id="loader" class="loading"> </div>
 
@@ -12,14 +15,15 @@
 <header th:replace="partials/navbar :: navbar"></header>
 <!-- Navbar End -->
 
+<!-- Start Page Container -->
 <div class="d-flex container create justify-content-center align-content-center">
 <!--Start Profile-->
     <div class="container emp-profile">
         <form method="post">
-<!--Start Row-->
+<!--Start Profile Header Holder-->
             <div class="row">
-                <div class="col-md-4">
 <!--Start Profile Img-->
+                <div class="col-md-4">
                     <form class="form-horizontal flex-grow-1"
                           th:action="@{/users/profile}"
                           th:object="${user}" th:method="post"
@@ -36,13 +40,12 @@
                 </div>
 <!--End Profile Img-->
 
-<!--Start Profile Header-->
+<!--Start Profile Header User Info-->
                 <div class="col-sm-6 profile-head-holder">
                     <div class="profile-head">
                         <h3  class="" th:text="${user.first_name} + ' ' + ${user.last_name}"></h3>
                         <h6 class="username" th:text="${user.username}"></h6>
                         <h6 class="" th:text="'Joined: ' + ${user.created_at}"></h6>
-
 <!--Start Profile Tabs-->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -62,18 +65,16 @@
                         </li>
                     </ul>
 <!--End Profile Tabs-->
-
                     </div>
-            </div>
-<!--End Profile Header-->
+                </div>
+<!--End Profile Header User Info-->
 <!--Start EDIT PROFILE BUTTON-->
-            <div class="col-md-2">
-                <a type="submit"  class="profile-edit-btn text-center" name="btnAddMore" th:href="@{/users/{id}/edit(id=${user.id})}">Edit Profile</a>
-            </div>
+                <div class="col-md-2">
+                    <a type="submit"  class="profile-edit-btn text-center" name="btnAddMore" th:href="@{/users/{id}/edit(id=${user.id})}">Edit Profile</a>
+                </div>
 <!--End EDIT PROFILE BUTTON-->
             </div>
-<!--End Row-->
-
+<!--End Profile Header Holder-->
 <!--Start Tab Panels-->
             <div class="row">
 <!--EMPTY DIV FOR MAINTAINING FORMAT OF PAGE-->
@@ -83,177 +84,190 @@
 
                 </div>
 <!--End EMPTY DIV FOR MAINTAINING FORMAT OF PAGE-->
-
+<!--Start of User Info Tab Panel-->
                 <div class="col-md-8">
                     <div class="tab-content profile-tab" id="myTabContent">
-                     <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="home-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Username</label>
+                        <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Username</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="" th:text="${user.username}"></p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p class="" th:text="${user.username}"></p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p  class="" th:text="${user.first_name} + ' ' + ${user.last_name}"></p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Name</label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="" th:text="${user.email}"></p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p  class="" th:text="${user.first_name} + ' ' + ${user.last_name}"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Email</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="" th:text="${user.email}"></p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>City</label>
-                            </div>
-                            <div class="col-md-6">
-                                <p class="" th:text="${user.city}"></p>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>City</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p class="" th:text="${user.city}"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="garden" role="tabpanel" aria-labelledby="garden-tab">
-                        <div class="d-flex row grow g-0 mb-3">
+                </div>
+<!--End of User Info Tab Panel-->
+<!--Start of Garden Tab Panel-->
+                <div class="tab-pane fade" id="garden" role="tabpanel" aria-labelledby="garden-tab">
+                    <div class="d-flex row grow g-0 mb-3">
 <!--Start of Garden Cards-->
-                            <div class="col-sm-6 mb-3 mb-sm-0" th:if="${not #lists.isEmpty(userPlants)}">
-                            <div class="column" th:each="plant : ${userPlants}">
-                                    <div class="card" style="width: 200px;">
-                                        <img src="/css/images/varigatedmonstera.jpeg" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <a class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
+                        <div class="d-flex row grow g-0" th:if="${not #lists.isEmpty(userPlants)}">
+                        <div class="col-sm-6 mb-3 mb-sm-0" th:each="plant : ${userPlants}">
+                            <div class="card" style="width: 200px;">
+                                <img src="/css/images/varigatedmonstera.jpeg" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <a class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
+                                        <span th:text="${plant.plant.name}"></span>
+                                    </a>
+                                    <p>
+                                        <span th:text="${#strings.capitalizeWords(#strings.replace(plant.sun_amount, '_', ' '))}"></span>
+                                    </p>
+                                    <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
+                                    <p><span th:text="${plant.getSun_tip}"></span></p>
+                                    <p><span th:text="${plant.getWater_tip}"></span></p>
+<!-- button for delete plant path -->
+                                    <div class="row">
+                                        <a th:href="@{/plants/quickWater/{id}(id=${plant.id})}">Watered</a>
+                                    </div>
+                                    <div class="row">
+                                        <a style="color: red;" th:href="@{/plants/{id}/delete(id=${plant.id})}">
+                                            Delete
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+<!--End of Garden Cards-->
+<!--IF NO PLANT SHOW SEARCH-->
+                        <div th:unless="${not #lists.isEmpty(userPlants)}">
+                            <form class="d-flex custom-form profile-plant-add" action="#" th:action="@{/plants/search}" method="post">
+                                <label class="d-flex label-plant-add justify-content-center align-self-center">Add A Plant!</label>
+                                <input  class="form-control" type="text" name="query" placeholder="Search for your plant..." required autocomplete="on">
+                                <input  class="btn-custom ms-3" value="Search" type="submit">
+                            </form>
+                        </div>
+<!--END IF NO PLANT SHOW SEARCH-->
+                    </div>
+                </div>
+<!--End of Garden Tab Panel-->
+<!--Start of Journal Tab Panel-->
+                <div class="tab-pane fade" id="journal" role="tabpanel" aria-labelledby="journal-tab">
+<!--recentPlantLogs-->
+                    <div th:if="${not #lists.isEmpty(recentPlantLogs)}">
+                        <div class="row justify-content-between">
+                            <div th:each="plant : ${userPlants}">
+                                <div th:if="${not #lists.isEmpty(plant.getPlantLogs())}">
+                                    <div class="row">
+                                        <div class="col">
+                                            <a th:href="@{/plants/garden/{id}(id=${plant.id})}">
                                                 <span th:text="${plant.plant.name}"></span>
                                             </a>
-                                            <p>
-                                                <span th:text="${#strings.capitalizeWords(#strings.replace(plant.sun_amount, '_', ' '))}"></span>
-                                            </p>
-                                            <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
-                                            <p><span th:text="${plant.getSun_tip}"></span></p>
-                                            <p><span th:text="${plant.getWater_tip}"></span></p>
-    <!-- button for delete plant path -->
-                                            <div class="row">
-                                                <a th:href="@{/plants/quickWater/{id}(id=${plant.id})}">Watered</a>
-                                            </div>
-                                            <div class="row">
-                                                <a style="color: red;" th:href="@{/plants/{id}/delete(id=${plant.id})}">
-                                                    Delete</a>
-                                            </div>
+                                        </div>
+                                        <div style=" max-width: fit-content; border-radius: 99px; color: white;"
+                                             class="col bg-primary"
+                                             th:text="${plant.getPlantLogs().size()}">
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            </div>
-<!--IF NO PLANT SHOW SEARCH-->
-                            <div th:unless="${not #lists.isEmpty(userPlants)}">
-                                <form class="d-flex custom-form profile-plant-add" action="#" th:action="@{/plants/search}" method="post">
-                                    <label class="d-flex label-plant-add justify-content-center align-self-center">Add A Plant!</label>
-                                    <input  class="form-control" type="text" name="query" placeholder="Search for your plant..." required autocomplete="on">
-                                    <input  class="btn-custom ms-3" value="Search" type="submit">
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="journal" role="tabpanel" aria-labelledby="journal-tab">
-
-<!--                        recentPlantLogs-->
-                        <div th:if="${not #lists.isEmpty(recentPlantLogs)}">
-                            <div class="row justify-content-between">
-
-                                <div th:each="plant : ${userPlants}">
-                                    <div th:if="${not #lists.isEmpty(plant.getPlantLogs())}">
+                                    <div class="col">
                                         <div class="row">
                                             <div class="col">
-                                                <a th:href="@{/plants/garden/{id}(id=${plant.id})}">
-                                                    <span th:text="${plant.plant.name}"></span>
-                                                </a>
-                                            </div>
-                                            <div style=" max-width: fit-content; border-radius: 99px; color: white;"
-                                                 class="col bg-primary"
-                                                 th:text="${plant.getPlantLogs().size()}"></div>
-                                        </div>
-                                        <div class="col">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
-                                                       th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at.getMonth()}"></p>
-                                                    <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
-                                                       th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at.getDayOfMonth()}"></p>
-                                                </div>
-                                                <div class="col">
-                                                    <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
-                                                       th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).title}"></p>
-                                                </div>
-                                            </div>
-                                            <div>
                                                 <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
-                                                   th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).content}"></p>
+                                                   th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at.getMonth()}">
+                                                </p>
+                                                <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
+                                                   th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at.getDayOfMonth()}">
+                                                </p>
+                                            </div>
+                                            <div class="col">
+                                                <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
+                                                   th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).title}">
+                                                </p>
                                             </div>
                                         </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div th:unless="${not #lists.isEmpty(recentPlantLogs)}">
-                            <p>no logs</p>
-                        </div>
-
-                        </div>
-                    <div class="tab-pane fade" id="weather" role="tabpanel" aria-labelledby="weather-tab">
-                        <div class="d-flex weather-title">
-                            <h3 class="">Today's Weather</h3>
-                        </div>
-                        <div class="weather-holder" th:if="${weather}">
-                            <div class="d-flex weather-icon-holder mb-2">
-                                <img class="weather-icon" th:src="${weather.getIcon()}"></img>
-                            </div>
-                            <div class="d-flex weather-desc-holder">
-                            <label>Description:</label>
-                            <p class="d-flex weather-description mb-2" th:text="${weather.getCloudDesc()}"></p>
-                            </div>
-                            <div class="d-flex row-cols-1 mb-5">
-                                <div class="col-lg-3 mb-2">
-                                    <div class="d-flex gap-3">
-                                        <label>Temp:</label>
-                                        <p class="mb-2" th:text="${weather.getTempAvg()} + '&#8457;'"></p>
-                                    </div>
-                                    <div class="d-flex gap-3">
-                                        <label>Sunrise:</label>
-                                        <p class="mb-2" th:text="${weather.getSunrise()}"></p>
-                                    </div>
-                                    <div class="d-flex gap-3">
-                                        <label>Cloudiness:</label>
-                                        <p class="mb-2" th:text="${weather.getCloudiness()}"></p>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 mb-2">
-                                    <div class="d-flex gap-3">
-                                        <label>Humidity:</label>
-                                        <p class="mb-2" th:text="${weather.getHumidity()}"></p>
-                                    </div>
-                                    <div class="d-flex gap-3">
-                                        <label>Sunset:</label>
-                                        <p class="mb-2" th:text="${weather.getSunset()}"></p>
-                                    </div>
-                                    <div class="d-flex gap-3">
-                                        <label>Wind Speed:</label>
-                                        <p class="mb-2" th:text="${weather.getWindSpeed()}"></p>
+                                        <div>
+                                            <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
+                                               th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).content}">
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
-                        <!--    Friends Request Placeholder-->
-                        <div>
+                    <div th:unless="${not #lists.isEmpty(recentPlantLogs)}">
+                        <p>no logs</p>
+                    </div>
+                </div>
+<!--Start of Weather Tab Panel-->
+                <div class="tab-pane fade" id="weather" role="tabpanel" aria-labelledby="weather-tab">
+                    <div class="d-flex weather-title">
+                        <h3 class="">Today's Weather</h3>
+                    </div>
+                    <div class="weather-holder" th:if="${weather}">
+                        <div class="d-flex weather-icon-holder mb-2">
+                            <img class="weather-icon" th:src="${weather.getIcon()}"></img>
+                        </div>
+                        <div class="d-flex weather-desc-holder">
+                            <label>Description:</label>
+                            <p class="d-flex weather-description mb-2" th:text="${weather.getCloudDesc()}"></p>
+                        </div>
+                        <div class="d-flex row-cols-1 mb-5">
+                            <div class="col-lg-3 mb-2">
+                                <div class="d-flex gap-3">
+                                    <label>Temp:</label>
+                                    <p class="mb-2" th:text="${weather.getTempAvg()} + '&#8457;'"></p>
+                                </div>
+                                <div class="d-flex gap-3">
+                                    <label>Sunrise:</label>
+                                    <p class="mb-2" th:text="${weather.getSunrise()}"></p>
+                                </div>
+                                <div class="d-flex gap-3">
+                                    <label>Cloudiness:</label>
+                                    <p class="mb-2" th:text="${weather.getCloudiness()}"></p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 mb-2">
+                                <div class="d-flex gap-3">
+                                    <label>Humidity:</label>
+                                    <p class="mb-2" th:text="${weather.getHumidity()}"></p>
+                                </div>
+                                <div class="d-flex gap-3">
+                                    <label>Sunset:</label>
+                                    <p class="mb-2" th:text="${weather.getSunset()}"></p>
+                                </div>
+                                <div class="d-flex gap-3">
+                                    <label>Wind Speed:</label>
+                                    <p class="mb-2" th:text="${weather.getWindSpeed()}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--End of Weather Tab Panel-->
+<!--Start of Friend Tab Panel-->
+                <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
+<!--Friends & Request Holder-->
+                    <div>
+<!--Friend Requests-->
+                        <div class="friend-requests">
                             <h3 class="subtitle">Friend Requests</h3>
                             <div class="col">
                                 <div class="row" style="margin-bottom: 15px;" th:each="request : ${friendsRequest}">
@@ -276,46 +290,37 @@
                                             <a class="btn btn-danger" th:href="@{/friends/ignore/{id}(id=${request.id})}">Ignore</a>
                                         </div>
                                     </div>
-<!--                                    <a th:href="@{/friends/accept/{id}(id=${request.id})}">Accept</a>-->
-<!--                                    <a th:href="@{/friends/ignore/{id}(id=${request.id})}">Ignore</a>-->
                                 </div>
                             </div>
-
-
-                            <div class="row justify-content-between">
-<!--                                <div class="column" th:each="request : ${friendsRequest}">-->
-<!--                                    <p th:text="${request.first_name}"></p>-->
-<!--                                    <p th:text="${request.last_name}"></p>-->
-<!--                                    <p th:text="${request.username}"></p>-->
-<!--                                    <p th:text="${request.email}"></p>-->
-<!--                                    <a th:href="@{/friends/accept/{id}(id=${request.id})}">Accept</a>-->
-<!--                                    <a th:href="@{/friends/ignore/{id}(id=${request.id})}">Ignore</a>-->
-<!--                                </div>-->
-                                <h3 class="subtitle">Friends</h3>
-                                <div class="col">
-                                    <div class="row" style="margin-bottom: 15px;" th:each="friend : ${friends}">
-                                        <div class="col-2">
-                                            <img class="friend-img img-circle profile-avatar" style="width: unset;"
-                                                 th:src="${friend.profile_pic}" height="64px" width="64px" alt="User avatar">
-                                        </div>
-                                        <div class="col-10">
-                                                <a style="font-weight: bold;"
-                                                   th:href="@{/friends/view/{id}(id=${friend.id})}"
-                                                   th:text="${friend.username}"></a>
-                                                <p style="color: black;"
-                                                   th:text="${friend.first_name + ' ' + friend.last_name}"></p>
-                                        </div>
+                        </div>
+<!--End Friends Request Holder-->
+                        <div class="row justify-content-between">
+                            <h3 class="subtitle">Friends</h3>
+                            <div class="col">
+                                <div class="row" style="margin-bottom: 15px;" th:each="friend : ${friends}">
+                                    <div class="col-2">
+                                        <img class="friend-img img-circle profile-avatar" style="width: unset;"
+                                             th:src="${friend.profile_pic}" height="64px" width="64px" alt="User avatar">
+                                    </div>
+                                    <div class="col-10">
+                                        <a style="font-weight: bold;"
+                                           th:href="@{/friends/view/{id}(id=${friend.id})}"
+                                           th:text="${friend.username}">
+                                        </a>
+                                        <p style="color: black;"
+                                           th:text="${friend.first_name + ' ' + friend.last_name}">
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    </div>
                 </div>
             </div>
-
-            <div th:if="${not #lists.isEmpty(outdoorPlants)}">
-                <h3 class="subtitle">Outdoor Plant Warning</h3>
+<!--END Tab Panels-->
+<!--Start Weather Warning-->
+            <div class="row" th:if="${not #lists.isEmpty(outdoorPlants)}">
+            <h3 class="subtitle">Outdoor Plant Warning</h3>
                 <div class="row justify-content-between">
                     <div class="column" th:each="plant : ${outdoorPlants}">
                         <p> Plant Name: <span th:text="${plant.plant.name}"></span></p>
@@ -326,10 +331,8 @@
                     </div>
                 </div>
             </div>
-            <div th:unless="${not #lists.isEmpty(outdoorPlants)}">
-
-            </div>
-
+<!--End Weather Warning-->
+            <div th:unless="${not #lists.isEmpty(outdoorPlants)}"></div>
         </form>
     </div>
 </div>
@@ -347,7 +350,6 @@
         });
     });
 </script>
-
 <!-- footer end -->
 </body>
 </html>
