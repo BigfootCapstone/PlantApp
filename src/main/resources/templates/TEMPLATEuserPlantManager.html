@@ -1,0 +1,100 @@
+div class="d-flex container-fluid create justify-content-center align-content-center">
+<div class="row">
+  <div class="column search-column" th:if="${plant}">
+    <h1 class="text-white">Plant Details</h1>
+    <!--------------Start View One Plant Details-------------->
+    <div class="container-fluid view-one-box mb-5 g-0">
+      <div class="row">
+        <div>
+          <p class="mb-4 plant-name" th:text="${plant.common_name}"></p>
+        </div>
+        <div class="d-flex column justify-content-center">
+          <img class="d-flex plantSearchImg" th:src="${plant.image_url}" alt="Plant Photo">
+        </div>
+      </div>
+      <div class="container-fluid plant-info-holder g-0">
+        <div class="d-flex row plant-info-holder grow g-0 mb-3">
+          <p class="plant-info " th:text="'Family:   ' + ${plant.family}"></p>
+          <p class="plant-info " th:text="'Genus:   ' + ${plant.genus}"></p>
+          <p class="plant-info " th:text="'Scientific Name:   ' + ${plant.scientific_name}"></p>
+          <p class="plant-info " th:if="${plant.growth_habit}" th:text="'Growth Habit:   ' + ${plant.growth_habit}"></p>
+          <p class="plant-info " th:text="'Edible:   ' + ${plant.edible ? 'Yes' : 'No'}"></p>
+          <p class="plant-info " th:if="${plant.minimum_temperature}" th:text="'Minimum Temperature:   ' + ${plant.minimum_temperature}"></p>
+          <p class="plant-info " th:if="${plant.maximum_temperature}" th:text="'Maximum Temperature:   ' + ${plant.maximum_temperature}"></p>
+          <p class="plant-info " th:if="${plant.ph_minimum}" th:text="'Minimum PH:   ' + ${plant.ph_minimum}"></p>
+          <p class="plant-info " th:if="${plant.ph_maximum}" th:text="'Maximum PH:   ' + ${plant.ph_maximum}"></p>
+          <p class="plant-info " th:if="${plant.sun_requirements}" th:text="'Sun Requirements:   ' + ${plant.sun_requirements}"></p>
+          <p class="plant-info  flex-grow-1" th:if="${plant.sowing_method}" th:text="'Sowing Method:   ' + ${plant.sowing_method}"></p>
+          <p class="plant-info " th:if="${plant.spread}" th:text="'Spread:   ' + ${plant.spread}"></p>
+          <p class="plant-info " th:if="${plant.row_spacing}" th:text="'Row Spacing:   ' + ${plant.row_spacing}"></p>
+          <div>
+            <p class="plant-info special  flex-grow-1" th:if="${plant.description}" th:text="'Description:   ' + ${plant.description}"></p>
+          </div>
+          <div id="careGuide" class="mb-3">
+            <p id="guide"  class="plant-info special flex-grow-1" th:if="${plant.careGuide}" th:text="'Care Guide:   ' + ${plant.careGuide}"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--------------End View One Plant Details-------------->
+    <!--------------Start Add Plant to Garden-------------->
+    <div class="d-flex row justify-content-center add-plant-box">
+      <div>
+        <h3 class="subtitle">Add this plant to your Garden?</h3>
+      </div>
+      <div>
+        <form method="post" th:action="@{/plants/{id}(id=${plant.id})}">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="">
+                <label class="form-label" for="name">Name Your Plant?</label>
+                <input class="form-control" type="text" name="name" id="name" placeholder="Only if you wanna :)">
+                <input type="hidden" name="CommonName" th:value="${plant.common_name}" />
+              </div>
+            </div>
+            <div class="col-md-3 offset-md-3">
+              <div class="">
+                <label class="form-label font-18">Is this plant Outside?</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 yes-no">
+                <div class="mb-3 radio">
+                  <label  class="form-label font-18" for="yes">Yes</label>
+                  <input class="ms-2 radio-1" name="is_outside" id="yes" type="radio" value="true">
+                  <label  class="ms-5 form-label font-18" for="no">No</label>
+                  <input class="ms-2 radio-2" name="is_outside" id="no" type="radio" value="false">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="mb-3">
+                <label class="form-label" for="sun_amount">Sun Amount</label>
+                <select class="form-control" name="sun_amount" id="sun_amount">
+                  <option value="FULL_SUN">Full Sun</option>
+                  <option value="PARTIAL_SUN">Partial Sun</option>
+                  <option value="FULL_SHADE">Shaded</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="mb-5">
+                <label  class="form-label" for="water_interval">Water Interval</label>
+                <input  class="form-control" type="number" id="water_interval" name="water_interval" min="1" max="30">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12 text-end mb-3">
+              <input type="submit" id="submit" class="submitBnt btn btn-custom" value="Add Dis Plant!" />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!--------------End Add Plant to Garden-------------->
+  </div>
+</div>
+</div>

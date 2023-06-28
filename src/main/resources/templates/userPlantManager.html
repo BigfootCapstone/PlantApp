@@ -9,163 +9,252 @@
 
 <div id="loader" class="loading"> </div>
 
-<div th:if="${plant}" class="ui container">
-
-
-    <h1>Plant Details</h1>
-    <div class="ui segment">
-        <h3 th:text="${plant.common_name}"></h3>
-<!--    API PLANT INFO-->
-        <div class="ui two column grid">
-            <div class="column">
-                <img class="ui fluid rounded image" th:src="${plant.image_url}" alt="Plant Photo">
-            </div>
-            <div class="column">
-                <p><strong>Family:</strong> <span th:text="${plant.family}"></span></p>
-                <p><strong>Genus:</strong> <span th:text="${plant.genus}"></span></p>
-                <p><strong>Scientific Name:</strong> <span th:text="${plant.scientific_name}"></span></p>
-                <p><strong>Growth Habit:</strong> <span th:text="${plant.growth_habit}"></span></p>
-                <p><strong>Edible:</strong> <span th:text="${plant.edible}"></span></p>
-                <p th:if="${plant.minimum_temperature}"><strong>Minimum Temperature:</strong>  <span
-                        th:text="${plant.minimum_temperature}"></span></p>
-                <p th:if="${plant.maximum_temperature}"><strong>Maximum Temperature:</strong>  <span
-                        th:text="${plant.maximum_temperature}"></span></p>
-                <p th:if="${plant.ph_minimum}"><strong>Minimum PH:</strong>  <span th:text="${plant.ph_minimum}"></span></p>
-                <p th:if="${plant.ph_maximum}"><strong>Maximum PH:</strong>  <span th:text="${plant.ph_maximum}"></span></p>
-                <p th:if="${plant.description}"><strong>Description</strong>  <span th:text="${plant.description}"></span></p>
-                <p th:if="${plant.sun_requirements}"><strong>Sun_requirements</strong>  <span
-                        th:text="${plant.sun_requirements}"></span></p>
-                <p th:if="${plant.sowing_method}"><strong>Sowing_method</strong>  <span
-                        th:text="${plant.sowing_method}"></span></p>
-                <p th:if="${plant.spread}"><strong>Spread</strong>  <span th:text="${plant.spread}"></span></p>
-                <p th:if="${plant.row_spacing}"><strong>Row_spacing</strong>  <span th:text="${plant.row_spacing}"></span></p>
-            </div>
-        </div>
-<!--    SAVED USER PLANT INFO-->
-        <div>
-            <div class="row">
-                <form method="post" th:if="${userGardenPlant}" th:action="@{/plants/plantEdit/{id}(id=${userGardenPlant.id})}">
-                    <input type="text" th:placeholder="${userGardenPlant.plant.name}" name="name">
-                    <label for="sun_amount">Sun Amount</label>
-                    <select name="sun_amount" id="sun_amount">
-                        <option value="FULL_SUN">Full Sun</option>
-                        <option value="PARTIAL_SUN">Partial Sun</option>
-                        <option value="FULL_SHADE">Shaded</option>
-                    </select>
-
-                    <label for="water_interval">Water Interval</label>
-                    <input type="number" id="water_interval" th:placeholder="${userGardenPlant.water_interval}"
-                           name="water_interval" min="1" max="30">
-                    <label>Is this plant Outside</label>
-                    <label for="yes">Yes
-                        <input name="is_outside" id="yes" type="radio" value="true">
-                    </label>
-                    <label for="no">No
-                        <input name="is_outside" id="no" type="radio" value="false">
-                    </label>
-
-<!--                    QUICK ACTION WATERED TODAY-->
-                    <div class="row">
-                        <a th:href="@{/plants/quickWater/{id}(id=${plant.id})}">Watered</a>
+<div class="d-flex container-fluid create justify-content-center align-content-center">
+    <div class="row justify-content-center">
+        <div class="column search-column">
+            <h1 class="text-white">Plant Details</h1>
+            <!--------------Plant Details-------------->
+            <div class="container-fluid view-one-box mb-5 g-0">
+                <div class="d-flex justify-content-between p-3">
+                    <div class="d-flex col-5 p-2">
+                        <img class="d-flex plantSearchImg" th:src="${plant.image_url}" alt="Plant Photo">
                     </div>
+                    <div class="col-7 container-fluid plant-info-holder g-0">
+                        <h4 class="text-white fw-bold mb-4 px-2" th:text="${plant.common_name}"></h4>
+                        <div class="d-flex flex-wrap">
 
-                    <button class="ui button">Save</button>
-                </form>
-            </div>
-        </div>
-<!--    USER PLANT LOGS AND ADD-->
-<!--        SHOW SAVED PLANT LOGS-->
-        <div class="column">
-            <div class="row">
-                <div id="comments-container" class="container" th:if="${userGardenPlant.plantLogs.size()>0}">
-                <div id="comments-feed" class="column justify-top gap-15">
-                    <div th:each="plantLog: ${usersPlantLogs}">
-                        <div>
-                            <p style="color: white;">[[${plantLog.title}]]
-                                <span style="color: gray;" th:text="${plantLog.created_at}"></span>
-                            </p>
-
-                            <p style="color: white;" th:text="${plantLog.content}"></p>
-                            <div class="row">
-                                <a th:href="@{/plants/comment/delete/{plant}.{id}(id=${plantLog.id}, plant=${userGardenPlant.id})}">Delete</a>
-<!--                                <a th:href="@{/plants/comment/edit/{plant}.{id}(id=${plantLog.id}, plant=${userGardenPlant.id})}">Edit</a>-->
+                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <span class="fw-bold">Growth Habit:</span>
+                                <p class="" th:if="${plant.growth_habit}" th:text="${plant.growth_habit}"></p>
                             </div>
+
+                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <span class="fw-bold">Edible:</span>
+                                <p class="" th:text="${plant.edible ? 'Yes' : 'No'}"></p>
+                            </div>
+
+                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <span class="fw-bold">Min Temperature:</span>
+                                <p class="" th:if="${plant.minimum_temperature}" th:text="${plant.minimum_temperature}"> <span>˚F</span></p>
+                            </div>
+
+                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <span class="fw-bold">Max Temperature:</span>
+                                <p class="" th:if="${plant.maximum_temperature}" th:text="${plant.maximum_temperature}">  <span>˚F</span></p>
+                            </div>
+
+                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <span class="fw-bold">Minimum PH:</span>
+                                <p class="" th:if="${plant.ph_minimum}" th:text="${plant.ph_minimum}"></p>
+                            </div>
+
+                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <span class="fw-bold">Maximum PH:</span>
+                                <p class="" th:if="${plant.ph_maximum}" th:text="${plant.ph_maximum}"></p>
+                            </div>
+
+                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <span class="fw-bold">Sun Requirements:</span>
+                                <p class="" th:if="${plant.sun_requirements}" th:text="${plant.sun_requirements}"></p>
+                            </div>
+
+                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <span class="fw-bold">Spread:</span>
+                                <p class="" th:if="${plant.spread}" th:text="${plant.spread}"><span>cm</span></p>
+                            </div>
+
+                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <span class="fw-bold">Row Spacing:</span>
+                                <p class="" th:if="${plant.row_spacing}" th:text="${plant.row_spacing}"><span>cm</span></p>
+                            </div>
+
+                            <div class="px-2 text-white col-12 d-flex align-items-start gap-1">
+                                <span class="fw-bold col-3 p-0">Sowing Method:</span>
+                                <span class="" th:if="${plant.sowing_method}" th:text="${plant.sowing_method}"></span>
+                            </div>
+
+                            <div class="px-2 text-white col-12 d-flex align-items-start gap-1">
+                                <span class="fw-bold col-3 p-0">Description:</span>
+                                <span class="" th:if="${plant.description}" th:text="${plant.description}"></span>
+                            </div>
+
+                            <div class="px-2 text-white col-12 d-flex align-items-start gap-1">
+                                <span class="fw-bold col-3 p-0">Care Guide:</span>
+                                <span th:if="${plant.careGuide}" th:text="${plant.careGuide}"></span>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!--------------AI DIAGNOSE-------------->
+            <div class="col-12 p-3 view-one-box mb-5">
+                <form method="post" th:action="@{/plants/diagnose/{id}(id=${userGardenPlant.id})}">
+                    <div class="d-flex col-12 p-0">
+                        <h3 class="text-white">AI Diagnose</h3>
+                    </div>
+                    <div class="d-flex">
+                        <div class="col-8">
+                            <div class="d-flex mb-2">
+                                <label for="stems" class="form-label fw-bold col-3">Stems</label>
+                                <select name="stems" id="stems" class="col-9">
+                                    <option value="0">N/A</option>
+                                    <option value="1">Discoloration (e.g., brown, black, yellowing)</option>
+                                    <option value="2">Lesions or cankers</option>
+                                    <option value="3">Soft or mushy areas</option>
+                                    <option value="4">Swelling or galls</option>
+                                    <option value="5">Splitting or cracking</option>
+                                    <option value="6">Presence of pests or insects (e.g., holes, tunnels)</option>
+                                </select>
+                            </div>
+                            <div class="d-flex mb-2">
+                                <label for="leaves" class="form-label fw-bold col-3">Leaves</label>
+                                <select name="leaves" id="leaves" class="col-9">
+                                    <option value="0">N/A</option>
+                                    <option value="1">Yellowing or chlorosis</option>
+                                    <option value="2">Browning or necrosis</option>
+                                    <option value="3">Wilting or drooping</option>
+                                    <option value="4">Curling or distortion</option>
+                                    <option value="5">Spots or lesions (e.g., brown, black, yellow, white)</option>
+                                    <option value="6">Holes or chewed edges</option>
+                                    <option value="7">Powdery or fuzzy growth</option>
+                                    <option value="8">Sticky residue (honeydew) or sap</option>
+                                    <option value="9">Presence of pests or insects (e.g., eggs, larvae, adult insects)</option>
+                                    <option value="10">Abnormal growth (e.g., stunted, dwarfed)</option>
+                                </select>
+
+
+                            </div>
+                            <div class="d-flex mb-2">
+                                <label for="fruits" class="form-label fw-bold col-3">Fruits</label>
+                                <select name="fruits" id="fruits" class="col-9">
+                                    <option value="0">N/A</option>
+                                    <option value="1">Discoloration (e.g., brown, black, yellowing)</option>
+                                    <option value="2">Lesions or rotting spots</option>
+                                    <option value="3">Wrinkling or shriveling</option>
+                                    <option value="4">Deformed or misshapen</option>
+                                    <option value="5">Stunted growth or smaller size than usual</option>
+                                    <option value="6">Presence of pests or insects (e.g., entry holes, feeding damage)</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+                        <div class="d-flex justify-content-end align-items-end col-4">
+                            <button class="btn btn-primary">Send</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <!--------------EDIT PLANT-------------->
+            <div class="d-flex justify-content-center mb-5">
+                <div class="col-12 p-3 view-one-box">
+                    <div class="d-flex col-12 p-0">
+                        <h3 class="text-white">Edit Plant</h3>
+                    </div>
+                    <form method="post" th:action="@{/plants/plantEdit/{id}(id=${userGardenPlant.id})}">
+                        <div class="d-flex justify-space-between gap-4">
+                            <div class="d-flex col flex-wrap p-0 gap-2">
+                                <div class="col-12 p-0">
+                                    <label class="form-label" for="name">Name Your Plant?</label>
+                                    <input class="form-control" type="text" name="name" id="name" placeholder="Only if you wanna :)">
+                                    <input type="hidden" name="CommonName" value="Tomato">
+                                </div><div class="d-flex justify-content-start col-12 p-0 gap-4">
+                                <div class="col-4 p-0">
+                                    <div class="">
+                                        <label class="form-label" for="sun_amount">Sun Amount</label>
+                                        <select class="form-control" name="sun_amount" id="sun_amount">
+                                            <option value="FULL_SUN">Full Sun</option>
+                                            <option value="PARTIAL_SUN">Partial Sun</option>
+                                            <option value="FULL_SHADE">Shaded</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4 p-0">
+                                    <div class="">
+                                        <label class="form-label" for="water_interval">Water Interval</label>
+                                        <input class="form-control" type="number" id="water_interval" name="water_interval" min="1" max="30">
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="d-flex col">
+                                <div class="col-12">
+                                    <label class="form-label">Is this plant Outside?</label>
+                                    <div class="d-flex justify-content-start col-12">
+                                        <div class="col-3">
+                                            <label class="form-label" for="yes">Yes</label>
+                                            <input class="ms-2 radio-1" name="is_outside" id="yes" type="radio" value="true">
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="form-label" for="no">No</label>
+                                            <input class="ms-2 radio-2" name="is_outside" id="no" type="radio" value="false">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-3">
+                            <div class="btn btn-primary">
+                                <a th:href="@{/plants/quickWater/{id}(id=${plant.id})}" class="text-white">Watered</a>
+                            </div>
+                            <input type="submit" id="submit" class="btn btn-success" value="Edit">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!--------------LOGS-------------->
+            <div class="d-flex view-one-box flex-column p-3 gap-2 mb-5">
+                <div class="d-flex col-12 p-0">
+                    <h3 class="text-white">Plant Logs</h3>
+                </div>
+                <div class="m-3">
+                    <div class="">
+                        <div class="">
+                            <div id="" class="d-flex flex-column" th:if="${userGardenPlant.plantLogs.size()>0}">
+                                <div class="mb-3 border-bottom" th:each="plantLog: ${usersPlantLogs}">
+                                    <div>
+                                        <div class="d-flex justify-content-between">
+                                            <p style="color: white;">
+                                                [[${plantLog.title}]]
+                                                <span style="color: gray;" th:text="${plantLog.created_at}">2023-06-27</span>
+                                            </p>
+                                            <a th:href="@{/plants/comment/delete/{plant}.{id}(id=${plantLog.id}, plant=${userGardenPlant.id})}">Delete</a>
+
+                                        </div>
+
+                                        <p style="color: white;" th:text="${plantLog.content}"></p>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="m-3">
+                    <form method="post" th:if="${userGardenPlant}" th:action="@{/plants/comment/{id}(id=${userGardenPlant.id})}">
+                        <div class="border-3 border-primary bg-white rounded">
+                            <input type="text" name="title" id="title" placeholder="Title" class="form-control">
+                            <textarea name="content" id="content" rows="10" cols="35" placeholder="Log message" class="form-control" style="resize: none;"></textarea>
+                        </div>
+                        <div class="d-flex justify-content-end gap-3">
+                            <button class="btn btn-primary">Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <form method="post" th:if="${userGardenPlant}"
-                  th:action="@{/plants/comment/{id}(id=${userGardenPlant.id})}" >
-            <label for="title">Title:</label>
-            <input type="text" name="title" id="title"/>
-
-            <label for="content">Body:</label>
-            <textarea name="content" id="content" rows="10" cols="35"></textarea>
-
-            <button class="ui button">Save</button>
-            </form>
-        </div>
-
-        <div>
-            <form method="post" th:action="@{/plants/diagnose/{id}(id=${userGardenPlant.id})}">
-                <h4>DIAGNOSIS Form</h4>
-                <label for="stems">Stems</label>
-                <select name="stems" id="stems">
-                    <option value="0">N/A</option>
-                    <option value="1">Discoloration (e.g., brown, black, yellowing)</option>
-                    <option value="2">Lesions or cankers</option>
-                    <option value="3">Soft or mushy areas</option>
-                    <option value="4">Swelling or galls</option>
-                    <option value="5">Splitting or cracking</option>
-                    <option value="6">Presence of pests or insects (e.g., holes, tunnels)</option>
-                </select>
-                <label for="leaves">Leaves</label>
-                <select name="leaves" id="leaves">
-                    <option value="0">N/A</option>
-                    <option value="1">Yellowing or chlorosis</option>
-                    <option value="2">Browning or necrosis</option>
-                    <option value="3">Wilting or drooping</option>
-                    <option value="4">Curling or distortion</option>
-                    <option value="5">Spots or lesions (e.g., brown, black, yellow, white)</option>
-                    <option value="6">Holes or chewed edges</option>
-                    <option value="7">Powdery or fuzzy growth</option>
-                    <option value="8">Sticky residue (honeydew) or sap</option>
-                    <option value="9">Presence of pests or insects (e.g., eggs, larvae, adult insects)</option>
-                    <option value="10">Abnormal growth (e.g., stunted, dwarfed)</option>
-                </select>
-                <label for="fruits">Fruits</label>
-                <select name="fruits" id="fruits">
-                    <option value="0">N/A</option>
-                    <option value="1">Discoloration (e.g., brown, black, yellowing)</option>
-                    <option value="2">Lesions or rotting spots</option>
-                    <option value="3">Wrinkling or shriveling</option>
-                    <option value="4">Deformed or misshapen</option>
-                    <option value="5">Stunted growth or smaller size than usual</option>
-                    <option value="6">Presence of pests or insects (e.g., entry holes, feeding damage)</option>
-                </select>
-                <button>Send</button>
-            </form>
-        </div>
-
     </div>
 </div>
-0
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
 
 <script>
-
     window.addEventListener('load',()=>{
         const loader = document.querySelector('.loading');
         loader.classList.add('loading-hidden');
@@ -174,6 +263,8 @@
         });
     });
 </script>
+
+<footer th:replace="partials/footer :: footer"></footer>
 
 </body>
 </html>
