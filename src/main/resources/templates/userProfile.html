@@ -122,22 +122,22 @@
                     </div>
                     <div class="tab-pane fade" id="garden" role="tabpanel" aria-labelledby="garden-tab">
                         <div class="d-flex row grow g-0 mb-3">
-<!--                            <div class="col-md-6">-->
-                                    <div th:if="${not #lists.isEmpty(userPlants)}">
-                                        <div class="column" th:each="plant : ${userPlants}">
+<!--Start of Garden Cards-->
+                            <div class="col-sm-6 mb-3 mb-sm-0" th:if="${not #lists.isEmpty(userPlants)}">
+                            <div class="column" th:each="plant : ${userPlants}">
+                                    <div class="card" style="width: 200px;">
+                                        <img src="/css/images/varigatedmonstera.jpeg" class="card-img-top" alt="...">
+                                        <div class="card-body">
                                             <a class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
                                                 <span th:text="${plant.plant.name}"></span>
                                             </a>
                                             <p>
                                                 <span th:text="${#strings.capitalizeWords(#strings.replace(plant.sun_amount, '_', ' '))}"></span>
                                             </p>
-
-
                                             <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
                                             <p><span th:text="${plant.getSun_tip}"></span></p>
                                             <p><span th:text="${plant.getWater_tip}"></span></p>
-
-                                            <!-- button for delete plant path -->
+    <!-- button for delete plant path -->
                                             <div class="row">
                                                 <a th:href="@{/plants/quickWater/{id}(id=${plant.id})}">Watered</a>
                                             </div>
@@ -147,15 +147,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div th:unless="${not #lists.isEmpty(userPlants)}">
-
-                                        <form class="d-flex custom-form profile-plant-add" action="#" th:action="@{/plants/search}" method="post">
-                                            <label class="d-flex label-plant-add justify-content-center align-self-center">Add A Plant!</label>
-                                            <input  class="form-control" type="text" name="query" placeholder="Search for your plant..." required autocomplete="on">
-                                            <input  class="btn-custom ms-3" value="Search" type="submit">
-                                        </form>
-                                    </div>
-<!--                            </div>-->
+                                </div>
+                            </div>
+                            </div>
+<!--IF NO PLANT SHOW SEARCH-->
+                            <div th:unless="${not #lists.isEmpty(userPlants)}">
+                                <form class="d-flex custom-form profile-plant-add" action="#" th:action="@{/plants/search}" method="post">
+                                    <label class="d-flex label-plant-add justify-content-center align-self-center">Add A Plant!</label>
+                                    <input  class="form-control" type="text" name="query" placeholder="Search for your plant..." required autocomplete="on">
+                                    <input  class="btn-custom ms-3" value="Search" type="submit">
+                                </form>
+                            </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="journal" role="tabpanel" aria-labelledby="journal-tab">
