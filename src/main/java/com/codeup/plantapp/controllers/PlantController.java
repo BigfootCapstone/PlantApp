@@ -124,14 +124,20 @@ public class PlantController {
         assert plant != null;
         String selectedPlantCommonName = plant.getCommon_name();
 
+        String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
+
+        URL openfarmApiUrl = new URL("https://openfarm.cc/api/v1/crops/" + commonNameSlug);
+
         // Call ChatGPT to get the care guide
         String chatKey = keys.getChatGPT();
         String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
         String careGuide = getChatGPTResponse(prompt, chatKey);
 
-        plant.setCareGuide(careGuide);
+        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant, chatKey);
 
-        model.addAttribute("plant", plant);
+        primedPlant.setCareGuide(careGuide);
+
+        model.addAttribute("plant", primedPlant);
         model.addAttribute("selectedPlantCommonName", selectedPlantCommonName);
 
         return "view-more";
@@ -234,7 +240,7 @@ public class PlantController {
     @GetMapping("/garden/{id}")
     public String viewPlantManager(
             @PathVariable("id") long id,
-            Model model) throws MalformedURLException {
+            Model model) throws Exception {
         String treflePlantId = gardenPlantsDao.findGardenPlantsById(id).getPlant().getTrefle_id();
 
         URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + treflePlantId + "?token=" + keys.getTrefle());
@@ -244,8 +250,14 @@ public class PlantController {
         String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
 
         URL openfarmApiUrl = new URL("https://openfarm.cc/api/v1/crops/" + commonNameSlug);
+
         String chatKey = keys.getChatGPT();
+        String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
+        String careGuide = getChatGPTResponse(prompt, chatKey);
+
         PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant, chatKey);
+
+        primedPlant.setCareGuide(careGuide);
 
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
         Plant userPlant = userGardenPlant.getPlant();
