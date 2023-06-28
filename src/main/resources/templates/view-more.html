@@ -64,6 +64,8 @@
                             <div class="col-lg-6">
                                 <div class="">
                                     <label class="form-label" for="name">Name Your Plant?</label>
+                                    <input type="hidden" name="plantImage" th:value="${plant.image_url}" />
+                                    <input type="hidden" name="openFarmID" th:value="${plant.openFarm_id}" />
                                     <input class="form-control" type="text" name="name" id="name" placeholder="Only if you wanna :)">
                                     <input type="hidden" name="CommonName" th:value="${plant.common_name}" />
                                 </div>
