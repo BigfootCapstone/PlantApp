@@ -910,7 +910,8 @@ p #guide{
 
 /***********************
     .Posts Create Form
-***********************/.create-pg{
+***********************/
+.create-pg{
     display: flex;
     flex-direction: column;
     gap: 13px;
@@ -995,14 +996,22 @@ p #guide{
 .add-comment{
     padding-bottom: 10px;
 }
-#content{
+#content, #body, #title{
     display: flex;
     width: 100%;
     margin-bottom: 10px;
     min-height: 100px;
 }
-
-
+.edit-form{
+    margin-bottom: 90px;
+}
+.post-img{
+    max-height: 62px;
+    max-width: 62px;
+    overflow: hidden;
+    min-height: 62px;
+    min-width: 62px;
+}
 /************************************
   XX.FRIENDS SEARCH ON POSTS INDEX
 *************************************/
