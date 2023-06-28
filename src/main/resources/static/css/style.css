@@ -757,6 +757,124 @@ div.weather-holder p {
     margin-left: 115px;
 }
 
+.weather-warning{
+    background-color: rgb(198,108,106);
+    border-radius: 10px;
+    font-family: Lato, sans-serif;
+}
+.plant-warning{
+    color: rgb(161,26,30);
+    font-family: Lato, sans-serif;
+}
+.tips-holder{
+    width: 410px;
+}
+.plant-warn-tips{
+width: 410px;
+}
+.weather-tip{
+    border:1px solid rgb(161,26,30);
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 10px;
+    height: 150px;
+    width: 407px;
+}
+.plant-warn-tips p{
+    color: yellow;
+    font-family: Lato, sans-serif;
+    font-size: 20px;
+}
+
+
+
+
+
+
+.f-modal-alert .f-modal-icon {
+    border-radius: 50%;
+    border: 4px solid rgb(161,26,30);
+    box-sizing: content-box;
+    height: 60px;
+    padding: 0;
+    position: relative;
+    width: 60px;
+}
+
+.f-modal-alert.f-modal-warning {
+    border-color: #F8BB86;
+}
+
+.f-modal-alert.f-modal-warning .f-modal-body {
+    background-color: rgb(229,149,58);
+    border-radius: 2px;
+    height: 27px;
+    left: 50%;
+    margin-left: -2px;
+    position: absolute;
+    top: 10px;
+    width: 5px;
+    z-index: 2;
+}
+
+.f-modal-alert.f-modal-warning .f-modal-dot {
+    background-color: rgb(229,149,58);
+    border-radius: 50%;
+    bottom: 10px;
+    height: 5px;
+    left: 50%;
+    margin-left: -3px;
+    position: absolute;
+    width: 7px;
+    z-index: 2;
+}
+
+.scaleWarning {
+    animation: scaleWarning 0.75s infinite alternate;
+}
+
+.pulseWarningIns {
+    animation: pulseWarningIns 0.75s infinite alternate;
+}
+
+@keyframes scaleWarning {
+    0% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.02);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulseWarningIns {
+    0% {
+        background-color: #f9c85f;
+    }
+
+    100% {
+        background-color: #f89845;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /***********************
   15.Plant Search View
 ************************/

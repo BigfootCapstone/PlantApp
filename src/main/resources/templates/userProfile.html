@@ -317,15 +317,52 @@
                 </div>
             <!--END Tab Panels-->
             <!--Start Weather Warning-->
-                <div class="row" th:if="${not #lists.isEmpty(outdoorPlants)}">
-                    <h3 class="subtitle">Outdoor Plant Warning</h3>
-                    <div class="row justify-content-between">
+                <div class="row weather-warning" th:if="${not #lists.isEmpty(outdoorPlants)}">
+                    <!--Start Weather Warning Header-->
+                    <div class="d-flex f-modal-alert f-modal-warning justify-content-around mt-3">
+                        <div class="f-modal-icon f-modal-warning scaleWarning">
+                            <span class="f-modal-body pulseWarningIns"></span>
+                            <span class="f-modal-dot pulseWarningIns"></span>
+                        </div>
+                        <div>
+                            <h3 class="plant-warning justify-content-center">Outdoor</h3>
+                        </div>
+                        <div>
+                            <h3 class="plant-warning justify-content-center">Plant</h3>
+                        </div>
+                        <div>
+                        <h3 class="plant-warning justify-content-center">Warning</h3>
+                        </div>
+                        <div class="f-modal-icon f-modal-warning scaleWarning">
+                            <span class="f-modal-body pulseWarningIns"></span>
+                            <span class="f-modal-dot pulseWarningIns"></span>
+                        </div>
+                    </div>
+                    <div class="d-flex row justify-content-center">
                         <div class="column" th:each="plant : ${outdoorPlants}">
-                            <p> Plant Name: <span th:text="${plant.plant.name}"></span></p>
-                            <p> Req'd Sun Amount: <span  th:text="${plant.sun_amount}"></span></p>
-                            <p> Water Every <span th:text="${plant.water_interval}"></span> Day(s)</p>
-                            <p> BotaniBuddy SunTip: <span  th:text="${plant.getSun_tip}"></span></p>
-                            <p> BotaniBuddy WaterTip: <span  th:text="${plant.getWater_tip}"></span></p>
+                            <div class="d-flex col-lg-3 mt-3 mb-3 plant-warn-tips">
+                                <div class="">
+                                    <p><span th:text="${plant.plant.name}"></span></p>
+                                </div>
+                                <div class="d-flex row tips-holder">
+                                    <div class="weather-tip">
+                                        <div class="d-flex justify-content-center">
+                                            <p> Sun Requirement: <span th:text="${#strings.capitalizeWords(#strings.replace(plant.sun_amount, '_', ' '))}"></span></p>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <p> BotaniBuddy Sun Tip: <span  th:text="${plant.getSun_tip}"></span></p>
+                                        </div>
+                                    </div>
+                                    <div class="weather-tip">
+                                        <div class="d-flex justify-content-center">
+                                            <p> Water Requirement: Every <span th:text="${plant.water_interval}"></span> Day(s)</p>
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <p> BotaniBuddy Water Tip: <span  th:text="${plant.getWater_tip}"></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
