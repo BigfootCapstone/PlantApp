@@ -1,5 +1,6 @@
 package com.codeup.plantapp.services;
 
+import com.codeup.plantapp.models.PlantMedForm;
 import com.codeup.plantapp.util.PlantDTO;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -29,6 +30,85 @@ public class PlantsCall {
             payload.put("model", "text-davinci-003");
             payload.put("prompt", prompt);
             payload.put("max_tokens", 200);
+            payload.put("temperature", 0);
+
+            conn.setDoOutput(true);
+            conn.getOutputStream().write(payload.toJSONString().getBytes());
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            JSONParser parser = new JSONParser();
+            JSONObject jsonResponse = (JSONObject) parser.parse(response.toString());
+            JSONArray choicesArray = (JSONArray) jsonResponse.get("choices");
+
+            if (choicesArray.size() > 0) {
+                JSONObject choiceObject = (JSONObject) choicesArray.get(0);
+                String completion = (String) choiceObject.get("text");
+                System.out.println("CHATGPT RESPONSE" + "\n" + completion + "\n"+ "\n");
+                return completion;
+            } else {
+                return ""; // Handle empty response as needed
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String getChatGPTDiagnosis(PlantMedForm plant, String key) throws Exception {
+        try {
+
+/*
+  TODO: DIAGNOSIS Form
+    STEMS
+      N/A
+      Discoloration (e.g., brown, black, yellowing)
+      Lesions or cankers
+      Soft or mushy areas
+      Swelling or galls
+      Splitting or cracking
+      Presence of pests or insects (e.g., holes, tunnels)
+    LEAVES
+      Yellowing or chlorosis
+      Browning or necrosis
+      Wilting or drooping
+      Curling or distortion
+      Spots or lesions (e.g., brown, black, yellow, white)
+      Holes or chewed edges
+      Powdery or fuzzy growth
+      Sticky residue (honeydew) or sap
+      Presence of pests or insects (e.g., eggs, larvae, adult insects)
+      Abnormal growth (e.g., stunted, dwarfed)
+    FRUITS
+      Discoloration (e.g., brown, black, yellowing)
+      Lesions or rotting spots
+      Wrinkling or shriveling
+      Deformed or misshapen
+      Stunted growth or smaller size than usual
+      Presence of pests or insects (e.g., entry holes, feeding damage)
+*/
+
+            String prompt = "without cutting off, diagnose the issue with a" + plant.getPlantName() + "plant suffering the " +
+                    "following symptoms: " + plant.getStemADJ() + " on the stems, " + plant.getLeaveADJ() + " on the leaves, and " + plant.getFruitADJ() +
+                    "on the " + "fruit.";
+
+            URL openaiApiUrl = new URL("https://api.openai.com/v1/completions");
+            HttpURLConnection conn = (HttpURLConnection) openaiApiUrl.openConnection();
+            String auth = "Bearer " + key;
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+            conn.setRequestProperty("Authorization", auth);
+
+            JSONObject payload = new JSONObject();
+            payload.put("model", "text-davinci-003");
+            payload.put("prompt", prompt);
+            payload.put("max_tokens", 175);
             payload.put("temperature", 0);
 
             conn.setDoOutput(true);

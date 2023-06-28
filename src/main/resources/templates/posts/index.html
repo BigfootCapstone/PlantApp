@@ -19,20 +19,19 @@
                     </form>
                 </div>
 
-                <div class="column justify-content-end" style="margin-top: 250px;">
+                <div class="column justify-content-end">
                     <div class="col dropdown" style="width: 100%">
                         <label for="searchInput"></label>
-                        <input id="searchInput" class="d-flex dropbtn" name="query"
-                                                                type="text" placeholder="Find a Buddy">
+                        <input id="searchInput" class="d-flex dropbtn" name="query" type="text" placeholder="Find a Buddy">
                         <ul id="searchResults" class="dropdown-content"></ul>
                     </div>
-                    <div class="col" th:if="${allPosts}">
+                    <div class="col all-post" th:if="${allPosts}">
                         <div th:each="post : ${allPosts}">
 
                             <div class="card container" style="width: 100%">
                                 <div class="card-body">
                                     <div>
-                                        <img class="img-circle profile-avatar" style="width: unset;"
+                                        <img class="post-img img-circle profile-avatar" style="width: unset;"
                                              th:src="${post.user.profile_pic}"
                                              id="profile-img" height="64px" width="64px" alt="User avatar">
                                     </div>
@@ -42,10 +41,15 @@
                                     </div>
                                     <div class="card-title"> [[${post.title}]] </div>
                                     <p class="card-text"> [[${post.body}]] </p>
-                                    <ul>
+                                    <ul class="post-index-btn">
                                         <li class="row justify-right">
-                                            <form id="view-post-btn"  th:action="@{/posts/{id}(id=${post.id})}" >
+                                            <form id="view-post-btn"  th:action="@{/posts/{id}(id=${post.id})}">
                                                 <button  class="btn btn-primary post-btn" >Comments</button>
+                                            </form>
+                                        </li>
+                                        <li class="row justify-right" th:if="${user.id == post.user.id}">
+                                            <form id="edit-btn"  th:action="@{/posts/{id}/edit(id=${post.id})}" >
+                                                <button   class="btn btn-primary post-btn post-edit-btn">Edit</button>
                                             </form>
                                         </li>
                                     </ul>

@@ -43,6 +43,8 @@ public class WeatherCall {
             double tempAvg = (double) atmObject.get("temp");
             long humidity = (long) atmObject.get("humidity");
 
+
+
             JSONObject sunObject = (JSONObject) jsonResponse.get("sys");
             long sunrise = (long) sunObject.get("sunrise") * 1000;
             String sunriseDTG = Time.printTime(convertTimestampToLocalDateTime(sunrise));
@@ -54,11 +56,17 @@ public class WeatherCall {
             JSONObject cloudDescObject = (JSONObject) cloudArray.get(0);
             long cloudiness = (long) cloudObject.get("all");
             String desc = (String) cloudDescObject.get("description");
+            String iconCode = (String) cloudDescObject.get("icon");
+
 
             JSONObject windObject = (JSONObject) jsonResponse.get("wind");
             Object windSpeed = windObject.get("speed");
 
-            return new Weather(tempAvg, humidity, sunriseDTG, sunsetDTG, cloudiness, desc, windSpeed.toString());
+            String iconBaseUrl = "http://openweathermap.org/img/wn/";
+            String iconUrl = iconBaseUrl + iconCode + ".png";
+
+
+            return new Weather(tempAvg, humidity, iconUrl, sunriseDTG, sunsetDTG, cloudiness, desc, windSpeed.toString());
         } catch (Exception e) {
             e.printStackTrace();
             return null;
