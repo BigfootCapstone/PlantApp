@@ -4,7 +4,19 @@
 <head th:insert="partials/head :: head('BotaniBuddy Plant Details')"></head>
 
 <body>
-<div id="loader" class="loading"> </div>
+<div id="loader" class="loading">
+    <div class="load-hold">
+        <div class="load-wrap">
+            <P class="long-load">Sorry for the wait Ai is thinking...</P>
+            <p class="long-load">Here are some fun tips and tricks while you wait: </p>
+        </div>
+        <div class="tips">
+            <div id="container"></div>
+        </div>
+
+    </div>
+
+</div>
 
 <!--Navbar Start-->
 <header th:replace="partials/navbar :: navbar"></header>
@@ -127,6 +139,88 @@
             document.body.removeChild("loading");
         });
     });
+
+</script>
+<script>
+    function getRandomTipsId() {
+        // Add YouTube video IDs here
+        let tips = [
+            "Choose the right plants for your garden: Consider the local climate, soil type, and available sunlight when selecting plants. This will increase their chances of thriving.",
+            "Proper watering is essential: Water your plants deeply and less frequently to encourage healthy root growth. Watering in the morning is generally best, as it allows foliage to dry before evening and reduces the risk of disease.M",
+            "Mulch for moisture retention: Apply a layer of organic mulch around your plants to conserve moisture, suppress weed growth, and maintain more consistent soil temperatures.",
+            "Rotate crops: To prevent soil depletion and pest build-up, practice crop rotation by changing the location of plant families each year.",
+            "Prune and trim regularly: Pruning and trimming help promote healthy growth and maintain the shape of your plants. Remove dead or damaged branches and encourage airflow by thinning dense foliage.",
+            "Use organic pest control: Opt for natural and organic methods to control pests in your garden. Introduce beneficial insects, such as ladybugs and praying mantises, to combat harmful pests.",
+            "Provide proper support: Stake tall or climbing plants to provide support and prevent them from bending or breaking due to heavy winds or their own weight.",
+            "Feed your plants: Fertilize your garden with organic matter or compost to enrich the soil and provide essential nutrients for plant growth. Follow recommended application rates to avoid over-fertilization.",
+            "Consider companion planting: Some plants have natural pest-repellent properties or complementary growth habits. Research companion planting to maximize the health and productivity of your garden.",
+            "Maintain a tidy garden: Regularly remove weeds, fallen leaves, and debris from your garden. This reduces the risk of pests and diseases and keeps your garden looking neat and well-maintained.",
+            "Flowers can communicate through colors and scents to attract pollinators.",
+            "The world's largest flower is the Rafflesia arnoldii, which can grow up to three feet in diameter.",
+            "Sunflowers can follow the movement of the sun throughout the day.",
+            "Plants release oxygen during the day and carbon dioxide at night.",
+            "Dandelion seeds can travel up to five miles in the wind.",
+            "The world's tallest tree, the coast redwood, can reach heights of over 350 feet.",
+            "The practice of growing plants without soil is called hydroponics.",
+            "Venus flytraps are carnivorous plants that trap and digest insects.",
+            "A mature tree can absorb up to 48 pounds of carbon dioxide per year.",
+            "The largest living organism on Earth is a honey fungus measuring over 2 miles across.",
+            "The world's oldest living tree is estimated to be over 5,000 years old.",
+            "The largest pumpkin ever recorded weighed over 2,600 pounds.",
+            "Bamboo is the fastest-growing plant on the planet, capable of growing up to 35 inches in a single day.",
+            "The world's smallest flowering plant is the watermeal, which measures about 1 millimeter in diameter.",
+            "The world's largest herb is the banana plant.",
+            "The corpse flower emits a strong odor of rotting flesh to attract pollinating insects.",
+            "Tomatoes are technically fruits, not vegetables.",
+            "The world's most expensive spice, saffron, comes from the crocus flower.",
+            "The world's largest living wall is located in Madrid, Spain, covering over 3,800 square feet.",
+            "The bluebonnet is the state flower of Texas.",
+            "The scent of freshly cut grass is actually a chemical distress signal released by the damaged blades.",
+            "The world's largest flower garden, Keukenhof in the Netherlands, covers an area of 79 acres.",
+            "The cactus family includes more than 2,000 different species.",
+            "Flowers can be used to make natural dyes for fabric and crafts.",
+            "The practice of growing and arranging miniature trees is called bonsai.",
+            "Test your soil before planting to determine its pH level and nutrient content.",
+            "Use companion planting to maximize space and deter pests.",
+            "Provide a consistent watering schedule to prevent stress on plants.",
+            "Apply mulch around plants to conserve moisture and suppress weeds.",
+            "Incorporate organic matter, such as compost, into the soil to improve its structure and fertility.",
+            "Deadhead flowers regularly to encourage new blooms.",
+            "Use a soaker hose or drip irrigation system to water deeply at the root level.",
+            "Start seeds indoors before the growing season to get a head start.",
+            "Practice crop rotation to prevent disease and nutrient depletion in the soil.",
+            "Attract pollinators by planting a variety of native flowers.",
+            "Use natural pest control methods, such as insecticidal soaps and neem oil.",
+            "Prune trees and shrubs during their dormant season to promote healthy growth.",
+            "Install a rain barrel to collect rainwater for watering plants.",
+            "Provide support for tall or vining plants with trellises or stakes.",
+            "Remove weeds regularly to prevent them from competing with your plants.",
+            "Choose disease-resistant plant varieties to reduce the risk of infections.",
+            "Incorporate compost tea into your watering routine for added nutrients.",
+            "Avoid over-fertilizing plants, as it can lead to excessive foliage growth with fewer blooms.",
+            "Create a habitat for beneficial insects, such as ladybugs and lacewings.",
+            "Use floating row covers to protect plants from pests and harsh weather conditions.",
+            "Regularly inspect plants for signs of pests or diseases to catch problems early.",
+            "Allow fallen leaves to decompose naturally, providing nutrients to the soil.",
+            "Provide adequate spacing between plants to allow for proper air circulation.",
+            "Practice responsible watering by adjusting irrigation to match weather conditions.",
+            "Enjoy the process and take time to relax and appreciate the beauty of your garden."
+        ];
+
+
+        let randomIndex = Math.floor(Math.random() * tips.length);
+        return tips[randomIndex];
+    }
+    function createTips() {
+        let tipsId = getRandomTipsId();
+        let container = document.querySelector("#container")
+        container.innerHTML = tipsId;
+    }
+    setInterval(function (){
+        createTips();
+    },6000)
+    createTips();
+
 </script>
 
 </body>
