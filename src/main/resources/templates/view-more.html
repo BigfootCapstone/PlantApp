@@ -63,7 +63,7 @@
                                 <div class="spinner-border" role="status">
                                     <span class="sr-only">Loading...</span>
                                 </div>
-                                <span class="d-flex ms-2 align-items-center">Generating AI Response</span>
+                                <span id="guideNote" class="d-flex ms-2 align-items-center"></span>
                             </div>
 <!--                            <p class="plant-info special flex-grow-1"-->
 <!--                               th:if="${plant.careGuide}" th:text="'Care Guide:   ' + ${plant.careGuide}"></p>-->
@@ -234,6 +234,31 @@
 
 </script>
 <script th:inline="javascript">
+    function getRandomNotes() {
+        let note = [
+            "Watering the pixels...",
+            "Growing virtual leaves...",
+            "Entertaining the plants...",
+            "Tickling the roots of the internet...",
+            "Photosynthesizing data...",
+            "Planting digital seeds...",
+            "Pruning the code branches...",
+            "Waiting for the virtual rain...",
+            "Giving life to the website garden...",
+            "Watching the progress grow like a bamboo..."
+        ];
+        let randomIndex = Math.floor(Math.random() * note.length);
+        return note[randomIndex];
+    }
+
+    function createTips() {
+        document.querySelector("#guideNote").innerHTML = getRandomNotes();
+    }
+
+    setInterval(function (){
+        createTips();
+    },6000)
+
     function getCareGuideForPlant(plant) {
         fetch(`/plants/careguide/${plant}`)
             .then(response => response.text())
@@ -252,6 +277,10 @@
     }
     const plant = [[${plant.common_name}]];
     getCareGuideForPlant(plant);
+    if (document.getElementById("showCareGuide").innerHTML === "") {
+        createTips();
+        getCareGuideForPlant(plant);
+    }
 </script>
 
 </body>
