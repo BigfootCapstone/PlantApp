@@ -283,7 +283,7 @@ public class PlantController {
     }
 
     @GetMapping("/diagnose/{id}.{stems}.{leaves}.{fruits}")
-    public String diagnosePlant(Model model,
+    public ResponseEntity<String> diagnosePlant(
                                 @PathVariable("id") long id,
                                 @PathVariable("stems") String stems,
                                 @PathVariable("leaves") String leaves,
@@ -302,22 +302,21 @@ public class PlantController {
 
         String chatResponse = getChatGPTDiagnosis(plantMedForm, chatKey);
 
-        model.addAttribute("plantID", id);
-        model.addAttribute("form", plantMedForm);
-        model.addAttribute("chatResponse", chatResponse);
+//        model.addAttribute("plantID", id);
+//        model.addAttribute("form", plantMedForm);
+//        model.addAttribute("chatResponse", chatResponse);
 
-
-        return "diagnosePlant";
+        return ResponseEntity.ok(chatResponse);
     }
 
-    @PostMapping("/diagnose/{id}")
-    public String diagnosePlant(@PathVariable("id") long id,
-                                @RequestParam(name="stems") String stems,
-                                @RequestParam(name="leaves") String leaves,
-                                @RequestParam(name="fruits") String fruits) {
-
-        return "redirect:/plants/diagnose/"+ id +"."+ stems +"."+ leaves +"."+ fruits;
-    }
+//    @PostMapping("/diagnose/{id}")
+//    public String diagnosePlant(@PathVariable("id") long id,
+//                                @RequestParam(name="stems") String stems,
+//                                @RequestParam(name="leaves") String leaves,
+//                                @RequestParam(name="fruits") String fruits) {
+//
+//        return "redirect:/plants/diagnose/"+ id +"."+ stems +"."+ leaves +"."+ fruits;
+//    }
 
     @PostMapping("/comment/{id}")
     public String savePlantLog(
