@@ -136,9 +136,12 @@
                                 <div class="d-flex row grow g-0" th:if="${not #lists.isEmpty(userPlants)}">
                                     <div class="col-sm-6 mb-3 mb-sm-0" th:each="plant : ${userPlants}">
                                         <div class="card" style="width: 200px;">
-                                            <img src="/css/images/varigatedmonstera.jpeg" class="card-img-top" alt="...">
+                                            <div>
+                                                <img th:src="${plant.plant.image_url}" height="64px" alt="User plant">
+                                            </div>
                                             <div class="card-body">
                                                 <a id="plant" class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
+
                                                     <span th:text="${plant.plant.name}"></span>
                                                 </a>
                                                 <p>
