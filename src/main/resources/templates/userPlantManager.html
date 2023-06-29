@@ -23,86 +23,91 @@
         <div class="column search-column">
             <h1 class="text-white">Plant Details</h1>
             <!--------------Plant Details-------------->
-            <div class="container-fluid view-one-box mb-5 g-0">
-                <div class="d-flex justify-content-between p-3">
+            <div class="container-fluid view-one-box mb-5 p-3 g-0">
+                <div class="d-flex col-12 justify-content-between mb-2">
                     <div class="d-flex col-5 p-2">
                         <img class="d-flex plantSearchImg" th:src="${plant.image_url}" alt="Plant Photo">
                     </div>
-                    <div class="col-7 container-fluid plant-info-holder g-0">
-                        <h4 class="text-white fw-bold mb-4 px-2" th:text="${plant.common_name}"></h4>
-                        <div class="d-flex flex-wrap">
+                    <div class="d-flex col-7 container-fluid plant-info-holder g-0">
+                        <div class="col-12">
+                            <h3 class="text-white fw-bold text-center mb-4 px-2"
+                                th:text="${plant.common_name}"></h3>
+                            <div class="d-flex flex-wrap">
 
-                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
-                                <span class="fw-bold">Growth Habit:</span>
-                                <p class="" th:if="${plant.growth_habit}" th:text="${plant.growth_habit}"></p>
+                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Growth Habit:</span>
+                                    <p class="" th:if="${plant.growth_habit}" th:text="${plant.growth_habit}"></p>
+                                </div>
+
+                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Edible:</span>
+                                    <p class="" th:text="${plant.edible ? 'Yes' : 'No'}"></p>
+                                </div>
+
+                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Min Temperature:</span>
+                                    <p class="" th:if="${plant.minimum_temperature}" th:text="${plant.minimum_temperature}"> <span>˚F</span></p>
+                                </div>
+
+                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Max Temperature:</span>
+                                    <p class="" th:if="${plant.maximum_temperature}" th:text="${plant.maximum_temperature}">  <span>˚F</span></p>
+                                </div>
+
+                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Minimum PH:</span>
+                                    <p class="" th:if="${plant.ph_minimum}" th:text="${plant.ph_minimum}"></p>
+                                </div>
+
+                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Maximum PH:</span>
+                                    <p class="" th:if="${plant.ph_maximum}" th:text="${plant.ph_maximum}"></p>
+                                </div>
+
+                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Sun Requirements:</span>
+                                    <p class="" th:if="${plant.sun_requirements}" th:text="${plant.sun_requirements}"></p>
+                                </div>
+
+                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Spread:</span>
+                                    <p class="" th:if="${plant.spread}" th:text="${plant.spread}"><span>cm</span></p>
+                                </div>
+
+                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Row Spacing:</span>
+                                    <p class="" th:if="${plant.row_spacing}" th:text="${plant.row_spacing}"><span>cm</span></p>
+                                </div>
+
+                                <div class="px-2 text-white col-12 d-flex align-items-start gap-1">
+                                    <span class="fw-bold col-3 p-0">Sowing Method:</span>
+                                    <span class="" th:if="${plant.sowing_method}" th:text="${plant.sowing_method}"></span>
+                                </div>
+
+                                <div class="px-2 text-white col-12 d-flex align-items-start gap-1">
+                                    <span class="fw-bold col-3 p-0">Description:</span>
+                                    <span class="" th:if="${plant.description}" th:text="${plant.description}"></span>
+                                </div>
                             </div>
-
-                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
-                                <span class="fw-bold">Edible:</span>
-                                <p class="" th:text="${plant.edible ? 'Yes' : 'No'}"></p>
-                            </div>
-
-                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
-                                <span class="fw-bold">Min Temperature:</span>
-                                <p class="" th:if="${plant.minimum_temperature}" th:text="${plant.minimum_temperature}"> <span>˚F</span></p>
-                            </div>
-
-                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
-                                <span class="fw-bold">Max Temperature:</span>
-                                <p class="" th:if="${plant.maximum_temperature}" th:text="${plant.maximum_temperature}">  <span>˚F</span></p>
-                            </div>
-
-                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
-                                <span class="fw-bold">Minimum PH:</span>
-                                <p class="" th:if="${plant.ph_minimum}" th:text="${plant.ph_minimum}"></p>
-                            </div>
-
-                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
-                                <span class="fw-bold">Maximum PH:</span>
-                                <p class="" th:if="${plant.ph_maximum}" th:text="${plant.ph_maximum}"></p>
-                            </div>
-
-                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
-                                <span class="fw-bold">Sun Requirements:</span>
-                                <p class="" th:if="${plant.sun_requirements}" th:text="${plant.sun_requirements}"></p>
-                            </div>
-
-                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
-                                <span class="fw-bold">Spread:</span>
-                                <p class="" th:if="${plant.spread}" th:text="${plant.spread}"><span>cm</span></p>
-                            </div>
-
-                            <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
-                                <span class="fw-bold">Row Spacing:</span>
-                                <p class="" th:if="${plant.row_spacing}" th:text="${plant.row_spacing}"><span>cm</span></p>
-                            </div>
-
-                            <div class="px-2 text-white col-12 d-flex align-items-start gap-1">
-                                <span class="fw-bold col-3 p-0">Sowing Method:</span>
-                                <span class="" th:if="${plant.sowing_method}" th:text="${plant.sowing_method}"></span>
-                            </div>
-
-                            <div class="px-2 text-white col-12 d-flex align-items-start gap-1">
-                                <span class="fw-bold col-3 p-0">Description:</span>
-                                <span class="" th:if="${plant.description}" th:text="${plant.description}"></span>
-                            </div>
-
-                            <div class="px-2 text-white col-12 d-flex align-items-start gap-1">
-                                <span class="fw-bold col-3 p-0">Care Guide:</span>
-                                <span th:if="${plant.careGuide}" th:text="${plant.careGuide}"></span>
-                            </div>
-
                         </div>
+                    </div>
+                </div>
+                <div class="text-white col-12 d-flex align-items-start gap-1 justify-content-between">
+                    <div class="col-2 text-center">
+                        <span class="fw-bold col-3 p-0">Care Guide:</span>
+                    </div>
+                    <div class="col-10">
+                        <span th:if="${plant.careGuide}" th:text="${plant.careGuide}"></span>
                     </div>
                 </div>
             </div>
 
             <!--------------AI DIAGNOSE-------------->
             <div class="col-12 p-3 view-one-box mb-5">
-                <form method="post" th:action="@{/plants/diagnose/{id}(id=${userGardenPlant.id})}">
-                    <div class="d-flex col-12 p-0">
-                        <h3 class="text-white">AI Diagnose</h3>
-                    </div>
+                <div class="d-flex col-12 p-0">
+                    <h3 class="text-white">AI Diagnose</h3>
+                </div>
+                <form class="m-3"  method="post" th:action="@{/plants/diagnose/{id}(id=${userGardenPlant.id})}">
                     <div class="d-flex">
                         <div class="col-8">
                             <div class="d-flex mb-2">
@@ -164,7 +169,7 @@
                     <div class="d-flex col-12 p-0">
                         <h3 class="text-white">Edit Plant</h3>
                     </div>
-                    <form method="post" th:action="@{/plants/plantEdit/{id}(id=${userGardenPlant.id})}">
+                    <form class="m-3" method="post" th:action="@{/plants/plantEdit/{id}(id=${userGardenPlant.id})}">
                         <div class="d-flex justify-space-between gap-4">
                             <div class="d-flex col flex-wrap p-0 gap-2">
                                 <div class="col-12 p-0">
@@ -249,8 +254,8 @@
                 </div>
                 <div class="m-3">
                     <form method="post" th:if="${userGardenPlant}" th:action="@{/plants/comment/{id}(id=${userGardenPlant.id})}">
-                        <div class="border-3 border-primary bg-white rounded">
-                            <input type="text" name="title" id="title" placeholder="Title" class="form-control">
+                        <div class="border-3 border-primary rounded">
+                            <input type="text" name="title" placeholder="Title" class="form-control mb-2">
                             <textarea name="content" id="content" rows="10" cols="35" placeholder="Log message" class="form-control" style="resize: none;"></textarea>
                         </div>
                         <div class="d-flex justify-content-end gap-3">
