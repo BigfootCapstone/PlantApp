@@ -34,9 +34,9 @@
                                 th:text="${plant.common_name}"></h3>
                             <div class="d-flex flex-wrap">
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.growth_habit}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Growth Habit:</span>
-                                    <p class="" th:if="${plant.growth_habit}" th:text="${plant.growth_habit}"></p>
+                                    <p class="" th:text="${plant.growth_habit}"></p>
                                 </div>
 
                                 <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
@@ -44,49 +44,49 @@
                                     <p class="" th:text="${plant.edible ? 'Yes' : 'No'}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.minimum_temperature}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Min Temperature:</span>
-                                    <p class="" th:if="${plant.minimum_temperature}" th:text="${plant.minimum_temperature}"> <span>˚F</span></p>
+                                    <p class="" th:text="${plant.minimum_temperature + ' ˚F'}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.maximum_temperature}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Max Temperature:</span>
-                                    <p class="" th:if="${plant.maximum_temperature}" th:text="${plant.maximum_temperature}">  <span>˚F</span></p>
+                                    <p class="" th:text="${plant.maximum_temperature + ' ˚F'}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.ph_minimum}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Minimum PH:</span>
-                                    <p class="" th:if="${plant.ph_minimum}" th:text="${plant.ph_minimum}"></p>
+                                    <p class="" th:text="${plant.ph_minimum}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.ph_maximum}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Maximum PH:</span>
-                                    <p class="" th:if="${plant.ph_maximum}" th:text="${plant.ph_maximum}"></p>
+                                    <p class="" th:text="${plant.ph_maximum}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.sun_requirements}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Sun Requirements:</span>
-                                    <p class="" th:if="${plant.sun_requirements}" th:text="${plant.sun_requirements}"></p>
+                                    <p class="" th:text="${plant.sun_requirements}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.spread}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Spread:</span>
-                                    <p class="" th:if="${plant.spread}" th:text="${plant.spread}"><span>cm</span></p>
+                                    <p class="" th:text="${plant.spread + ' cm'}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.row_spacing}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Row Spacing:</span>
-                                    <p class="" th:if="${plant.row_spacing}" th:text="${plant.row_spacing}"><span>cm</span></p>
+                                    <p class="" th:text="${plant.row_spacing + ' cm'}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-12 d-flex align-items-start gap-1">
+                                <div th:if="${plant.sowing_method}" class="px-2 text-white col-12 d-flex align-items-start gap-1">
                                     <span class="fw-bold col-3 p-0">Sowing Method:</span>
-                                    <span class="" th:if="${plant.sowing_method}" th:text="${plant.sowing_method}"></span>
+                                    <span class="" th:text="${plant.sowing_method}"></span>
                                 </div>
 
-                                <div class="px-2 text-white col-12 d-flex align-items-start gap-1">
+                                <div th:if="${plant.description}" class="px-2 text-white col-12 d-flex align-items-start gap-1">
                                     <span class="fw-bold col-3 p-0">Description:</span>
-                                    <span class="" th:if="${plant.description}" th:text="${plant.description}"></span>
+                                    <span class="" th:text="${plant.description}"></span>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,14 @@
                         <span class="fw-bold col-3 p-0">Care Guide:</span>
                     </div>
                     <div class="col-10">
-                        <span th:if="${plant.careGuide}" th:text="${plant.careGuide}"></span>
+                        <div id="AIWait" class="d-flex d-none justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span id="guideNote" class="sr-only">Loading...</span>
+                            </div>
+                            <span class="d-flex ms-2 align-items-center">Generating AI Response</span>
+                        </div>
+                        <span th:if="${careGuide}" th:text="${careGuide}"></span>
+                        <span id="careGuide"></span>
                     </div>
                 </div>
             </div>
@@ -152,8 +159,6 @@
                                     <option value="6">Presence of pests or insects (e.g., entry holes, feeding damage)</option>
                                 </select>
                             </div>
-
-
                         </div>
                         <div id="send" class="d-flex justify-content-end align-items-end col-4">
                             <button class="btn btn-primary">Send</button>
@@ -371,6 +376,55 @@
     },6000)
     createTips();
 
+</script>
+
+<script th:inline="javascript">
+    function getRandomNotes() {
+        let note = [
+            "Watering the pixels...",
+            "Growing virtual leaves...",
+            "Entertaining the plants...",
+            "Tickling the roots of the internet...",
+            "Photosynthesizing data...",
+            "Planting digital seeds...",
+            "Pruning the code branches...",
+            "Waiting for the virtual rain...",
+            "Giving life to the website garden...",
+            "Watching the progress grow like a bamboo..."
+        ];
+        let randomIndex = Math.floor(Math.random() * note.length);
+        return note[randomIndex];
+    }
+
+    function createTips() {
+        document.querySelector("#guideNote").innerHTML = getRandomNotes();
+    }
+
+    setInterval(function (){
+        createTips();
+    },6000)
+
+    function getCareGuideForPlant(plant) {
+        fetch(`/plants/careguide/${plant}`)
+            .then(response => response.text())
+            .then(careGuide => {
+                if (careGuide === "") {
+                    document.getElementById("careGuide").innerHTML = 'No care guide found for this plant.';
+                } else {
+                    document.getElementById("careGuide").innerHTML = careGuide;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+    const plant = [[${plant.common_name}]];
+    const dbCareGuide = [[${careGuide}]];
+    if (dbCareGuide.isNull()) {
+        document.getElementById("AIWait").classList.remove("d-none");
+        createTips();
+        getCareGuideForPlant(plant);
+    }
 </script>
 
 
