@@ -97,6 +97,12 @@
                         <span class="fw-bold col-3 p-0">Care Guide:</span>
                     </div>
                     <div class="col-10">
+                        <div id="AIWait" class="d-flex d-none justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <span class="d-flex ms-2 align-items-center">Generating AI Response</span>
+                        </div>
                         <span th:if="${careGuide}" th:text="${careGuide}"></span>
                         <span id="careGuide"></span>
                     </div>
@@ -390,6 +396,7 @@
     const plant = [[${plant.common_name}]];
     const dbCareGuide = [[${careGuide}]];
     if (dbCareGuide.isNull()) {
+        document.getElementById("AIWait").classList.remove("d-none");
         getCareGuideForPlant(plant);
     }
 </script>

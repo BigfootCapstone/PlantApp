@@ -59,8 +59,14 @@
                             <p class="plant-info special  flex-grow-1" th:if="${plant.description}" th:text="'Description:   ' + ${plant.description}"></p>
                         </div>
                         <div class="mb-3">
-                            <p class="plant-info special flex-grow-1"
-                               th:if="${plant.careGuide}" th:text="'Care Guide:   ' + ${plant.careGuide}"></p>
+                            <div id="AIWait" class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <span class="d-flex ms-2 align-items-center">Generating AI Response</span>
+                            </div>
+<!--                            <p class="plant-info special flex-grow-1"-->
+<!--                               th:if="${plant.careGuide}" th:text="'Care Guide:   ' + ${plant.careGuide}"></p>-->
                             <p id="showCareGuide"></p>
                         </div>
                     </div>
@@ -235,6 +241,7 @@
                 if (careGuide === "") {
                     document.getElementById("careGuide").innerHTML = 'No care guide found for this plant.';
                 } else {
+                    document.getElementById("AIWait").classList.add("d-none");
                     document.getElementById("showCareGuide").innerHTML = careGuide;
                     document.getElementById("careGuide").value = careGuide;
                 }
