@@ -376,7 +376,6 @@
 
 <script th:inline="javascript">
     function getCareGuideForPlant(plant) {
-        // Send a GET request to the backend endpoint
         fetch(`/plants/careguide/${plant}`)
             .then(response => response.text())
             .then(careGuide => {

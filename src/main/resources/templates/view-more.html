@@ -58,8 +58,10 @@
                         <div>
                             <p class="plant-info special  flex-grow-1" th:if="${plant.description}" th:text="'Description:   ' + ${plant.description}"></p>
                         </div>
-                        <div id="careGuide" class="mb-3">
-                            <p id="guide"  class="plant-info special flex-grow-1" th:if="${plant.careGuide}" th:text="'Care Guide:   ' + ${plant.careGuide}"></p>
+                        <div class="mb-3">
+                            <p class="plant-info special flex-grow-1"
+                               th:if="${plant.careGuide}" th:text="'Care Guide:   ' + ${plant.careGuide}"></p>
+                            <p id="showCareGuide"></p>
                         </div>
                     </div>
                 </div>
@@ -76,6 +78,7 @@
                             <div class="col-lg-6">
                                 <div class="">
                                     <label class="form-label" for="name">Name Your Plant?</label>
+                                    <input id="careGuide" type="hidden" name="careGuide" />
                                     <input type="hidden" name="plantImage" th:value="${plant.image_url}" />
                                     <input type="hidden" name="openFarmID" th:value="${plant.openFarm_id}" />
                                     <input class="form-control" type="text" name="name" id="name" placeholder="Only if you wanna :)">
@@ -223,6 +226,25 @@
     },6000)
     createTips();
 
+</script>
+<script th:inline="javascript">
+    function getCareGuideForPlant(plant) {
+        fetch(`/plants/careguide/${plant}`)
+            .then(response => response.text())
+            .then(careGuide => {
+                if (careGuide === "") {
+                    document.getElementById("careGuide").innerHTML = 'No care guide found for this plant.';
+                } else {
+                    document.getElementById("showCareGuide").innerHTML = careGuide;
+                    document.getElementById("careGuide").value = careGuide;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+    const plant = [[${plant.common_name}]];
+    getCareGuideForPlant(plant);
 </script>
 
 </body>

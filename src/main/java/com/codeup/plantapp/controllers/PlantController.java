@@ -89,11 +89,11 @@ public class PlantController {
 //    }
 
 
-    /*
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><FIND PLANT IN API ><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    */
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><FIND PLANT IN API ><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
 
     @GetMapping("/search/{query}")
     public String showSearchForm(@PathVariable("query") String query, Model model) {
@@ -133,13 +133,12 @@ public class PlantController {
         URL openfarmApiUrl = new URL("https://openfarm.cc/api/v1/crops/" + commonNameSlug);
 
         // Call ChatGPT to get the care guide
-        String chatKey = keys.getChatGPT();
-        String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
-        String careGuide = getChatGPTResponse(prompt, chatKey);
+//        String chatKey = keys.getChatGPT();
+//        String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
+//        String careGuide = getChatGPTResponse(prompt, chatKey);
+//        primedPlant.setCareGuide(careGuide);
 
         PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant);
-
-        primedPlant.setCareGuide(careGuide);
 
         model.addAttribute("plant", primedPlant);
         model.addAttribute("selectedPlantCommonName", selectedPlantCommonName);
@@ -159,29 +158,31 @@ public class PlantController {
                             @RequestParam(name="plantImage") String image_url,
                             @RequestParam(name="CommonName") String common_name,
                             @RequestParam(name="sun_amount") sun_amount sun_amount,
+                            @RequestParam(name="careGuide") String careGuide,
                             @RequestParam(name="water_interval") long water_interval,
                             @RequestParam(name="is_outside") boolean is_outside
     ) {
 
-        String name = plant_name.isEmpty() ? common_name : plant_name;
+    String name = plant_name.isEmpty() ? common_name : plant_name;
 
-        Plant userPlant = new Plant(id, openfarm_id, name, image_url);
-        plantsDao.save(userPlant);
+    Plant userPlant = new Plant(id, openfarm_id, name, image_url);
+    plantsDao.save(userPlant);
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userFound = usersDao.findUserById(user.getId());
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User userFound = usersDao.findUserById(user.getId());
 
-        LocalDate date = LocalDate.now();
+    LocalDate date = LocalDate.now();
 
-        GardenPlant newGardenPlant = new GardenPlant(userFound, userPlant, sun_amount, date, water_interval, is_outside);
+    GardenPlant newGardenPlant = new GardenPlant(userFound, userPlant, sun_amount, date, water_interval, is_outside);
+    newGardenPlant.setCareGuide(careGuide);
 
-        gardenPlantsDao.save(newGardenPlant);
-        return "redirect:/users/profile";
-    }
+    gardenPlantsDao.save(newGardenPlant);
+    return "redirect:/users/profile";
+}
 
-    /*
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    */
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><USER DELETE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
@@ -198,11 +199,11 @@ public class PlantController {
         return "redirect:/users/profile";
     }
 
-    /*
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    */
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
     @PostMapping("/plantEdit/{id}")
     public String updateUserPlant(
             @PathVariable("id") long id,
@@ -223,10 +224,10 @@ public class PlantController {
         return "redirect:/users/profile";
     }
 
-    /*
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><<USER QUICK WATER>><<>><<>><<>><<>><<>><<>><<>><|
-    */
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<USER QUICK WATER>><<>><<>><<>><<>><<>><<>><<>><|
+*/
     @GetMapping("/quickWater/{id}")
     public String quickWater(@PathVariable("id") long id) {
         GardenPlant updateGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
@@ -240,7 +241,7 @@ public class PlantController {
 */
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><<ADD A PLANT LOG >><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<User Garden Plant><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
 
@@ -258,13 +259,14 @@ public class PlantController {
 
         URL openfarmApiUrl = new URL("https://openfarm.cc/api/v1/crops/" + commonNameSlug);
 
+//        OLD CHAT GPT CODE
 //        String chatKey = keys.getChatGPT();
 //        String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
 //        String careGuide = getChatGPTResponse(prompt, chatKey);
+//        primedPlant.setCareGuide(careGuide);
+///////////////////////////////////////////////////////////////////////////////////////
 
         PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant);
-
-//        primedPlant.setCareGuide(careGuide);
 
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
         Plant userPlant = userGardenPlant.getPlant();
