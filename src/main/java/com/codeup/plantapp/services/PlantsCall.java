@@ -230,7 +230,7 @@ public class PlantsCall {
         }
     }
 
-    public static PlantDTO getOpenFarmPrimer(URL url, PlantDTO plant, String chatKey) {
+    public static PlantDTO getOpenFarmPrimer(URL url, PlantDTO plant) {
         try {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");

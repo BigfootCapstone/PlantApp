@@ -10,11 +10,14 @@ import com.codeup.plantapp.util.PlantDTO;
 import com.codeup.plantapp.util.PlantResultDTO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.method.support.ModelAndViewContainer;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.MalformedURLException;
@@ -134,7 +137,7 @@ public class PlantController {
         String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
         String careGuide = getChatGPTResponse(prompt, chatKey);
 
-        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant, chatKey);
+        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant);
 
         primedPlant.setCareGuide(careGuide);
 
@@ -255,18 +258,19 @@ public class PlantController {
 
         URL openfarmApiUrl = new URL("https://openfarm.cc/api/v1/crops/" + commonNameSlug);
 
-        String chatKey = keys.getChatGPT();
-        String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
-        String careGuide = getChatGPTResponse(prompt, chatKey);
+//        String chatKey = keys.getChatGPT();
+//        String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
+//        String careGuide = getChatGPTResponse(prompt, chatKey);
 
-        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant, chatKey);
+        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant);
 
-        primedPlant.setCareGuide(careGuide);
+//        primedPlant.setCareGuide(careGuide);
 
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
         Plant userPlant = userGardenPlant.getPlant();
         List<PlantLog> usersPlantLogs = plantLogsDao.findPlantLogByGardenPlant(userGardenPlant);
 
+        model.addAttribute("careGuide", gardenPlantsDao.findGardenPlantsById(id).getCareGuide());
         model.addAttribute("plant", primedPlant);
         model.addAttribute("selectedPlantCommonName", plant.getCommon_name());
         model.addAttribute("userGardenPlant", userGardenPlant);
@@ -341,26 +345,17 @@ public class PlantController {
 
         return "redirect:/plants/garden/{plant}";
     }
+
+    @GetMapping("/careguide/{plant}")
+    public ResponseEntity<String> careGuideAI(Model model,
+                                              @PathVariable String plant) throws Exception {
+
+        String chatKey = keys.getChatGPT();
+        String prompt = "Give me a care guide for " + plant + "!";
+        String careGuide = getChatGPTResponse(prompt, chatKey);
+
+        model.addAttribute("chatGPTGuide", careGuide);
+
+        return ResponseEntity.ok(careGuide);
+    }
 }
-
-
-//1. Plants can communicate with each other through chemical signals in the air and soil.
-//2. Some plants, such as the Venus flytrap, can move and capture prey.
-//3. The world's largest flower, the Rafflesia arnoldii, can grow up to three feet in diameter.
-//4. Bamboo is one of the fastest-growing plants on Earth, capable of growing several feet in just one day.
-//5. The oldest living organism on Earth is a bristlecone pine tree in California, estimated to be over 5,000 years old.
-//6. The Titan arum, also known as the "corpse flower," produces the largest unbranched inflorescence in the world.
-//7. Plants release more oxygen during daylight than they consume, making them crucial for maintaining the Earth's oxygen balance.
-//8. The world's tallest tree, the coast redwood, can reach heights of over 360 feet (110 meters).
-//9. The largest living organism on Earth is a grove of quaking aspen trees in Utah, all connected through a single root system.
-//10. Some plants, like the sundew and pitcher plant, have evolved to capture and digest insects as a source of nutrients.
-//11. Plants can recognize their relatives and adjust their growth accordingly to compete less with kin.
-//12. The stinging nettle plant can cause a painful rash when touched due to its tiny stinging hairs.
-//13. The bark of the white willow tree contains a natural compound called salicin, which was used as the basis for aspirin.
-//14. Plants can "remember" stressful events and adjust their responses to future stressors.
-//15. The Joshua tree, native to the southwestern United States, is not a tree but a type of yucca plant.
-//16. The lotus plant has the ability to regulate its temperature, keeping its flowers several degrees warmer than the surrounding air to attract pollinators.
-//17. The leaves of the sensitive plant (Mimosa pudica) fold inward when touched or shaken, as a defense mechanism against herbivores.
-//18. The scent of lavender can help promote relaxation and improve sleep quality.
-//19. Some plants, like the Baobab tree, store large amounts of water in their trunks to survive in arid environments.
-//20. The oldest known seed to successfully germinate was a 2,000-year-old Judean date palm seed discovered in Israel.
