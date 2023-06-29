@@ -390,7 +390,10 @@
             });
     }
     const plant = [[${plant.common_name}]];
-    getCareGuideForPlant(plant);
+    const dbCareGuide = [[${careGuide}]];
+    if (dbCareGuide.isNull()) {
+        getCareGuideForPlant(plant);
+    }
 </script>
 
 
