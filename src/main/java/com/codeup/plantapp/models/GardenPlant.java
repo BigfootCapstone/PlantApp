@@ -40,8 +40,11 @@ public class GardenPlant {
     @Column(nullable = false)
     private long water_in_days;
 
-    @Column(nullable = false, unique = false)
+    @Column(nullable = false)
     private boolean is_outside;
+
+    @Column(nullable = false, length = 65000 )
+    private String careGuide;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "gardenPlant")
     private List<PlantLog> plantLogs;
@@ -114,6 +117,13 @@ public class GardenPlant {
     }
     public void setIs_outside(boolean is_outside) {
         this.is_outside = is_outside;
+    }
+
+    public String getCareGuide() {
+        return careGuide;
+    }
+    public void setCareGuide(String careGuide) {
+        this.careGuide = careGuide;
     }
 
     public List<PlantLog> getPlantLogs() {

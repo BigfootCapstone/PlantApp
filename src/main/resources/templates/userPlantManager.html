@@ -26,7 +26,7 @@
             <div class="container-fluid view-one-box mb-5 p-3 g-0">
                 <div class="d-flex col-12 justify-content-between mb-2">
                     <div class="d-flex col-5 p-2">
-                        <img class="d-flex plantSearchImg" th:src="${plant.image_url}" alt="Plant Photo">
+                        <img class="d-flex rounded img-thumbnail" th:src="${plant.image_url}" alt="Plant Photo">
                     </div>
                     <div class="d-flex col-7 container-fluid plant-info-holder g-0">
                         <div class="col-12">
@@ -34,9 +34,9 @@
                                 th:text="${plant.common_name}"></h3>
                             <div class="d-flex flex-wrap">
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.growth_habit}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Growth Habit:</span>
-                                    <p class="" th:if="${plant.growth_habit}" th:text="${plant.growth_habit}"></p>
+                                    <p class="" th:text="${plant.growth_habit}"></p>
                                 </div>
 
                                 <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
@@ -44,49 +44,49 @@
                                     <p class="" th:text="${plant.edible ? 'Yes' : 'No'}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.minimum_temperature}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Min Temperature:</span>
-                                    <p class="" th:if="${plant.minimum_temperature}" th:text="${plant.minimum_temperature}"> <span>˚F</span></p>
+                                    <p class="" th:text="${plant.minimum_temperature + ' ˚F'}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.maximum_temperature}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Max Temperature:</span>
-                                    <p class="" th:if="${plant.maximum_temperature}" th:text="${plant.maximum_temperature}">  <span>˚F</span></p>
+                                    <p class="" th:text="${plant.maximum_temperature + ' ˚F'}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.ph_minimum}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Minimum PH:</span>
-                                    <p class="" th:if="${plant.ph_minimum}" th:text="${plant.ph_minimum}"></p>
+                                    <p class="" th:text="${plant.ph_minimum}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.ph_maximum}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Maximum PH:</span>
-                                    <p class="" th:if="${plant.ph_maximum}" th:text="${plant.ph_maximum}"></p>
+                                    <p class="" th:text="${plant.ph_maximum}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.sun_requirements}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Sun Requirements:</span>
-                                    <p class="" th:if="${plant.sun_requirements}" th:text="${plant.sun_requirements}"></p>
+                                    <p class="" th:text="${plant.sun_requirements}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.spread}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Spread:</span>
-                                    <p class="" th:if="${plant.spread}" th:text="${plant.spread}"><span>cm</span></p>
+                                    <p class="" th:text="${plant.spread + ' cm'}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                <div th:if="${plant.row_spacing}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
                                     <span class="fw-bold">Row Spacing:</span>
-                                    <p class="" th:if="${plant.row_spacing}" th:text="${plant.row_spacing}"><span>cm</span></p>
+                                    <p class="" th:text="${plant.row_spacing + ' cm'}"></p>
                                 </div>
 
-                                <div class="px-2 text-white col-12 d-flex align-items-start gap-1">
+                                <div th:if="${plant.sowing_method}" class="px-2 text-white col-12 d-flex align-items-start gap-1">
                                     <span class="fw-bold col-3 p-0">Sowing Method:</span>
-                                    <span class="" th:if="${plant.sowing_method}" th:text="${plant.sowing_method}"></span>
+                                    <span class="" th:text="${plant.sowing_method}"></span>
                                 </div>
 
-                                <div class="px-2 text-white col-12 d-flex align-items-start gap-1">
+                                <div th:if="${plant.description}" class="px-2 text-white col-12 d-flex align-items-start gap-1">
                                     <span class="fw-bold col-3 p-0">Description:</span>
-                                    <span class="" th:if="${plant.description}" th:text="${plant.description}"></span>
+                                    <span class="" th:text="${plant.description}"></span>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,14 @@
                         <span class="fw-bold col-3 p-0">Care Guide:</span>
                     </div>
                     <div class="col-10">
-                        <span th:if="${plant.careGuide}" th:text="${plant.careGuide}"></span>
+                        <div id="AIWait" class="d-flex d-none justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span id="guideNote" class="sr-only">Loading...</span>
+                            </div>
+                            <span class="d-flex ms-2 align-items-center">Generating AI Response</span>
+                        </div>
+                        <span th:if="${careGuide}" th:text="${careGuide}"></span>
+                        <span id="careGuide"></span>
                     </div>
                 </div>
             </div>
@@ -107,12 +114,13 @@
                 <div class="d-flex col-12 p-0">
                     <h3 class="text-white">AI Diagnose</h3>
                 </div>
-                <form class="m-3"  method="post" th:action="@{/plants/diagnose/{id}(id=${userGardenPlant.id})}">
+<!--                <form class="m-3"  method="post" th:action="@{/plants/diagnose/{id}(id=${userGardenPlant.id})}">-->
+                <div class="m-3">
                     <div class="d-flex">
-                        <div class="col-8">
+                        <div id="diagnoseForm" class="col-8">
                             <div class="d-flex mb-2">
-                                <label for="stems" class="form-label fw-bold col-3">Stems</label>
-                                <select name="stems" id="stems" class="col-9">
+                                <label for="stemsDiagnose" class="form-label fw-bold col-3">Stems</label>
+                                <select name="stems" id="stemsDiagnose" class="col-9">
                                     <option value="0">N/A</option>
                                     <option value="1">Discoloration (e.g., brown, black, yellowing)</option>
                                     <option value="2">Lesions or cankers</option>
@@ -123,8 +131,8 @@
                                 </select>
                             </div>
                             <div class="d-flex mb-2">
-                                <label for="leaves" class="form-label fw-bold col-3">Leaves</label>
-                                <select name="leaves" id="leaves" class="col-9">
+                                <label for="leavesDiagnose" class="form-label fw-bold col-3">Leaves</label>
+                                <select name="leaves" id="leavesDiagnose" class="col-9">
                                     <option value="0">N/A</option>
                                     <option value="1">Yellowing or chlorosis</option>
                                     <option value="2">Browning or necrosis</option>
@@ -138,11 +146,10 @@
                                     <option value="10">Abnormal growth (e.g., stunted, dwarfed)</option>
                                 </select>
 
-
                             </div>
                             <div class="d-flex mb-2">
-                                <label for="fruits" class="form-label fw-bold col-3">Fruits</label>
-                                <select name="fruits" id="fruits" class="col-9">
+                                <label for="fruitsDiagnose" class="form-label fw-bold col-3">Fruits</label>
+                                <select name="fruits" id="fruitsDiagnose" class="col-9">
                                     <option value="0">N/A</option>
                                     <option value="1">Discoloration (e.g., brown, black, yellowing)</option>
                                     <option value="2">Lesions or rotting spots</option>
@@ -152,15 +159,60 @@
                                     <option value="6">Presence of pests or insects (e.g., entry holes, feeding damage)</option>
                                 </select>
                             </div>
-
-
                         </div>
                         <div id="send" class="d-flex justify-content-end align-items-end col-4">
-                            <button class="btn btn-primary">Send</button>
+                            <button id="diagnoseAI" class="btn btn-primary">Send</button>
+                        </div>
+
+<!--                        LOADER-->
+                        <div id="diagnoseWait" class="d-flex d-none justify-content-center">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                            <span class="d-flex ms-2 align-items-center">AI Diagnosing</span>
+                        </div>
+
+<!--                     DIAGNOSE RESPONSE-->
+                        <div id="diagnoseResp" class="d-flex d-none col-12">
+                            <div class="card p-3">
+                                <div class="d-flex align-items-center mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="red" class="bi bi-heart-pulse" viewBox="0 0 16 16">
+                                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053.918 3.995.78 5.323 1.508 7H.43c-2.128-5.697 4.165-8.83 7.394-5.857.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17c3.23-2.974 9.522.159 7.394 5.856h-1.078c.728-1.677.59-3.005.108-3.947C13.486.878 10.4.28 8.717 2.01L8 2.748ZM2.212 10h1.315C4.593 11.183 6.05 12.458 8 13.795c1.949-1.337 3.407-2.612 4.473-3.795h1.315c-1.265 1.566-3.14 3.25-5.788 5-2.648-1.75-4.523-3.434-5.788-5Z"></path>
+                                        <path d="M10.464 3.314a.5.5 0 0 0-.945.049L7.921 8.956 6.464 5.314a.5.5 0 0 0-.88-.091L3.732 8H.5a.5.5 0 0 0 0 1H4a.5.5 0 0 0 .416-.223l1.473-2.209 1.647 4.118a.5.5 0 0 0 .945-.049l1.598-5.593 1.457 3.642A.5.5 0 0 0 12 9h3.5a.5.5 0 0 0 0-1h-3.162l-1.874-4.686Z"></path>
+                                    </svg>
+                                    <h4 class="ps-2">AI Diagnosis</h4>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <div class="px-2 col-4 d-flex align-items-start gap-1">
+                                        <span class="fw-bold">Leaf:</span>
+                                        <span id="getLeaveADJ"></span>
+                                    </div>
+                                    <div class="px-2 col-4 d-flex align-items-start gap-1">
+                                        <span class="fw-bold">Stem:</span>
+                                        <span id="getStemADJ"></span>
+                                    </div>
+                                    <div class="px-2 col-4 d-flex align-items-start gap-1">
+                                        <span class="fw-bold">Fruit:</span>
+                                        <span id="getFruitADJ"></span>
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <p id="chatResponse"></p>
+                                </div>
+
+                                <div id="diagnoseNext" class="d-flex d-none px-4 justify-content-end">
+                                    <form method="post" th:action="@{/plants/comment/{id}(id=${userGardenPlant.id})}">
+                                        <input id="saveTitle" type="hidden" name="title" />
+                                        <input id="saveResponse" type="hidden" name="content" />
+
+                                        <button class="btn btn-success">Save Log</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
-
-                </form>
+                </div>
+<!--                </form>-->
             </div>
 
             <!--------------EDIT PLANT-------------->
@@ -276,19 +328,6 @@
             document.body.removeChild("loading");
         });
     });
-    const details = document.querySelector("#send");
-    details.addEventListener('click', () => {
-        console.log("butooooooonnnnn clickckckckckckeddd")
-        const loader = document.querySelector('.loading');
-        loader.classList.remove('loading-hidden');
-
-
-        nav.classList.remove('loading-hidden');
-
-        loader.addEventListener('transitioned', () => {
-            document.body.removeChild(loader);
-        });
-    });
 
 </script>
 <script>
@@ -370,6 +409,94 @@
         createTips();
     },6000)
     createTips();
+
+</script>
+
+<script th:inline="javascript">
+    function getRandomNotes() {
+        let note = [
+            "Watering the pixels...",
+            "Growing virtual leaves...",
+            "Entertaining the plants...",
+            "Tickling the roots of the internet...",
+            "Photosynthesizing data...",
+            "Planting digital seeds...",
+            "Pruning the code branches...",
+            "Waiting for the virtual rain...",
+            "Giving life to the website garden...",
+            "Watching the progress grow like a bamboo..."
+        ];
+        let randomIndex = Math.floor(Math.random() * note.length);
+        return note[randomIndex];
+    }
+
+    function createTips() {
+        document.querySelector("#guideNote").innerHTML = getRandomNotes();
+    }
+
+    setInterval(function (){
+        createTips();
+    },6000)
+
+
+    function getCareGuideForPlant(plant) {
+        fetch(`/plants/careguide/${plant}`)
+            .then(response => response.text())
+            .then(careGuide => {
+                if (careGuide === "") {
+                    document.getElementById("careGuide").innerHTML = 'No care guide found for this plant.';
+                } else {
+                    document.getElementById("careGuide").innerHTML = careGuide;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+    const plant = [[${plant.common_name}]];
+    const dbCareGuide = [[${careGuide}]];
+    if (dbCareGuide === "") {
+        document.getElementById("AIWait").classList.remove("d-none");
+        createTips();
+        getCareGuideForPlant(plant);
+    }
+
+    function getPlantDiagnosis(id, stems, leaves, fruits) {
+        fetch(`/plants/diagnose/${id}.${stems.value}.${leaves.value}.${fruits.value}`)
+            .then(response => response.text())
+            .then(chatResponse => {
+                if (chatResponse === "") {
+                    document.getElementById("chatResponse").innerHTML = 'No diagnosis found for this plant.';
+                } else {
+                    document.getElementById("diagnoseWait").classList.add("d-none");
+                    document.getElementById("getLeaveADJ").innerHTML = stems.options[stems.selectedIndex].innerHTML;
+                    document.getElementById("getStemADJ").innerHTML = leaves.options[leaves.selectedIndex].innerHTML;
+                    document.getElementById("getFruitADJ").innerHTML = fruits.options[fruits.selectedIndex].innerHTML;
+                    document.getElementById("diagnoseResp").classList.remove("d-none");
+                    document.getElementById("chatResponse").innerHTML = chatResponse;
+                    document.getElementById("saveTitle").value = [[${plant.common_name}]] + " Diagnosis";
+                    document.getElementById("saveResponse").value = chatResponse;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    let getDiagnosis =  document.getElementById("diagnoseAI");
+    getDiagnosis.addEventListener("click", function () {
+        console.log("clicked")
+        document.getElementById("send").classList.add("d-none");
+        getDiagnosis.classList.add("d-none");
+        document.getElementById("diagnoseForm").classList.add("d-none");
+        document.getElementById("diagnoseWait").classList.remove("d-none");
+        let plantID = [[${userGardenPlant.id}]];
+        let stems = document.getElementById("stemsDiagnose");
+        let leaves = document.getElementById("leavesDiagnose");
+        let fruits = document.getElementById("fruitsDiagnose");
+        getPlantDiagnosis(plantID, stems, leaves, fruits);
+        document.getElementById("diagnoseNext").classList.remove("d-none");
+    })
 
 </script>
 

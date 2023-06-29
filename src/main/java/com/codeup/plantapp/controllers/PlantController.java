@@ -10,11 +10,14 @@ import com.codeup.plantapp.util.PlantDTO;
 import com.codeup.plantapp.util.PlantResultDTO;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.method.support.ModelAndViewContainer;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.MalformedURLException;
@@ -86,11 +89,11 @@ public class PlantController {
 //    }
 
 
-    /*
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><FIND PLANT IN API ><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    */
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><FIND PLANT IN API ><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
 
     @GetMapping("/search/{query}")
     public String showSearchForm(@PathVariable("query") String query, Model model) {
@@ -130,13 +133,12 @@ public class PlantController {
         URL openfarmApiUrl = new URL("https://openfarm.cc/api/v1/crops/" + commonNameSlug);
 
         // Call ChatGPT to get the care guide
-        String chatKey = keys.getChatGPT();
-        String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
-        String careGuide = getChatGPTResponse(prompt, chatKey);
+//        String chatKey = keys.getChatGPT();
+//        String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
+//        String careGuide = getChatGPTResponse(prompt, chatKey);
+//        primedPlant.setCareGuide(careGuide);
 
-        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant, chatKey);
-
-        primedPlant.setCareGuide(careGuide);
+        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant);
 
         model.addAttribute("plant", primedPlant);
         model.addAttribute("selectedPlantCommonName", selectedPlantCommonName);
@@ -156,29 +158,31 @@ public class PlantController {
                             @RequestParam(name="plantImage") String image_url,
                             @RequestParam(name="CommonName") String common_name,
                             @RequestParam(name="sun_amount") sun_amount sun_amount,
+                            @RequestParam(name="careGuide") String careGuide,
                             @RequestParam(name="water_interval") long water_interval,
                             @RequestParam(name="is_outside") boolean is_outside
     ) {
 
-        String name = plant_name.isEmpty() ? common_name : plant_name;
+    String name = plant_name.isEmpty() ? common_name : plant_name;
 
-        Plant userPlant = new Plant(id, openfarm_id, name, image_url);
-        plantsDao.save(userPlant);
+    Plant userPlant = new Plant(id, openfarm_id, name, image_url);
+    plantsDao.save(userPlant);
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User userFound = usersDao.findUserById(user.getId());
+    User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    User userFound = usersDao.findUserById(user.getId());
 
-        LocalDate date = LocalDate.now();
+    LocalDate date = LocalDate.now();
 
-        GardenPlant newGardenPlant = new GardenPlant(userFound, userPlant, sun_amount, date, water_interval, is_outside);
+    GardenPlant newGardenPlant = new GardenPlant(userFound, userPlant, sun_amount, date, water_interval, is_outside);
+    newGardenPlant.setCareGuide(careGuide);
 
-        gardenPlantsDao.save(newGardenPlant);
-        return "redirect:/users/profile";
-    }
+    gardenPlantsDao.save(newGardenPlant);
+    return "redirect:/users/profile";
+}
 
-    /*
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    */
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><USER DELETE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
@@ -195,11 +199,11 @@ public class PlantController {
         return "redirect:/users/profile";
     }
 
-    /*
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    */
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><USER UPDATE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+*/
     @PostMapping("/plantEdit/{id}")
     public String updateUserPlant(
             @PathVariable("id") long id,
@@ -220,10 +224,10 @@ public class PlantController {
         return "redirect:/users/profile";
     }
 
-    /*
-    |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-    |><<>><<>><<>><<>><<>><<>><<>><<USER QUICK WATER>><<>><<>><<>><<>><<>><<>><<>><|
-    */
+/*
+|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<USER QUICK WATER>><<>><<>><<>><<>><<>><<>><<>><|
+*/
     @GetMapping("/quickWater/{id}")
     public String quickWater(@PathVariable("id") long id) {
         GardenPlant updateGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
@@ -237,7 +241,7 @@ public class PlantController {
 */
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><<ADD A PLANT LOG >><<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>><<>><<>><<>><<User Garden Plant><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
 
@@ -255,18 +259,20 @@ public class PlantController {
 
         URL openfarmApiUrl = new URL("https://openfarm.cc/api/v1/crops/" + commonNameSlug);
 
-        String chatKey = keys.getChatGPT();
-        String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
-        String careGuide = getChatGPTResponse(prompt, chatKey);
+//        OLD CHAT GPT CODE
+//        String chatKey = keys.getChatGPT();
+//        String prompt = "Give me a care guide for " + selectedPlantCommonName + "!";
+//        String careGuide = getChatGPTResponse(prompt, chatKey);
+//        primedPlant.setCareGuide(careGuide);
+///////////////////////////////////////////////////////////////////////////////////////
 
-        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant, chatKey);
-
-        primedPlant.setCareGuide(careGuide);
+        PlantDTO primedPlant = getOpenFarmPrimer(openfarmApiUrl, plant);
 
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
         Plant userPlant = userGardenPlant.getPlant();
         List<PlantLog> usersPlantLogs = plantLogsDao.findPlantLogByGardenPlant(userGardenPlant);
 
+        model.addAttribute("careGuide", gardenPlantsDao.findGardenPlantsById(id).getCareGuide());
         model.addAttribute("plant", primedPlant);
         model.addAttribute("selectedPlantCommonName", plant.getCommon_name());
         model.addAttribute("userGardenPlant", userGardenPlant);
@@ -277,7 +283,7 @@ public class PlantController {
     }
 
     @GetMapping("/diagnose/{id}.{stems}.{leaves}.{fruits}")
-    public String diagnosePlant(Model model,
+    public ResponseEntity<String> diagnosePlant(
                                 @PathVariable("id") long id,
                                 @PathVariable("stems") String stems,
                                 @PathVariable("leaves") String leaves,
@@ -296,22 +302,21 @@ public class PlantController {
 
         String chatResponse = getChatGPTDiagnosis(plantMedForm, chatKey);
 
-        model.addAttribute("plantID", id);
-        model.addAttribute("form", plantMedForm);
-        model.addAttribute("chatResponse", chatResponse);
+//        model.addAttribute("plantID", id);
+//        model.addAttribute("form", plantMedForm);
+//        model.addAttribute("chatResponse", chatResponse);
 
-
-        return "diagnosePlant";
+        return ResponseEntity.ok(chatResponse);
     }
 
-    @PostMapping("/diagnose/{id}")
-    public String diagnosePlant(@PathVariable("id") long id,
-                                @RequestParam(name="stems") String stems,
-                                @RequestParam(name="leaves") String leaves,
-                                @RequestParam(name="fruits") String fruits) {
-
-        return "redirect:/plants/diagnose/"+ id +"."+ stems +"."+ leaves +"."+ fruits;
-    }
+//    @PostMapping("/diagnose/{id}")
+//    public String diagnosePlant(@PathVariable("id") long id,
+//                                @RequestParam(name="stems") String stems,
+//                                @RequestParam(name="leaves") String leaves,
+//                                @RequestParam(name="fruits") String fruits) {
+//
+//        return "redirect:/plants/diagnose/"+ id +"."+ stems +"."+ leaves +"."+ fruits;
+//    }
 
     @PostMapping("/comment/{id}")
     public String savePlantLog(
@@ -341,26 +346,17 @@ public class PlantController {
 
         return "redirect:/plants/garden/{plant}";
     }
+
+    @GetMapping("/careguide/{plant}")
+    public ResponseEntity<String> careGuideAI(Model model,
+                                              @PathVariable String plant) throws Exception {
+
+        String chatKey = keys.getChatGPT();
+        String prompt = "Give me a care guide for " + plant + "!";
+        String careGuide = getChatGPTResponse(prompt, chatKey);
+
+        model.addAttribute("chatGPTGuide", careGuide);
+
+        return ResponseEntity.ok(careGuide);
+    }
 }
-
-
-//1. Plants can communicate with each other through chemical signals in the air and soil.
-//2. Some plants, such as the Venus flytrap, can move and capture prey.
-//3. The world's largest flower, the Rafflesia arnoldii, can grow up to three feet in diameter.
-//4. Bamboo is one of the fastest-growing plants on Earth, capable of growing several feet in just one day.
-//5. The oldest living organism on Earth is a bristlecone pine tree in California, estimated to be over 5,000 years old.
-//6. The Titan arum, also known as the "corpse flower," produces the largest unbranched inflorescence in the world.
-//7. Plants release more oxygen during daylight than they consume, making them crucial for maintaining the Earth's oxygen balance.
-//8. The world's tallest tree, the coast redwood, can reach heights of over 360 feet (110 meters).
-//9. The largest living organism on Earth is a grove of quaking aspen trees in Utah, all connected through a single root system.
-//10. Some plants, like the sundew and pitcher plant, have evolved to capture and digest insects as a source of nutrients.
-//11. Plants can recognize their relatives and adjust their growth accordingly to compete less with kin.
-//12. The stinging nettle plant can cause a painful rash when touched due to its tiny stinging hairs.
-//13. The bark of the white willow tree contains a natural compound called salicin, which was used as the basis for aspirin.
-//14. Plants can "remember" stressful events and adjust their responses to future stressors.
-//15. The Joshua tree, native to the southwestern United States, is not a tree but a type of yucca plant.
-//16. The lotus plant has the ability to regulate its temperature, keeping its flowers several degrees warmer than the surrounding air to attract pollinators.
-//17. The leaves of the sensitive plant (Mimosa pudica) fold inward when touched or shaken, as a defense mechanism against herbivores.
-//18. The scent of lavender can help promote relaxation and improve sleep quality.
-//19. Some plants, like the Baobab tree, store large amounts of water in their trunks to survive in arid environments.
-//20. The oldest known seed to successfully germinate was a 2,000-year-old Judean date palm seed discovered in Israel.
