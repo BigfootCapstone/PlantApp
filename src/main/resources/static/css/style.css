@@ -491,6 +491,10 @@ img.codeup{
 .custom-form .form-group textarea.form-control {
     height: auto;
 }
+input.form-control, textarea.form-control{
+    background-color: rgb(244,233,219);
+
+}
 
 .form-label{
     color: #FFFFFF;
@@ -733,6 +737,9 @@ h6.username{
 .garden-type{
     color: rgb(61,132,132);
     font-family: Lato, sans-serif;
+}
+.card-img-top{
+    height: 250px;
 }
 .card{
     box-shadow: unset;
