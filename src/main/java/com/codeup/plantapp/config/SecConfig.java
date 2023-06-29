@@ -64,6 +64,7 @@ public class SecConfig {
                         "/plants/plantEdit/{id}",
                         "/plants/quickWater/{id}",
                         "/plants/garden/{id}",
+                        "/plants/careguide/{plant}",
                         "/plants/diagnose/{id}",
                         "/plants/diagnose/{id}.{stems}.{leaves}.{fruits}",
                         "/plants/comment/{id}",

@@ -139,9 +139,10 @@
                                     <th:block th:if="${! #lists.isEmpty(userPlants)}">
                                         <div class="col-sm-4 mb-3 mb-sm-0" th:each="plant : ${userPlants}" th:if="${plant.is_outside}">
                                             <div class="card" style="width: 250px;">
-                                            <img src="/css/images/varigatedmonstera.jpeg" class="card-img-top" alt="...">
+                                            <img th:src="${plant.plant.image_url}" class="card-img-top" alt="User Plant">
                                             <div class="card-body">
                                                 <a id="plant" class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
+
                                                     <span th:text="${plant.plant.name}"></span>
                                                 </a>
                                                 <p>
@@ -183,7 +184,7 @@
                                     <th:block th:if="${! #lists.isEmpty(userPlants)}">
                                         <div class="col-sm-4 mb-3 mb-sm-0" th:each="plant : ${userPlants}" th:if="${!plant.is_outside}">
                                             <div class="card" style="width: 250px;">
-                                            <img src="/css/images/varigatedmonstera.jpeg" class="card-img-top" alt="...">
+                                            <img th:src="${plant.plant.image_url}" class="card-img-top" alt="User Plant">
                                             <div class="card-body">
                                                 <a id="plant" class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
                                                     <span th:text="${plant.plant.name}"></span>
@@ -217,8 +218,7 @@
                                         </div>
                                     </th:block>
                                 </div>
-
-                                <!--End of Garden Cards-->
+                        <!--End of Garden Cards-->
                         <!--IF NO PLANT SHOW SEARCH-->
                                 <div th:unless="${! #lists.isEmpty(userPlants)}">
                                     <form class="d-flex custom-form profile-plant-add" action="#" th:action="@{/plants/search}" method="post">
