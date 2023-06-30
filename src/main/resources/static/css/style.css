@@ -259,7 +259,7 @@ button.nav-buttons{
     font-family: "Karla", sans-serif;
 }
 
-.navbar-custom .navbar-nav .nav-item .nav-link:hover, .navbar-custom .navbar-nav .nav-item .nav-link.active, .navbar-custom .navbar-nav .nav-item .nav-link:active, #home-tab.nav-link:hover, #garden-tab.nav-link:hover, #journal-tab.nav-link:hover, #weather-tab.nav-link:hover, #friends-tab.nav-link:hover{
+.navbar-custom .navbar-nav .nav-item .nav-link:hover, .navbar-custom .navbar-nav .nav-item .nav-link.active, .navbar-custom .navbar-nav .nav-item .nav-link:active, #home-tab.nav-link:hover, #garden-tab.nav-link:hover, #journal-tab.nav-link:hover, #weather-tab.nav-link:hover, #friends-tab.nav-link:hover, .personal-plant-name:hover{
     color: #F28153;
 }
 
@@ -491,6 +491,10 @@ img.codeup{
 .custom-form .form-group textarea.form-control {
     height: auto;
 }
+input.form-control, textarea.form-control{
+    background-color: rgb(244,233,219);
+
+}
 
 .form-label{
     color: #FFFFFF;
@@ -681,8 +685,11 @@ div .delete-profile, .pe-7s-delete-user{
     border: 4px solid rgb(233 162 48);
 }
 
-.profile-head h3, .profile-head h6, #weather h3{
+.profile-head h3, .profile-head h6, #weather h3, h3.friend-req-title, h3.garden-type{
     color: rgb(61,132,132);
+}
+#weather h3, h3.friend-req-title, h3.garden-type{
+    font-family: Lato, sans-serif;
 }
 h6.username{
     color: rgb(233 162 48);
@@ -706,7 +713,7 @@ h6.username{
     margin-bottom:5%;
 }
 .nav-tabs .nav-link.active {
-    color: rgb(61,132,132);
+    color: #F28153;
     background-color: #fff;
 }
 .profile-head .nav-tabs .nav-link{
@@ -730,9 +737,12 @@ h6.username{
     font-weight: 600;
     color: rgb(154,167,118);
 }
-.garden-type{
-    color: rgb(61,132,132);
-    font-family: Lato, sans-serif;
+
+/***************************
+        Garden Tab
+***************************/
+.card-img-top{
+    height: 250px;
 }
 .card{
     box-shadow: unset;
@@ -785,6 +795,9 @@ label.label-plant-add{
     width: 150px;
     margin: 0px;
 }
+/***************************
+        Weather Tab
+***************************/
 .weather-title{
     margin-left: 80px;
 }
@@ -817,8 +830,21 @@ div.weather-holder p {
 div.row.warning-body{
     margin-left: 0px;
 }
-
-
+/***************************
+        Friends Tab
+***************************/
+img.friend-img{
+    height: 200px;
+    width: 200px;
+    border: 4px solid rgb(233 162 48);
+}
+.friend-req-names{
+    margin-right: 10px;
+}
+.friend-username{
+    font-weight: bold;
+    color: #F28153;
+}
 
 
 
