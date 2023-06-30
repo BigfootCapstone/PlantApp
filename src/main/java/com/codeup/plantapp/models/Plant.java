@@ -19,6 +19,9 @@ public class Plant {
     @Column(nullable = true, length = 100)
     private String name;
 
+    @Column(nullable = false)
+    private String image_url;
+
     @OneToOne(mappedBy = "plant")
     private GardenPlant gardenPlant;
 
@@ -50,6 +53,13 @@ public class Plant {
         this.name = name;
     }
 
+    public String getImage_url() {
+        return image_url;
+    }
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
+
     public GardenPlant getGardenPlant() {
         return gardenPlant;
     }
@@ -59,7 +69,8 @@ public class Plant {
 
     public Plant () {}
 
-    public Plant(String trefle_id, String openfarm_id, String name) {
+    public Plant(String trefle_id, String openfarm_id, String name, String image_url) {
+        this.image_url = image_url;
         this.trefle_id = trefle_id;
         this.openfarm_id = openfarm_id;
         this.name = name;

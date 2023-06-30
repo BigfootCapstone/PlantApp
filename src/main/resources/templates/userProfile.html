@@ -9,8 +9,17 @@
 
 
 <body>
-<div id="loader" class="loading"> </div>
-
+<div id="loader" class="loading">
+    <div class="load-hold loading-hidden">
+        <div class="load-wrap ">
+            <P class="long-load">Sorry for the wait Ai is thinking...</P>
+            <p class="long-load">Here are some fun tips and tricks while you wait: </p>
+        </div>
+        <div class="tips">
+            <div id="container"></div>
+        </div>
+    </div>
+</div>
 <!--Navbar Start-->
 <header th:replace="partials/navbar :: navbar"></header>
 <!-- Navbar End -->
@@ -76,7 +85,7 @@
             </div>
             <!--End Profile Header Holder-->
             <!--Start Tab Panels-->
-            <div class="row">
+            <div class="row mb-3">
                 <!--EMPTY DIV FOR MAINTAINING FORMAT OF PAGE-->
                 <div class="col-md-4">
 <!----------------------EMPTINESS IS ON PURPOSE---------------------->
@@ -124,36 +133,94 @@
                         <div class="tab-pane fade" id="garden" role="tabpanel" aria-labelledby="garden-tab">
                             <div class="d-flex row grow g-0 mb-3">
                                 <!--Start of Garden Cards-->
-                                <div class="d-flex row grow g-0" th:if="${not #lists.isEmpty(userPlants)}">
-                                    <div class="col-sm-6 mb-3 mb-sm-0" th:each="plant : ${userPlants}">
-                                        <div class="card" style="width: 200px;">
-                                            <img src="/css/images/varigatedmonstera.jpeg" class="card-img-top" alt="...">
+                                <!-- Section for outdoor plants -->
+                                <div class="d-flex row grow g-0">
+                                    <h2 class="garden-type">Outdoor Plants</h2>
+                                    <th:block th:if="${! #lists.isEmpty(userPlants)}">
+                                        <div class="col-sm-4 mb-3 mb-sm-0" th:each="plant : ${userPlants}" th:if="${plant.is_outside}">
+                                            <div class="card" style="width: 250px;">
+                                            <img th:src="${plant.plant.image_url}" class="card-img-top" alt="User Plant">
                                             <div class="card-body">
-                                                <a class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
+                                                <a id="plant" class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
+
                                                     <span th:text="${plant.plant.name}"></span>
                                                 </a>
                                                 <p>
                                                     <span th:text="${#strings.capitalizeWords(#strings.replace(plant.sun_amount, '_', ' '))}"></span>
                                                 </p>
-                                                <p><span th:text="${plant.water_interval}"></span> Day(s)</p>
-                                                <p><span th:text="${plant.getSun_tip}"></span></p>
+                                                <p>Water every: <span th:text="${plant.water_interval}"></span> Day(s)</p>
                                                 <p><span th:text="${plant.getWater_tip}"></span></p>
+                                                <img class="weather-icon" th:src="${weather.getIcon()}"></img>
+
+                                                <p class="card-plant-warning"><span th:text="${plant.getSun_tip}"></span></p>
                                                 <!-- button for delete plant path -->
-                                                <div class="row">
-                                                    <a th:href="@{/plants/quickWater/{id}(id=${plant.id})}">Watered</a>
-                                                </div>
-                                                <div class="row">
-                                                    <a style="color: red;" th:href="@{/plants/{id}/delete(id=${plant.id})}">
-                                                        Delete
-                                                    </a>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="row water-delete">
+                                                        <button class="watered" style="color: white;" th:href="@{/plants/quickWater/{id}(id=${plant.id})}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-droplet" viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0c.109.363.234.708.371 1.038.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8zm.413 1.021A31.25 31.25 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10a5 5 0 0 0 10 0c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"/>
+                                                                <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z"/>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                    <div class="row water-delete">
+                                                        <button class="delete-plant" style="color: white;" th:href="@{/plants/{id}/delete(id=${plant.id})}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
                                                 </div>
                                             </div>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </th:block>
+                                </div>
+
+                                <!-- Section for indoor plants -->
+                                <div class="d-flex row grow g-0">
+                                    <h2 class="garden-type">Indoor Plants</h2>
+                                    <th:block th:if="${! #lists.isEmpty(userPlants)}">
+                                        <div class="col-sm-4 mb-3 mb-sm-0" th:each="plant : ${userPlants}" th:if="${!plant.is_outside}">
+                                            <div class="card" style="width: 250px;">
+                                            <img th:src="${plant.plant.image_url}" class="card-img-top" alt="User Plant">
+                                            <div class="card-body">
+                                                <a id="plant" class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
+                                                    <span th:text="${plant.plant.name}"></span>
+                                                </a>
+                                                <p>
+                                                    <span th:text="${#strings.capitalizeWords(#strings.replace(plant.sun_amount, '_', ' '))}"></span>
+                                                </p>
+                                                <p>Water every: <span th:text="${plant.water_interval}"></span> Day(s)</p>
+                                                <p><span th:text="${plant.getWater_tip}"></span></p>
+                                                <!-- button for delete plant path -->
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="row">
+                                                        <button class="watered" style="color: white;" th:href="@{/plants/quickWater/{id}(id=${plant.id})}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-droplet" viewBox="0 0 16 16">
+                                                                <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0c.109.363.234.708.371 1.038.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8zm.413 1.021A31.25 31.25 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10a5 5 0 0 0 10 0c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"/>
+                                                                <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z"/>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                    <div class="row">
+                                                        <button class="delete-plant" style="color: white;" th:href="@{/plants/{id}/delete(id=${plant.id})}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </th:block>
                                 </div>
                         <!--End of Garden Cards-->
                         <!--IF NO PLANT SHOW SEARCH-->
-                                <div th:unless="${not #lists.isEmpty(userPlants)}">
+                                <div th:unless="${! #lists.isEmpty(userPlants)}">
                                     <form class="d-flex custom-form profile-plant-add" action="#" th:action="@{/plants/search}" method="post">
                                         <label class="d-flex label-plant-add justify-content-center align-self-center">Add A Plant!</label>
                                         <input  class="form-control" type="text" name="query" placeholder="Search for your plant..." required autocomplete="on">
@@ -167,10 +234,10 @@
                         <!--Start of Journal Tab Panel-->
                         <div class="tab-pane fade" id="journal" role="tabpanel" aria-labelledby="journal-tab">
                             <!--recentPlantLogs-->
-                            <div th:if="${not #lists.isEmpty(recentPlantLogs)}">
+                            <div th:if="${! #lists.isEmpty(recentPlantLogs)}">
                                 <div class="row justify-content-between">
                                     <div th:each="plant : ${userPlants}">
-                                        <div th:if="${not #lists.isEmpty(plant.getPlantLogs())}">
+                                        <div th:if="${! #lists.isEmpty(plant.getPlantLogs())}">
                                             <div class="row">
                                                 <div class="col">
                                                     <a th:href="@{/plants/garden/{id}(id=${plant.id})}">
@@ -185,21 +252,21 @@
                                             <div class="col">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
+                                                        <p th:if="${! #lists.isEmpty(plant.getPlantLogs())}"
                                                            th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at.getMonth()}">
                                                         </p>
-                                                        <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
+                                                        <p th:if="${! #lists.isEmpty(plant.getPlantLogs())}"
                                                            th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at.getDayOfMonth()}">
                                                         </p>
                                                     </div>
                                                     <div class="col">
-                                                        <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
+                                                        <p th:if="${! #lists.isEmpty(plant.getPlantLogs())}"
                                                            th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).title}">
                                                         </p>
                                                     </div>
                                                 </div>
                                                 <div>
-                                                    <p th:if="${not #lists.isEmpty(plant.getPlantLogs())}"
+                                                    <p th:if="${! #lists.isEmpty(plant.getPlantLogs())}"
                                                        th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).content}">
                                                     </p>
                                                 </div>
@@ -208,7 +275,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div th:unless="${not #lists.isEmpty(recentPlantLogs)}">
+                            <div th:unless="${! #lists.isEmpty(recentPlantLogs)}">
                                 <p>no logs</p>
                             </div>
                         </div>
@@ -316,21 +383,6 @@
                 </div>
                 </div>
             <!--END Tab Panels-->
-            <!--Start Weather Warning-->
-                <div class="row" th:if="${not #lists.isEmpty(outdoorPlants)}">
-                    <h3 class="subtitle">Outdoor Plant Warning</h3>
-                    <div class="row justify-content-between">
-                        <div class="column" th:each="plant : ${outdoorPlants}">
-                            <p> Plant Name: <span th:text="${plant.plant.name}"></span></p>
-                            <p> Req'd Sun Amount: <span  th:text="${plant.sun_amount}"></span></p>
-                            <p> Water Every <span th:text="${plant.water_interval}"></span> Day(s)</p>
-                            <p> BotaniBuddy SunTip: <span  th:text="${plant.getSun_tip}"></span></p>
-                            <p> BotaniBuddy WaterTip: <span  th:text="${plant.getWater_tip}"></span></p>
-                        </div>
-                    </div>
-                </div>
-            <!--End Weather Warning-->
-                <div th:unless="${not #lists.isEmpty(outdoorPlants)}"></div>
         </form>
     </div>
 </div>
@@ -339,14 +391,116 @@
 <!-- footer start -->
 <footer th:replace="partials/footer :: footer"></footer>
 <script>
-
+   ;
     window.addEventListener('load',()=>{
+
         const loader = document.querySelector('.loading');
+
         loader.classList.add('loading-hidden');
         loader.addEventListener('transitioned', ()=>{
             document.body.removeChild("loading");
         });
     });
+
+    const details = document.querySelector("#plant");
+    details.addEventListener('click', () => {
+        const short = document.querySelector('.load-hold');
+        short.classList.remove('loading-hidden');
+
+        const loader = document.querySelector('.loading');
+        loader.classList.remove('loading-hidden');
+
+
+        nav.classList.remove('loading-hidden');
+
+        loader.addEventListener('transitioned', () => {
+            document.body.removeChild(loader);
+        });
+    });
+
+</script>
+<script>
+
+    function getRandomTipsId() {
+        // Add YouTube video IDs here
+        let tips = [
+            "Choose the right plants for your garden: Consider the local climate, soil type, and available sunlight when selecting plants. This will increase their chances of thriving.",
+            "Proper watering is essential: Water your plants deeply and less frequently to encourage healthy root growth. Watering in the morning is generally best, as it allows foliage to dry before evening and reduces the risk of disease.M",
+            "Mulch for moisture retention: Apply a layer of organic mulch around your plants to conserve moisture, suppress weed growth, and maintain more consistent soil temperatures.",
+            "Rotate crops: To prevent soil depletion and pest build-up, practice crop rotation by changing the location of plant families each year.",
+            "Prune and trim regularly: Pruning and trimming help promote healthy growth and maintain the shape of your plants. Remove dead or damaged branches and encourage airflow by thinning dense foliage.",
+            "Use organic pest control: Opt for natural and organic methods to control pests in your garden. Introduce beneficial insects, such as ladybugs and praying mantises, to combat harmful pests.",
+            "Provide proper support: Stake tall or climbing plants to provide support and prevent them from bending or breaking due to heavy winds or their own weight.",
+            "Feed your plants: Fertilize your garden with organic matter or compost to enrich the soil and provide essential nutrients for plant growth. Follow recommended application rates to avoid over-fertilization.",
+            "Consider companion planting: Some plants have natural pest-repellent properties or complementary growth habits. Research companion planting to maximize the health and productivity of your garden.",
+            "Maintain a tidy garden: Regularly remove weeds, fallen leaves, and debris from your garden. This reduces the risk of pests and diseases and keeps your garden looking neat and well-maintained.",
+            "Flowers can communicate through colors and scents to attract pollinators.",
+            "The world's largest flower is the Rafflesia arnoldii, which can grow up to three feet in diameter.",
+            "Sunflowers can follow the movement of the sun throughout the day.",
+            "Plants release oxygen during the day and carbon dioxide at night.",
+            "Dandelion seeds can travel up to five miles in the wind.",
+            "The world's tallest tree, the coast redwood, can reach heights of over 350 feet.",
+            "The practice of growing plants without soil is called hydroponics.",
+            "Venus flytraps are carnivorous plants that trap and digest insects.",
+            "A mature tree can absorb up to 48 pounds of carbon dioxide per year.",
+            "The largest living organism on Earth is a honey fungus measuring over 2 miles across.",
+            "The world's oldest living tree is estimated to be over 5,000 years old.",
+            "The largest pumpkin ever recorded weighed over 2,600 pounds.",
+            "Bamboo is the fastest-growing plant on the planet, capable of growing up to 35 inches in a single day.",
+            "The world's smallest flowering plant is the watermeal, which measures about 1 millimeter in diameter.",
+            "The world's largest herb is the banana plant.",
+            "The corpse flower emits a strong odor of rotting flesh to attract pollinating insects.",
+            "Tomatoes are technically fruits, not vegetables.",
+            "The world's most expensive spice, saffron, comes from the crocus flower.",
+            "The world's largest living wall is located in Madrid, Spain, covering over 3,800 square feet.",
+            "The bluebonnet is the state flower of Texas.",
+            "The scent of freshly cut grass is actually a chemical distress signal released by the damaged blades.",
+            "The world's largest flower garden, Keukenhof in the Netherlands, covers an area of 79 acres.",
+            "The cactus family includes more than 2,000 different species.",
+            "Flowers can be used to make natural dyes for fabric and crafts.",
+            "The practice of growing and arranging miniature trees is called bonsai.",
+            "Test your soil before planting to determine its pH level and nutrient content.",
+            "Use companion planting to maximize space and deter pests.",
+            "Provide a consistent watering schedule to prevent stress on plants.",
+            "Apply mulch around plants to conserve moisture and suppress weeds.",
+            "Incorporate organic matter, such as compost, into the soil to improve its structure and fertility.",
+            "Deadhead flowers regularly to encourage new blooms.",
+            "Use a soaker hose or drip irrigation system to water deeply at the root level.",
+            "Start seeds indoors before the growing season to get a head start.",
+            "Practice crop rotation to prevent disease and nutrient depletion in the soil.",
+            "Attract pollinators by planting a variety of native flowers.",
+            "Use natural pest control methods, such as insecticidal soaps and neem oil.",
+            "Prune trees and shrubs during their dormant season to promote healthy growth.",
+            "Install a rain barrel to collect rainwater for watering plants.",
+            "Provide support for tall or vining plants with trellises or stakes.",
+            "Remove weeds regularly to prevent them from competing with your plants.",
+            "Choose disease-resistant plant varieties to reduce the risk of infections.",
+            "Incorporate compost tea into your watering routine for added nutrients.",
+            "Avoid over-fertilizing plants, as it can lead to excessive foliage growth with fewer blooms.",
+            "Create a habitat for beneficial insects, such as ladybugs and lacewings.",
+            "Use floating row covers to protect plants from pests and harsh weather conditions.",
+            "Regularly inspect plants for signs of pests or diseases to catch problems early.",
+            "Allow fallen leaves to decompose naturally, providing nutrients to the soil.",
+            "Provide adequate spacing between plants to allow for proper air circulation.",
+            "Practice responsible watering by adjusting irrigation to match weather conditions.",
+            "Enjoy the process and take time to relax and appreciate the beauty of your garden."
+        ];
+
+
+        let randomIndex = Math.floor(Math.random() * tips.length);
+        return tips[randomIndex];
+    }
+    function createTips() {
+
+        let tipsId = getRandomTipsId();
+        let container = document.querySelector("#container")
+        container.innerHTML = tipsId;
+    }
+    setInterval(function (){
+        createTips();
+    },6000)
+    createTips();
+
 </script>
 <!-- footer end -->
 </body>

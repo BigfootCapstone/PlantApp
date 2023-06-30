@@ -40,28 +40,6 @@ public class FriendsController {
 
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><SEE UNASSIGNED FRIENDS <<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-*/
-    @GetMapping("/")
-    public String allUsers(Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-//  ALL BUT CURRENT USER
-        List<User> botaniUsers  = usersDao.findAllByIdIsNot(user.getId());
-
-//  ALL BUT CURRENT FRIEND ASSOCIATIONS (TRUE OR FALSE)
-        List<Friend> friendsAssoc = friendDao.findAllByUserID2(user);
-
-        model.addAttribute("users", showUnknownFriends(botaniUsers, friendsAssoc));
-        return "friends";
-    }
-
-/*
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-*/
-/*
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>>< USER ADD FRIEND >><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
