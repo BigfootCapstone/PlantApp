@@ -113,16 +113,19 @@ public class PostController {
 
     @PostMapping("/{id}/edit")
     public String submitEditPost(HttpSession session,
-                                 @ModelAttribute Post thingpost,
+                                 @PathVariable(name = "id") long id,
                                  @RequestParam(name = "title") String title,
                                  @RequestParam(name = "body") String body) {
-        User user = (User) session.getAttribute("user");
-        User userid = usersDao.findUserById(thingpost.getId());
-        thingpost.setUser(user);
-        thingpost.setTitle(title);
-        thingpost.setBody(body);
-        thingpost.setId(userid.getId());
-        postsDao.save(thingpost);
+//        User user = (User) session.getAttribute("user");
+
+//        thingpost.setUser(user);
+        Post post = postsDao.findById(id);
+
+
+        post.setTitle(title);
+        post.setBody(body);
+        postsDao.save(post);
+
         return "redirect:/posts/all";
     }
     @GetMapping("/users/login")
