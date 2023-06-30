@@ -18,9 +18,11 @@
                     <textarea name="body" th:field="*{body}" id="body" rows="10" cols="35"></textarea>
 
                     <input class="btn btn-primary post-btn" type="submit" value="Save">
+
                 </form>
-
-
+<!--                <form id="post-delete-btn"  class=" column edit-form" th:action="@{/posts/{id}/delete(id=${thingpost.id})}" >-->
+<!--                    <input type="submit"   class="btn btn-primary post-btn post-edit-btn" value="Delete">-->
+<!--                </form>-->
             </div>
         </div>
     </div>

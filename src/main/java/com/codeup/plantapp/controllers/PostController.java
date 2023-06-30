@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/posts")
@@ -115,9 +117,11 @@ public class PostController {
                                  @RequestParam(name = "title") String title,
                                  @RequestParam(name = "body") String body) {
         User user = (User) session.getAttribute("user");
+        User userid = usersDao.findUserById(thingpost.getId());
         thingpost.setUser(user);
         thingpost.setTitle(title);
         thingpost.setBody(body);
+        thingpost.setId(userid.getId());
         postsDao.save(thingpost);
         return "redirect:/posts/all";
     }
@@ -125,5 +129,23 @@ public class PostController {
     public String viewLoginPage() {
         return "login";
     }
+
+
+    @GetMapping("/{id}/delete")
+    public String deletePost(@PathVariable(name = "id") long id, Model model) {
+//        User user = usersDao.findUserById(id);
+        Post post = postsDao.findById(id);
+        model.addAttribute("post", post);
+        postsDao.deleteById(id);
+        return "redirect:/posts/all";
+    }
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable(name = "id") long id, Model model) {
+        Post post = postsDao.findById(id);
+        model.addAttribute("post", post);
+        postsDao.deleteAllById(Collections.singleton(id));
+        return "redirect:/posts/all";
+    }
+
 
 }
