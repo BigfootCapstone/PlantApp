@@ -186,7 +186,7 @@
                                             <div class="card" style="width: 250px;">
                                             <img th:src="${plant.plant.image_url}" class="card-img-top" alt="User Plant">
                                             <div class="card-body">
-                                                <a id="plant" class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
+                                                <a id="plant2" class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
                                                     <span th:text="${plant.plant.name}"></span>
                                                 </a>
                                                 <p>
@@ -417,6 +417,21 @@
             document.body.removeChild(loader);
         });
     });
+   const details2 = document.querySelector("#plant2");
+   details2.addEventListener('click', () => {
+       const short = document.querySelector('.load-hold');
+       short.classList.remove('loading-hidden');
+
+       const loader = document.querySelector('.loading');
+       loader.classList.remove('loading-hidden');
+
+
+       nav.classList.remove('loading-hidden');
+
+       loader.addEventListener('transitioned', () => {
+           document.body.removeChild(loader);
+       });
+   });
 
 </script>
 <script>
