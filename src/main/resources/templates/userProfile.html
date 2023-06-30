@@ -135,7 +135,7 @@
                                 <!--Start of Garden Cards-->
                                 <!-- Section for outdoor plants -->
                                 <div class="d-flex row grow g-0">
-                                    <h2 class="garden-type">Outdoor Plants</h2>
+                                    <h3 class="garden-type">Outdoor Plants</h3>
                                     <th:block th:if="${! #lists.isEmpty(userPlants)}">
                                         <div class="col-sm-4 mb-3 mb-sm-0" th:each="plant : ${userPlants}" th:if="${plant.is_outside}">
                                             <div class="card" style="width: 250px;">
@@ -184,7 +184,7 @@
 
                                 <!-- Section for indoor plants -->
                                 <div class="d-flex row grow g-0">
-                                    <h2 class="garden-type">Indoor Plants</h2>
+                                    <h3 class="garden-type">Indoor Plants</h3>
                                     <th:block th:if="${! #lists.isEmpty(userPlants)}">
                                         <div class="col-sm-4 mb-3 mb-sm-0" th:each="plant : ${userPlants}" th:if="${!plant.is_outside}">
                                             <div class="card" style="width: 250px;">
@@ -336,24 +336,22 @@
                         <!--Start of Friend Tab Panel-->
                         <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
                             <!--Friends & Request Holder-->
+                            <!--Friend Requests-->
+                            <div class="d-flex mb-3">
+                                <h3 class="friend-req-title">Friend Requests</h3>
+                            </div>
                             <div class="friends-holder">
-                                <!--Friend Requests-->
-                                <div class="friend-requests">
-                                    <h3 class="subtitle">Friend Requests</h3>
+                                <div class="d-flex friend-requests">
                                     <div class="col">
                                         <div class="row" style="margin-bottom: 15px;" th:each="request : ${friendsRequest}">
-                                            <div class="col-2">
-                                                <img class="friend-img img-circle profile-avatar" style="width: unset;"
-                                                     th:src="${request.profile_pic}" height="64px" width="64px" alt="User avatar">
+                                            <div class="col-5 ms-4">
+                                                <img class="friend-img img-circle profile-avatar" th:src="${request.profile_pic}" alt="User avatar">
                                             </div>
-                                            <div class="col-10">
-                                                <a style="font-weight: bold;"
-                                                   th:href="@{/friends/view/{id}(id=${request.id})}"
-                                                   th:text="${request.username}"></a>
-                                                <p style="color: black;"
-                                                   th:text="${request.first_name + ' ' + request.last_name}"></p>
+                                            <div class="col-4 friend-req-names">
+                                                <a class="friend-username" th:href="@{/friends/view/{id}(id=${request.id})}" th:text="${request.username}"></a>
+                                                <p class="friend-name" th:text="${request.first_name + ' ' + request.last_name}"></p>
                                             </div>
-                                            <div class="row justify-content-end">
+                                            <div class="row">
                                                 <div class="col-3">
                                                     <a class="btn btn-primary" th:href="@{/friends/accept/{id}(id=${request.id})}">Accept</a>
                                                 </div>
@@ -366,7 +364,7 @@
                                 </div>
                         <!--End Friends Request Holder-->
                                 <div class="row justify-content-between">
-                                    <h3 class="subtitle">Friends</h3>
+                                    <h3 class="">Friends</h3>
                                     <div class="col">
                                         <div class="row" style="margin-bottom: 15px;" th:each="friend : ${friends}">
                                             <div class="col-2">
