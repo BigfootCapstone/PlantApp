@@ -336,52 +336,40 @@
                         <!--Start of Friend Tab Panel-->
                         <div class="tab-pane fade" id="friends" role="tabpanel" aria-labelledby="friends-tab">
                             <!--Friends & Request Holder-->
-                            <!--Friend Requests-->
-                            <div class="d-flex mb-3">
-                                <h3 class="friend-req-title">Friend Requests</h3>
-                            </div>
                             <div class="friends-holder">
-                                <div class="d-flex friend-requests">
-                                    <div class="col">
-                                        <div class="row" style="margin-bottom: 15px;" th:each="request : ${friendsRequest}">
-                                            <div class="col-5 ms-4">
-                                                <img class="friend-img img-circle profile-avatar" th:src="${request.profile_pic}" alt="User avatar">
+                                <!--Friend Requests-->
+                                <h3 class="friend-title mb-3">Friend Requests</h3>
+                                <div class="d-flex row friend-requests mb-3">
+                                    <div class="col-6" style="margin-bottom: 15px;" th:each="request : ${friendsRequest}">
+                                        <div class="col-5 friend-img-holder">
+                                            <img class="friend-img img-circle profile-avatar" th:src="${request.profile_pic}" alt="User avatar">
+                                        </div>
+                                        <div class="col-4 friend-req-names">
+                                            <a class="d-flex friend-username justify-content-center" th:href="@{/friends/view/{id}(id=${request.id})}" th:text="${request.username}"></a>
+                                            <p class="d-flex friend-name justify-content-center" th:text="${request.first_name + ' ' + request.last_name}"></p>
+                                        </div>
+                                        <div class="row accept-reject gap-3">
+                                            <div class="col-3">
+                                                <a class="btn btn-primary" th:href="@{/friends/accept/{id}(id=${request.id})}">Accept</a>
                                             </div>
-                                            <div class="col-4 friend-req-names">
-                                                <a class="friend-username" th:href="@{/friends/view/{id}(id=${request.id})}" th:text="${request.username}"></a>
-                                                <p class="friend-name" th:text="${request.first_name + ' ' + request.last_name}"></p>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <a class="btn btn-primary" th:href="@{/friends/accept/{id}(id=${request.id})}">Accept</a>
-                                                </div>
-                                                <div class="col-3">
-                                                    <a class="btn btn-danger" th:href="@{/friends/ignore/{id}(id=${request.id})}">Ignore</a>
-                                                </div>
+                                            <div class="col-3">
+                                                <a class="btn btn-danger" th:href="@{/friends/ignore/{id}(id=${request.id})}">Ignore</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                         <!--End Friends Request Holder-->
-                                <div class="row justify-content-between">
-                                    <h3 class="">Friends</h3>
-                                    <div class="col">
-                                        <div class="row" style="margin-bottom: 15px;" th:each="friend : ${friends}">
-                                            <div class="col-2">
-                                                <img class="friend-img img-circle profile-avatar" style="width: unset;"
-                                                     th:src="${friend.profile_pic}" height="64px" width="64px" alt="User avatar">
+                                <h3 class="friend-title mb-3">Friends</h3>
+                                <div class="d-flex row friends">
+                                        <div class="col-6" style="margin-bottom: 15px;" th:each="friend : ${friends}">
+                                            <div class="col-5 friend-img-holder">
+                                                <img class="friend-img img-circle profile-avatar" th:src="${friend.profile_pic}" alt="User avatar">
                                             </div>
-                                            <div class="col-10">
-                                                <a style="font-weight: bold;"
-                                                   th:href="@{/friends/view/{id}(id=${friend.id})}"
-                                                   th:text="${friend.username}">
-                                                </a>
-                                                <p style="color: black;"
-                                                   th:text="${friend.first_name + ' ' + friend.last_name}">
-                                                </p>
+                                            <div class="col-4 friend-req-names">
+                                                <a class="d-flex friend-username justify-content-center" th:href="@{/friends/view/{id}(id=${friend.id})}" th:text="${friend.username}"></a>
+                                                <p class="d-flex friend-name justify-content-center" th:text="${friend.first_name + ' ' + friend.last_name}"></p>
                                             </div>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
