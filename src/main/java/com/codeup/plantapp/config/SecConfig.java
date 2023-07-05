@@ -32,19 +32,16 @@ public class SecConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((requests) -> requests
-                        .requestMatchers(
-
-
-                                "/css/**",
-                                "/js/**",
-                                "/",
-                                "/users/about",
-                                "/users/create",
-                                "/users/login",
-                                "/login",
-                                "/users/about"
-
-                        ).permitAll()
+                .requestMatchers(
+                        "/css/**",
+                        "/js/**",
+                        "/",
+                        "/users/about",
+                        "/users/create",
+                        "/users/login",
+                        "/login",
+                        "/users/about"
+                ).permitAll()
                 .requestMatchers(
                         "/users/{id}",
                         "/users/{id}",
@@ -83,7 +80,7 @@ public class SecConfig {
 
         http.formLogin((form) -> form.loginPage("/login").defaultSuccessUrl("/users/profile"));
         http.logout((form) -> form.logoutSuccessUrl("/"));
-        http.httpBasic(withDefaults());
+//        http.httpBasic(withDefaults());
         return http.build();
     }
 
