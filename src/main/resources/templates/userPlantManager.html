@@ -105,7 +105,9 @@
                         </div>
                         <span th:if="${careGuide}" th:text="${careGuide}"></span>
                         <span id="careGuide"></span>
+
                     </div>
+<!--                    <button id="getNewGuide" class="align-self-end btn btn-success">New Guide</button>-->
                 </div>
             </div>
 
@@ -455,10 +457,11 @@
     }
     const plant = [[${plant.common_name}]];
     const dbCareGuide = [[${careGuide}]];
-    if (dbCareGuide === "") {
+    if (dbCareGuide === "" || document.getElementById("careGuide").innerHTML === "") {
         document.getElementById("AIWait").classList.remove("d-none");
         createTips();
         getCareGuideForPlant(plant);
+        document.getElementById("AIWait").classList.add("d-none");
     }
 
     function getPlantDiagnosis(id, stems, leaves, fruits) {
@@ -497,6 +500,14 @@
         getPlantDiagnosis(plantID, stems, leaves, fruits);
         document.getElementById("diagnoseNext").classList.remove("d-none");
     })
+
+    // let getNewGuide = document.getElementById("getNewGuide");
+    // getNewGuide.addEventListener("click", function () {
+    //     document.getElementById("AIWait").classList.remove("d-none");
+    //     createTips();
+    //     getCareGuideForPlant(plant);
+    //     document.getElementById("AIWait").classList.add("d-none");
+    // })
 
 </script>
 
