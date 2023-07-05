@@ -1192,7 +1192,7 @@ p #guide{
 }
 
 .user-tag {
-    background-color: #f1f1f1;
+    /*background-color: #f1f1f1;*/
     padding: 12px 16px;
 }
 
@@ -1492,7 +1492,7 @@ input[type=checkbox] { display: none; }
 
     input[type=checkbox]:checked ~ .menu {
         display: block;
-        z-index: 2;
+        z-index: 3;
     }
 
     .hamburger {
