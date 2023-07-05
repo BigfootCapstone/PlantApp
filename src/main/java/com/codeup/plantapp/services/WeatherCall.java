@@ -43,8 +43,6 @@ public class WeatherCall {
             double tempAvg = (double) atmObject.get("temp");
             long humidity = (long) atmObject.get("humidity");
 
-
-
             JSONObject sunObject = (JSONObject) jsonResponse.get("sys");
             long sunrise = (long) sunObject.get("sunrise") * 1000;
             String sunriseDTG = Time.printTime(convertTimestampToLocalDateTime(sunrise));
