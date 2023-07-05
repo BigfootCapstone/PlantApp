@@ -6,7 +6,7 @@
         <div class="col-lg col-sm-12">
             <a class="d-flex logo justify-items-center align-items-center gap" th:href="@{/}">
                 <img src="/css/images/carrotguy(fknawesome).png" alt="" class="logo-dark" height="100">
-                <h1 class="logo-text text-white">BotaniBuddy</h1>
+                <h1 class="logo-text nav-bot text-white">BotaniBuddy</h1>
             </a>
         </div>
         <!--      NAVIGATION MENU -->
@@ -73,7 +73,7 @@
                 </div>
                 <div class="nb-li col" sec:authorize="isAuthenticated()">
                     <li class="mx-1 nav-item" id="wrap">
-                        <form action="#" th:action="@{/plants/search}" method="post">
+                        <form class="search-form" action="#" th:action="@{/plants/search}" method="post">
                             <input id="search" class="d-flex" type="text" name="query" placeholder="Lookin' for a plant ?" required autocomplete="off">
                             <input id="search_submit" value="Search" type="submit">
                             <div id="search-style"></div>
