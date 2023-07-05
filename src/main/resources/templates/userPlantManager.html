@@ -229,7 +229,7 @@
                                 <div class="col-12 p-0">
                                     <label class="form-label" for="name">Name Your Plant?</label>
                                     <input class="form-control" type="text" name="name" id="name" placeholder="Only if you wanna :)">
-                                    <input type="hidden" name="CommonName" value="Tomato">
+                                    <input type="hidden" name="CommonName" th:value="${plant.common_name}">
                                 </div><div class="d-flex justify-content-start col-12 p-0 gap-4">
                                 <div class="col-4 p-0">
                                     <div class="">
