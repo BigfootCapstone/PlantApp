@@ -126,7 +126,7 @@ public class PostController {
         post.setBody(body);
         postsDao.save(post);
 
-        return "redirect:/posts/all";
+        return "rediregit ct:/posts/all";
     }
     @GetMapping("/users/login")
     public String viewLoginPage() {
@@ -136,7 +136,6 @@ public class PostController {
 
     @GetMapping("/{id}/delete")
     public String deletePost(@PathVariable(name = "id") long id, Model model) {
-//        User user = usersDao.findUserById(id);
         Post post = postsDao.findById(id);
         model.addAttribute("post", post);
         postsDao.deleteById(id);

@@ -20,12 +20,21 @@
                         <div class="home-title text-center">
                             <h5 class="mb-5 discover">Discover</h5>
                             <h2 class="mt-2 mb-5 text-white">BotaniBuddy</h2>
-                            <p class="subtitle home-desc font-16 mb-5">Our guidance empowers you to cultivate your first green companions or nurture an exquisite garden oasis.
-                            </p>
-                            <div class="d-flex justify-content-center mt-5">
-                                <button class="btn-custom btn-sign-up justify-content-center align-items-center">
-                                    <a  class="btn-sign-text text-center signup" th:href="@{/users/create}">SIGN UP!</a>
-                                </button>
+git                             <p class="subtitle home-desc font-16 mb-5">Our guidance empowers you to cultivate your first green companions or nurture an exquisite garden oasis.</p>
+
+                            <div  class="d-flex justify-content-center mt-5" sec:authorize="isAuthenticated()">
+
+                                    <form class="btn-custom btn-sign-up justify-content-center align-items-center" th:action="@{/logout}" th:method="post">
+                                        <button style="border: unset; background: unset" class="btn-sign-text text-center signup text-white" >Logout</button>
+                                    </form>
+
+                            </div>
+                            <div  class="d-flex justify-content-center mt-5" sec:authorize="!isAuthenticated()">
+
+                                    <form class="btn-custom btn-sign-up justify-content-center align-items-center" th:action="@{/users/create}" >
+                                        <button style="border: unset; background: unset" class="btn-sign-text text-center signup text-white" >SIGN UP!</button>
+                                    </form>
+
                             </div>
                         </div>
                     </div>
@@ -97,7 +106,7 @@
                     </div>
                     <div class="overflow-hidden">
                         <h5 class="text-white">Journal</h5>
-                        <p class="descriptions">BotaniBuddy creates a nurturing community and fosters plant health by offering a Garden Journal for users to share experiences, and document the growth of their plants.</p>
+                        <p class="descriptions">BotaniBuddy creates a nurturing community and fosters plant health by offering a Garden Journal for users to share experiences, & document the growth of their plants.</p>
                     </div>
                 </div>
             </div>
