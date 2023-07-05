@@ -34,8 +34,8 @@
                         <img class="plantSearchImg" th:if="${plant.image_url}" th:src="${plant.image_url}" alt="Plant Photo">
                     </div>
                     <div class="column ms-2 plant-info-holder align-self-center">
-                        <p class="plant-info justify-content-center" th:text="'Plant Family:   ' + ${plant.family}"></p>
-                        <p class="plant-info justify-content-center" th:text="'Plant Genus:   ' + ${plant.genus}"></p>
+                        <p class="plant-info pe-2" th:text="'Plant Family:   ' + ${plant.family}"></p>
+                        <p class="plant-info pe-2" th:text="'Plant Genus:   ' + ${plant.genus}"></p>
                         <a id="details" type="submit" class="plant-info justify-content-center" th:href="@{/plants/{id}(id=${plant.id})}">View Details</a>
                     </div>
                 </li>

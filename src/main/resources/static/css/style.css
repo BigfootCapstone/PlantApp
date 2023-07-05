@@ -904,7 +904,7 @@ img.plantSearchImg{
 }
 
 p.plant-name{
-    width: 343px;
+    /*width: 343px;*/
     height: 60px;
     font-size: 34px;
     color: rgba(253, 229, 180, 0.8);
@@ -922,7 +922,7 @@ li.plant-box, .plant-box, .view-one-box{
 p.plant-info, a.plant-info{
     display: flex;
     height: 100px;
-    width: 343px;
+    /*width: 343px;*/
     flex-wrap: wrap;
     font-size: 18px;
     color: rgba(255, 255, 255, 0.8);
@@ -1448,7 +1448,7 @@ input[type=checkbox] { display: none; }
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 980px) {
     .navbar {
         min-height: unset;
     }
