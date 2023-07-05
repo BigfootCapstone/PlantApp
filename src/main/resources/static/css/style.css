@@ -312,7 +312,7 @@ li#wrap {
 
 input#search[type="text"] {
     height: 60px;
-    font-size: 55px;
+    font-size: 30px;
     color: #F28153;
     display: inline-block;
     font-family: "Lato", sans-serif;
@@ -323,14 +323,13 @@ input#search[type="text"] {
     padding-right: 144px;
     width: 0px;
     position: absolute;
-    top: 10px;
+    top: 0px;
     right: -15px;
     background: none;
     z-index: 3;
     transition: width .4s cubic-bezier(0.000, 0.795, 0.000, 1.000);
     cursor: pointer;
 }
-
 
 
 
@@ -359,7 +358,7 @@ input#search_submit[type="submit"] {
     text-indent: -10000px;
     border: none;
     position: absolute;
-    top: 10px;
+    top: 0px;
     right: -15px;
     z-index: 2;
     cursor: pointer;
@@ -373,9 +372,9 @@ input#search_submit[type="submit"]:hover {
 
 #search-style {
     position: absolute;
-    min-width: 100vw;
+    min-width: 50vw;
     min-height: 57px;
-    top: 20px;
+    top: -2px;
     left: -33px;
     background-color: #1f2026b5;
 }
@@ -575,13 +574,13 @@ input.form-control, textarea.form-control{
    10.Create User
 *******************/
 
-.container.create, .container-fluid.create{
-    margin-top: 150px;
-}
+/*.container.create, .container-fluid.create{*/
+/*    margin-top: 50px;*/
+/*}*/
 
-.row.create{
-    margin-top: 150px;
-}
+/*.row.create{*/
+/*    margin-top: 150px;*/
+/*}*/
 
 
 
@@ -684,7 +683,7 @@ div .delete-profile, .pe-7s-delete-user{
 
 .emp-profile{
     padding: 3%;
-    margin-top: 3%;
+    margin-top: 12%;
     margin-bottom: 3%;
     border-radius: 10px;
     background-color: rgb(244,233,219);
@@ -1357,14 +1356,7 @@ p #guide{
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
 :root {
-    --red: #ff0073;
-    --blue: #33A0FF;
-    --green: #33ff92;
-    --orange: #ffa83a;
-    --yellow: #FFDB33;
     --black: #1f2025;
-    --dietBlack: #2a2a2a;
-    --gray: #465444;
     --white: #FBFAF5;
 }
 
@@ -1436,12 +1428,24 @@ input[type=checkbox] { display: none; }
 
 
 /* APPLYING MEDIA QUERIES */
-@media (max-width: 1008px) {
+@media (max-width: 1010px) {
     input#search_submit[type="submit"] {
         top: 18px;
     }
     input#search[type="text"] {
         top: 18px;
+    }
+    #search-style {
+        min-width: 100vw;
+    }
+    #search-style {
+        top: 9px;
+    }
+    input#search_submit[type="submit"] {
+        top: 9px;
+    }
+    input#search[type="text"] {
+        top: 9px;
     }
 }
 
@@ -1563,4 +1567,9 @@ input[type=checkbox] { display: none; }
         background: var(--red);
     }
 
+}
+
+.userGardenList{
+    max-width: 1200px;
+    overflow-x: scroll;
 }
