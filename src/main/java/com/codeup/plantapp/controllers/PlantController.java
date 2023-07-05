@@ -188,7 +188,7 @@ public class PlantController {
 |><<>><<>><<>><<>><<>><<>><<>><USER DELETE PLANT ><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
-    @GetMapping("/{id}/delete")
+    @PostMapping("/{id}/delete")
     public String deletePlant(@PathVariable long id) {
         GardenPlant userGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
         List<PlantLog> remove = plantLogsDao.findPlantLogByGardenPlant(userGardenPlant);
@@ -228,7 +228,7 @@ public class PlantController {
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<USER QUICK WATER>><<>><<>><<>><<>><<>><<>><<>><|
 */
-    @GetMapping("/quickWater/{id}")
+    @PostMapping("/quickWater/{id}")
     public String quickWater(@PathVariable("id") long id) {
         GardenPlant updateGardenPlant = gardenPlantsDao.findGardenPlantsById(id);
         updateGardenPlant.setLast_watered(LocalDate.now());

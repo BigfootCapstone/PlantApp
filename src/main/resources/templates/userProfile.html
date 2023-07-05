@@ -55,25 +55,6 @@
                         <h3  class="" th:text="${user.first_name} + ' ' + ${user.last_name}"></h3>
                         <h6 class="username" th:text="${user.username}"></h6>
                         <h6 class="" th:text="'Joined: ' + ${user.created_at}"></h6>
-                        <!--Start Profile Tabs-->
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" id="home-tab" data-toggle="tab" th:href="@{#profile}" role="tab" aria-controls="profile" aria-selected="true">User Info</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="garden-tab" data-toggle="tab" th:href="@{#garden}" role="tab" aria-controls="profile" aria-selected="false">Your Garden</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="journal-tab" data-toggle="tab" th:href="@{#journal}" role="tab" aria-controls="profile" aria-selected="false">Plant Journal</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="weather-tab" data-toggle="tab" th:href="@{#weather}" role="tab" aria-controls="profile" aria-selected="false">Weather</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="friends-tab" data-toggle="tab" th:href="@{#friends}" role="tab" aria-controls="profile" aria-selected="false">Friends</a>
-                            </li>
-                        </ul>
-                        <!--End Profile Tabs-->
                     </div>
                 </div>
                 <!--End Profile Header User Info-->
@@ -84,15 +65,40 @@
                 <!--End EDIT PROFILE BUTTON-->
             </div>
             <!--End Profile Header Holder-->
+            <!--Start Profile Tabs-->
+            <ul class="nav nav-tabs d-flex col-12 mt-3" id="myTab" role="tablist">
+                <li class="col nav-item">
+                    <a class="nav-link text-center active" id="home-tab" data-toggle="tab" th:href="@{#profile}"
+                       role="tab"
+                       aria-controls="profile" aria-selected="true">User Info</a>
+                </li>
+                <li class="col nav-item">
+                    <a class="nav-link text-center" id="garden-tab" data-toggle="tab" th:href="@{#garden}" role="tab"
+                       aria-controls="profile" aria-selected="false">Your Garden</a>
+                </li>
+                <li class="col nav-item">
+                    <a class="nav-link text-center" id="journal-tab" data-toggle="tab" th:href="@{#journal}" role="tab"
+                       aria-controls="profile" aria-selected="false">Plant Journal</a>
+                </li>
+                <li class="col nav-item">
+                    <a class="nav-link text-center" id="weather-tab" data-toggle="tab" th:href="@{#weather}" role="tab"
+                       aria-controls="profile" aria-selected="false">Weather</a>
+                </li>
+                <li class="col nav-item">
+                    <a class="nav-link text-center" id="friends-tab" data-toggle="tab" th:href="@{#friends}" role="tab"
+                       aria-controls="profile" aria-selected="false">Friends</a>
+                </li>
+            </ul>
+            <!--End Profile Tabs-->
             <!--Start Tab Panels-->
             <div class="row mb-3">
-                <!--EMPTY DIV FOR MAINTAINING FORMAT OF PAGE-->
-                <div class="col-md-4">
-<!----------------------EMPTINESS IS ON PURPOSE---------------------->
-                </div>
-                <!--End EMPTY DIV FOR MAINTAINING FORMAT OF PAGE-->
+<!--                &lt;!&ndash;EMPTY DIV FOR MAINTAINING FORMAT OF PAGE&ndash;&gt;-->
+<!--                <div class="col-md-4">-->
+<!--                    &lt;!&ndash;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;EMPTINESS IS ON PURPOSE&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
+<!--                </div>-->
+<!--                &lt;!&ndash;End EMPTY DIV FOR MAINTAINING FORMAT OF PAGE&ndash;&gt;-->
                 <!--Start of User Info Tab Panel-->
-                <div class="col-md-8">
+                <div class="d-flex justify-content-center mb-3">
                     <div class="tab-content profile-tab" id="myTabContent">
                         <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="home-tab">
                             <div class="row">
@@ -128,17 +134,17 @@
                                 </div>
                             </div>
                         </div>
-                <!--End of User Info Tab Panel-->
-                <!--Start of Garden Tab Panel-->
+                        <!--End of User Info Tab Panel-->
+                        <!--Start of Garden Tab Panel-->
                         <div class="tab-pane fade" id="garden" role="tabpanel" aria-labelledby="garden-tab">
                             <div class="d-flex row grow g-0 mb-3">
                                 <!--Start of Garden Cards-->
                                 <!-- Section for outdoor plants -->
-                                <div class="d-flex row grow g-0">
-                                    <h3 class="garden-type">Outdoor Plants</h3>
+                                <h3 class="col-12">Outdoor Plants</h3>
+                                <div class="userGardenList d-flex flex-wrap gap-5 grow g-0">
                                     <th:block th:if="${! #lists.isEmpty(userPlants)}">
-                                        <div class="col-sm-4 mb-3 mb-sm-0" th:each="plant : ${userPlants}" th:if="${plant.is_outside}">
-                                            <div class="card" style="width: 250px;">
+                                        <div class="card" style="min-width: 250px;" th:each="plant : ${userPlants}"
+                                             th:if="${plant.is_outside}">
                                             <img th:src="${plant.plant.image_url}" class="card-img-top" alt="User Plant">
                                             <div class="card-body">
                                                 <a id="plant" class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
@@ -157,37 +163,37 @@
                                                 <div class="d-flex justify-content-between">
                                                     <div class="row water-delete">
                                                         <form th:action="@{/plants/quickWater/{id}(id=${plant.id})}" method="post">
-                                                        <button type="submit" class="watered" style="color: white;" >
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-droplet" viewBox="0 0 16 16">
-                                                                <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0c.109.363.234.708.371 1.038.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8zm.413 1.021A31.25 31.25 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10a5 5 0 0 0 10 0c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"/>
-                                                                <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z"/>
-                                                            </svg>
-                                                        </button>
+                                                            <button type="submit" class="watered" style="color: white;" >
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-droplet" viewBox="0 0 16 16">
+                                                                    <path fill-rule="evenodd" d="M7.21.8C7.69.295 8 0 8 0c.109.363.234.708.371 1.038.812 1.946 2.073 3.35 3.197 4.6C12.878 7.096 14 8.345 14 10a6 6 0 0 1-12 0C2 6.668 5.58 2.517 7.21.8zm.413 1.021A31.25 31.25 0 0 0 5.794 3.99c-.726.95-1.436 2.008-1.96 3.07C3.304 8.133 3 9.138 3 10a5 5 0 0 0 10 0c0-1.201-.796-2.157-2.181-3.7l-.03-.032C9.75 5.11 8.5 3.72 7.623 1.82z"/>
+                                                                    <path fill-rule="evenodd" d="M4.553 7.776c.82-1.641 1.717-2.753 2.093-3.13l.708.708c-.29.29-1.128 1.311-1.907 2.87l-.894-.448z"/>
+                                                                </svg>
+                                                            </button>
                                                         </form>
                                                     </div>
                                                     <div class="row water-delete">
-                                                        <form th:action="@{/plants/{id}/delete(id=${plant.id})}" method="post">
-                                                        <button type="submit" class="delete-plant" style="color: white;">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
-                                                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
-                                                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
-                                                            </svg>
-                                                        </button>
+                                                        <form th:action="@{/plants/{id}/delete(id=${plant.id})}"
+                                                              method="get">
+                                                            <button type="submit" class="delete-plant" style="color: white;">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z"/>
+                                                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z"/>
+                                                                </svg>
+                                                            </button>
                                                         </form>
                                                     </div>
                                                 </div>
-                                            </div>
                                             </div>
                                         </div>
                                     </th:block>
                                 </div>
 
                                 <!-- Section for indoor plants -->
-                                <div class="d-flex row grow g-0">
-                                    <h3 class="garden-type">Indoor Plants</h3>
+                                <h3 class="col-12 mt-3">Indoor Plants</h3>
+                                <div class="userGardenList d-flex gap-5 grow g-0">
                                     <th:block th:if="${! #lists.isEmpty(userPlants)}">
-                                        <div class="col-sm-4 mb-3 mb-sm-0" th:each="plant : ${userPlants}" th:if="${!plant.is_outside}">
-                                            <div class="card" style="width: 250px;">
+                                        <div class="card" style="min-width: 250px;" th:each="plant : ${userPlants}"
+                                             th:if="${!plant.is_outside}">
                                             <img th:src="${plant.plant.image_url}" class="card-img-top" alt="User Plant">
                                             <div class="card-body">
                                                 <a id="plant2" class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
@@ -222,12 +228,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            </div>
                                         </div>
                                     </th:block>
                                 </div>
-                        <!--End of Garden Cards-->
-                        <!--IF NO PLANT SHOW SEARCH-->
+                                <!--End of Garden Cards-->
+                                <!--IF NO PLANT SHOW SEARCH-->
                                 <div th:unless="${! #lists.isEmpty(userPlants)}">
                                     <form class="d-flex custom-form profile-plant-add" action="#" th:action="@{/plants/search}" method="post">
                                         <label class="d-flex label-plant-add justify-content-center align-self-center">Add A Plant!</label>
@@ -240,51 +245,56 @@
                         </div>
                         <!--End of Garden Tab Panel-->
                         <!--Start of Journal Tab Panel-->
+
                         <div class="tab-pane fade" id="journal" role="tabpanel" aria-labelledby="journal-tab">
                             <!--recentPlantLogs-->
-                            <div th:if="${! #lists.isEmpty(recentPlantLogs)}">
-                                <div class="row justify-content-between">
-                                    <div th:each="plant : ${userPlants}">
-                                        <div th:if="${! #lists.isEmpty(plant.getPlantLogs())}">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <a th:href="@{/plants/garden/{id}(id=${plant.id})}">
-                                                        <span th:text="${plant.plant.name}"></span>
-                                                    </a>
-                                                </div>
-                                                <div style=" max-width: fit-content; border-radius: 99px; color: white;"
-                                                     class="col bg-primary"
-                                                     th:text="${plant.getPlantLogs().size()}">
-                                                </div>
-                                            </div>
-                                            <div class="col">
+                            <div class="d-flex row grow g-0 mb-3">
+                                <h3 class="col-12">Recent Plant Logs</h3>
+
+                                <div th:if="${! #lists.isEmpty(recentPlantLogs)}">
+                                    <div class="row justify-content-between">
+                                        <div th:each="plant : ${userPlants}">
+                                            <div th:if="${! #lists.isEmpty(plant.getPlantLogs())}">
                                                 <div class="row">
                                                     <div class="col">
-                                                        <p th:if="${! #lists.isEmpty(plant.getPlantLogs())}"
-                                                           th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at.getMonth()}">
-                                                        </p>
-                                                        <p th:if="${! #lists.isEmpty(plant.getPlantLogs())}"
-                                                           th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at.getDayOfMonth()}">
-                                                        </p>
+                                                        <a th:href="@{/plants/garden/{id}(id=${plant.id})}">
+                                                            <span th:text="${plant.plant.name}"></span>
+                                                        </a>
                                                     </div>
-                                                    <div class="col">
-                                                        <p th:if="${! #lists.isEmpty(plant.getPlantLogs())}"
-                                                           th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).title}">
-                                                        </p>
+                                                    <div style=" max-width: fit-content; border-radius: 99px; color: white;"
+                                                         class="col bg-primary"
+                                                         th:text="${plant.getPlantLogs().size()}">
                                                     </div>
                                                 </div>
-                                                <div>
-                                                    <p th:if="${! #lists.isEmpty(plant.getPlantLogs())}"
-                                                       th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).content}">
-                                                    </p>
+                                                <div class="col">
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <p th:if="${! #lists.isEmpty(plant.getPlantLogs())}"
+                                                               th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at.getMonth()}">
+                                                            </p>
+                                                            <p th:if="${! #lists.isEmpty(plant.getPlantLogs())}"
+                                                               th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).created_at.getDayOfMonth()}">
+                                                            </p>
+                                                        </div>
+                                                        <div class="col">
+                                                            <p th:if="${! #lists.isEmpty(plant.getPlantLogs())}"
+                                                               th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).title}">
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <p th:if="${! #lists.isEmpty(plant.getPlantLogs())}"
+                                                           th:text="${plant.getPlantLogs().get(plant.getPlantLogs().size()-1).content}">
+                                                        </p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div th:unless="${! #lists.isEmpty(recentPlantLogs)}">
-                                <p>You have no logs!  Make one by clicking on a plant in your garden.</p>
+                                <div th:unless="${! #lists.isEmpty(recentPlantLogs)}">
+                                    <p>You have no logs!  Make one by clicking on a plant in your garden.</p>
+                                </div>
                             </div>
                         </div>
                         <!--Start of Weather Tab Panel-->
@@ -358,26 +368,29 @@
                                         </div>
                                     </div>
                                 </div>
-                        <!--End Friends Request Holder-->
+                                <!--End Friends Request Holder-->
                                 <h3 class="friend-title mb-3">Friends</h3>
                                 <div class="d-flex row friends">
-                                        <div class="col-6" style="margin-bottom: 15px;" th:each="friend : ${friends}">
-                                            <div class="col-5 friend-img-holder">
-                                                <img class="friend-img img-circle profile-avatar" th:src="${friend.profile_pic}" alt="User avatar">
-                                            </div>
-                                            <div class="col-4 friend-req-names">
-                                                <a class="d-flex friend-username justify-content-center" th:href="@{/friends/view/{id}(id=${friend.id})}" th:text="${friend.username}"></a>
-                                                <p class="d-flex friend-name justify-content-center" th:text="${friend.first_name + ' ' + friend.last_name}"></p>
-                                            </div>
+                                    <div class="col-6" style="margin-bottom: 15px;" th:each="friend : ${friends}">
+                                        <div class="col-5 friend-img-holder">
+                                            <img class="friend-img img-circle img-thumbnail" th:src="${friend.profile_pic}"
+                                                 alt="User avatar">
                                         </div>
+                                        <div class="col-4 friend-req-names">
+                                            <a class="d-flex friend-username justify-content-center" th:href="@{/friends/view/{id}(id=${friend.id})}" th:text="${friend.username}"></a>
+                                            <p class="d-flex friend-name justify-content-center" th:text="${friend.first_name + ' ' + friend.last_name}"></p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
             <!--END Tab Panels-->
+
         </form>
+
     </div>
 </div>
 <!-- End Page Container -->
