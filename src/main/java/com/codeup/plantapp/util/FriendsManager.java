@@ -59,7 +59,6 @@ public class FriendsManager {
 //              SHOWS EACH REQUEST WHERE BOB is USER
 //                friendReq.add(friend.getUser());
 //              SHOWS EACH USER2 WHERE BOB is USER
-                System.out.println(friend.getUser().getUsername());
                 friendReq.add(friend.getUserID2());
             }
         }

@@ -73,19 +73,71 @@
             </div>
             <!--------------End View One Plant Details-------------->
             <!--------------Start Add Plant to Garden-------------->
-            <div class="d-flex row justify-content-center add-plant-box">
-                <div>
+            <div class="d-flex justify-content-center mb-5">
+                <div class="col-12 p-3 view-one-box">
+                <div class="d-flex col-12 p-0">
                     <h3 class="subtitle">Add this plant to your Garden?</h3>
                 </div>
                 <div>
-                    <form method="post" th:action="@{/plants/{id}(id=${plant.id})}">
-                        <div class="row">
+                    <form class="m-3" method="post" th:action="@{/plants/{id}(id=${plant.id})}">
+
+                        <div class="d-flex justify-space-between gap-4">
+                            <div class="d-flex col flex-wrap p-0 gap-2">
+                                <div class="col-12 p-0">
+                                    <label class="form-label" for="name">Name Your Plant?</label>
+                                    <input class="form-control" type="text" name="name" id="name" placeholder="Only if you wanna :)">
+                                    <input id="careGuide" type="hidden" name="careGuide" />
+                                    <input type="hidden" name="plantImage" th:value="${plant.image_url}" />
+                                    <input type="hidden" name="CommonName" th:value="${plant.common_name}">
+                                    <input type="hidden" name="openFarmID" th:value="${plant.openFarm_id}" />
+                                </div><div class="d-flex justify-content-start col-12 p-0 gap-4">
+                                <div class="col-4 p-0">
+                                    <div class="">
+                                        <label class="form-label" for="sun_amount">Sun Amount</label>
+                                        <select class="form-control" name="sun_amount" id="sun_amount">
+                                            <option value="FULL_SUN">Full Sun</option>
+                                            <option value="PARTIAL_SUN">Partial Sun</option>
+                                            <option value="FULL_SHADE">Shaded</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4 p-0">
+                                    <div class="">
+                                        <label class="form-label" for="water_interval">Water Interval</label>
+                                        <input class="form-control" type="number" id="water_interval" name="water_interval" min="1" max="30">
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="d-flex col">
+                                <div class="col-12">
+                                    <label class="form-label">Is this plant Outside?</label>
+                                    <div class="d-flex justify-content-start col-12">
+                                        <div class="col-3">
+                                            <label class="form-label" for="yes">Yes</label>
+                                            <input class="ms-2 radio-1" name="is_outside" id="yes" type="radio" value="true">
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="form-label" for="no">No</label>
+                                            <input class="ms-2 radio-2" name="is_outside" id="no" type="radio" value="false">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-3">
+                            <input type="submit" id="submit" class="btn btn-success" disabled="disabled" value="Please Wait">
+                        </div>
+
+<!--
+<div class="row">
                             <div class="col-lg-6">
                                 <div class="">
                                     <label class="form-label" for="name">Name Your Plant?</label>
                                     <input id="careGuide" type="hidden" name="careGuide" />
                                     <input type="hidden" name="plantImage" th:value="${plant.image_url}" />
-                                    <input type="hidden" name="openFarmID" th:value="${plant.openFarm_id}" />
+
                                     <input class="form-control" type="text" name="name" id="name" placeholder="Only if you wanna :)">
                                     <input type="hidden" name="CommonName" th:value="${plant.common_name}" />
                                 </div>
@@ -129,8 +181,11 @@
                                 <input type="submit" id="submit" class="submitBnt btn btn-custom" value="Add Dis Plant!" />
                             </div>
                         </div>
+-->
+
                     </form>
                 </div>
+            </div>
             </div>
             <!--------------End Add Plant to Garden-------------->
         </div>
@@ -268,6 +323,8 @@
                     document.getElementById("AIWait").classList.add("d-none");
                     document.getElementById("showCareGuide").innerHTML = careGuide;
                     document.getElementById("careGuide").value = careGuide;
+                    document.getElementById("submit").value = "Add to Garden";
+                    document.getElementById("submit").disabled = false;
                 }
             })
             .catch(error => {
