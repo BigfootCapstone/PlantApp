@@ -86,7 +86,6 @@ public class UserController {
 
     @GetMapping("/login")
     public String viewLoginPage() {
-        System.out.println("Inside viewLoginPage");
         return "login";
     }
 
@@ -133,10 +132,7 @@ public class UserController {
 //      Set All Plants for Garden Preview
         model.addAttribute("userPlants", allPlants);
         model.addAttribute("recentPlantLogs", plantlogsDao.findTop5ByUserOrderByCreatedAtDesc(user));
-        for (PlantLog plantLog : plantlogsDao.findTop5ByUserOrderByCreatedAtDesc(user)
-             ) {
-            System.out.println(plantLog.getCreated_at());
-        }
+
         return "userProfile";
     }
 

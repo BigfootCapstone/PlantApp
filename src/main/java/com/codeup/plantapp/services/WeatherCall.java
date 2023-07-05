@@ -49,12 +49,10 @@ public class WeatherCall {
             long sunrise = (long) sunObject.get("sunrise");
 //            String sunriseDTG = Time.printTime(convertTimestampToLocalDateTime(sunrise));
             LocalDateTime sunriseDateTime = convertUnixTimestampToLocalDateTime(sunrise);
-            System.out.println("WEATHER TIME FROM USER: " + sunrise);
 
             long sunset = (long) sunObject.get("sunset");
 //            String sunsetDTG = Time.printTime(convertTimestampToLocalDateTime(sunset));
             LocalDateTime sunsetDateTime = convertUnixTimestampToLocalDateTime(sunset);
-            System.out.println("WEATHER TIME FROM USER: " + sunset);
 
 //            long timezoneObject = (long) jsonResponse.get("timezone");
             long timezoneOffsetSeconds = (long) jsonResponse.get("timezone");
@@ -64,9 +62,7 @@ public class WeatherCall {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
             String userLocalSunriseTime = userLocalSunriseDateTime.format(formatter);
-            System.out.println("SunRISE in time: " + userLocalSunriseTime);
             String userLocalSunsetTime = userLocalSunsetDateTime.format(formatter);
-            System.out.println("SunSET in time: " + userLocalSunsetTime);
 
             JSONObject cloudObject = (JSONObject) jsonResponse.get("clouds");
             JSONArray cloudArray = (JSONArray) jsonResponse.get("weather");
