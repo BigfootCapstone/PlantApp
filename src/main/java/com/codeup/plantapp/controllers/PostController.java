@@ -126,7 +126,7 @@ public class PostController {
         post.setBody(body);
         postsDao.save(post);
 
-        return "rediregit ct:/posts/all";
+        return "redirect:/posts/all";
     }
     @GetMapping("/users/login")
     public String viewLoginPage() {

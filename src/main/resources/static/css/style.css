@@ -321,7 +321,7 @@ input#search[type="text"] {
     outline: none;
     padding: 3px;
     padding-right: 144px;
-    width: 0px;
+    width: fit-content;
     position: absolute;
     top: 0px;
     right: -15px;
@@ -343,7 +343,7 @@ input#search[type="text"]:focus:hover {
 }
 
 input#search[type="text"]:focus {
-    width: auto;
+    width: 100vw;
     z-index: 1;
     /*border-bottom: 1px solid #F28153;*/
     cursor: text;
@@ -376,11 +376,12 @@ input#search_submit[type="submit"]:hover {
     min-height: 57px;
     top: -2px;
     left: -33px;
-    background-color: #1f2026b5;
+    background: linear-gradient(to right, #0d3830, #176354);
+
 }
 
 /*******************
-    5.Home
+5.Home
 *******************/
 
 .bg-home {
@@ -862,19 +863,6 @@ img.friend-img{
 .accept-reject{
     margin-left: 5px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /***********************
   15.Plant Search View
@@ -1362,8 +1350,7 @@ p #guide{
 
 .navbar {
     min-height: 18vh;
-    background-color: var(--black);
-    display: flex;
+    background: linear-gradient(to right, #0d3830, #176354);    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 8px 20px;
@@ -1376,8 +1363,7 @@ p #guide{
 }
 
 .nav-links a {
-    color: var(--white);
-}
+    background: linear-gradient(to right, #0d3830, #176354);}
 
 /* LOGO */
 .logo { font-size: 32px; }
@@ -1405,8 +1391,7 @@ p #guide{
 /* DROPDOWN MENU */
 .services { position: relative; }
 .dropdown {
-    background-color: var(--black);
-    padding: 1em 0;
+    background: linear-gradient(to right, #0d3830, #176354);    padding: 1em 0;
     position: absolute; /*WITH RESPECT TO PARENT*/
     display: none;
     border-radius: 8px;
@@ -1417,11 +1402,13 @@ p #guide{
     padding: 0.5em 1em;
     width: 8em;
     text-align: center;
-    border-bottom: 1px solid var(--black);
+    border-bottom: linear-gradient(to right, #0d3830, #176354);
 }
+
+
 .dropdown li:hover {
-    background-color: unset;
-    border-radius: 0 0 8px 0;
+background-color: unset;
+border-radius: 0 0 8px 0;
 }
 .services:hover .dropdown { display: block; }
 input[type=checkbox] { display: none; }
@@ -1429,6 +1416,9 @@ input[type=checkbox] { display: none; }
 
 /* APPLYING MEDIA QUERIES */
 @media (max-width: 1010px) {
+    .search-form{
+        margin-bottom: 65px;
+    }
     input#search_submit[type="submit"] {
         top: 18px;
     }
@@ -1468,7 +1458,7 @@ input[type=checkbox] { display: none; }
         padding: 2px;
         display:none;
         position: absolute;
-        background-color: var(--black);
+        background: linear-gradient(to right, #0d3830, #176354);
         top: 9px;
         right: 0;
         left: 0;
@@ -1515,7 +1505,7 @@ input[type=checkbox] { display: none; }
         display: block;
         height: 32px;
         width: 32px;
-        top: -64px;
+        top: -30px;
         right: 14px;
         z-index: 5;
         opacity: 0;
@@ -1525,7 +1515,7 @@ input[type=checkbox] { display: none; }
         height: 16px;
         width: 20px;
         position: absolute;
-        top: -55px;
+        top: -30px;
         right: 20px;
         z-index: 2;
         display: flex;
@@ -1557,14 +1547,14 @@ input[type=checkbox] { display: none; }
     }
     .nav-links input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
         transform: rotate(-45deg);
-        background: var(--red);
+        background: #F28153;
     }
     .nav-links input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
         transform: scaleX(0);
     }
     .nav-links input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
         transform: rotate(45deg);
-        background: var(--red);
+        background: #F28153;
     }
 
 }
@@ -1572,4 +1562,24 @@ input[type=checkbox] { display: none; }
 .userGardenList{
     max-width: 1200px;
     overflow-x: scroll;
+}
+@media (max-width: 667px) {
+    .logo-dark{
+        max-width: 50px;
+        max-height: 50px;
+    }
+    .nav-bot{
+        font-size: 30px;
+    }
+    #search{
+        left: 10px;
+        width: fit-content;
+        top: -12px;
+    }
+    #search_submit{
+        top: -12px;
+    }
+    .menu{
+        background: linear-gradient(to right, #0d3830, #176354);    }
+    
 }
