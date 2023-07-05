@@ -9,3 +9,8 @@ triggerTabList.forEach(triggerEl => {
         tabTrigger.show()
     })
 })
+
+
+
+
+

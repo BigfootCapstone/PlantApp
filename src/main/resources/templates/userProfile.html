@@ -92,40 +92,29 @@
             <!--End Profile Tabs-->
             <!--Start Tab Panels-->
             <div class="row mb-3">
-<!--                &lt;!&ndash;EMPTY DIV FOR MAINTAINING FORMAT OF PAGE&ndash;&gt;-->
-<!--                <div class="col-md-4">-->
-<!--                    &lt;!&ndash;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;EMPTINESS IS ON PURPOSE&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&ndash;&gt;-->
-<!--                </div>-->
-<!--                &lt;!&ndash;End EMPTY DIV FOR MAINTAINING FORMAT OF PAGE&ndash;&gt;-->
                 <!--Start of User Info Tab Panel-->
                 <div class="d-flex justify-content-center mb-3">
                     <div class="tab-content profile-tab" id="myTabContent">
                         <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
+                            <div class="d-flex row grow g-0 mt-3 mb-3">
                                 <div class="col-md-6">
                                     <label>Username</label>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="" th:text="${user.username}"></p>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <label>Name</label>
                                 </div>
                                 <div class="col-md-6">
                                     <p  class="" th:text="${user.first_name} + ' ' + ${user.last_name}"></p>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <label>Email</label>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="" th:text="${user.email}"></p>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-6">
                                     <label>Zip Code</label>
                                 </div>
@@ -140,10 +129,10 @@
                             <div class="d-flex row grow g-0 mb-3">
                                 <!--Start of Garden Cards-->
                                 <!-- Section for outdoor plants -->
-                                <h3 class="col-12">Outdoor Plants</h3>
+                                <h3 class="col-12 garden-type">Outdoor Plants</h3>
                                 <div class="userGardenList d-flex flex-wrap gap-5 grow g-0">
                                     <th:block th:if="${! #lists.isEmpty(userPlants)}">
-                                        <div class="card" style="min-width: 250px;" th:each="plant : ${userPlants}"
+                                        <div class="card" style="min-width: 333px;" th:each="plant : ${userPlants}"
                                              th:if="${plant.is_outside}">
                                             <img th:src="${plant.plant.image_url}" class="card-img-top" alt="User Plant">
                                             <div class="card-body">
@@ -155,7 +144,7 @@
                                                     <span th:text="${#strings.capitalizeWords(#strings.replace(plant.sun_amount, '_', ' '))}"></span>
                                                 </p>
                                                 <p>Water every: <span th:text="${plant.water_interval}"></span> Day(s)</p>
-                                                <p><span th:text="${plant.getWater_tip}"></span></p>
+                                                <p th:text="${plant.getWater_tip}"></p>
                                                 <img class="weather-icon" th:src="${weather.getIcon()}"></img>
 
                                                 <p class="card-plant-warning"><span th:text="${plant.getSun_tip}"></span></p>
@@ -189,7 +178,7 @@
                                 </div>
 
                                 <!-- Section for indoor plants -->
-                                <h3 class="col-12 mt-3">Indoor Plants</h3>
+                                <h3 class="col-12 mt-3 garden-type">Indoor Plants</h3>
                                 <div class="userGardenList d-flex gap-5 grow g-0">
                                     <th:block th:if="${! #lists.isEmpty(userPlants)}">
                                         <div class="card" style="min-width: 250px;" th:each="plant : ${userPlants}"
@@ -299,18 +288,18 @@
                         </div>
                         <!--Start of Weather Tab Panel-->
                         <div class="tab-pane fade" id="weather" role="tabpanel" aria-labelledby="weather-tab">
-                            <div class="d-flex weather-title">
+                            <div class="d-flex weather-title justify-content-center">
                                 <h3 class="">Today's Weather</h3>
                             </div>
                             <div class="weather-holder" th:if="${weather}">
-                                <div class="d-flex weather-icon-holder mb-2">
+                                <div class="d-flex weather-icon-holder mb-2 justify-content-center">
                                     <img class="weather-icon" th:src="${weather.getIcon()}"></img>
                                 </div>
-                                <div class="d-flex weather-desc-holder">
+                                <div class="d-flex weather-desc-holder justify-content-center">
                                     <label>Description:</label>
                                     <p class="d-flex weather-description mb-2" th:text="${weather.getCloudDesc()}"></p>
                                 </div>
-                                <div class="d-flex row-cols-1 mb-5">
+                                <div class="d-flex row-cols-1 mb-5 justify-content-center">
                                     <div class="col-lg-3 mb-2">
                                         <div class="d-flex gap-3">
                                             <label>Temp:</label>
@@ -354,7 +343,7 @@
                                         <div class="col-5 friend-img-holder">
                                             <img class="friend-img img-circle profile-avatar" th:src="${request.profile_pic}" alt="User avatar">
                                         </div>
-                                        <div class="col-4 friend-req-names">
+                                        <div class="col-6 friend-req-names">
                                             <a class="d-flex friend-username justify-content-center" th:href="@{/friends/view/{id}(id=${request.id})}" th:text="${request.username}"></a>
                                             <p class="d-flex friend-name justify-content-center" th:text="${request.first_name + ' ' + request.last_name}"></p>
                                         </div>
@@ -384,10 +373,10 @@
                                 <div class="d-flex row friends">
                                     <div class="col-6" style="margin-bottom: 15px;" th:each="friend : ${friends}">
                                         <div class="col-5 friend-img-holder">
-                                            <img class="friend-img img-circle img-thumbnail" th:src="${friend.profile_pic}"
+                                            <img class="friend-img img-circle profile-avatar" th:src="${friend.profile_pic}"
                                                  alt="User avatar">
                                         </div>
-                                        <div class="col-4 friend-req-names">
+                                        <div class="col-6 friend-req-names">
                                             <a class="d-flex friend-username justify-content-center" th:href="@{/friends/view/{id}(id=${friend.id})}" th:text="${friend.username}"></a>
                                             <p class="d-flex friend-name justify-content-center" th:text="${friend.first_name + ' ' + friend.last_name}"></p>
                                         </div>
@@ -408,6 +397,7 @@
 
 <!-- footer start -->
 <footer th:replace="partials/footer :: footer"></footer>
+<script th:src="@{/js/staticElements.js}"></script>
 <script>
    ;
     window.addEventListener('load',()=>{
