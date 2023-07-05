@@ -13,8 +13,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-import static com.codeup.plantapp.util.Time.convertTimestampToLocalDateTime;
+import static com.codeup.plantapp.util.Time.*;
 
 @Service
 public class WeatherCall {
@@ -44,10 +46,23 @@ public class WeatherCall {
             long humidity = (long) atmObject.get("humidity");
 
             JSONObject sunObject = (JSONObject) jsonResponse.get("sys");
-            long sunrise = (long) sunObject.get("sunrise") * 1000;
-            String sunriseDTG = Time.printTime(convertTimestampToLocalDateTime(sunrise));
-            long sunset = (long) sunObject.get("sunset") * 1000;
-            String sunsetDTG = Time.printTime(convertTimestampToLocalDateTime(sunset));
+            long sunrise = (long) sunObject.get("sunrise");
+//            String sunriseDTG = Time.printTime(convertTimestampToLocalDateTime(sunrise));
+            LocalDateTime sunriseDateTime = convertUnixTimestampToLocalDateTime(sunrise);
+
+            long sunset = (long) sunObject.get("sunset");
+//            String sunsetDTG = Time.printTime(convertTimestampToLocalDateTime(sunset));
+            LocalDateTime sunsetDateTime = convertUnixTimestampToLocalDateTime(sunset);
+
+//            long timezoneObject = (long) jsonResponse.get("timezone");
+            long timezoneOffsetSeconds = (long) jsonResponse.get("timezone");
+
+            LocalDateTime userLocalSunriseDateTime = adjustDateTimeByTimezoneOffset(sunriseDateTime, Math.toIntExact(timezoneOffsetSeconds));
+            LocalDateTime userLocalSunsetDateTime = adjustDateTimeByTimezoneOffset(sunsetDateTime, Math.toIntExact(timezoneOffsetSeconds));
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+            String userLocalSunriseTime = userLocalSunriseDateTime.format(formatter);
+            String userLocalSunsetTime = userLocalSunsetDateTime.format(formatter);
 
             JSONObject cloudObject = (JSONObject) jsonResponse.get("clouds");
             JSONArray cloudArray = (JSONArray) jsonResponse.get("weather");
@@ -64,7 +79,7 @@ public class WeatherCall {
             String iconUrl = iconBaseUrl + iconCode + ".png";
 
 
-            return new Weather(tempAvg, humidity, iconUrl, sunriseDTG, sunsetDTG, cloudiness, desc, windSpeed.toString());
+            return new Weather(tempAvg, humidity, iconUrl, userLocalSunriseTime, userLocalSunsetTime, cloudiness, desc, windSpeed.toString());
         } catch (Exception e) {
             e.printStackTrace();
             return null;

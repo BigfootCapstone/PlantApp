@@ -8,7 +8,6 @@ import com.codeup.plantapp.repositories.UserRepository;
 import com.codeup.plantapp.services.Keys;
 import com.codeup.plantapp.util.PlantDTO;
 import com.codeup.plantapp.util.PlantResultDTO;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,11 +15,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.method.support.ModelAndViewContainer;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -53,41 +49,6 @@ public class PlantController {
         this.gardenPlantsDao = gardenPlantsDao;
         this.plantLogsDao = plantLogsDao;
     }
-
-/*
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><ADD PLANT NOT IN API ><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-*/
-//
-//    @GetMapping("/add")
-//    public String addPlantForm(HttpSession session, Model model){
-//        session.getAttribute("user");
-//        model.addAttribute("plant", new Plant());
-//        return "addPlantForm";
-//    }
-//
-//    @PostMapping("/add")
-//    public String addPlant(@ModelAttribute Plant plant,
-//                           @RequestParam(name="name") String plant_name,
-//                           @RequestParam(name="image_url") String image_url,
-//                           @RequestParam(name="sun_amount") sun_amount sun_amount,
-//                           @RequestParam(name="water_interval") long water_interval,
-//                           @RequestParam(name="is_outside") boolean is_outside){
-//        Plant newPlant = new Plant();
-//        plantsDao.save(newPlant);
-//
-//        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        User userFound = usersDao.findUserById(user.getId());
-//
-//        LocalDate date = LocalDate.now();
-//
-//        GardenPlant newGardenPlant = new GardenPlant(userFound, newPlant, sun_amount, date, water_interval, is_outside);
-//
-//        gardenPlantsDao.save(newGardenPlant);
-//        return "redirect:/users/profile";
-//    }
-
 
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
@@ -254,6 +215,7 @@ public class PlantController {
         URL trefleApiUrl = new URL("https://trefle.io/api/v1/plants/" + treflePlantId + "?token=" + keys.getTrefle());
         PlantDTO plant =  getTreflePlant(trefleApiUrl);
 
+        assert plant != null;
         String selectedPlantCommonName = plant.getCommon_name();
         String commonNameSlug = selectedPlantCommonName.toLowerCase().replace(" ", "-");
 
@@ -302,21 +264,8 @@ public class PlantController {
 
         String chatResponse = getChatGPTDiagnosis(plantMedForm, chatKey);
 
-//        model.addAttribute("plantID", id);
-//        model.addAttribute("form", plantMedForm);
-//        model.addAttribute("chatResponse", chatResponse);
-
         return ResponseEntity.ok(chatResponse);
     }
-
-//    @PostMapping("/diagnose/{id}")
-//    public String diagnosePlant(@PathVariable("id") long id,
-//                                @RequestParam(name="stems") String stems,
-//                                @RequestParam(name="leaves") String leaves,
-//                                @RequestParam(name="fruits") String fruits) {
-//
-//        return "redirect:/plants/diagnose/"+ id +"."+ stems +"."+ leaves +"."+ fruits;
-//    }
 
     @PostMapping("/comment/{id}")
     public String savePlantLog(
