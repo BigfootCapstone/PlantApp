@@ -555,8 +555,8 @@ input.form-control, textarea.form-control{
 
 .footer .social-links li a {
     display: inline-block;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     line-height: 32px;
     color: rgba(255, 255, 255, 0.5);
     border: 2px solid rgba(255, 255, 255, 0.5);
@@ -667,14 +667,13 @@ input[type='file'] {
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
 
-div .delete-profile, .pe-7s-delete-user{
+div .delete-profile, .bi-person-x{
     color: #FF0000FF;
-    margin-left: 237px;
+    margin-left: 126px;
     padding: unset;
 }
 
-.pe-7s-delete-user:before {
-    content: "\e6a7";
+.bi-person-x:before {
     margin: 15px;
 }
 
@@ -861,7 +860,7 @@ img.friend-img{
     color: #F28153;
 }
 .accept-reject{
-    margin-left: 5px;
+    margin-left: -14px;
 }
 
 /***********************
@@ -1181,7 +1180,7 @@ p #guide{
 }
 
 .user-tag {
-    background-color: #f1f1f1;
+    /*background-color: #f1f1f1;*/
     padding: 12px 16px;
 }
 
@@ -1483,7 +1482,7 @@ input[type=checkbox] { display: none; }
 
     input[type=checkbox]:checked ~ .menu {
         display: block;
-        z-index: 2;
+        z-index: 3;
     }
 
     .hamburger {

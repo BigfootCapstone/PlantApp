@@ -15,8 +15,6 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 
-
-//import static com.codeup.plantapp.services.EmailService.sendSimpleMessage;
 import static com.codeup.plantapp.services.WeatherCall.getWeather;
 import static com.codeup.plantapp.util.CareTips.checkForOutdoorPlants;
 import static com.codeup.plantapp.util.CareTips.plantTipCheck;
@@ -34,14 +32,13 @@ public class UserController {
     private final FriendRepository friendDao;
     private final PlantLogRepository plantlogsDao;
 
-
     public UserController(UserRepository usersDao, GardenPlantRepository gardenPlantDao,
-                          FriendRepository friendDao,PlantLogRepository plantlogsDao,
-                          PlantRepository plantDao, PasswordEncoder passwordEncoder){
+                          FriendRepository friendDao, PlantLogRepository plantlogsDao,
+                          PlantRepository plantDao, PasswordEncoder passwordEncoder) {
         this.usersDao = usersDao;
         this.gardenPlantDao = gardenPlantDao;
         this.passwordEncoder = passwordEncoder;
-        this.plantDao =  plantDao;
+        this.plantDao = plantDao;
         this.friendDao = friendDao;
         this.plantlogsDao = plantlogsDao;
     }
@@ -60,12 +57,18 @@ public class UserController {
         return "createUserForm";
     }
 
-    //messing with it for the create user
     @PostMapping("/create")
     public String createUserProfile(@ModelAttribute("user") User user,
-                                    @RequestParam(name="subscribe", required = false) String subscribe) {
-        user.setCreated_at(LocalDate.now());
+                                    @RequestParam(name = "subscribe", required = false) String subscribe,
+                                    Model model) {
+        User existingUser = usersDao.findByUsername(user.getUsername());
+        if (existingUser != null) {
+            model.addAttribute("user", user);
+            model.addAttribute("errorMessage", "Username is already taken");
+            return "createUserForm";
+        }
 
+        user.setCreated_at(LocalDate.now());
         String userPic = "https://cdn.filestackcontent.com/mzEXQKGFQvW4pbksWgeB";
         user.setProfile_pic(userPic);
 
@@ -76,7 +79,6 @@ public class UserController {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-
 
         usersDao.save(user);
         return "redirect:/users/login";
