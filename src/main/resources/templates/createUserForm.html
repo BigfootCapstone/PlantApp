@@ -1,81 +1,74 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:insert="partials/head :: head('Create User')"></head>
 
 <body>
 
-<!--Navbar Start-->
+<!-- Navbar Start -->
 <header th:replace="partials/navbar :: navbar"></header>
 <!-- Navbar End -->
 
-    <div class="d-flex container create justify-content-center align-content-center">
-        <div class="row">
-            <div class="col">
-                <h1 class="subtitle text-center">Create Your Profile!</h1>
-                <div class="custom-form">
+<div class="d-flex container create justify-content-center align-content-center">
+    <div class="row">
+        <div class="col">
+            <h1 class="subtitle text-center">Create Your Profile!</h1>
+            <div class="custom-form">
 
-        <!-- Create Form start -->
-                    <form method="post" th:action="@{/users/create}" th:object="${user}">
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label" for="username">Username:</label>
-                                <input type="text" id="username" class="form-control" th:field="*{username}" required>
+                <!-- Create Form start -->
+                <form method="post" th:action="@{/users/create}" th:object="${user}">
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Username:</label>
+                            <input type="text" id="username" class="form-control" th:field="*{username}" required>
+                            <div th:if="${errorMessage}" class="text-danger">
+                                <p th:text="${errorMessage}"></p>
                             </div>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label" for="firstName">First Name:</label>
-                                <input type="text" id="firstName" class="form-control" th:field="*{first_name}" required>
-                            </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <label class="form-label" for="firstName">First Name:</label>
+                            <input type="text" id="firstName" class="form-control" th:field="*{first_name}" required>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label" for="lastName">Last Name:</label>
-                                <input type="text" id="lastName" class="form-control" th:field="*{last_name}" required>
-                            </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <label class="form-label" for="lastName">Last Name:</label>
+                            <input type="text" id="lastName" class="form-control" th:field="*{last_name}" required>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label" for="city">Zip Code:</label>
-                                <input id="city" name="zip" class="form-control" type="text" pattern="[0-9]*" th:field="*{city}" required>
-                                <!--                <input type="text" id="city" class="form-control" th:field="*{city}" required>-->
-                            </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <label class="form-label" for="city">Zip Code:</label>
+                            <input id="city" name="zip" class="form-control" type="text" pattern="[0-9]*" th:field="*{city}" required>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label" for="email">Email:</label>
-                                <input type="email" id="email" class="form-control" th:field="*{email}" required>
-                            </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email:</label>
+                            <input type="email" id="email" class="form-control" th:field="*{email}" required>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label" for="password">Password:</label>
-                                <input type="password" id="password" class="form-control" th:field="*{password}" required>
-                            </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Password:</label>
+                            <input type="password" id="password" class="form-control" th:field="*{password}" required>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="mb-3">
-                                <label class="form-label" for="subscribe"> Would you like to receive emails about
-                                plant conditions?</label>
-                                <input id="subscribe" name="subscribe" type="checkbox" value="1">
-                            </div>
-                        </div>
+                    </div>
 
+                    <div class="d-flex col-lg-12 text-end mb-5 justify-content-center align-items-center">
+                        <button type="submit" class="submitBnt btn btn-custom">Create Profile
+                        </button>
+                    </div>
+                </form>
+                <!-- Create Form end -->
 
-                        <div class="d-flex col-lg-12 text-end mb-5 justify-content-center align-items-center">
-                            <button type="submit" class="submitBnt btn btn-custom">Create Profile</button>
-                        </div>
-                    </form>
-        <!-- Create Form end -->
-
-                </div>
             </div>
         </div>
     </div>
+</div>
 
-<!-- Footer Partial start-->
+<!-- Footer Partial start -->
 <footer th:replace="partials/footer :: footer"></footer>
 <!-- Footer Partial end -->
 
