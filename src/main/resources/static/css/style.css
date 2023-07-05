@@ -303,7 +303,6 @@ button.nav-buttons{
 *******************/
 
 li#wrap {
-    /*margin: -60px 75px;*/
     display: inline-block;
     float: right;
     padding: 0;
@@ -321,7 +320,7 @@ input#search[type="text"] {
     outline: none;
     padding: 3px;
     padding-right: 144px;
-    width: fit-content;
+    width: 0px;
     position: absolute;
     top: 0px;
     right: -15px;
@@ -332,21 +331,21 @@ input#search[type="text"] {
 }
 
 
-
 ::placeholder {
     color: #FFFFFF;
     opacity: 1;
 }
 
-input#search[type="text"]:focus:hover {
-    /*border-bottom: 1px solid #F28153;*/
-}
 
 input#search[type="text"]:focus {
-    width: 100vw;
+    width: auto;
     z-index: 1;
-    /*border-bottom: 1px solid #F28153;*/
+    border-bottom: 1px solid #F28153;
     cursor: text;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: background-color 1s;
+    border-radius: 10px;
+
 }
 input#search_submit[type="submit"] {
     height: 67px;
@@ -362,7 +361,6 @@ input#search_submit[type="submit"] {
     right: -15px;
     z-index: 2;
     cursor: pointer;
-    opacity: 0.4;
     transition: opacity .4s ease;
 }
 
@@ -376,17 +374,19 @@ input#search_submit[type="submit"]:hover {
     min-height: 57px;
     top: -2px;
     left: -33px;
-    background: linear-gradient(to right, #0d3830, #176354);
-
+    background-color: transparent;
 }
 
+
+
+
 /*******************
-5.Home
+    5.Home
 *******************/
 
 .bg-home {
     position: relative;
-    padding: 185px 0px 240px;
+    padding: 78px 0px 180px;
 }
 
 .row .sign-up {
@@ -683,7 +683,7 @@ div .delete-profile, .bi-person-x{
 
 .emp-profile{
     padding: 3%;
-    margin-top: 12%;
+    margin-top: 3%;
     margin-bottom: 3%;
     border-radius: 10px;
     background-color: rgb(244,233,219);
@@ -726,11 +726,12 @@ h6.username{
     color: #F28153;
     background-color: #fff;
 }
-.profile-head .nav-tabs .nav-link{
-    font-weight:600;
+.nav-tabs .nav-link{
+    font-family: Lato, sans-serif;
+    font-weight:bold;
     border: none;
 }
-.profile-head .nav-tabs .nav-link.active{
+.nav-tabs .nav-link.active{
     border: none;
     border-bottom:2px solid rgb(61,132,132);
 }
@@ -808,14 +809,8 @@ label.label-plant-add{
 /***************************
         Weather Tab
 ***************************/
-.weather-title{
-    margin-left: 80px;
-}
 div.weather-holder{
     width: 800px;
-}
-.weather-icon-holder{
-    margin-left: 130px;
 }
 img.weather-icon{
     height: 100px;
@@ -826,7 +821,7 @@ div.weather-holder p {
     margin-bottom: unset;
 }
 .weather-desc-holder{
-    padding-left: 15px;
+    margin-left: -30px;
 }
 .weather-description{
     margin-left: 115px;
@@ -844,7 +839,7 @@ div.row.warning-body{
         Friends Tab
 ***************************/
 .friend-img-holder{
-    margin-left: 15px;
+    margin-left: 37px;
 }
 img.friend-img{
     height: 150px;
@@ -860,8 +855,21 @@ img.friend-img{
     color: #F28153;
 }
 .accept-reject{
-    margin-left: -14px;
+    margin-left: 15px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /***********************
   15.Plant Search View
@@ -1349,7 +1357,8 @@ p #guide{
 
 .navbar {
     min-height: 18vh;
-    background: linear-gradient(to right, #0d3830, #176354);    display: flex;
+    background: linear-gradient(to right, #0d3830, #176354);
+    display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 8px 20px;
@@ -1362,7 +1371,8 @@ p #guide{
 }
 
 .nav-links a {
-    background: linear-gradient(to right, #0d3830, #176354);}
+    color: var(--white);
+}
 
 /* LOGO */
 .logo { font-size: 32px; }
@@ -1390,7 +1400,8 @@ p #guide{
 /* DROPDOWN MENU */
 .services { position: relative; }
 .dropdown {
-    background: linear-gradient(to right, #0d3830, #176354);    padding: 1em 0;
+    background-color: var(--black);
+    padding: 1em 0;
     position: absolute; /*WITH RESPECT TO PARENT*/
     display: none;
     border-radius: 8px;
@@ -1401,13 +1412,11 @@ p #guide{
     padding: 0.5em 1em;
     width: 8em;
     text-align: center;
-    border-bottom: linear-gradient(to right, #0d3830, #176354);
+    border-bottom: 1px solid var(--black);
 }
-
-
 .dropdown li:hover {
-background-color: unset;
-border-radius: 0 0 8px 0;
+    background-color: unset;
+    border-radius: 0 0 8px 0;
 }
 .services:hover .dropdown { display: block; }
 input[type=checkbox] { display: none; }
@@ -1415,9 +1424,6 @@ input[type=checkbox] { display: none; }
 
 /* APPLYING MEDIA QUERIES */
 @media (max-width: 1010px) {
-    .search-form{
-        margin-bottom: 65px;
-    }
     input#search_submit[type="submit"] {
         top: 18px;
     }
@@ -1454,10 +1460,10 @@ input[type=checkbox] { display: none; }
 
     .menu {
         border-radius: 0 0 5px 5px;
+        background-color: var(--black);
         padding: 2px;
         display:none;
         position: absolute;
-        background: linear-gradient(to right, #0d3830, #176354);
         top: 9px;
         right: 0;
         left: 0;
@@ -1466,6 +1472,7 @@ input[type=checkbox] { display: none; }
 
     .menu-auth {
         top: 66px;
+        background-color: var(--black);
     }
 
     .menu li {
@@ -1504,7 +1511,7 @@ input[type=checkbox] { display: none; }
         display: block;
         height: 32px;
         width: 32px;
-        top: -30px;
+        top: -64px;
         right: 14px;
         z-index: 5;
         opacity: 0;
@@ -1514,7 +1521,7 @@ input[type=checkbox] { display: none; }
         height: 16px;
         width: 20px;
         position: absolute;
-        top: -30px;
+        top: -55px;
         right: 20px;
         z-index: 2;
         display: flex;
@@ -1546,39 +1553,18 @@ input[type=checkbox] { display: none; }
     }
     .nav-links input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
         transform: rotate(-45deg);
-        background: #F28153;
+        background: var(--red);
     }
     .nav-links input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
         transform: scaleX(0);
     }
     .nav-links input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
         transform: rotate(45deg);
-        background: #F28153;
+        background: var(--red);
     }
 
 }
 
 .userGardenList{
     max-width: 1200px;
-    overflow-x: scroll;
-}
-@media (max-width: 667px) {
-    .logo-dark{
-        max-width: 50px;
-        max-height: 50px;
-    }
-    .nav-bot{
-        font-size: 30px;
-    }
-    #search{
-        left: 10px;
-        width: fit-content;
-        top: -12px;
-    }
-    #search_submit{
-        top: -12px;
-    }
-    .menu{
-        background: linear-gradient(to right, #0d3830, #176354);    }
-    
 }
