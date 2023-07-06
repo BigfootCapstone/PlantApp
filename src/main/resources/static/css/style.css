@@ -444,6 +444,7 @@ p.home-desc{
 img.codeup{
     width: 159px;
     height: 50px;
+    margin-left: 115px;
 }
 
 
@@ -1284,9 +1285,6 @@ p #guide{
     .footer-logo, .footer-desc, .footer-list {
         text-align: center;
     }
-    div.about.col-sm-6{
-        width: 50%;
-    }
 }
 
 @media (min-width: 200px) and (max-width: 768px) {
@@ -1356,6 +1354,9 @@ p #guide{
         width: 145px;
         height: 22px;
         margin-bottom: 10px;
+    }
+    img.codeup{
+        margin-left: 192px;
     }
 }
 
