@@ -46,7 +46,8 @@ public class ReportScheduler {
             String weatherKey = keys.getOpenWeather();
             URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + weatherKey +
                     "&units=imperial");
-            Weather localWeather = getWeather(url);
+            String zipError = "Weather data not available, check zipcode";
+            Weather localWeather = getWeather(url) == null ? new Weather(0, 0, "NA", "NA", "NA", 0, zipError, "NA") : getWeather(url);;
 
             List<GardenPlant> userGarden = gardenPlantDao.findGardenPlantByUser(botaniUser);
 
