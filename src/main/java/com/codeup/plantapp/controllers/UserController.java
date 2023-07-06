@@ -61,14 +61,22 @@ public class UserController {
     public String createUserProfile(@ModelAttribute("user") User user,
                                     @RequestParam(name = "subscribe", required = false) String subscribe,
                                     Model model) {
+        // Check if username already exists
         User existingUser = usersDao.findByUsername(user.getUsername());
         if (existingUser != null) {
-            model.addAttribute("user", user);
-            model.addAttribute("errorMessage", "Username is already taken");
+            model.addAttribute("usernameError", "Username already exists. Please choose a different username.");
+            return "createUserForm";
+        }
+
+        // Check if email already exists
+        User existingEmailUser = usersDao.findByEmail(user.getEmail());
+        if (existingEmailUser != null) {
+            model.addAttribute("emailError", "Email already exists. Please use a different email address.");
             return "createUserForm";
         }
 
         user.setCreated_at(LocalDate.now());
+
         String userPic = "https://cdn.filestackcontent.com/mzEXQKGFQvW4pbksWgeB";
         user.setProfile_pic(userPic);
 
@@ -91,30 +99,23 @@ public class UserController {
     }
 
     @GetMapping("/profile")
-    public String showProfile(Model model) throws Exception{
+    public String showProfile(Model model) throws Exception {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         long userId = user.getId();
 
         User userFromDb = usersDao.findUserById(userId);
         model.addAttribute("user", userFromDb);
 
-        String successMessage = (String) model.asMap().get("successMessage");
-
-//      Pass the success message to the view if it exists
-        if (successMessage != null) {
-            model.addAttribute("successMessage", successMessage);
-        }
-
-//      Get Weather for User's City
+        // Get Weather for User's City
         String city = userFromDb.getCity();
         String weatherKey = keys.getOpenWeather();
         URL url = new URL("https://api.openweathermap.org/data/2.5/weather?zip=" + city + "&appid=" + weatherKey + "&units=imperial");
         Weather userWeather = getWeather(url);
 
-//      Aggregate all plants in user's garden
+        // Aggregate all plants in user's garden
         List<GardenPlant> allPlants = gardenPlantDao.findGardenPlantByUser(userFromDb);
 
-//      Run conditional logic for all plants based on Days passed
+        // Run conditional logic for all plants based on Days passed
         for (GardenPlant plant: allPlants) {
             GardenPlant gardenPlant = gardenPlantDao.findGardenPlantsById(plant.getId());
             GardenPlant checked = plantTipCheck(gardenPlant, userWeather);
@@ -126,19 +127,14 @@ public class UserController {
 
         model.addAttribute("friendsRequest", friendsRequest);
         model.addAttribute("friends", friends);
-//      Set Weather for View
         model.addAttribute("weather", userWeather);
-//      Set Outdoor plants for quick weather reference and warnings
         model.addAttribute("outdoorPlants", checkForOutdoorPlants(userFromDb));
-//      Set All Plants for Garden Preview
         model.addAttribute("userPlants", allPlants);
         model.addAttribute("recentPlantLogs", plantlogsDao.findTop5ByUserOrderByCreatedAtDesc(user));
-        for (PlantLog plantLog : plantlogsDao.findTop5ByUserOrderByCreatedAtDesc(user)
-             ) {
-            System.out.println(plantLog.getCreated_at());
-        }
+
         return "userProfile";
     }
+
 
     @GetMapping("/{id}")
     public String getUserProfile(@PathVariable("id") long id, Model model) {
@@ -158,10 +154,9 @@ public class UserController {
         return "editUserForm";
     }
 
-
     @PostMapping("/{id}/edit")
     public String updateUserProfile(@PathVariable(name = "id") Long id,
-                                    @RequestParam(name="subscribe", required = false) String subscribe,
+                                    @RequestParam(name = "subscribe", required = false) String subscribe,
                                     @RequestParam(name = "filestackUrl", required = false) String fileStackLink,
                                     @ModelAttribute User updatedUser) throws IOException {
         User user = usersDao.findById(id)
@@ -181,8 +176,6 @@ public class UserController {
             user.setIs_emailNotifiable(true);
         }
         usersDao.save(user);
-
-//        sendSimpleMessage(keys.getAwsSES(), keys.getAwsSESSecret());
 
         return "redirect:/users/profile";
     }
@@ -216,6 +209,4 @@ public class UserController {
         model.addAttribute("users", usersDao.findAll());
         return "users";
     }
-
-
 }
