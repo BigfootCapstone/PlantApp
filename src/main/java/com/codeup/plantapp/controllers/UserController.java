@@ -109,7 +109,8 @@ public class UserController {
         String city = userFromDb.getCity();
         String weatherKey = keys.getOpenWeather();
         URL url = new URL("https://api.openweathermap.org/data/2.5/weather?zip=" + city + "&appid=" + weatherKey + "&units=imperial");
-        Weather userWeather = getWeather(url);
+        String zipError = "Weather data not available, check zipcode";
+        Weather userWeather = getWeather(url) == null ? new Weather(0, 0, "NA", "NA", "NA", 0, zipError, "NA") : getWeather(url);
 
         // Aggregate all plants in user's garden
         List<GardenPlant> allPlants = gardenPlantDao.findGardenPlantByUser(userFromDb);
