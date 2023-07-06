@@ -23,7 +23,7 @@
         <div class="column search-column">
             <h1 class="text-white">Plant Details</h1>
             <!--------------Plant Details-------------->
-            <div class="container-fluid view-one-box mb-5 p-3 g-0">
+            <div class="view-one-box mb-5 p-3 g-0">
                 <div class="d-flex col-12 justify-content-between mb-2">
                     <div class="d-flex col-5 p-2">
                         <img class="d-flex rounded img-thumbnail" th:src="${plant.image_url}" alt="Plant Photo">
@@ -440,7 +440,6 @@
         createTips();
     },6000)
 
-
     function getCareGuideForPlant(plant) {
         fetch(`/plants/careguide/${plant}`)
             .then(response => response.text())
@@ -457,7 +456,7 @@
     }
     const plant = [[${plant.common_name}]];
     const dbCareGuide = [[${careGuide}]];
-    if (dbCareGuide === "" || document.getElementById("careGuide").innerHTML === "") {
+    if (dbCareGuide === "") {
         document.getElementById("AIWait").classList.remove("d-none");
         createTips();
         getCareGuideForPlant(plant);
