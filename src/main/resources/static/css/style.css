@@ -141,7 +141,7 @@ html {
     height: 45px;
 }
 
-a.btn-sign-text{
+.btn-sign-text{
     color: #FFFFFF;
     font-size: 18px;
 }
@@ -376,6 +376,10 @@ input#search_submit[type="submit"]:hover {
 .home-desc-center {
     display: table-cell;
     vertical-align: middle;
+}
+
+p.home-desc{
+    font-size: 16px;
 }
 
 .home-title .play-icon-circle {
@@ -1008,7 +1012,7 @@ p #guide{
 
 .create-wrapper{
     margin: 25px;
-    width: 1300px;
+    width: 1200px;
     font-size: 20px;
     color: aliceblue;
 }
@@ -1185,24 +1189,37 @@ p #guide{
 /******************
     .Responsive
 *******************/
+@media (max-width: 1210px){
+    .col-sm-5.sign-up{
+        width: 321px;
+        height: 460px;
+    }
+    img.infographic{
+        width: 348px;
+        height: 460px;
+    }
+    .create-wrapper{
+        width: 900px;
+    }
+}
 
-/*@media (min-width: 200px) and (max-width: 1199px) {*/
-/*  .container-fluid {*/
-/*    max-width: 100%;*/
-/*  }*/
-/*}*/
+@media (min-width: 200px) and (max-width: 1199px) {
+  .container-fluid {
+    max-width: 100%;
+  }
+}
 
-/*@media (min-width: 1200px) {*/
-/*  .container-fluid {*/
-/*    max-width: 85%;*/
-/*  }*/
-/*}*/
+@media (min-width: 1200px) {
+  .container-fluid {
+    max-width: 85%;
+  }
+}
 
-/*@media (min-width: 1600px) {*/
-/*  .container-fluid {*/
-/*    max-width: 70%;*/
-/*  }*/
-/*}*/
+@media (min-width: 1600px) {
+  .container-fluid {
+    max-width: 70%;
+  }
+}
 
 
 .navbar-custom {
@@ -1215,7 +1232,7 @@ p #guide{
 
 .fixed-top {
     position: fixed;
-    background: linear-gradient(to right, #0d3830, #176354);
+    background: transparent;
     top: -25px;
     right: 0;
     left: 0;
@@ -1229,14 +1246,9 @@ p #guide{
 
 
 @media (min-width: 992px) {
-
     .column .search {
         justify-content: end;
     }
-}
-
-@media (max-width: 991px) {
-
     .features {
         bottom: 74px;
     }
@@ -1255,18 +1267,13 @@ p #guide{
         display: none;
     }
 
-    /*.navbar-custom .logo img {*/
-    /*  height: 18px;*/
-    /*}*/
-
     .navbar-custom .navbar-nav .nav-item .nav-link {
         transition: all 0.4s;
-        color: rgba(107, 107, 222, 0.8) !important;
         margin: 0px;
         padding: 6px 0px;
     }
     .navbar-custom .navbar-nav .nav-item.active .nav-link {
-        background: linear-gradient(to right, #0d3830, #176354);
+        background: transparent;
     }
     .navbar-toggler {
         font-size: 24px;
@@ -1277,9 +1284,31 @@ p #guide{
     .footer-logo, .footer-desc, .footer-list {
         text-align: center;
     }
+    div.about.col-sm-6{
+        width: 50%;
+    }
 }
 
 @media (min-width: 200px) and (max-width: 768px) {
+    .col-sm-5.sign-up{
+        width: 221px;
+        height: 360px;
+    }
+    img.infographic{
+        width: 248px;
+        height: 360px;
+    }
+    p.home-desc{
+        font-size: 10px;
+    }
+    .btn-sign-text{
+        font-size: 10px;
+    }
+    .btn-sign-up {
+        width: 145px;
+        height: 27px;
+        margin-bottom: 10px;
+    }
     .bg-home {
         padding: 130px 0px;
     }
@@ -1293,6 +1322,44 @@ p #guide{
         margin-top: 20px !important;
     }
 }
+
+@media (max-width: 652px){
+    img.infographic {
+        width: 348px;
+        height: 367px;
+    }
+}
+
+@media (max-width: 598px) {
+    .bg-home{
+        padding: 62px 0px;
+    }
+    .discover{
+        font-size: 18px;
+    }
+    .home-title h2{
+        font-size: 18px;
+    }
+    .col-sm-5.sign-up{
+        width: 320px;
+        height: 320px;
+        margin-bottom: 50px;
+    }
+    img.infographic{
+        width: 348px;
+        height: 360px;
+    }
+    .btn-sign-text{
+        font-size: 10px;
+    }
+    .btn-sign-up {
+        width: 145px;
+        height: 22px;
+        margin-bottom: 10px;
+    }
+}
+
+
 
 @media (max-width: 425px) {
     .features-tab .nav-item .nav-link {
@@ -1316,7 +1383,7 @@ p #guide{
 
 .navbar {
     min-height: 18vh;
-    background: linear-gradient(to right, #0d3830, #176354);
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1424,7 +1491,7 @@ input[type=checkbox] { display: none; }
     }
 
     .menu-auth {
-        top: 66px;
+        top: 70px;
         background-color: var(--black);
     }
 
@@ -1503,7 +1570,22 @@ input[type=checkbox] { display: none; }
         transform: rotate(45deg);
         background: var(--red);
     }
+    .create-wrapper{
+        margin-top: 50px;
+    }
 
+}
+
+@media (max-width: 930px){
+    .create-wrapper{
+        width: 600px;
+    }
+}
+
+@media (max-width: 630px) {
+    .create-wrapper{
+    width: 350px;
+    }
 }
 
 .userGardenList{
