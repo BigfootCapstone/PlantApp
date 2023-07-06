@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 //water scheduler
+import java.time.ZoneOffset;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +15,15 @@ public class Time {
     public static LocalDateTime convertTimestampToLocalDateTime(long timestamp) {
         Instant instant = Instant.ofEpochMilli(timestamp);
         return LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
+    }
+
+    public static LocalDateTime convertUnixTimestampToLocalDateTime(long unixTimestamp) {
+        return LocalDateTime.ofInstant(Instant.ofEpochSecond(unixTimestamp), ZoneOffset.UTC);
+    }
+
+    public static LocalDateTime adjustDateTimeByTimezoneOffset(LocalDateTime dateTime, int timezoneOffsetSeconds) {
+        ZoneOffset offset = ZoneOffset.ofTotalSeconds(timezoneOffsetSeconds);
+        return dateTime.plusSeconds(timezoneOffsetSeconds).atOffset(offset).toLocalDateTime();
     }
 
 //      String weekDay = Weather.getWeekday(usersLocalWeather.getSunset()); // FRIDAY

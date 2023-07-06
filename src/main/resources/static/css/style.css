@@ -8,11 +8,18 @@
 07.Reviews
 08.Contact
 09.footer
-10.Create User
-
-12.Login
-13.Edit Profile
-  .Responsive
+.Login Page
+.Edit Profile
+.Profile
+.Garden Tab
+.Weather Tab
+.Friends Tab
+.Plant Search View
+.Loader
+.Posts Index
+.Posts Create Form
+.Friends Search on Posts Index
+.Responsive
 ********************************/
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Karla:400,700");
 @import url(//db.onlinewebfonts.com/c/7218a2da5a03f622ca18085806382043?family=Pe-icon-7-stroke);
@@ -23,26 +30,14 @@
 /*******************
     1.General
 *******************/
-
-
-/*
-    1.1. Global
-*/
-
-
 .peachy {
     background-color: rgb(244,233,219);
 }
 
-
-html{
-
-}
 body {
     font-family: "Noto Sans", sans-serif;
     font-size: 14px;
     background: linear-gradient(to right, #0d3830, #176354);
-    /*width: 100%;*/
 }
 
 h1 {
@@ -96,7 +91,6 @@ p {
     font-size: 15px;
 }
 
-
 html {
     scroll-padding-top: 57px;
     /* height of sticky header */
@@ -106,7 +100,6 @@ html {
 /*******************
     2.Helper
 *******************/
-
 .section {
     position: relative;
     padding-top: 80px;
@@ -162,6 +155,7 @@ a.btn-sign-text{
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+
 .subtitle{
     color: rgb(239,253,95);
 }
@@ -180,26 +174,6 @@ a.btn-sign-text{
     color: #7036b4;
 }
 
-/**BACK TO TOP**/
-.back-to-top {
-    width: 30px;
-    height: 30px;
-    position: fixed;
-    bottom: 10px;
-    right: 20px;
-    display: none;
-    text-align: center;
-    z-index: 10000;
-    border-radius: 3px;
-    transition: all 0.5s;
-}
-
-.back-to-top i {
-    color: #ffffff;
-    font-size: 22px;
-    display: block;
-    line-height: 30px;
-}
 
 /******************
     3.Navbar
@@ -219,10 +193,6 @@ a.btn-sign-text{
 
 .navbar-custom .logo .logo-light {
     display: inline-block;
-}
-
-.navbar-nav {
-
 }
 
 .logo-text {
@@ -249,7 +219,6 @@ button.nav-buttons{
     border: unset;
     color: #FFFFFF;
 }
-
 
 .navbar-custom .navbar-nav .nav-item .nav-link {
     line-height: 26px;
@@ -298,10 +267,11 @@ button.nav-buttons{
 .homepage .navbar .homelinks{
     margin-right: 44px;
 }
+
+
 /*******************
   4.Search on Nav
 *******************/
-
 li#wrap {
     display: inline-block;
     float: right;
@@ -330,12 +300,10 @@ input#search[type="text"] {
     cursor: pointer;
 }
 
-
 ::placeholder {
     color: #FFFFFF;
     opacity: 1;
 }
-
 
 input#search[type="text"]:focus {
     width: auto;
@@ -345,8 +313,8 @@ input#search[type="text"]:focus {
     background-color: rgba(0, 0, 0, 0.5);
     transition: background-color 1s;
     border-radius: 10px;
-
 }
+
 input#search_submit[type="submit"] {
     height: 67px;
     width: 63px;
@@ -378,12 +346,9 @@ input#search_submit[type="submit"]:hover {
 }
 
 
-
-
 /*******************
     5.Home
 *******************/
-
 .bg-home {
     position: relative;
     padding: 78px 0px 180px;
@@ -401,6 +366,7 @@ input#search_submit[type="submit"]:hover {
     height: 430px;
     width: 670px;
 }
+
 .home-center {
     display: table;
     width: 100%;
@@ -431,7 +397,6 @@ input#search_submit[type="submit"]:hover {
 /*******************
     6.About Us
 *******************/
-
 .about-box {
     background-color: rgb(118, 156, 105);
     border-radius: 10px;
@@ -450,13 +415,11 @@ input#search_submit[type="submit"]:hover {
 /*******************
     7.Reviews
 *******************/
-
 .testers-box {
     position: relative;
     box-shadow: 0 7px 15px 0 rgb(42, 181, 154);
     border-radius: 7px;
 }
-
 
 .testers-box .testers-img img {
     max-width: 64px;
@@ -483,7 +446,6 @@ img.codeup{
 /*******************
     8.Contact
 ********************/
-
 .custom-form .form-group {
     margin-bottom: 24px;
 }
@@ -502,45 +464,25 @@ img.codeup{
 .custom-form .form-group textarea.form-control {
     height: auto;
 }
+
 input.form-control, textarea.form-control{
     background-color: rgb(244,233,219);
-
 }
 
 .form-label{
     color: #FFFFFF;
 }
 
-.error {
-    margin: 8px 0px;
-    display: none;
-    color: #ff5d48;
-}
-
-
-.error_message {
-    padding: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #ff5d48;
-    background-color: #ffdbd7;
-    border-color: #ffdbd7;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
 
 /*******************
     9.footer
 ********************/
-
 .footer {
     padding: 40px 0px 20px 0px;
     background-color: #1f2025;
     margin: 0px 0px 0px 0px;
     max-width: unset;
 }
-
 
 .footer .footer-list li a {
     color: rgba(255, 255, 255, 0.5);
@@ -551,7 +493,6 @@ input.form-control, textarea.form-control{
 .footer .footer-list li a:hover {
     color: #ffffff;
 }
-
 
 .footer .social-links li a {
     display: inline-block;
@@ -572,24 +513,8 @@ input.form-control, textarea.form-control{
 
 
 /******************
-   10.Create User
-*******************/
-
-/*.container.create, .container-fluid.create{*/
-/*    margin-top: 50px;*/
-/*}*/
-
-/*.row.create{*/
-/*    margin-top: 150px;*/
-/*}*/
-
-
-
-
-/******************
    12.Login Page
 *******************/
-
 .login-form{
     max-width: 400px;
     max-height: 400px;
@@ -602,22 +527,28 @@ input.form-control, textarea.form-control{
 .container.create-modded{
     margin-top: 30px;
 }
+
 .panel {
     box-shadow: none;
 }
+
 .panel-heading {
     border-bottom: 0;
 }
+
 .panel-title {
     font-size: 17px;
 }
+
 .panel-title > small {
     font-size: .75em;
     color: #999999;
 }
+
 .panel-body *:first-child {
     margin-top: 0;
 }
+
 .panel-footer {
     border-top: 0;
 }
@@ -631,7 +562,6 @@ input.form-control, textarea.form-control{
         padding-top: 7px;
     }
 }
-
 
 .profile-avatar {
     width: 300px;
@@ -677,10 +607,10 @@ div .delete-profile, .bi-person-x{
     margin: 15px;
 }
 
+
 /******************
   14.Profile
 *******************/
-
 .emp-profile{
     padding: 3%;
     margin-top: 3%;
@@ -698,12 +628,15 @@ div .delete-profile, .bi-person-x{
 .profile-head h3, .profile-head h6, #weather h3, h3.friend-title, h3.garden-type{
     color: rgb(61,132,132);
 }
+
 #weather h3, h3.friend-title, h3.garden-type{
     font-family: Lato, sans-serif;
 }
+
 h6.username{
     color: rgb(233 162 48);
 }
+
 .profile-edit-btn{
     border: 1px solid #F28153;
     border-radius: 10px;
@@ -713,41 +646,45 @@ h6.username{
     color: #F28153;
     cursor: pointer;
 }
+
 .profile-edit-btn:hover{
     color: rgb(61,132,132);
 }
+
 .profile-head-holder{
     height: 150px;
 }
+
 .profile-head .nav-tabs{
     margin-bottom:5%;
 }
+
 .nav-tabs .nav-link.active {
     color: #F28153;
     background-color: #fff;
 }
+
 .nav-tabs .nav-link{
     font-family: Lato, sans-serif;
     font-weight:bold;
     border: none;
 }
+
 .nav-tabs .nav-link.active{
     border: none;
     border-bottom:2px solid rgb(61,132,132);
-}
-.profile-work{
-    padding: 14%;
-    margin-top: -15%;
 }
 
 .profile-tab label{
     font-weight: 600;
     color: rgb(61,132,132);
 }
+
 .profile-tab p{
     font-weight: 600;
     color: rgb(154,167,118);
 }
+
 
 /***************************
         Garden Tab
@@ -755,39 +692,42 @@ h6.username{
 .card-img-top{
     height: 250px;
 }
+
 .card{
     box-shadow: unset;
     background-color: rgb(243,224,200);
 }
+
 .personal-plant-name{
     color: rgb(61,132,132);
     font-size: 20px;
     font-weight: bold;
 }
+
 .card-body p{
     font-weight: unset;
     color: rgb(154,167,118)
 }
+
 .card-plant-warning p{
     color: rgb(154,167,118);
-
 }
+
 .card-plant-warning span{
     color: rgb(161,26,30);
-
 }
+
 .custom-form.profile-plant-add{
     width: 500px;
 }
-.water-delete{
 
-}
 button.watered, button.delete-plant{
     border-radius: 999px;
     height: 44px;
     width: 44px;
     border: none;
 }
+
 button.watered{
     background-color: cornflowerblue;
     box-shadow: 0px 0px 2px 2px rgb(28, 101, 238);
@@ -795,6 +735,7 @@ button.watered{
     top: 10px;
     left: 20px;
 }
+
 button.delete-plant{
     background-color: red;
     box-shadow: 0px 0px 2px 2px rgb(174, 1, 1);
@@ -802,27 +743,34 @@ button.delete-plant{
     top: 10px;
     right: 20px;
 }
+
 label.label-plant-add{
     width: 150px;
     margin: 0px;
 }
+
+
 /***************************
         Weather Tab
 ***************************/
 div.weather-holder{
     width: 800px;
 }
+
 img.weather-icon{
     height: 100px;
     width: 100px;
     margin: unset;
 }
+
 div.weather-holder p {
     margin-bottom: unset;
 }
+
 .weather-desc-holder{
     margin-left: -30px;
 }
+
 .weather-description{
     margin-left: 115px;
 }
@@ -832,49 +780,43 @@ div.weather-holder p {
     border-radius: 10px;
     font-family: Lato, sans-serif;
 }
+
 div.row.warning-body{
     margin-left: 0px;
 }
+
+
 /***************************
         Friends Tab
 ***************************/
 .friend-img-holder{
     margin-left: 37px;
 }
+
 img.friend-img{
     height: 150px;
     width: 150px;
     border: 4px solid rgb(233 162 48);
 }
+
 .friend-req-names{
     padding: unset;
     margin-left: 45px;
 }
+
 .friend-username{
     font-weight: bold;
     color: #F28153;
 }
+
 .accept-reject{
     margin-left: 15px;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /***********************
   15.Plant Search View
 ************************/
-
 .plant-query{
     color: rgba(233, 205, 55, 0.8);
     font-family: Lato, sans-serif;
@@ -900,7 +842,7 @@ img.plantSearchImg{
 }
 
 p.plant-name{
-    width: 343px;
+    /*width: 343px;*/
     height: 60px;
     font-size: 34px;
     color: rgba(253, 229, 180, 0.8);
@@ -914,11 +856,10 @@ li.plant-box, .plant-box, .view-one-box{
     padding-right: unset;
 }
 
-
 p.plant-info, a.plant-info{
     display: flex;
     height: 100px;
-    width: 343px;
+    /*width: 343px;*/
     flex-wrap: wrap;
     font-size: 18px;
     color: rgba(255, 255, 255, 0.8);
@@ -939,21 +880,19 @@ a.search-add{
     padding: 10px;
 }
 
-
 img.cool-cactus{
     max-height: 25px;
     max-width: 25px;
 }
 
-
 .container-fluid.plant-box{
     max-width: unset;
     min-height: 100%;
 }
+
 .row.plant-info-holder{
     padding: 0px 20px 0px 20px;
 }
-
 
 p.plant-name{
     padding-left: 20px;
@@ -968,24 +907,22 @@ p.plant-info.special{
     margin-left: 900px;
 }
 
-
 div #careGuide {
     margin-left:auto;
     margin-right:auto;
     height: 200px;
     overflow: auto;
 }
+
 p #guide{
     float:left;
 }
+
 .add-plant-box{
     position: relative;
     max-width: 1100px;
     padding-right: unset;
 }
-
-
-
 
 
 /******************
@@ -996,8 +933,8 @@ p #guide{
     justify-content: center;
     align-items: center;
     font-family: 'Inconsolata', monospace;
-
 }
+
 #loader{
     top: 0;
     position: fixed;
@@ -1009,6 +946,7 @@ p #guide{
     transition: 1s, visibility 1s;
     /*background-size: cover;*/
 }
+
 .loading-hidden{
     opacity: 0;
     visibility: hidden;
@@ -1018,6 +956,7 @@ p #guide{
     margin: unset;
     align-items: center;
 }
+
 .load-hold{
     display: flex;
     flex-direction: column;
@@ -1028,24 +967,29 @@ p #guide{
     font-size: 25px;
     text-align: center;
     margin-top: 25px;
-
 }
+
 .long-load{
     font-size: 25px;
 }
+
 .tips{
     margin-top: 525px;
     max-width: 500px;
     font-size: 20px;
 }
+
+
 /******************
     .Posts Index
-*******************/.create-btn{
+*******************/
+.create-btn{
     display: flex;
     flex-direction: row;
     margin-bottom: 20px;
     justify-content: space-between;
 }
+
 .post-btn{
     border-radius: 999px;
     border-color: #F28153;
@@ -1061,52 +1005,61 @@ p #guide{
     flex-direction: column;
     gap: 13px;
 }
+
 .create-wrapper{
     margin: 25px;
     width: 1300px;
     font-size: 20px;
     color: aliceblue;
 }
+
 .create-header{
     color: #F28153;
-
 }
+
 #view-post-btn{
     display: flex;
     justify-content: flex-end;
 }
+
 #create-button{
     height: 100px;
     width: 100px;
 }
+
 .post-edit-btn{
   background-color: #15594B;
   border-color: #15594B;
   max-width: 100px;
-
 }
+
 #edit-btn{
   display: flex;
   justify-content: flex-end;
 }
+
 .post-index-btn{
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   gap: 6px;
 }
+
 .all-post{
     display: flex;
     flex-direction: column-reverse;
 }
+
 .show-post-row{
     margin: 40px;
 }
+
 .back-to-post{
     position: absolute;
     left: 80px;
     margin-bottom: 10px;
 }
+
 .post{
     display: flex;
     justify-content: center;
@@ -1116,9 +1069,11 @@ p #guide{
     position:relative;
     margin-bottom: 25px;
 }
+
 .view-post{
     max-width: 750px;
 }
+
 .post-row{
     background-color: #176152e6;
     color: white;
@@ -1126,6 +1081,7 @@ p #guide{
     border-radius: 5px;
     margin-bottom: 15px;
 }
+
 .post-user-peek{
     display: flex;
     flex-direction: row;
@@ -1138,18 +1094,22 @@ p #guide{
     color: white;
     border-radius: 5px;
 }
+
 .add-comment{
     padding-bottom: 10px;
 }
+
 #content, #body, #title{
     display: flex;
     width: 100%;
     margin-bottom: 10px;
     min-height: 100px;
 }
+
 .edit-form{
     margin-bottom: 90px;
 }
+
 .post-img{
     max-height: 62px;
     max-width: 62px;
@@ -1157,6 +1117,8 @@ p #guide{
     min-height: 62px;
     min-width: 62px;
 }
+
+
 /************************************
   XX.FRIENDS SEARCH ON POSTS INDEX
 *************************************/
@@ -1199,8 +1161,6 @@ p #guide{
     text-decoration: none;
     display: block;
 }
-
-/*.dropdown-content div .row:hover {background-color: #f1f1f1}*/
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
@@ -1343,7 +1303,6 @@ p #guide{
     }
 }
 
-/*# sourceMappingURL=style.css.map */
 
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
@@ -1390,12 +1349,6 @@ p #guide{
     padding: 2px 8px;
     list-style: none;
 }
-
-/*.menu li:hover {*/
-/*    border-radius: 5px;*/
-/*    transition: 0.3s ease;*/
-/*}*/
-
 
 /* DROPDOWN MENU */
 .services { position: relative; }
@@ -1444,7 +1397,7 @@ input[type=checkbox] { display: none; }
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 980px) {
     .navbar {
         min-height: unset;
     }
@@ -1479,14 +1432,6 @@ input[type=checkbox] { display: none; }
         padding: 8px 0;
     }
 
-    /*.menu li:hover {*/
-    /*    display: inline-block;*/
-    /*}*/
-
-    .menu li + li {
-        /*margin-top: 12px;*/
-    }
-
     input[type=checkbox]:checked ~ .menu {
         display: block;
         z-index: 3;
@@ -1501,10 +1446,6 @@ input[type=checkbox] { display: none; }
         top: 30px;
         transform: translateX(35%);
     }
-
-    /*.dropdown li:hover {*/
-    /*    background-color: var(--green);*/
-    /*}*/
 
     .nav-links .checkbox {
         position: absolute;
