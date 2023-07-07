@@ -136,7 +136,7 @@
                     <div class="d-flex col mb-5">
                         <input type="hidden" name="id" th:attr="value=${user.id}" />
                         <button type="submit" class="btn btn-custom" value="save">Save</button>
-                        <button type="reset" class="btn cancel-nav-link">Cancel</button>
+                        <a type="reset" class="btn cancel-nav-link" id="cancel-edit" th:href="@{/users/profile}">Cancel</a>
                         <div>
                             <a class="col font-18 delete-profile" th:href="@{/users/{id}/delete(id=${user.id})}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-person-x" viewBox="0 0 16 16">

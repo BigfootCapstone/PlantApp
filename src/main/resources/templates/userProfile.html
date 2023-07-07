@@ -222,7 +222,7 @@
                                 <div th:unless="${! #lists.isEmpty(userPlants)}">
                                     <form class="d-flex custom-form profile-plant-add" action="#" th:action="@{/plants/search}" method="post">
                                         <label class="d-flex label-plant-add justify-content-center align-self-center">Add A Plant!</label>
-                                        <input  class="form-control" type="text" name="query" placeholder="Search for your plant..." required autocomplete="on">
+                                        <input  class="form-control" id="plant-add" type="text" name="query" placeholder="Search for your plant..." required autocomplete="on">
                                         <input  class="btn-custom ms-3" value="Search" type="submit">
                                     </form>
                                 </div>

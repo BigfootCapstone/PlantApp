@@ -1,5 +1,5 @@
 /*******************************
-01.General
+01.General/Root
 02.Helper
 03.Navbar
 04.Search On Nav
@@ -29,8 +29,16 @@
 
 
 /*******************
-    1.General
+    1.General/Root
 *******************/
+:root {
+    --terracota: #F28153;
+    --hoverTerracota: #F9C0A9;
+    --lightTerracota: rgb(242,197,116);
+    --emerald: rgb(61,132,132);
+    --lemonyellow: rgb(239,253,95);
+    --white: #FFFFFF;
+}
 .peachy {
     background-color: rgb(244,233,219);
 }
@@ -127,9 +135,9 @@ p {
 .btn-custom {
     display: flex;
     border-radius: 7px;
-    color: #ffffff !important;
-    background-color: #f28153;
-    border: 1px solid #F28153;
+    color: var(--white) !important;
+    background-color: var(--terracota);
+    border: 1px solid var(--terracota);
 }
 
 .btn-sign-up{
@@ -138,26 +146,26 @@ p {
 }
 
 .btn-sign-text{
-    color: #FFFFFF;
+    color: var(--white);
     font-size: 18px;
 }
 
 .btn-custom:hover, .btn-custom:focus, .btn-custom:active {
-    background-color: #F9C0A9;
+    background-color: var(--hoverTerracota);
 }
 
 .small-title {
-    color: #FFFFFF;
+    color: var(--white);
     text-transform: uppercase;
     letter-spacing: 2px;
 }
 
 .subtitle{
-    color: rgb(239,253,95);
+    color: var(--lemonyellow);
 }
 
 .quote{
-    color: rgb(242,197,116);
+    color: var(--lightTerracota);
 }
 
 .sign-up{
@@ -199,7 +207,7 @@ p {
 
 .navbar-custom .navbar-nav .nav-item .nav-link {
     line-height: 26px;
-    color: #FFFFFF;
+    color: var(--white);
     transition: all 0.4s;
     padding: 6px 10px;
     margin: 0 20px;
@@ -210,7 +218,7 @@ p {
     font-size: 24px;
     margin-top: 5px;
     margin-bottom: 0px;
-    color: #ffffff;
+    color: var(--white);
 }
 
 .navbar-toggler:focus {
@@ -223,7 +231,7 @@ p {
 .navbar-custom {
     margin-top: 0px;
     padding: 10px 0px;
-    background-color: #ffffff;
+    background-color: var(--white);
     box-shadow: 0 10px 33px -14px rgba(0, 0, 0, 0.1);
 }
 
@@ -268,7 +276,7 @@ p {
 }
 
 .nav-item:hover button {
-    color: #F28153;
+    color: var(--terracota);
 }
 
 
@@ -287,7 +295,7 @@ li#wrap {
 input#search[type="text"] {
     height: 60px;
     font-size: 30px;
-    color: #F28153;
+    color: var(--terracota);
     display: inline-block;
     font-family: "Lato", sans-serif;
     font-weight: 100;
@@ -306,14 +314,14 @@ input#search[type="text"] {
 }
 
 ::placeholder {
-    color: #FFFFFF;
+    color: var(--white);
     opacity: 1;
 }
 
 input#search[type="text"]:focus {
     width: auto;
     z-index: 1;
-    border-bottom: 1px solid #F28153;
+    border-bottom: 1px solid var(--terracota);
     cursor: text;
     background-color: rgba(0, 0, 0, 0.5);
     transition: background-color 1s;
@@ -324,7 +332,7 @@ input#search_submit[type="submit"] {
     height: 67px;
     width: 63px;
     display: inline-block;
-    color: #F28153;
+    color: var(--terracota);
     float: right;
     background: url(./images/search.png);
     text-indent: -10000px;
@@ -388,7 +396,7 @@ p.home-desc{
 }
 
 .home-title .play-icon-circle {
-    background: #ffffff;
+    background: var(--white);
     height: 80px;
     width: 80px;
     line-height: 36px;
@@ -476,11 +484,11 @@ img.codeup{
 }
 
 input.form-control, textarea.form-control{
-    background-color: rgb(244,233,219);
+    background-color: rgb(243,224,200)
 }
 
 .form-label{
-    color: #FFFFFF;
+    color: var(--white);
 }
 
 
@@ -501,7 +509,7 @@ input.form-control, textarea.form-control{
 }
 
 .footer .footer-list li a:hover {
-    color: #ffffff;
+    color: var(--white);
 }
 
 .footer .social-links li a {
@@ -517,8 +525,8 @@ input.form-control, textarea.form-control{
 }
 
 .footer .social-links li a:hover {
-    color: #ffffff;
-    border-color: #ffffff;
+    color: var(--white);
+    border-color: var(--white);
 }
 
 
@@ -585,13 +593,13 @@ input::file-selector-button {
     font-weight: bold;
     padding: 0.5em;
     border-radius: 7px;
-    color: #ffffff !important;
-    background-color: #f28153;
-    border: 1px solid #F28153;
+    color: var(--white) !important;
+    background-color: var(--terracota);
+    border: 1px solid var(--terracota);
 }
 
 input[type="file"]::file-selector-button:hover {
-    background-color: #F9C0A9;
+    background-color: var(--hoverTerracota);
     transition: 1s;
 }
 
@@ -603,7 +611,7 @@ input[type='file'] {
 .cancel-nav-link {
     display: block;
     padding: 8px 16px;
-    color: #FFFFFF;
+    color: var(--white);
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
 }
 
@@ -617,6 +625,9 @@ div .delete-profile, .bi-person-x{
     margin: 15px;
 }
 
+#cancel-edit:hover{
+    color: red;
+}
 
 /******************
   14.Profile
@@ -635,30 +646,30 @@ div .delete-profile, .bi-person-x{
     border: 4px solid rgb(233 162 48);
 }
 
-.profile-head h3, .profile-head h6, #weather h3, h3.friend-title, h3.garden-type{
-    color: rgb(61,132,132);
+.profile-head h3, .profile-head h6, #weather h3, h3.friend-title, h3.garden-type, #journal h3{
+    color: var(--emerald);
 }
 
-#weather h3, h3.friend-title, h3.garden-type{
+#weather h3, h3.friend-title, h3.garden-type, #journal h3{
     font-family: Lato, sans-serif;
 }
 
-h6.username{
+h6.username, span.username{
     color: rgb(233 162 48);
 }
 
 .profile-edit-btn{
-    border: 1px solid #F28153;
+    border: 1px solid var(--terracota);
     border-radius: 10px;
     width: 70%;
     padding: 2%;
     font-weight: 600;
-    color: #F28153;
+    color: var(--terracota);
     cursor: pointer;
 }
 
 .profile-edit-btn:hover{
-    color: rgb(61,132,132);
+    color: var(--emerald);
 }
 
 .profile-head-holder{
@@ -670,7 +681,7 @@ h6.username{
 }
 
 .nav-tabs .nav-link.active {
-    color: #F28153;
+    color: var(--terracota);
     background-color: #fff;
 }
 
@@ -682,12 +693,12 @@ h6.username{
 
 .nav-tabs .nav-link.active{
     border: none;
-    border-bottom:2px solid rgb(61,132,132);
+    border-bottom:2px solid var(--emerald);
 }
 
 .profile-tab label{
     font-weight: 600;
-    color: rgb(61,132,132);
+    color: var(--emerald);
 }
 
 .profile-tab p{
@@ -715,7 +726,7 @@ h6.username{
 }
 
 .personal-plant-name{
-    color: rgb(61,132,132);
+    color: var(--emerald);
     font-size: 20px;
     font-weight: bold;
 }
@@ -763,8 +774,16 @@ button.delete-plant{
 label.label-plant-add{
     width: 150px;
     margin: 0px;
+    color: var(--terracota);
 }
 
+input#plant-add::placeholder{
+    color: var(--emerald);
+}
+
+input#plant-add{
+    border-color: var(--terracota);
+}
 
 /***************************
         Weather Tab
@@ -800,7 +819,7 @@ img.friend-img{
 
 .friend-username{
     font-weight: bold;
-    color: #F28153;
+    color: var(--terracota);
 }
 
 .accept-reject{
@@ -832,7 +851,7 @@ img.plantSearchImg{
     height: 400px;
     width: 400px;
     border-radius: 999px;
-    border: 5px solid #FFFFFF;
+    border: 5px solid var(--white);
 }
 
 p.plant-name{
@@ -861,12 +880,12 @@ p.plant-info, a.plant-info{
 }
 
 a.plant-info{
-    color: #F28153;
+    color: var(--terracota);
 }
 
 a.search-add{
-    background-color: #F28153;
-    color: #FFFFFF;
+    background-color: var(--terracota);
+    color: var(--white);
     font-size: 18px;
     width: 250px;
     height: 45px;
@@ -986,8 +1005,8 @@ p #guide{
 
 .post-btn{
     border-radius: 999px;
-    border-color: #F28153;
-    background-color: #F28153;
+    border-color: var(--terracota);
+    background-color: var(--terracota);
 }
 
 
@@ -1008,7 +1027,7 @@ p #guide{
 }
 
 .create-header{
-    color: #F28153;
+    color: var(--terracota);
 }
 
 #view-post-btn{
@@ -1117,7 +1136,7 @@ p #guide{
   XX.FRIENDS SEARCH ON POSTS INDEX
 *************************************/
 .dropbtn {
-    background-color: #ffffff1c;
+    background-color: var(--white)1c;
     width: 100%;
     color: white;
     font-size: 16px;
@@ -1250,7 +1269,7 @@ p #guide{
         font-size: 24px;
         margin-top: 0px;
         margin-bottom: 0px;
-        color: #FFFFFF;
+        color: var(--white);
     }
     .footer-logo, .footer-desc, .footer-list {
         text-align: center;
