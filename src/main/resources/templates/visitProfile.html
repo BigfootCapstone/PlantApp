@@ -35,7 +35,7 @@
         <!--Start Profile Header-->
         <div class="col-md-6">
           <div class="profile-head">
-            <h5  class="subtitle" th:text="${owner.first_name} + ' ' + ${owner.last_name}"></h5>
+            <h5 th:text="${owner.first_name} + ' ' + ${owner.last_name}"></h5>
             <h6 class="quote" th:text="${owner.username}"></h6>
             <h6 class="quote" th:text="'Date Joined: ' + ${owner.created_at}"></h6>
             <p th:text="${owner.city}"></p>
@@ -55,7 +55,7 @@
 
 <div class="col" th:if="${allPosts}">
 
-  <h1 class="text-white">Posts by <span class="text-info" th:text="${owner.username}"></span></h1>
+  <h1 class="text-white col">Posts by <span class="text-info" th:text="${owner.username}"></span></h1>
   <div th:each="post : ${allPosts}">
 
     <div class="card container" style="width: 100%">
