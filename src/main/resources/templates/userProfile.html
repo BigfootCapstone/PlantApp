@@ -130,9 +130,9 @@
                                 <!--Start of Garden Cards-->
                                 <!-- Section for outdoor plants -->
                                 <h3 class="col-12 garden-type">Outdoor Plants</h3>
-                                <div class="userGardenList d-flex flex-wrap gap-5 grow g-0">
+                                <div class="userGardenList d-flex flex-wrap grow g-0">
                                     <th:block th:if="${! #lists.isEmpty(userPlants)}">
-                                        <div class="card" style="min-width: 333px;" th:each="plant : ${userPlants}"
+                                        <div class="card ms-4" style="width: 250px;" th:each="plant : ${userPlants}"
                                              th:if="${plant.is_outside}">
                                             <img th:src="${plant.plant.image_url}" class="card-img-top" alt="User Plant">
                                             <div class="card-body">
@@ -178,9 +178,9 @@
 
                                 <!-- Section for indoor plants -->
                                 <h3 class="col-12 mt-3 garden-type">Indoor Plants</h3>
-                                <div class="userGardenList d-flex gap-5 grow g-0">
+                                <div class="userGardenList d-flex flex-wrap grow g-0">
                                     <th:block th:if="${! #lists.isEmpty(userPlants)}">
-                                        <div class="card" style="min-width: 250px;" th:each="plant : ${userPlants}"
+                                        <div class="card ms-4" style="width: 250px;" th:each="plant : ${userPlants}"
                                              th:if="${!plant.is_outside}">
                                             <img th:src="${plant.plant.image_url}" class="card-img-top" alt="User Plant">
                                             <div class="card-body">
