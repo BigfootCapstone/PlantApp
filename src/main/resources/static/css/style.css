@@ -92,11 +92,6 @@ p {
     font-size: 15px;
 }
 
-html {
-    scroll-padding-top: 57px;
-    /* height of sticky header */
-}
-
 
 /*******************
     2.Helper
@@ -715,6 +710,8 @@ h6.username{
 .card{
     box-shadow: unset;
     background-color: rgb(243,224,200);
+    width: 333px;
+
 }
 
 .personal-plant-name{
@@ -958,7 +955,7 @@ p #guide{
     top: 0;
     position: fixed;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: #368679 url("https://cdn.dribbble.com/users/3651832/screenshots/13959869/media/4c2ed7c84e517248523388f6ad9cb450.gif") no-repeat center;
     background-position-y: center;
     z-index: 9999999999;
@@ -1209,7 +1206,12 @@ p #guide{
         max-width: 70%;
     }
 }
-
+@media (max-width: 1400px) {
+    .card{
+        max-width: 250px;
+    }
+    
+}
 @media (max-width: 1210px){
     .col-sm-5.sign-up{
         width: 321px;
@@ -1231,11 +1233,19 @@ p #guide{
 }
 
 @media (min-width: 200px) and (max-width: 1199px) {
-  .container-fluid {
+    .container-fluid {
     max-width: 100%;
-  }
+    }
+    .card{
+        max-width: 225px;
+    }
 }
 
+@media (max-width: 1030px) {
+    .emp-profile{
+        margin-top: 65px;
+    }
+}
 @media (min-width: 992px) {
     .column .search {
         justify-content: end;
@@ -1275,8 +1285,13 @@ p #guide{
     .footer-logo, .footer-desc, .footer-list {
         text-align: center;
     }
-}
 
+}
+@media (max-width: 991px) {
+    .card{
+        max-width: 291px;
+    }
+}
 @media (min-width: 200px) and (max-width: 768px) {
     .col-sm-5.sign-up{
         width: 221px;
@@ -1309,6 +1324,13 @@ p #guide{
     .mo-mt-20 {
         margin-top: 20px !important;
     }
+    .profile-edit-btn {
+        width: 100%;
+    }
+    .card{
+        max-width: 213px;
+    }
+
 }
 
 @media (max-width: 652px){
@@ -1351,8 +1373,24 @@ p #guide{
     .checkbox{
         margin-left: 50px;
     }
+    .userGardenList.gap-5{
+        gap: unset !important;
+        gap: 75px !important; /* Adjust the desired gap value */
+    }
 }
 
+
+
+@media (max-width: 541px) {
+    .userGardenList.gap-5{
+        gap: 46px !important;
+    }
+}
+@media (max-width: 511px){
+    .userGardenList.gap-5{
+        gap: 15px !important;
+    }
+}
 @media (max-width: 425px) {
     .features-tab .nav-item .nav-link {
         padding: 14px;
@@ -1440,7 +1478,7 @@ input[type=checkbox] { display: none; }
         top: 18px;
     }
     #search-style {
-        min-width: 100vw;
+        min-width: 95vw;
     }
     #search-style {
         top: 9px;
