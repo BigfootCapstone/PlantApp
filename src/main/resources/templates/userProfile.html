@@ -25,7 +25,7 @@
 <!-- Navbar End -->
 
 <!-- Start Page Container -->
-<div class="d-flex container create justify-content-center align-content-center">
+<div class="d-flex container justify-content-center align-content-center">
     <!--Start Profile-->
     <div class="container emp-profile">
         <form method="post">
@@ -50,7 +50,7 @@
                 <!--End Profile Img-->
 
                 <!--Start Profile Header User Info-->
-                <div class="col-sm-6 profile-head-holder">
+                <div class="col-md-6 col-sm-12 profile-head-holder">
                     <div class="profile-head">
                         <h3  class="" th:text="${user.first_name} + ' ' + ${user.last_name}"></h3>
                         <h6 class="username" th:text="${user.username}"></h6>
@@ -132,8 +132,7 @@
                                 <h3 class="col-12 garden-type">Outdoor Plants</h3>
                                 <div class="userGardenList d-flex flex-wrap grow g-0">
                                     <th:block th:if="${! #lists.isEmpty(userPlants)}">
-                                        <div class="card ms-4" style="width: 250px;" th:each="plant : ${userPlants}"
-                                             th:if="${plant.is_outside}">
+                                        <div class="card ms-4" style="width: 250px;" th:each="plant : ${userPlants}" th:if="${plant.is_outside}">
                                             <img th:src="${plant.plant.image_url}" class="card-img-top" alt="User Plant">
                                             <div class="card-body">
                                                 <a id="plant" class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
@@ -180,8 +179,7 @@
                                 <h3 class="col-12 mt-3 garden-type">Indoor Plants</h3>
                                 <div class="userGardenList d-flex flex-wrap grow g-0">
                                     <th:block th:if="${! #lists.isEmpty(userPlants)}">
-                                        <div class="card ms-4" style="width: 250px;" th:each="plant : ${userPlants}"
-                                             th:if="${!plant.is_outside}">
+                                        <div class="card ms-4" style="width: 250px;" th:each="plant : ${userPlants}" th:if="${!plant.is_outside}">
                                             <img th:src="${plant.plant.image_url}" class="card-img-top" alt="User Plant">
                                             <div class="card-body">
                                                 <a id="plant2" class="personal-plant-name" th:href="@{/plants/garden/{id}(id=${plant.id})}">
@@ -299,7 +297,7 @@
                                     <p class="d-flex weather-description mb-2" th:text="${weather.getCloudDesc()}"></p>
                                 </div>
                                 <div class="d-flex row-cols-1 mb-5 justify-content-center">
-                                    <div class="col-lg-3 mb-2">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 todays-weather mb-2">
                                         <div class="d-flex gap-3">
                                             <label>Temp:</label>
                                             <p class="mb-2" th:text="${weather.getTempAvg()} + ' &#8457;'"></p>
@@ -313,7 +311,7 @@
                                             <p class="mb-2" th:text="${weather.getCloudiness()}"></p>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3 mb-2">
+                                    <div class="col-lg-3 col-md-3 col-sm-3 todays-weather mb-2">
                                         <div class="d-flex gap-3">
                                             <label>Humidity:</label>
                                             <p class="mb-2" th:text="${weather.getHumidity() + '%'}"></p>

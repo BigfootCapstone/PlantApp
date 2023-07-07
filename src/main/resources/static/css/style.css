@@ -19,7 +19,8 @@
 .Posts Index
 .Posts Create Form
 .Friends Search on Posts Index
-.Responsive
+.Media Queries
+.Navbar Hamburger Menu/Media Queries
 ********************************/
 @import url("https://fonts.googleapis.com/css?family=Noto+Sans:400,700|Karla:400,700");
 @import url(//db.onlinewebfonts.com/c/7218a2da5a03f622ca18085806382043?family=Pe-icon-7-stroke);
@@ -89,11 +90,6 @@ a {
 p {
     line-height: 1.6;
     font-size: 15px;
-}
-
-html {
-    scroll-padding-top: 57px;
-    /* height of sticky header */
 }
 
 
@@ -178,9 +174,7 @@ html {
 /******************
     3.Navbar
 *******************/
-.column.top{
-    width: unset;
-}
+
 
 .navbar-custom {
     padding: 20px 0px;
@@ -203,23 +197,6 @@ html {
     text-shadow: 0px 2px 4px #2ab59a;
 }
 
-.noAction{
-    background-color: #92ACA8;
-    border-color: #F28153;
-    width: 115px;
-    height: 25px;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 0px;
-}
-
-button.nav-buttons{
-    background-color: transparent;
-    box-shadow: unset;
-    border: unset;
-    color: #FFFFFF;
-}
-
 .navbar-custom .navbar-nav .nav-item .nav-link {
     line-height: 26px;
     color: #FFFFFF;
@@ -227,10 +204,6 @@ button.nav-buttons{
     padding: 6px 10px;
     margin: 0 20px;
     font-family: "Karla", sans-serif;
-}
-
-.navbar-custom .navbar-nav .nav-item .nav-link:hover, .navbar-custom .navbar-nav .nav-item .nav-link.active, .navbar-custom .navbar-nav .nav-item .nav-link:active, #home-tab.nav-link:hover, #garden-tab.nav-link:hover, #journal-tab.nav-link:hover, #weather-tab.nav-link:hover, #friends-tab.nav-link:hover, .personal-plant-name:hover{
-    color: #F28153;
 }
 
 .navbar-toggler {
@@ -244,29 +217,61 @@ button.nav-buttons{
     box-shadow: 0 0 0 2px rgba(172, 8, 8, 0.5);
 }
 
+
+
 /*--- navbar sticky ---*/
-.nav-sticky.navbar-custom {
+.navbar-custom {
     margin-top: 0px;
     padding: 10px 0px;
     background-color: #ffffff;
     box-shadow: 0 10px 33px -14px rgba(0, 0, 0, 0.1);
 }
 
-.nav-sticky.navbar-custom .logo .logo-dark {
+.navbar-custom .logo .logo-dark {
     display: inline-block;
 }
 
-.nav-sticky.navbar-custom .logo .logo-light {
+.navbar-custom .logo .logo-light {
     display: none;
 }
 
-.nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link:hover, .nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link.active, .nav-sticky.navbar-custom .navbar-nav .nav-item .nav-link:active {
+.navbar-custom .navbar-nav .nav-item .nav-link:hover, .navbar-custom .navbar-nav .nav-item .nav-link.active, .navbar-custom .navbar-nav .nav-item .nav-link:active {
     color: #FFCBA5;
 }
 
 .homepage .navbar .homelinks{
     margin-right: 44px;
 }
+
+.navbar-custom {
+    padding: 20px 0px;
+    width: 100%;
+    margin-bottom: 0px;
+    transition: all 0.5s ease-in-out;
+}
+
+.fixed-top {
+    position: fixed;
+    background: transparent;
+    top: -25px;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    padding: 51px 0px 0px;
+    width: 100%;
+    margin-bottom: 0px;
+    transition: all 0.5s ease-in-out;
+}
+
+.nav-item button{
+    color: white;
+}
+
+.nav-item:hover button {
+    color: #F28153;
+}
+
+
 
 
 /*******************
@@ -694,6 +699,10 @@ h6.username{
 /***************************
         Garden Tab
 ***************************/
+.userGardenList{
+    max-width: 1200px;
+}
+
 .card-img-top{
     height: 250px;
 }
@@ -701,6 +710,8 @@ h6.username{
 .card{
     box-shadow: unset;
     background-color: rgb(243,224,200);
+    width: 333px;
+
 }
 
 .personal-plant-name{
@@ -944,7 +955,7 @@ p #guide{
     top: 0;
     position: fixed;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     background: #368679 url("https://cdn.dribbble.com/users/3651832/screenshots/13959869/media/4c2ed7c84e517248523388f6ad9cb450.gif") no-repeat center;
     background-position-y: center;
     z-index: 9999999999;
@@ -1187,9 +1198,15 @@ p #guide{
 
 
 /*****************************************KEEP THIS LAST ON HERE PLEASE*******************************************************/
-/******************
-    .Responsive
-*******************/
+/**********************
+    .Media Queries
+***********************/
+@media (min-width: 1600px) {
+    .container-fluid {
+        max-width: 70%;
+    }
+}
+
 @media (max-width: 1210px){
     .col-sm-5.sign-up{
         width: 321px;
@@ -1204,48 +1221,23 @@ p #guide{
     }
 }
 
-@media (min-width: 200px) and (max-width: 1199px) {
-  .container-fluid {
-    max-width: 100%;
-  }
-}
-
 @media (min-width: 1200px) {
-  .container-fluid {
-    max-width: 85%;
-  }
+    .container-fluid {
+        max-width: 85%;
+    }
 }
 
-@media (min-width: 1600px) {
-  .container-fluid {
-    max-width: 70%;
-  }
+@media (min-width: 200px) and (max-width: 1199px) {
+    .container-fluid {
+    max-width: 100%;
+    }
 }
 
-
-.navbar-custom {
-    padding: 20px 0px;
-    width: 100%;
-    margin-bottom: 0px;
-    transition: all 0.5s ease-in-out;
+@media (max-width: 1030px) {
+    .emp-profile{
+        margin-top: 65px;
+    }
 }
-
-
-.fixed-top {
-    position: fixed;
-    background: transparent;
-    top: -25px;
-    right: 0;
-    left: 0;
-    z-index: 1030;
-    padding: 51px 0px 0px;
-    width: 100%;
-    margin-bottom: 0px;
-    transition: all 0.5s ease-in-out;
-
-}
-
-
 @media (min-width: 992px) {
     .column .search {
         justify-content: end;
@@ -1285,6 +1277,7 @@ p #guide{
     .footer-logo, .footer-desc, .footer-list {
         text-align: center;
     }
+
 }
 
 @media (min-width: 200px) and (max-width: 768px) {
@@ -1318,6 +1311,9 @@ p #guide{
     }
     .mo-mt-20 {
         margin-top: 20px !important;
+    }
+    .profile-edit-btn {
+        width: 100%;
     }
 }
 
@@ -1358,23 +1354,37 @@ p #guide{
     img.codeup{
         margin-left: 192px;
     }
+    .checkbox{
+        margin-left: 50px;
+    }
+    .userGardenList.gap-5{
+        gap: unset !important;
+        gap: 75px !important; /* Adjust the desired gap value */
+    }
 }
 
 
 
+@media (max-width: 541px) {
+    .userGardenList.gap-5{
+        gap: 46px !important;
+    }
+}
+@media (max-width: 511px){
+    .userGardenList.gap-5{
+        gap: 15px !important;
+    }
+}
 @media (max-width: 425px) {
     .features-tab .nav-item .nav-link {
         padding: 14px;
-    }
-    .cta {
-        padding: 24px !important;
     }
 }
 
 
 /*
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
-|><<>><<>><<>><<>><<>><<>><<>>     NAVAR TEST     <<>><<>><<>><<>><<>><<>><<>><|
+|><<>><<>><<>><<>>     NAVBAR Hamburger Menu/Media Queries     <>><<>><<>><<>><|
 |><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><<>><|
 */
 :root {
@@ -1452,7 +1462,7 @@ input[type=checkbox] { display: none; }
         top: 18px;
     }
     #search-style {
-        min-width: 100vw;
+        min-width: 95vw;
     }
     #search-style {
         top: 9px;
@@ -1585,10 +1595,6 @@ input[type=checkbox] { display: none; }
 
 @media (max-width: 630px) {
     .create-wrapper{
-    width: 350px;
+        width: 350px;
     }
-}
-
-.userGardenList{
-    max-width: 1200px;
 }
