@@ -24,49 +24,49 @@
                     <div class="nb-li col">
                         <li class="mx-1 nav-item" >
                             <form th:action="@{/users/about}" >
-                                <button class="btn text-white ">About</button>
+                                <button class="btn  ">About</button>
                             </form>
                         </li>
                     </div>
                     <div class="nb-li col" sec:authorize="!isAuthenticated()">
                         <li class="mx-1 nav-item">
                             <form th:action="@{/#reviews}">
-                                <button  class="btn text-white ">Reviews</button>
+                                <button  class="btn  ">Reviews</button>
                             </form>
                         </li>
                     </div>
                     <div class="nb-li col" sec:authorize="!isAuthenticated()">
                         <li class="mx-1 nav-item">
                             <form th:action="@{/#contact}" >
-                                <button class="btn text-white ">Contact</button>
+                                <button class="btn  ">Contact</button>
                             </form>
                         </li>
                     </div>
                     <div class="nb-li col" sec:authorize="!isAuthenticated()">
                         <li class="mx-1 nav-item">
                             <form th:action="@{/users/login}" th:method="get">
-                                <button  class="btn text-white active" >Login</button>
+                                <button  class="btn  active" >Login</button>
                             </form>
                         </li>
                     </div>
                     <div class="nb-li col" sec:authorize="isAuthenticated()">
                         <li class="mx-1 nav-item">
                             <form th:action="@{/posts/all}" >
-                                <button class="btn text-white ">Social</button>
+                                <button class="btn  ">Social</button>
                             </form>
                         </li>
                     </div>
                     <div class="nb-li col" sec:authorize="isAuthenticated()">
                         <li class="mx-1 nav-item">
                             <form th:action="@{/users/profile}" >
-                                <button class="btn text-white" >Profile</button>
+                                <button class="btn " >Profile</button>
                             </form>
                         </li>
                     </div>
                     <div class="nb-li col" sec:authorize="isAuthenticated()">
                         <li class="mx-1 nav-item">
                             <form th:action="@{/logout}" th:method="post">
-                                <button class="btn text-white active" >Logout</button>
+                                <button class="btn  active" >Logout</button>
                             </form>
                         </li>
                     </div>
