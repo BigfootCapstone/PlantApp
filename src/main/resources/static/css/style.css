@@ -769,10 +769,6 @@ label.label-plant-add{
 /***************************
         Weather Tab
 ***************************/
-div.weather-holder{
-    width: 800px;
-}
-
 img.weather-icon{
     height: 100px;
     width: 100px;
@@ -781,24 +777,6 @@ img.weather-icon{
 
 div.weather-holder p {
     margin-bottom: unset;
-}
-
-.weather-desc-holder{
-    margin-left: -30px;
-}
-
-.weather-description{
-    margin-left: 115px;
-}
-
-.weather-warning{
-    background-color: rgb(198,108,106);
-    border-radius: 10px;
-    font-family: Lato, sans-serif;
-}
-
-div.row.warning-body{
-    margin-left: 0px;
 }
 
 
@@ -1357,24 +1335,8 @@ p #guide{
     .checkbox{
         margin-left: 50px;
     }
-    .userGardenList.gap-5{
-        gap: unset !important;
-        gap: 75px !important; /* Adjust the desired gap value */
-    }
 }
 
-
-
-@media (max-width: 541px) {
-    .userGardenList.gap-5{
-        gap: 46px !important;
-    }
-}
-@media (max-width: 511px){
-    .userGardenList.gap-5{
-        gap: 15px !important;
-    }
-}
 @media (max-width: 425px) {
     .features-tab .nav-item .nav-link {
         padding: 14px;

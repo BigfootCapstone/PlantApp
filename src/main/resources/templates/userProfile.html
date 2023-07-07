@@ -94,7 +94,7 @@
             <div class="row mb-3">
                 <!--Start of User Info Tab Panel-->
                 <div class="d-flex justify-content-center mb-3">
-                    <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-content profile-tab w-100" id="myTabContent">
                         <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="home-tab">
                             <div class="d-flex row grow g-0 mt-3 mb-3">
                                 <div class="col-md-6">
@@ -285,46 +285,46 @@
                         </div>
                         <!--Start of Weather Tab Panel-->
                         <div class="tab-pane fade" id="weather" role="tabpanel" aria-labelledby="weather-tab">
-                            <div class="d-flex weather-title justify-content-center">
-                                <h3 class="">Today's Weather</h3>
-                            </div>
-                            <div class="weather-holder" th:if="${weather}">
-                                <div class="d-flex weather-icon-holder mb-2 justify-content-center">
+
+                            <div class="row weather-holder" th:if="${weather}">
+                                <div class="d-flex col-12 justify-content-center">
+                                    <h3 class="">Today's Weather</h3>
+                                </div>
+                                <div class="d-flex col -12 mb-2 justify-content-center">
                                     <img class="weather-icon" th:src="${weather.getIcon()}"></img>
                                 </div>
-                                <div class="d-flex weather-desc-holder justify-content-center">
-                                    <label>Description:</label>
-                                    <p class="d-flex weather-description mb-2" th:text="${weather.getCloudDesc()}"></p>
-                                </div>
-                                <div class="d-flex row-cols-1 mb-5 justify-content-center">
-                                    <div class="col-lg-3 col-md-3 col-sm-3 todays-weather mb-2">
-                                        <div class="d-flex gap-3">
+                                <div class="d-flex col-12 mb-5 justify-content-center weather-desc-holder">
+                                    <div class="col-lg-12 col-sm-12  mb-2">
+                                        <div class="d-flex gap-5 justify-content-center">
+                                            <label>Description:</label>
+                                            <p class="mb-2" th:text="${weather.getCloudDesc()}"></p>
+                                        </div>
+                                        <div class="d-flex gap-5 justify-content-center">
                                             <label>Temp:</label>
                                             <p class="mb-2" th:text="${weather.getTempAvg()} + ' &#8457;'"></p>
                                         </div>
-                                        <div class="d-flex gap-3">
+                                        <div class="d-flex gap-5 justify-content-center">
                                             <label>Sunrise:</label>
                                             <p class="mb-2" th:text="${weather.getSunrise()}"></p>
                                         </div>
-                                        <div class="d-flex gap-3">
+                                        <div class="d-flex gap-5 justify-content-center">
                                             <label>Cloudiness:</label>
                                             <p class="mb-2" th:text="${weather.getCloudiness()}"></p>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-3 col-md-3 col-sm-3 todays-weather mb-2">
-                                        <div class="d-flex gap-3">
+                                        <div class="d-flex gap-5 justify-content-center">
                                             <label>Humidity:</label>
                                             <p class="mb-2" th:text="${weather.getHumidity() + '%'}"></p>
                                         </div>
-                                        <div class="d-flex gap-3">
+                                        <div class="d-flex gap-5 justify-content-center">
                                             <label>Sunset:</label>
                                             <p class="mb-2" th:text="${weather.getSunset()}"></p>
                                         </div>
-                                        <div class="d-flex gap-3">
+                                        <div class="d-flex gap-5 justify-content-center">
                                             <label>Wind Speed:</label>
                                             <p class="mb-2" th:text="${weather.getWindSpeed()} + ' mph' "></p>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
