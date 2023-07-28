@@ -1,4 +1,4 @@
-package com.codeup.plantapp;
+package com.codeup.campaignclash;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,11 +6,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-public class PlantAppApplication {
+public class CampaignClashApplication {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(PlantAppApplication.class, args);
+        SpringApplication.run(CampaignClashApplication.class, args);
     }
 
 }
