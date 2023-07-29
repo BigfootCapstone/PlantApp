@@ -1,10 +1,10 @@
-package com.codeup.campaignclash;
+package com.codeup.plantapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CampaignClashApplicationTests {
+class PlantAppApplicationTests {
 
     @Test
     void contextLoads() {

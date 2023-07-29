@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:insert="partials/head :: head('BotaniBuddy Plant Details')"></head>
+
+<body>
+<div id="loader" class="loading">
+    <div class="load-hold">
+        <div class="load-wrap">
+            <P class="long-load">Sorry for the wait...</P>
+            <p class="long-load">Here are some fun tips and tricks while you wait: </p>
+        </div>
+        <div class="tips">
+            <div id="container"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<!--Navbar Start-->
+<header th:replace="partials/navbar :: navbar"></header>
+<!-- Navbar End -->
+
+<!--<<<<<<< HEAD-->
+
+<!--<div th:if="${plant}" class="ui container">-->
+<!--------------Start Page Container-------------->
+<div class="d-flex container-fluid create justify-content-center align-content-center">
+    <div class="row">
+        <div class="column search-column" th:if="${plant}">
+            <h1 class="text-white">Plant Details</h1>
+            <!--------------Start View One Plant Details-------------->
+<!--
+<div class="container-fluid view-one-box mb-5 g-0">
+                <div class="row">
+                    <div>
+                        <p class="mb-4 plant-name" th:text="${plant.common_name}"></p>
+                    </div>
+                    <div class="d-flex column justify-content-center">
+                        <img class="d-flex plantSearchImg" th:src="${plant.image_url}" alt="Plant Photo">
+                    </div>
+                </div>
+                <div class="container-fluid plant-info-holder g-0">
+                    <div class="d-flex row plant-info-holder grow g-0 mb-3">
+                        <p class="plant-info " th:text="'Family:   ' + ${plant.family}"></p>
+                        <p class="plant-info " th:text="'Genus:   ' + ${plant.genus}"></p>
+                        <p class="plant-info " th:text="'Scientific Name:   ' + ${plant.scientific_name}"></p>
+                        <p class="plant-info " th:if="${plant.growth_habit}" th:text="'Growth Habit:   ' + ${plant.growth_habit}"></p>
+                        <p class="plant-info " th:if="${plant.minimum_temperature}" th:text="'Minimum Temperature:   ' + ${plant.minimum_temperature} + F"></p>
+                        <p class="plant-info " th:if="${plant.maximum_temperature}" th:text="'Maximum Temperature:   ' + ${plant.maximum_temperature} + F"></p>
+                        <p class="plant-info " th:if="${plant.ph_minimum}" th:text="'Minimum PH:   ' + ${plant.ph_minimum}"></p>
+                        <p class="plant-info " th:if="${plant.ph_maximum}" th:text="'Maximum PH:   ' + ${plant.ph_maximum}"></p>
+                        <p class="plant-info " th:if="${plant.sun_requirements}" th:text="'Sun Requirements:   ' + ${plant.sun_requirements}"></p>
+                        <p class="plant-info  flex-grow-1" th:if="${plant.sowing_method}" th:text="'Sowing Method:   ' + ${plant.sowing_method}"></p>
+                        <p class="plant-info " th:if="${plant.spread}" th:text="'Spread:   ' + ${plant.spread} + cm"></p>
+                        <p class="plant-info " th:if="${plant.row_spacing}" th:text="'Row Spacing:   ' + ${plant.row_spacing} + cm"></p>
+                        <div>
+                            <p class="plant-info special  flex-grow-1" th:if="${plant.description}" th:text="'Description:   ' + ${plant.description}"></p>
+                        </div>
+                        <div class="my-4">
+                            <h2>AI CareGuide</h2>
+                            <div id="AIWait" class="d-flex justify-content-center">
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <span id="guideNote" class="d-flex ms-2 align-items-center"></span>
+                            </div>
+
+            <p id="showCareGuide"></p>
+        </div>
+    </div>
+</div>
+</div>
+
+-->
+
+
+            <div class="view-one-box mb-5 p-3 g-0">
+                <div class="d-flex col-12 justify-content-between mb-2">
+                    <div class="d-flex col-5 p-2">
+                        <img class="d-flex rounded img-thumbnail" th:src="${plant.image_url}" alt="Plant Photo">
+                    </div>
+                    <div class="d-flex col-7 container-fluid plant-info-holder g-0">
+                        <div class="col-12">
+                            <h3 class="text-white fw-bold text-center mb-4 px-2"
+                                th:text="${plant.common_name}"></h3>
+                            <div class="d-flex flex-wrap">
+
+                                <div th:if="${plant.growth_habit}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Growth Habit:</span>
+                                    <p class="" th:text="${plant.growth_habit}"></p>
+                                </div>
+
+                                <div class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Edible:</span>
+                                    <p class="" th:text="${plant.edible ? 'Yes' : 'No'}"></p>
+                                </div>
+
+                                <div th:if="${plant.minimum_temperature}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Min Temperature:</span>
+                                    <p class="" th:text="${plant.minimum_temperature + ' ˚F'}"></p>
+                                </div>
+
+                                <div th:if="${plant.maximum_temperature}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Max Temperature:</span>
+                                    <p class="" th:text="${plant.maximum_temperature + ' ˚F'}"></p>
+                                </div>
+
+                                <div th:if="${plant.ph_minimum}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Minimum PH:</span>
+                                    <p class="" th:text="${plant.ph_minimum}"></p>
+                                </div>
+
+                                <div th:if="${plant.ph_maximum}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Maximum PH:</span>
+                                    <p class="" th:text="${plant.ph_maximum}"></p>
+                                </div>
+
+                                <div th:if="${plant.sun_requirements}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Sun Requirements:</span>
+                                    <p class="" th:text="${plant.sun_requirements}"></p>
+                                </div>
+
+                                <div th:if="${plant.spread}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Spread:</span>
+                                    <p class="" th:text="${plant.spread + ' cm'}"></p>
+                                </div>
+
+                                <div th:if="${plant.row_spacing}" class="px-2 text-white col-3 d-flex flex-column align-items-start">
+                                    <span class="fw-bold">Row Spacing:</span>
+                                    <p class="" th:text="${plant.row_spacing + ' cm'}"></p>
+                                </div>
+
+                                <div th:if="${plant.sowing_method}"
+                                     class="px-2 my-1 text-white col-12 d-flex align-items-start gap-1">
+                                    <span class="fw-bold col-3 p-0">Sowing Method:</span>
+                                    <span class="" th:text="${plant.sowing_method}"></span>
+                                </div>
+
+                                <div th:if="${plant.description}"
+                                     class="px-2 my-1 text-white col-12 d-flex align-items-start gap-1">
+                                    <span class="fw-bold col-3 p-0">Description:</span>
+                                    <span class="" th:text="${plant.description}"></span>
+                                </div>
+                                <div class="text-white my-1 col-12 d-flex align-items-start gap-1">
+                                    <div class="fw-bold col-3 p-0">
+                                        <span >AI Guide:</span>
+                                    </div>
+                                    <div >
+                                        <div id="AIWait" class="d-flex justify-content-center">
+                                            <div class="spinner-border" role="status">
+                                                <span class="sr-only">Loading...</span>
+                                            </div>
+                                            <span id="guideNote" class="d-flex ms-2 align-items-center"></span>
+                                        </div>
+                                        <p id="showCareGuide"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--------------End View One Plant Details-------------->
+            <!--------------Start Add Plant to Garden-------------->
+            <div class="d-flex justify-content-center mb-5">
+                <div class="col-12 p-3 view-one-box">
+                <div class="d-flex col-12 p-0">
+                    <h3 class="subtitle">Add this plant to your Garden?</h3>
+                </div>
+                <div>
+                    <form class="m-3" method="post" th:action="@{/plants/{id}(id=${plant.id})}">
+
+                        <div class="d-flex justify-space-between gap-4">
+                            <div class="d-flex col flex-wrap p-0 gap-2">
+                                <div class="col-12 p-0">
+                                    <label class="form-label" for="name">Name Your Plant?</label>
+                                    <input class="form-control" type="text" name="name" id="name" placeholder="Only if you wanna :)">
+                                    <input id="careGuide" type="hidden" name="careGuide" />
+                                    <input type="hidden" name="plantImage" th:value="${plant.image_url}" />
+                                    <input type="hidden" name="CommonName" th:value="${plant.common_name}">
+                                    <input type="hidden" name="openFarmID" th:value="${plant.openFarm_id}" />
+                                </div><div class="d-flex justify-content-start col-12 p-0 gap-4">
+                                <div class="col-4 p-0">
+                                    <div class="">
+                                        <label class="form-label" for="sun_amount">Sun Amount</label>
+                                        <select class="form-control" name="sun_amount" id="sun_amount" required>
+                                            <option value="FULL_SUN">Full Sun</option>
+                                            <option value="PARTIAL_SUN">Partial Sun</option>
+                                            <option value="FULL_SHADE">Shaded</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-4 p-0">
+                                    <div class="">
+                                        <label class="form-label" for="water_interval" >Water Interval (days)</label>
+                                        <input class="form-control" type="number" id="water_interval"
+                                               name="water_interval" min="1" max="30" required>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="d-flex col">
+                                <div class="col-12">
+                                    <label class="form-label">Is this plant Outside?</label>
+                                    <div class="d-flex justify-content-start col-12">
+                                        <div class="col-3">
+                                            <label class="form-label" for="yes">Yes</label>
+                                            <input class="ms-2 radio-1" name="is_outside" id="yes" type="radio" value="true">
+                                        </div>
+                                        <div class="col-3">
+                                            <label class="form-label" for="no">No</label>
+                                            <input class="ms-2 radio-2" name="is_outside" id="no" type="radio"
+                                                   value="false" checked>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-3">
+                            <input type="submit" id="submit" class="btn btn-success" disabled="disabled" value="Please Wait">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            </div>
+            <!--------------End Add Plant to Garden-------------->
+        </div>
+    </div>
+</div>
+<!--------------End Page Container-------------->
+<!-- footer start -->
+<footer th:replace="partials/footer :: footer"></footer>
+<!-- footer end -->
+<script>
+
+    window.addEventListener('load',()=>{
+        const loader = document.querySelector('.loading');
+        loader.classList.add('loading-hidden');
+        loader.addEventListener('transitioned', ()=>{
+            document.body.removeChild("loading");
+        });
+    });
+
+</script>
+<script>
+    function getRandomTipsId() {
+        // Add YouTube video IDs here
+        let tips = [
+            "Choose the right plants for your garden: Consider the local climate, soil type, and available sunlight when selecting plants. This will increase their chances of thriving.",
+            "Proper watering is essential: Water your plants deeply and less frequently to encourage healthy root growth. Watering in the morning is generally best, as it allows foliage to dry before evening and reduces the risk of disease.M",
+            "Mulch for moisture retention: Apply a layer of organic mulch around your plants to conserve moisture, suppress weed growth, and maintain more consistent soil temperatures.",
+            "Rotate crops: To prevent soil depletion and pest build-up, practice crop rotation by changing the location of plant families each year.",
+            "Prune and trim regularly: Pruning and trimming help promote healthy growth and maintain the shape of your plants. Remove dead or damaged branches and encourage airflow by thinning dense foliage.",
+            "Use organic pest control: Opt for natural and organic methods to control pests in your garden. Introduce beneficial insects, such as ladybugs and praying mantises, to combat harmful pests.",
+            "Provide proper support: Stake tall or climbing plants to provide support and prevent them from bending or breaking due to heavy winds or their own weight.",
+            "Feed your plants: Fertilize your garden with organic matter or compost to enrich the soil and provide essential nutrients for plant growth. Follow recommended application rates to avoid over-fertilization.",
+            "Consider companion planting: Some plants have natural pest-repellent properties or complementary growth habits. Research companion planting to maximize the health and productivity of your garden.",
+            "Maintain a tidy garden: Regularly remove weeds, fallen leaves, and debris from your garden. This reduces the risk of pests and diseases and keeps your garden looking neat and well-maintained.",
+            "Flowers can communicate through colors and scents to attract pollinators.",
+            "The world's largest flower is the Rafflesia arnoldii, which can grow up to three feet in diameter.",
+            "Sunflowers can follow the movement of the sun throughout the day.",
+            "Plants release oxygen during the day and carbon dioxide at night.",
+            "Dandelion seeds can travel up to five miles in the wind.",
+            "The world's tallest tree, the coast redwood, can reach heights of over 350 feet.",
+            "The practice of growing plants without soil is called hydroponics.",
+            "Venus flytraps are carnivorous plants that trap and digest insects.",
+            "A mature tree can absorb up to 48 pounds of carbon dioxide per year.",
+            "The largest living organism on Earth is a honey fungus measuring over 2 miles across.",
+            "The world's oldest living tree is estimated to be over 5,000 years old.",
+            "The largest pumpkin ever recorded weighed over 2,600 pounds.",
+            "Bamboo is the fastest-growing plant on the planet, capable of growing up to 35 inches in a single day.",
+            "The world's smallest flowering plant is the watermeal, which measures about 1 millimeter in diameter.",
+            "The world's largest herb is the banana plant.",
+            "The corpse flower emits a strong odor of rotting flesh to attract pollinating insects.",
+            "Tomatoes are technically fruits, not vegetables.",
+            "The world's most expensive spice, saffron, comes from the crocus flower.",
+            "The world's largest living wall is located in Madrid, Spain, covering over 3,800 square feet.",
+            "The bluebonnet is the state flower of Texas.",
+            "The scent of freshly cut grass is actually a chemical distress signal released by the damaged blades.",
+            "The world's largest flower garden, Keukenhof in the Netherlands, covers an area of 79 acres.",
+            "The cactus family includes more than 2,000 different species.",
+            "Flowers can be used to make natural dyes for fabric and crafts.",
+            "The practice of growing and arranging miniature trees is called bonsai.",
+            "Test your soil before planting to determine its pH level and nutrient content.",
+            "Use companion planting to maximize space and deter pests.",
+            "Provide a consistent watering schedule to prevent stress on plants.",
+            "Apply mulch around plants to conserve moisture and suppress weeds.",
+            "Incorporate organic matter, such as compost, into the soil to improve its structure and fertility.",
+            "Deadhead flowers regularly to encourage new blooms.",
+            "Use a soaker hose or drip irrigation system to water deeply at the root level.",
+            "Start seeds indoors before the growing season to get a head start.",
+            "Practice crop rotation to prevent disease and nutrient depletion in the soil.",
+            "Attract pollinators by planting a variety of native flowers.",
+            "Use natural pest control methods, such as insecticidal soaps and neem oil.",
+            "Prune trees and shrubs during their dormant season to promote healthy growth.",
+            "Install a rain barrel to collect rainwater for watering plants.",
+            "Provide support for tall or vining plants with trellises or stakes.",
+            "Remove weeds regularly to prevent them from competing with your plants.",
+            "Choose disease-resistant plant varieties to reduce the risk of infections.",
+            "Incorporate compost tea into your watering routine for added nutrients.",
+            "Avoid over-fertilizing plants, as it can lead to excessive foliage growth with fewer blooms.",
+            "Create a habitat for beneficial insects, such as ladybugs and lacewings.",
+            "Use floating row covers to protect plants from pests and harsh weather conditions.",
+            "Regularly inspect plants for signs of pests or diseases to catch problems early.",
+            "Allow fallen leaves to decompose naturally, providing nutrients to the soil.",
+            "Provide adequate spacing between plants to allow for proper air circulation.",
+            "Practice responsible watering by adjusting irrigation to match weather conditions.",
+            "Enjoy the process and take time to relax and appreciate the beauty of your garden."
+        ];
+
+
+        let randomIndex = Math.floor(Math.random() * tips.length);
+        return tips[randomIndex];
+    }
+    function createTips() {
+        let tipsId = getRandomTipsId();
+        let container = document.querySelector("#container")
+        container.innerHTML = tipsId;
+    }
+    setInterval(function (){
+        createTips();
+    },6000)
+    createTips();
+
+</script>
+<script th:inline="javascript">
+    function getRandomNotes() {
+        let note = [
+            "Watering the pixels...",
+            "Growing virtual leaves...",
+            "Entertaining the plants...",
+            "Tickling the roots of the internet...",
+            "Photosynthesizing data...",
+            "Planting digital seeds...",
+            "Pruning the code branches...",
+            "Waiting for the virtual rain...",
+            "Giving life to the website garden...",
+            "Watching the progress grow like a bamboo..."
+        ];
+        let randomIndex = Math.floor(Math.random() * note.length);
+        return note[randomIndex];
+    }
+
+    function createTips() {
+        document.querySelector("#guideNote").innerHTML = getRandomNotes();
+    }
+
+    setInterval(function (){
+        createTips();
+    },6000)
+
+    function getCareGuideForPlant(plant) {
+        fetch(`/plants/careguide/${plant}`)
+            .then(response => response.text())
+            .then(careGuide => {
+                if (careGuide === "") {
+                    document.getElementById("careGuide").innerHTML = 'No care guide found for this plant.';
+                } else {
+                    document.getElementById("AIWait").classList.add("d-none");
+                    document.getElementById("showCareGuide").innerHTML = careGuide;
+                    document.getElementById("careGuide").value = careGuide;
+                    document.getElementById("submit").value = "Add to Garden";
+                    document.getElementById("submit").disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+    const plant = [[${plant.common_name}]];
+    getCareGuideForPlant(plant);
+    if (document.getElementById("showCareGuide").innerHTML === "") {
+        createTips();
+        getCareGuideForPlant(plant);
+    }
+</script>
+
+</body>
+</html>

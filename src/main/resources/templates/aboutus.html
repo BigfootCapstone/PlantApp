@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head th:insert="partials/head :: head('BotaniBuddy Home')"></head>
+
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="58" class="scrollspy-example homepage">
+<!--Navbar Start-->
+<header th:replace="partials/navbar :: navbar"></header>
+<!-- Navbar End -->
+
+<!-- about BotaniBuddy start -->
+<section class="botanibuddy" style="padding: 185px 0 80px;">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="title text-center">
+                    <h6 class="about small-title">About Us</h6>
+                    <h4 class="subtitle">What we do</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-l-6 col-sm-6">
+                <div class="about-box p-4 mt-4">
+                    <div class="about-img float-start me-4">
+                        <img src="/css/images/icons/binosyellow.png" alt="">
+                    </div>
+                    <div class="overflow-hidden">
+                        <h5 class="text-white">BotaniBuddy</h5>
+                        <p class="descriptions"> Welcome to BotaniBuddy, where we believe in the transformative power of plants. We are an innovative platform dedicated to providing plant enthusiasts and nature lovers with an unrivaled experience in exploring and accessing information on thousands of plant species. With BotaniBuddy by your side, embark on a journey of discovery, connection, and growth in the captivating world of plants.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container-fluid -->
+</section>
+<!-- about BotaniBuddy end -->
+
+<!-- Cynthia start -->
+<section class="section" id="cynthia-about">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-l-6 col-sm-6">
+                <div class="about-box justify-content-between mt-4">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-auto">
+                                <img src="/css/images/devs/cynthia_linkedIn.jpeg" height="150" width="150"
+                                     class="card-image-top" style="border-radius: 5px;" alt="cynthia-nelson">
+                            </div>
+                            <div class="col d-flex align-items-end">
+                                <h5 class="card-title" style="text-align: center; margin-bottom: 3px;">
+                                    Cynthia Nelson • UX/UI DESIGN
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="card-text">Meet Cynthia Nelson, our talented UI/UX expert, who plays a pivotal role in shaping the user experience of BotaniBuddy. With her keen eye for aesthetics and deep understanding of user behavior, Cynthia ensures that our platform is not only visually appealing but also intuitive and user-friendly.</p>
+                                    <p class="card-text">Cynthia brings her passion for design and human-centered approach to every aspect of BotaniBuddy's interface. She meticulously crafts the layout, typography and color schemes, creating an immersive and engaging digital environment for plant enthusiasts. Through her thoughtful design choices, Cynthia enables users to seamlessly navigate through the vast collection of plant species, making their exploration effortless and enjoyable.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col d-flex justify-content-end">
+                                    <a href="https://www.linkedin.com/in/cynthia-v-nelson/" class="btn btn-primary" style="margin-top: 25px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                        </svg>
+                                        LinkedIn
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container-fluid -->
+</section>
+<!-- Cynthia end -->
+
+<!-- Gabby start -->
+<section class="section" id="gabby-about">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-l-6 col-sm-6">
+                <div class="about-box justify-content-between mt-4">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-auto">
+                                <img src="/css/images/devs/gabby_linkedIn.jpeg" height="150" width="150"
+                                     class="card-image-top" style="border-radius: 5px;" alt="cynthia-nelson">
+                            </div>
+                            <div class="col d-flex align-items-end">
+                                <h5 class="card-title" style="text-align: center; margin-bottom: 3px;">
+                                    Gabriella Martinez • UX & Deployment
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="card-text">Introducing Gabriella Martinez, our skilled UX and Deployment specialist, who brings a wealth of expertise to the BotaniBuddy team. Gabriella is the driving force behind ensuring a smooth and seamless experience for our users from the moment they access our platform.</p>
+                                    <p class="card-text">With her extensive knowledge of user experience principles, Gabriella focuses on optimizing the interactions between users and the BotaniBuddy platform. She conducts thorough usability tests and gathers valuable feedback, working diligently to enhance the platform's functionality and responsiveness. Additionally, Gabriella oversees the deployment process, ensuring that the platform is accessible and reliable for plant enthusiasts around the world.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col d-flex justify-content-end">
+                                    <a href="https://www.linkedin.com/in/gabriella-marie-martinez/" class="btn btn-primary" style="margin-top: 25px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                        </svg>
+                                        LinkedIn
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container-fluid -->
+</section>
+<!-- Gabby end -->
+
+<!-- Quintyn start -->
+<section class="section" id="quin-about">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-l-6 col-sm-6">
+                <div class="about-box justify-content-between mt-4">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-auto">
+                                <img src="/css/images/devs/quintyn_linkedIn.jpeg" height="150" width="150"
+                                     class="card-image-top" style="border-radius: 5px;" alt="cynthia-nelson">
+                            </div>
+                            <div class="col d-flex align-items-end">
+                                <h5 class="card-title" style="text-align: center; margin-bottom: 3px;">
+                                    Quintyn Williams • Backend & Database
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="card-text">Say hello to Quintyn Williams, our brilliant Backend Logic & Database Design expert, who plays a vital role in the development of BotaniBuddy's robust infrastructure. With a passion for logic and problem-solving, Quintyn ensures that the platform's backend operates seamlessly, allowing users to access information on thousands of plant species effortlessly.</p>
+                                    <p class="card-text">Quintyn's expertise lies in designing efficient database structures that enable quick and accurate retrieval of plant data. His meticulous attention to detail ensures the reliability and security of our platform's database. With his exceptional coding skills, Quintyn implements complex algorithms and logical systems that power the core functionalities of BotaniBuddy, creating a seamless experience for plant enthusiasts.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col d-flex justify-content-end">
+                                    <a href="https://www.linkedin.com/in/quintyn-williams-17a582107/" class="btn btn-primary" style="margin-top: 25px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                        </svg>
+                                        LinkedIn
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container-fluid -->
+</section>
+<!-- Quintyn end -->
+
+<!-- Sarah start -->
+<section class="section" id="sara-about">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-l-6 col-sm-6">
+                <div class="about-box justify-content-between mt-4">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-auto">
+                                <img src="/css/images/devs/sara_linkedIn.jpeg" height="150" width="150"
+                                     class="card-image-top" style="border-radius: 5px;" alt="cynthia-nelson">
+                            </div>
+                            <div class="col d-flex align-items-end">
+                                <h5 class="card-title" style="text-align: center; margin-bottom: 3px;">
+                                    Sarah Brightman • Security & UX
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="card-text">Meet Sarah Brightman, our talented Security & UX specialist, who brings a unique blend of expertise to the BotaniBuddy team. With a deep understanding of both security practices and user experience, Sarah ensures that our platform is not only user-friendly but also safeguarded against potential threats.</p>
+                                    <p class="card-text">Sarah meticulously assesses and fortifies the platform's security infrastructure, implementing robust measures to protect user data and privacy. She also ensures compliance with industry standards and regulations, providing a secure environment for plant enthusiasts to explore and engage with our platform.</p>
+                                    <p class="card-text">In addition to her security expertise, Sarah collaborates with the UI/UX team to enhance the overall user experience. She leverages her understanding of user behavior to create a seamless and safe interaction with BotaniBuddy. She is also working on developing the social aspect of BotaniBuddy, creating features that allow users to connect with each other and share plant care tips.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col d-flex justify-content-end">
+                                    <a href="https://www.linkedin.com/in/sarah-brightman/" class="btn btn-primary" style="margin-top: 25px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                        </svg>
+                                        LinkedIn
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container-fluid -->
+</section>
+<!-- Sara end -->
+
+<!-- Zion start -->
+<section class="section" id="zion-about">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-l-6 col-sm-6">
+                <div class="about-box justify-content-between mt-4">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-auto">
+                                <img src="/css/images/devs/zion_linkedIn.jpeg" height="150" width="150"
+                                     class="card-image-top" style="border-radius: 5px;" alt="cynthia-nelson">
+                            </div>
+                            <div class="col d-flex align-items-end">
+                                <h5 class="card-title" style="text-align: center; margin-bottom: 3px;">
+                                    Zion Segovia • API/AI Integration
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="card-text">Introducing Zion Segovia, our accomplished API/AI Integration expert, who brings cutting-edge technology to BotaniBuddy's development. Zion's expertise lies in integrating advanced AI capabilities and APIs seamlessly into our platform, unlocking new possibilities for plant enthusiasts.</p>
+                                    <p class="card-text">With his deep understanding of artificial intelligence and data integration, Zion leverages APIs to access vast repositories of plant information, enabling users to delve into the depths of botanical knowledge. He ensures that the AI algorithms work harmoniously with the platform, providing accurate plant identifications and personalized recommendations. Zion's expertise empowers BotaniBuddy to deliver an intelligent and dynamic user experience, revolutionizing the way users explore and engage with plant species.</p>
+                                    <p class="card-text">As an avid gardener living on a farm, Zion brings a wealth of practical experience and passion for growing plants to the forefront. He not only integrates advanced technology but also integrates his personal knowledge and insights into the platform. This unique blend of AI capabilities and real-world gardening expertise creates an authentic and enriching experience for users. With Zion's contributions, BotaniBuddy becomes a haven for plant enthusiasts, offering a seamless fusion of cutting-edge technology and hands-on cultivation knowledge.</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col d-flex justify-content-end">
+                                    <a href="https://www.linkedin.com/in/zion-segovia/" class="btn btn-primary" style="margin-top: 25px;">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+                                        </svg>
+                                        LinkedIn
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end row -->
+    </div>
+    <!-- end container-fluid -->
+</section>
+<!-- Zion end -->
+
+<!-- footer start -->
+<footer th:replace="partials/footer :: footer"></footer>
+<!-- footer end -->
+</body>
+</html>

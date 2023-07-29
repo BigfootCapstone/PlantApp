@@ -1,0 +1,97 @@
+
+<header th:fragment="navbar" class="container-fluid p-0" id="nav">
+    <nav class="navbar column">
+
+        <!--      LOGO -->
+        <div class="col-lg col-sm-12">
+            <a class="d-flex logo justify-items-center align-items-center gap" th:href="@{/}">
+                <img src="/css/images/carrotguy(fknawesome).png" alt="" class="logo-dark" height="100">
+                <h1 class="logo-text text-white">BotaniBuddy</h1>
+            </a>
+        </div>
+        <!--      NAVIGATION MENU -->
+        <div class="col-lg flex-wrap col-sm-12">
+            <div class="nav-links">
+                <!-- USING CHECKBOX HACK -->
+                <input type="checkbox" class="checkbox" id="checkbox_toggle" />
+                <div class="hamburger-lines column align-center">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
+                </div>
+                <!--        NAVIGATION MENUS -->
+                <div class="menu menu-auth">
+                    <div class="nb-li col">
+                        <li class="mx-1 nav-item" >
+                            <form th:action="@{/users/about}" >
+                                <button class="btn  ">About</button>
+                            </form>
+                        </li>
+                    </div>
+                    <div class="nb-li col" sec:authorize="!isAuthenticated()">
+                        <li class="mx-1 nav-item">
+                            <form th:action="@{/#reviews}">
+                                <button  class="btn  ">Reviews</button>
+                            </form>
+                        </li>
+                    </div>
+                    <div class="nb-li col" sec:authorize="!isAuthenticated()">
+                        <li class="mx-1 nav-item">
+                            <form th:action="@{/#contact}" >
+                                <button class="btn  ">Contact</button>
+                            </form>
+                        </li>
+                    </div>
+                    <div class="nb-li col" sec:authorize="!isAuthenticated()">
+                        <li class="mx-1 nav-item">
+                            <form th:action="@{/users/login}" th:method="get">
+                                <button  class="btn  active" >Login</button>
+                            </form>
+                        </li>
+                    </div>
+                    <div class="nb-li col" sec:authorize="isAuthenticated()">
+                        <li class="mx-1 nav-item">
+                            <form th:action="@{/posts/all}" >
+                                <button class="btn  ">Social</button>
+                            </form>
+                        </li>
+                    </div>
+                    <div class="nb-li col" sec:authorize="isAuthenticated()">
+                        <li class="mx-1 nav-item">
+                            <form th:action="@{/users/profile}" >
+                                <button class="btn " >Profile</button>
+                            </form>
+                        </li>
+                    </div>
+                    <div class="nb-li col" sec:authorize="isAuthenticated()">
+                        <li class="mx-1 nav-item">
+                            <form th:action="@{/logout}" th:method="post">
+                                <button class="btn  active" >Logout</button>
+                            </form>
+                        </li>
+                    </div>
+                </div>
+                <div class="nb-li col" sec:authorize="isAuthenticated()">
+                    <li class="mx-1 nav-item" id="wrap">
+                        <form action="#" th:action="@{/plants/search}" method="post">
+                            <input id="search" class="d-flex" type="text" name="query" placeholder="Lookin' for a plant ?" required autocomplete="off">
+                            <input id="search_submit" value="Search" type="submit">
+                            <div id="search-style"></div>
+                        </form>
+                    </li>
+                </div>
+            </div>
+        </div>
+
+        <script th:inline="javascript">
+            let auth = document.getElementById("search");
+            let dropDown = document.querySelector('.menu');
+
+            if (auth !== null) {
+                dropDown.classList.add('menu-auth');
+            } else {
+                dropDown.classList.remove('menu-auth');
+            }
+        </script>
+    </nav>
+</header>

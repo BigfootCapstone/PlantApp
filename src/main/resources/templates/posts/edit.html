@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="en">
+<head th:insert="partials/head :: head('BotaniBuddy')"></head>
+<body>
+<header th:replace="partials/navbar :: navbar"></header>
+
+<div class="page-wrapper d-flex container create justify-content-center align-content-center">
+    <div class="container feed" >
+        <div class="row">
+            <div class="column">
+
+                <h2 class="text-white">Edit Post</h2>
+                <form class=" column edit-form" th:action="@{edit}" th:method="POST" th:object="${thingpost}">
+                    <label for="title">Title:</label>
+                    <input type="text" name="title" th:field="*{title}" id="title"/>
+
+                    <label for="body">Body:</label>
+                    <textarea name="body" th:field="*{body}" id="body" rows="10" cols="35"></textarea>
+
+                    <input class="btn btn-primary post-btn" type="submit" value="Save">
+
+                </form>
+                <form id="post-delete-btn"  class=" column edit-form" th:action="@{/posts/{id}/delete(id=${thingpost.id})}" >
+                    <input type="submit"   class="btn btn-primary post-btn post-edit-btn" value="Delete">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="partials/footer :: footer"></footer>
+</body>
+</html>

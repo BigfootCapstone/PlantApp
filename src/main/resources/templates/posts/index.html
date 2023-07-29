@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  lang="en">
+<head th:insert="partials/head :: head('BotaniBuddy')"></head>
+<body>
+<header th:replace="partials/navbar :: navbar"></header>
+
+
+<!--TODO: SHOW LAST 25 Posts-->
+<!--       switch (like user comments)-->
+<!--TODO: SHOW LAST 3days of posts by friends and posts with their comments-->
+<div class="page-wrapper d-flex container create justify-content-center align-content-center mt-5">
+    <div class="container feed" >
+        <div class="row">
+            <div class="column">
+                <div class="row justify-right align-center " >
+                    <form class="create-btn align-center " th:action="@{/posts/create}" >
+                        <h1 class="text-white text-center align-center">Public Feed</h1>
+                        <button id="create-button" class="btn btn-primary post-btn" >Create Post</button>
+                    </form>
+                </div>
+
+                <div class="column justify-content-end">
+                    <div style="position: relative">
+                        <label for="searchInput"></label>
+                        <input id="searchInput" class="d-flex dropbtn" name="query" type="text" placeholder="Find a Buddy">
+                        <ul id="searchResults" class="dropdown-content"
+                            style="z-index: 2;position: absolute; width:100%;"></ul>
+                    </div>
+                    <div class="mt-3 col all-post" th:if="${allPosts}">
+                        <div th:each="post : ${allPosts}">
+
+                            <div class="card container" style="width: 100%">
+                                <div class="card-body">
+                                    <div>
+                                        <img class="post-img img-circle profile-avatar" style="width: unset;"
+                                             th:src="${post.user.profile_pic}"
+                                             id="profile-img" height="64px" width="64px" alt="User avatar">
+                                    </div>
+                                    <div class="row justify-right">
+                                        <a th:href="@{/friends/view/{id}(id=${post.user.id})}"
+                                           th:text="${post.user.username}"></a>
+                                    </div>
+                                    <div class="card-title"> [[${post.title}]] </div>
+                                    <p class="card-text"> [[${post.body}]] </p>
+                                    <ul class="post-index-btn">
+                                        <li class="row justify-right">
+                                            <form id="view-post-btn"  th:action="@{/posts/{id}(id=${post.id})}">
+                                                <button  class="btn btn-primary post-btn" >Comments</button>
+                                            </form>
+                                        </li>
+                                        <li class="row justify-right" th:if="${user.id == post.user.id}">
+                                            <form id="edit-btn"  th:action="@{/posts/{id}/edit(id=${post.id})}" >
+                                                <button   class="btn btn-primary post-btn post-edit-btn">Edit</button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="partials/footer :: footer"></footer>
+<script th:inline="javascript">
+
+    document.addEventListener("DOMContentLoaded", function() {
+        let searchInput = document.querySelector("#searchInput");
+
+        searchInput.addEventListener("keyup", function() {
+            let query = this.value.trim();
+
+            if (query.length === 0) {
+                document.querySelector("#searchResults").innerHTML = "";
+                return;
+            }
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "/friends/search?query=" + query);
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    let data = JSON.parse(xhr.responseText);
+                    let searchResults = document.getElementById("searchResults");
+                    searchResults.innerHTML = ""; // Clear previous search results
+//
+//              TODO: Add a link to the user's profile page
+                    data.forEach(function(user) {
+                        if (user.username.toLowerCase().includes(query.toLowerCase())) {
+                            // Create HTML element to display the user information
+                            let userElement = document.createElement("div");
+                            userElement.setAttribute("class", "row user-tag");
+
+                            let userImgHold = document.createElement("div");
+                            userImgHold.setAttribute("class", "col-2 justify-content-center");
+                            let userImage = document.createElement("img");
+                            userImage.setAttribute("src", user.profile_pic);
+                            userImage.setAttribute("height", "48px");
+                            userImage.setAttribute("width", "48px");
+                            userImgHold.appendChild(userImage);
+
+                            let userNameHold = document.createElement("div");
+                            userNameHold.setAttribute("class", "col-10")
+                            let userLink = document.createElement("a");
+                            userLink.textContent = user.username;
+                            userLink.setAttribute("href", "/friends/view/" + user.id);
+                            userNameHold.appendChild(userLink);
+
+                            userElement.setAttribute("name", user.id);
+
+                            userElement.appendChild(userImgHold);
+                            userElement.appendChild(userNameHold);
+
+                            searchResults.appendChild(userElement);
+                        }
+                    });
+                }
+            };
+            xhr.send();
+        });
+    });
+
+</script>
+
+</body>
+</html>

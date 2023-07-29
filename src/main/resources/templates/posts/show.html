@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head th:insert="partials/head :: head('BotaniBuddy')"></head>
+<body>
+<header th:replace="partials/navbar :: navbar"></header>
+
+<div class="page-wrapper d-flex container create justify-content-center align-content-center">
+    <div class="container post ">
+        <div class="row show-post-row">
+            <div class="column view-post gap-10">
+
+                <div class="row justify-content-start align-center back-to-post">
+                    <a href="/posts/all" class="post-return btn btn-primary post-btn post-edit-btn">Back</a>
+                </div>
+
+                <div th:if="${post}" class="post-row row post">
+                    <div class="post-user-peek column align-center justify-center shrink">
+<!--                TODO: SHOW POST-USER PROFILE PIC-->
+                        <div>
+                            <img class="img-circle profile-avatar post-img" style="width: unset;" th:src="${user.profile_pic}"
+                                 id="profile-img" height="64px" width="64px" alt="User avatar">
+                        </div>
+                        <div class="row justify-space-between post-user" th:if="${user}">
+                            <span>[[${user.username}]]</span>
+                            <span>[[${user.email}]]</span>
+                        </div>
+                    </div>
+                    <div class="post-body column justify-center">
+                        <div class="column post-head shrink">
+                            <p class="row post-title"> [[${post.title}]] </p>
+                        </div>
+                        <p class="post-text"> [[${post.body}]] </p>
+
+
+                    </div>
+                    <h3 id="comments-title">Comments</h3>
+                    <div id="comments-container" class="container" th:if="${post.comments.size()>0}">
+                        <div id="comments-feed" class="column justify-top gap-15">
+                            <div th:each="comment: ${post.comments}" class="comment-user-container row justify-left full-width no-gap">
+                                <div class=" column align-center justify-center shrink">
+                                    <img class="img-circle profile-avatar post-img" style="width: unset; height: unset" th:src="${comment.user.profile_pic}"
+                                         id="commentor-img" height="64px" width="64px" alt="User avatar">
+                                </div>
+                                <div class="column align-left">
+                                    <p class="comment-username" th:text="${comment.user.username}"></p>
+                                    <p class="comment-user-said" th:text="${comment.content}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="row justify-center">
+                    <a sec:authorize="!isAuthenticated()" th:href="@{users/login}" class="btn btn-primary post-btn post-edit-btn">Login</a>
+                </div>
+
+                <div sec:authorize="isAuthenticated()" class="nb-li">
+                    <form class="post-row row comment-user-container post add-comment" th:action="@{/posts/comment}" th:method="post">
+                        <div class="post-user-peek column align-center justify-center shrink">
+                            <img class="img-circle profile-avatar post-img" style="width: unset;" th:src="${user.profile_pic}"
+                                 id="commentor-img-txt" height="64px" width="64px" alt="User avatar">
+                            <p class="comment-username" th:text="${#authentication.principal.username}"></p>
+
+                        </div>
+                        <div class="column align-left">
+                            <label for="content">Add Comment</label>
+                            <textarea  name="content" id="content" maxlength="255"></textarea>
+                            <input type="hidden" name="postId" th:value="${post.id}">
+                        </div>
+                        <button class="btn btn-primary post-btn ">Submit</button>
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<footer th:replace="partials/footer :: footer"></footer>
+</body>
+</html>
