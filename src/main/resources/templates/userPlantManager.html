@@ -103,7 +103,6 @@
                             </div>
                             <span class="d-flex ms-2 align-items-center">Generating AI Response</span>
                         </div>
-                        <span th:if="${careGuide}" th:text="${careGuide}"></span>
                         <span id="careGuide"></span>
 
                     </div>
@@ -461,6 +460,8 @@
         createTips();
         getCareGuideForPlant(plant);
         document.getElementById("AIWait").classList.add("d-none");
+    } else {
+        document.getElementById("careGuide").innerHTML = dbCareGuide;
     }
 
     function getPlantDiagnosis(id, stems, leaves, fruits) {
